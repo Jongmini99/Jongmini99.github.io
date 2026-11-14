@@ -64,7 +64,7 @@ export default function HomePage() {
       {featured.length > 0 && (
         <section aria-labelledby="featured-title">
           <Container className="flex flex-col gap-5 pt-14 sm:pt-16">
-            <div className="flex items-end justify-between gap-4">
+            <div className="flex items-center justify-between gap-4">
               <h2 id="featured-title">
                 <Eyebrow>Featured Project</Eyebrow>
               </h2>

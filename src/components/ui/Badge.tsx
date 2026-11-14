@@ -32,15 +32,20 @@ export function Tag({ children, tone = "neutral" }: { children: ReactNode; tone?
 }
 
 /** 구분선(|)으로 이어지는 인라인 목록 — 역할 표시 등 */
+/** 구분선 목록. 줄바꿈된 줄 맨 앞의 구분선은 왼쪽 여백 밖으로 밀어 잘라낸다. */
 export function DividedList({ items, className }: { items: string[]; className?: string }) {
   return (
-    <ul className={cx("flex flex-wrap items-center gap-y-1 text-sm text-fg-muted", className)}>
-      {items.map((item, i) => (
-        <li key={`${item}-${i}`} className="flex items-center">
-          {i > 0 && <span aria-hidden="true" className="mx-3 h-3 w-px bg-line-strong" />}
-          {item}
-        </li>
-      ))}
-    </ul>
+    <div className={cx("overflow-hidden", className)}>
+      <ul className="-ml-[1.5625rem] flex flex-wrap items-center gap-y-1 text-sm text-fg-muted">
+        {items.map((item, i) => (
+          <li
+            key={`${item}-${i}`}
+            className="flex items-center before:mx-3 before:h-3 before:w-px before:bg-line-strong before:content-['']"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
