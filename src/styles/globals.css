@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+    overflow-wrap: anywhere;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-bg);
+  }
+
+  /* 키보드 포커스 표시 (마우스 클릭에는 표시하지 않음) */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* 고정 헤더에 앵커가 가려지지 않도록 */
+  [id] {
+    scroll-margin-top: calc(var(--spacing-header) + 1rem);
+  }
+
+  /* 모바일 목차 바(3rem)가 추가로 고정되는 상세 페이지 */
+  @media (width < 64rem) {
+    [data-toc-page] [id] {
+      scroll-margin-top: calc(var(--spacing-header) + 4rem);
+    }
+  }
+}
+
+/* 모션 최소화 설정을 존중: 사용자가 허용한 경우에만 부드러운 스크롤 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

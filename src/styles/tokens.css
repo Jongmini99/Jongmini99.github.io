@@ -1,0 +1,61 @@
+/**
+ * 디자인 토큰 — 색상·타이포그래피·여백·형태의 단일 정의 위치
+ *
+ * Tailwind v4 @theme 변수로 선언하면 bg-surface, text-fg-muted, border-line,
+ * rounded-card 같은 유틸리티가 자동 생성된다.
+ * 디자인을 교체할 때는 이 파일의 값만 바꾸고, 컴포넌트에서는 원시 색상값(#...)을 쓰지 않는다.
+ *
+ * 현재 값: 다크 프리미엄 디자인 요청서 기준
+ * (배경 #101116 / 카드 #1B1D25 / 테두리 #2B2E3B / 글자 #F4F4F6 / 강조 #3B82F6)
+ */
+@theme {
+  /* ---------- Color: surface ---------- */
+  --color-bg: #101116;
+  --color-surface: #1b1d25;
+  --color-surface-raised: #22252f;
+  --color-line: #2b2e3b;
+  --color-line-strong: #3a3e4e;
+
+  /* ---------- Color: text ---------- */
+  --color-fg: #f4f4f6;
+  --color-fg-muted: #a9adbb; /* bg 대비 약 8.5:1 */
+  --color-fg-subtle: #80859a; /* bg 대비 약 5:1 (보조 텍스트 최소치) */
+
+  /* ---------- Color: accent ---------- */
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-accent-fg: #ffffff; /* accent 배경 위 글자 */
+  --color-accent-text: #60a5fa; /* 어두운 배경 위 강조 텍스트 (대비 확보용 밝은 블루) */
+  --color-accent-soft: rgb(59 130 246 / 0.12);
+
+  /* ---------- Color: 대비(comparison) 섹션의 두 번째 진영 ---------- */
+  --color-rival: #ef4444;
+  --color-rival-text: #f87171;
+  --color-rival-soft: rgb(239 68 68 / 0.12);
+
+  /* ---------- Color: state ---------- */
+  --color-focus: #93c5fd;
+  --color-danger: #f87171;
+
+  /* ---------- Typography ---------- */
+  --font-sans:
+    "Pretendard Variable", Pretendard, Inter, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "Segoe UI", system-ui, sans-serif;
+  --font-display: Inter, "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--letter-spacing: 0.2em;
+  --text-display: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
+  --text-display--line-height: 1.15;
+
+  /* ---------- Shape ---------- */
+  --radius-card: 0.75rem;
+  --radius-control: 0.5rem;
+
+  /* ---------- Layout ---------- */
+  --container-content: 76rem;
+  --spacing-gutter: 1rem;
+  --spacing-section: 5rem;
+  --spacing-header: 4rem;
+}

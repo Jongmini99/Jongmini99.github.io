@@ -1,0 +1,137 @@
+{
+  "id": "zombie-project-x",
+  "slug": "zombie-project-x",
+  "title": "좀비 프로젝트 X",
+  "subtitle": "인간과 좀비, 두 진영의 비대칭 PvP 추격전",
+  "description": "인간과 좀비 두 진영으로 나뉘어 대결하는 2D 탑다운 PvP 슈팅 게임",
+  "genre": "2D 탑다운 PvP 슈팅",
+  "platform": "메이플스토리 월드",
+  "developmentPeriod": { "start": "2023-03", "end": "2023-07" },
+  "developmentType": "팀 프로젝트",
+  "teamSize": 6,
+  "teamComposition": "PM 2명 / 기획·개발 2명 / 아트 2명",
+  "roles": ["게임 기획 총괄", "시스템 설계", "콘텐츠 및 레벨 기획", "Lua 스크립트 구현"],
+  "technologies": ["Lua"],
+  "gallery": [],
+  "videos": [],
+  "documents": [],
+  "externalLinks": [],
+  "achievements": [
+    { "title": "메이플스토리 월드 개발 공모전 대상", "date": "2024" },
+    { "title": "유튜브 크리에이터 팡이요의 게임 플레이 콘텐츠에 등장" }
+  ],
+  "featured": true,
+  "published": true,
+  "displayOrder": 10,
+  "sections": [
+    {
+      "id": "overview",
+      "type": "richText",
+      "eyebrow": "Overview",
+      "title": "프로젝트 개요",
+      "visible": true,
+      "width": "full",
+      "body": "좀비 프로젝트 X는 인간과 좀비 두 진영으로 나뉘어 대결하는 2D 탑다운 PvP 슈팅 게임입니다.\n\n인간은 총기를 이용하여 좀비를 공격하고, 좀비는 인간 플레이어를 감염시켜 진영을 확장합니다. 제한시간 종료 시 승패가 결정되며, 인간과 좀비의 대립을 통한 긴장감 있는 추격전을 핵심 경험으로 설계했습니다."
+    },
+    {
+      "id": "development-info",
+      "type": "projectInfo",
+      "eyebrow": "Development",
+      "title": "개발 정보",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "roles",
+      "type": "roles",
+      "eyebrow": "Role",
+      "title": "담당 역할 및 기여",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "core-gameplay",
+      "type": "comparison",
+      "eyebrow": "Core Gameplay",
+      "title": "게임 소개 및 핵심 플레이",
+      "visible": true,
+      "width": "full",
+      "intro": "인간과 좀비의 대립을 통한 긴장감 있는 추격전을 핵심 경험으로 설계한 **진영 간 비대칭 PvP** 구조입니다. 제한시간 종료 시 승패가 결정됩니다.",
+      "items": [
+        { "label": "인간 진영", "description": "총기를 이용하여 좀비를 공격합니다." },
+        { "label": "좀비 진영", "description": "인간 플레이어를 감염시켜 진영을 확장합니다." }
+      ]
+    },
+    {
+      "id": "core-systems",
+      "type": "cards",
+      "eyebrow": "Core System",
+      "title": "핵심 시스템 설계",
+      "visible": true,
+      "width": "full",
+      "items": [
+        {
+          "title": "전투 시스템",
+          "icon": "crosshair",
+          "bullets": ["인간의 총기 공격", "좀비의 인간 감염", "진영 간 비대칭 PvP 구조", "제한시간 기반 승패 결정"]
+        },
+        {
+          "title": "성장 및 경제 시스템",
+          "icon": "chart",
+          "bullets": ["전투를 통한 재화 획득", "재화를 활용한 신규 무기 구매", "인게임 상자 파밍", "경험치 획득 및 레벨업 강화"]
+        },
+        {
+          "title": "특수 좀비 시스템",
+          "icon": "biohazard",
+          "bullets": ["특수 좀비 4종", "좀비별 차별화된 전투 콘셉트", "콘셉트에 따른 스킬과 능력치 설계"]
+        },
+        {
+          "title": "무기 및 아이템 시스템",
+          "icon": "swords",
+          "bullets": ["무기별 전투 콘셉트 설계", "무기 특성에 따른 스탯 및 기능 구성"]
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "type": "technologies",
+      "eyebrow": "Technical",
+      "title": "기술 구현",
+      "visible": true,
+      "width": "half",
+      "items": ["Lua 기반 인게임 시스템 전반 구현"]
+    },
+    {
+      "id": "achievements",
+      "type": "achievements",
+      "eyebrow": "Achievement",
+      "title": "주요 성과",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "media",
+      "type": "media",
+      "eyebrow": "Media",
+      "title": "미디어",
+      "visible": true,
+      "width": "full"
+    },
+    {
+      "id": "documents",
+      "type": "documents",
+      "eyebrow": "Document",
+      "title": "기획 문서 및 자료",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "links",
+      "type": "links",
+      "eyebrow": "External Links",
+      "title": "외부 링크",
+      "visible": true,
+      "width": "half"
+    }
+  ]
+}

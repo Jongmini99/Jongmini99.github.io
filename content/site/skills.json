@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "name": "개발",
+      "items": [
+        { "name": "Unity", "icon": "unity", "highlight": true },
+        { "name": "C#", "icon": "csharp", "highlight": true },
+        { "name": "Lua", "icon": "lua", "highlight": true },
+        { "name": "MS-SQL", "icon": "database", "highlight": false },
+        { "name": "AI 활용 개발", "icon": "sparkles", "highlight": false }
+      ]
+    },
+    {
+      "name": "기획",
+      "items": [
+        { "name": "게임 시스템 기획", "icon": "layers", "highlight": true },
+        { "name": "테크니컬 기획", "icon": "workflow", "highlight": false },
+        { "name": "QA / 일정 관리", "icon": "calendar-check", "highlight": false }
+      ]
+    },
+    {
+      "name": "협업 도구",
+      "items": [
+        { "name": "Jira / Confluence", "icon": "kanban", "highlight": false }
+      ]
+    }
+  ]
+}

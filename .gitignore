@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# env (비밀정보는 저장소에 커밋하지 않는다)
+.env
+.env.*
+!.env.example
+
+# cloudflare worker
+cms/oauth-worker/.wrangler/
+cms/oauth-worker/.dev.vars
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# logs
+npm-debug.log*
+
+# Decap CMS 생성물 (scripts/prepare-cms.ts)
+public/admin/decap/
+public/admin/config.yml
