@@ -1,5 +1,5 @@
 {
   "items": [
-    { "title": "IT 기획", "period": "약 2년" }
+    { "title": "IT 기획", "period": "약 2년", "description": "기획 문서 작성, 일정 관리, 클라이언트 응대, QA 및 팀 커뮤니케이션" }
   ]
 }

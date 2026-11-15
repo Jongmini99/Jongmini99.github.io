@@ -6,7 +6,7 @@ import { ProjectGrid } from "@/components/project/ProjectCards";
 
 export const metadata: Metadata = {
   title: "프로젝트",
-  description: "게임 시스템 기획 및 테크니컬 기획 프로젝트 목록",
+  description: "시스템 게임 기획 및 프로토타입 구현 프로젝트 목록",
 };
 
 export default function ProjectsPage() {
