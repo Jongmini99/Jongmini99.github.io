@@ -1,5 +1,7 @@
 # 허종민 포트폴리오
 
+> 작업 규칙은 [CLAUDE.md](CLAUDE.md)를 따른다.
+
 시스템 / 테크니컬 게임 기획자 포트폴리오. Next.js(App Router) 정적 내보내기 → GitHub Pages.
 
 ## 구조
@@ -28,6 +30,7 @@ npm run typecheck
 npm run lint
 npm run build             # out/ 정적 내보내기
 npm run check             # 위 검사 전체
+npm run audit             # 가로 넘침 + 접근성 점검 (npx serve out -l 4173 실행 중일 때)
 ```
 
 프로젝트 사이트(`/<repo>`)로 빌드를 확인하려면 `NEXT_PUBLIC_BASE_PATH=/<repo> npm run build`.
