@@ -9,7 +9,7 @@ import {
   getSkills,
 } from "@/content/loaders";
 import { Container } from "@/components/layout/Container";
-import { Eyebrow, SectionTitle } from "@/components/ui/Typography";
+import { SectionTitle } from "@/components/ui/Typography";
 import { Tag, TechBadge } from "@/components/ui/Badge";
 import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
@@ -119,7 +119,6 @@ export default function HomePage() {
       <section id="projects" aria-labelledby="projects-title" className="bg-bg-alt py-section">
         <Container className="flex flex-col gap-12">
           <SectionTitle
-            eyebrow="Projects"
             title="참여한 프로젝트"
             id="projects-title"
             description="기획부터 구현까지 참여한 게임 프로젝트입니다."
@@ -143,7 +142,7 @@ export default function HomePage() {
       {/* ---------------- ④ 소개 ---------------- */}
       <section id="about" aria-labelledby="about-title" className="py-section">
         <Container className="flex flex-col gap-12">
-          <SectionTitle eyebrow="About" title="자기소개" id="about-title" />
+          <SectionTitle title="자기소개" id="about-title" />
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
             <div className="flex flex-col gap-6">
               <p className="text-2xl leading-snug font-semibold tracking-[-0.03em] text-fg">{profile.headline}</p>
@@ -174,7 +173,7 @@ export default function HomePage() {
       {/* ---------------- ⑤ 이력 및 성과 ---------------- */}
       <section id="career" aria-labelledby="career-title" className="bg-bg-alt py-section">
         <Container className="flex flex-col gap-12">
-          <SectionTitle eyebrow="Career & Achievements" title="이력 및 성과" id="career-title" />
+          <SectionTitle title="이력 및 성과" id="career-title" />
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
             <div className="flex flex-col gap-5">
               <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">경력</h3>
@@ -192,7 +191,6 @@ export default function HomePage() {
       <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden py-section">
         <div aria-hidden="true" className="pointer-events-none absolute bottom-[-20rem] left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
         <Container className="relative flex flex-col items-center gap-6 text-center">
-          <Eyebrow>Contact</Eyebrow>
           <h2 id="contact-title" className="text-title font-semibold tracking-[-0.04em] text-fg">
             연락하기
           </h2>

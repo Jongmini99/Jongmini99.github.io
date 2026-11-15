@@ -145,16 +145,16 @@ const SECTION_TYPES: Field[] = [
 
 /** 새 프로젝트 생성 시 기본으로 채워지는 섹션 템플릿 (요청서의 공통 구조) */
 const DEFAULT_SECTIONS = [
-  { type: "richText", id: "overview", title: "프로젝트 개요", eyebrow: "Overview", visible: true, width: "full", body: "프로젝트 개요를 입력하세요." },
-  { type: "projectInfo", id: "development-info", title: "개발 정보", eyebrow: "Development", visible: true, width: "half" },
-  { type: "roles", id: "roles", title: "담당 역할 및 기여", eyebrow: "Role", visible: true, width: "half" },
-  { type: "comparison", id: "core-gameplay", title: "게임 소개 및 핵심 플레이", eyebrow: "Core Gameplay", visible: false, width: "full", items: [] },
-  { type: "cards", id: "core-systems", title: "핵심 시스템 설계", eyebrow: "Core System", visible: true, width: "full", items: [] },
-  { type: "technologies", id: "technical", title: "기술 구현", eyebrow: "Technical", visible: true, width: "half", items: [] },
-  { type: "achievements", id: "achievements", title: "주요 성과", eyebrow: "Achievement", visible: true, width: "half" },
-  { type: "media", id: "media", title: "미디어", eyebrow: "Media", visible: true, width: "full" },
-  { type: "documents", id: "documents", title: "기획 문서 및 자료", eyebrow: "Document", visible: true, width: "half" },
-  { type: "links", id: "links", title: "외부 링크", eyebrow: "External Links", visible: true, width: "half" },
+  { type: "richText", id: "overview", title: "프로젝트 개요", visible: true, width: "full", body: "프로젝트 개요를 입력하세요." },
+  { type: "projectInfo", id: "development-info", title: "개발 정보", visible: true, width: "half" },
+  { type: "roles", id: "roles", title: "담당 역할 및 기여", visible: true, width: "half" },
+  { type: "comparison", id: "core-gameplay", title: "게임 소개 및 핵심 플레이", visible: false, width: "full", items: [] },
+  { type: "cards", id: "core-systems", title: "핵심 시스템 설계", visible: true, width: "full", items: [] },
+  { type: "technologies", id: "technical", title: "기술 구현", visible: true, width: "half", items: [] },
+  { type: "achievements", id: "achievements", title: "주요 성과", visible: true, width: "half" },
+  { type: "media", id: "media", title: "미디어", visible: true, width: "full" },
+  { type: "documents", id: "documents", title: "기획 문서 및 자료", visible: true, width: "half" },
+  { type: "links", id: "links", title: "외부 링크", visible: true, width: "half" },
 ];
 
 /* ------------------------------------------------------------------ */

@@ -4,7 +4,6 @@ import type { Project } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
 import { DividedList } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Typography";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -26,7 +25,6 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
       </div>
       <Container className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
         <div className="flex flex-col gap-6">
-          <Eyebrow>Featured Project</Eyebrow>
           <div className="flex flex-col gap-3">
             <p className="font-display text-sm font-semibold tracking-wide text-accent-text">{project.platform}</p>
             <h2 id={headingId} className="text-display font-bold tracking-[-0.05em] text-fg">
@@ -47,7 +45,7 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
                   <Trophy className="mt-0.5 size-4 shrink-0 text-accent-text" aria-hidden="true" />
                   <span>
                     {a.title}
-                    {a.date && <span className="ml-2 font-display text-sm text-fg-subtle">{a.date}</span>}
+                    {a.date && <span className="ml-2 font-display text-sm text-fg-muted">{a.date}</span>}
                   </span>
                 </li>
               ))}

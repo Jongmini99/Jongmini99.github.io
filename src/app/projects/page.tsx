@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   const projects = getPublishedProjects();
   return (
     <>
-      <PageHeader eyebrow="Projects" title="프로젝트">
+      <PageHeader title="프로젝트">
         <p>기획부터 구현까지 참여한 게임 프로젝트입니다.</p>
       </PageHeader>
       <Container className="py-14 sm:py-16">

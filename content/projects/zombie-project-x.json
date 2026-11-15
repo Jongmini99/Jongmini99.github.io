@@ -33,7 +33,6 @@
     {
       "id": "overview",
       "type": "richText",
-      "eyebrow": "Overview",
       "title": "프로젝트 개요",
       "visible": true,
       "width": "full",
@@ -42,7 +41,6 @@
     {
       "id": "development-info",
       "type": "projectInfo",
-      "eyebrow": "Development",
       "title": "개발 정보",
       "visible": true,
       "width": "half"
@@ -50,7 +48,6 @@
     {
       "id": "roles",
       "type": "roles",
-      "eyebrow": "Role",
       "title": "담당 역할 및 기여",
       "visible": true,
       "width": "half"
@@ -58,7 +55,6 @@
     {
       "id": "core-gameplay",
       "type": "comparison",
-      "eyebrow": "Core Gameplay",
       "title": "게임 소개 및 핵심 플레이",
       "visible": true,
       "width": "full",
@@ -71,7 +67,6 @@
     {
       "id": "core-systems",
       "type": "cards",
-      "eyebrow": "Core System",
       "title": "핵심 시스템 설계",
       "visible": true,
       "width": "full",
@@ -101,7 +96,6 @@
     {
       "id": "technical",
       "type": "technologies",
-      "eyebrow": "Technical",
       "title": "기술 구현",
       "visible": true,
       "width": "half",
@@ -110,7 +104,6 @@
     {
       "id": "achievements",
       "type": "achievements",
-      "eyebrow": "Achievement",
       "title": "주요 성과",
       "visible": true,
       "width": "half"
@@ -118,7 +111,6 @@
     {
       "id": "media",
       "type": "media",
-      "eyebrow": "Media",
       "title": "미디어",
       "visible": true,
       "width": "full"
@@ -126,7 +118,6 @@
     {
       "id": "documents",
       "type": "documents",
-      "eyebrow": "Document",
       "title": "기획 문서 및 자료",
       "visible": true,
       "width": "half"
@@ -134,7 +125,6 @@
     {
       "id": "links",
       "type": "links",
-      "eyebrow": "External Links",
       "title": "외부 링크",
       "visible": true,
       "width": "half"

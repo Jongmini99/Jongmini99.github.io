@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ChevronLeft, Calendar, Gamepad2, Layers, User, Users } from "lucide-react";
 import type { Project } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
-import { Eyebrow } from "@/components/ui/Typography";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -35,7 +34,6 @@ export function ProjectHeader({ project }: { project: Project }) {
         </Link>
 
         <div className="flex max-w-xl flex-col gap-4 pt-8 pb-4 sm:pt-16 sm:pb-8">
-          <Eyebrow>Project Case Study</Eyebrow>
           <h1 className="text-display font-bold tracking-[-0.05em] text-fg">{project.title}</h1>
           <p className="text-xl font-semibold text-accent-text">{project.genre}</p>
           {project.subtitle && <p className="border-l-2 border-accent pl-4 text-lg text-fg-muted">{project.subtitle}</p>}
