@@ -36,7 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="flex min-h-dvh flex-col antialiased">
         <a
           href="#main"
-          className="fixed top-2 left-2 z-50 -translate-y-20 rounded-control bg-accent px-4 py-2 font-medium text-accent-fg focus:translate-y-0"
+          className="fixed top-2 left-2 z-50 -translate-y-20 rounded-control bg-accent-solid px-4 py-2 font-medium text-accent-fg focus:translate-y-0"
         >
           본문 바로가기
         </a>

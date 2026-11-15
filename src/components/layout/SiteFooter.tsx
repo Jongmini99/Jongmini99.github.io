@@ -8,7 +8,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-section border-t border-line">
+    <footer className="border-t border-line">
       <Container className="flex flex-col gap-4 py-8 text-sm text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
         <p>
           © {year} {profile.name}. {profile.roleTitle}

@@ -227,7 +227,7 @@ export const ProfileSchema = z.object({
   /** 자기소개 (Markdown) */
   summary: optionalText,
   targetRoles: list(text),
-  /** 메인 히어로 배경 이미지 (선택) */
+  /** 메인 히어로 비주얼 (선택) — 첫 화면 오른쪽 원형 영역 */
   heroImage: optionalImage,
 });
 

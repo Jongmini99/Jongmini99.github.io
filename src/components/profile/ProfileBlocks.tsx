@@ -1,8 +1,8 @@
 /**
- * 사이트 정보(프로필·성과·연락처) 표시 블록 — Home/About/Contact에서 공용
+ * 사이트 정보(프로필·성과·연락처) 표시 블록 — 홈 한 페이지 섹션에서 사용
  */
 import { Download, Mail } from "lucide-react";
-import type { Awards, Contact, Skills } from "@/content/schema";
+import type { Awards, Career, Contact, Skills } from "@/content/schema";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { TechBadge } from "@/components/ui/Badge";
@@ -24,23 +24,62 @@ export const CATEGORY_LABEL: Record<Awards["items"][number]["category"], string>
   other: "기타",
 };
 
-/** 주요 성과 가로 목록 (메인) */
-export function HighlightList({ items }: { items: Awards["items"] }) {
+/** 수상·출시·전시 카드 그리드 */
+export function AchievementGrid({ items }: { items: Awards["items"] }) {
+  if (items.length === 0) return <p className="text-sm text-fg-subtle">등록된 이력이 없습니다.</p>;
   return (
-    <ul className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-0 md:divide-x md:divide-line">
-      {items.map((a, i) => (
-        <li key={i} className="flex items-start gap-3 md:px-6 md:first:pl-0">
-          <span className="mt-0.5 text-fg-muted">
-            <Icon name={CATEGORY_ICON[a.category]} className="size-7" />
-          </span>
-          <div className="min-w-0">
-            <p className="sr-only">{CATEGORY_LABEL[a.category]}:</p>
-            <p className="text-[0.95rem] leading-snug font-medium text-fg">{a.title}</p>
-            {a.date && <p className="mt-1 font-display text-xs text-fg-subtle">{a.date}</p>}
-          </div>
+    <ul className="grid gap-4 sm:grid-cols-2">
+      {items.map((a, i) => {
+        const title = a.url ? (
+          <a href={a.url} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+            {a.title}
+            <span className="sr-only"> (새 창)</span>
+          </a>
+        ) : (
+          a.title
+        );
+        return (
+          <li key={i} className="flex gap-4 rounded-card border border-line bg-surface p-5">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-inner bg-accent-soft text-accent-text">
+              <Icon name={CATEGORY_ICON[a.category]} className="size-5" />
+            </span>
+            <div className="flex min-w-0 flex-col gap-1">
+              <p className="flex items-center gap-2 text-xs font-semibold text-fg-subtle">
+                <span>{CATEGORY_LABEL[a.category]}</span>
+                {a.date && (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <span className="font-display">{a.date}</span>
+                  </>
+                )}
+              </p>
+              <p className="leading-snug font-semibold text-fg">{title}</p>
+              {a.description && <p className="text-sm text-fg-muted">{a.description}</p>}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/** 경력 타임라인 */
+export function CareerTimeline({ items }: { items: Career["items"] }) {
+  if (items.length === 0) return <p className="text-sm text-fg-subtle">등록된 경력이 없습니다.</p>;
+  return (
+    <ol className="flex flex-col">
+      {items.map((c, i) => (
+        <li key={i} className="relative border-l border-line-strong pb-8 pl-6 last:pb-0">
+          <span aria-hidden="true" className="absolute top-1.5 -left-[5px] size-[9px] rounded-full bg-accent ring-4 ring-accent-soft" />
+          {c.period && <p className="font-display text-sm text-accent-text">{c.period}</p>}
+          <p className="mt-1 text-lg font-semibold text-fg">
+            {c.title}
+            {c.organization && <span className="font-normal text-fg-muted"> · {c.organization}</span>}
+          </p>
+          {c.description && <p className="mt-1 text-sm leading-relaxed text-fg-muted">{c.description}</p>}
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 
@@ -73,11 +112,11 @@ export function ContactActions({ contact, className }: { contact: Contact; class
 }
 
 /** 기술 스택 그룹 */
-export function SkillGroups({ skills }: { skills: Skills }) {
+export function SkillGroups({ skills, className }: { skills: Skills; className?: string }) {
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className={cx("grid gap-4", className)}>
       {skills.groups.map((g) => (
-        <div key={g.name} className="rounded-card border border-line bg-surface p-5">
+        <div key={g.name} className="rounded-card border border-line bg-surface p-5 sm:p-6">
           <h3 className="mb-4 text-sm font-semibold text-fg-muted">{g.name}</h3>
           <ul className="flex flex-wrap gap-2">
             {g.items.map((s) => (

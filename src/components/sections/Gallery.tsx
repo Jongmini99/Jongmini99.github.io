@@ -81,14 +81,14 @@ export function Gallery({ images, label }: { images: Image[]; label: string }) {
           ref={scrollerRef}
           onScroll={updateEdges}
           aria-label={label}
-          className="flex flex-1 snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]"
+          className="flex min-w-0 flex-1 snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]"
         >
           {images.map((img, i) => (
             <li key={`${img.src}-${i}`} className="w-[78%] shrink-0 snap-start sm:w-[calc(50%-0.375rem)] lg:w-[calc(25%-0.5625rem)]">
               <button
                 type="button"
                 onClick={() => open(i)}
-                className="block aspect-video w-full overflow-hidden rounded-card border border-line transition-colors duration-150 hover:border-accent"
+                className="relative block aspect-video w-full overflow-hidden rounded-card border border-line transition-colors duration-150 hover:border-accent"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={withBasePath(img.src)} alt={img.alt ?? img.caption ?? `${label} ${i + 1}`} loading="lazy" decoding="async" className="size-full object-cover" />

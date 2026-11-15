@@ -12,7 +12,13 @@
   "teamComposition": "PM 2명 / 기획·개발 2명 / 아트 2명",
   "roles": ["게임 기획 총괄", "시스템 설계", "콘텐츠 및 레벨 기획", "Lua 스크립트 구현"],
   "technologies": ["Lua"],
-  "gallery": [],
+  "thumbnail": { "src": "/uploads/images/temp/project-thumbnail.svg", "alt": "임시 썸네일 이미지" },
+  "heroImage": { "src": "/uploads/images/temp/project-hero.svg", "alt": "임시 대표 이미지" },
+  "gallery": [
+    { "src": "/uploads/images/temp/gallery-1.svg", "alt": "임시 갤러리 이미지 1", "caption": "임시 이미지 — 실제 스크린샷으로 교체 예정" },
+    { "src": "/uploads/images/temp/gallery-2.svg", "alt": "임시 갤러리 이미지 2", "caption": "임시 이미지 — 실제 스크린샷으로 교체 예정" },
+    { "src": "/uploads/images/temp/gallery-3.svg", "alt": "임시 갤러리 이미지 3", "caption": "임시 이미지 — 실제 스크린샷으로 교체 예정" }
+  ],
   "videos": [],
   "documents": [],
   "externalLinks": [],

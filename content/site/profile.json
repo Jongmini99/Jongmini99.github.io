@@ -3,5 +3,6 @@
   "roleTitle": "System & Technical Game Designer",
   "headline": "기획과 개발을 연결하는 테크니컬 게임 디자이너",
   "summary": "게임의 재미를 설계하는 기획과,\n실제로 구현되는 개발의 관점을 함께 이해하고 연결하는\n시스템 게임 기획자이자 테크니컬 게임 기획자입니다.",
-  "targetRoles": ["시스템 게임 기획자", "테크니컬 게임 기획자"]
+  "targetRoles": ["시스템 게임 기획자", "테크니컬 게임 기획자"],
+  "heroImage": { "src": "/uploads/images/temp/hero-visual.svg", "alt": "임시 히어로 이미지" }
 }

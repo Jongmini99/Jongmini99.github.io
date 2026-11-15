@@ -7,10 +7,14 @@
  *
  * 현재 값: 다크 프리미엄 디자인 요청서 기준
  * (배경 #101116 / 카드 #1B1D25 / 테두리 #2B2E3B / 글자 #F4F4F6 / 강조 #3B82F6)
+ * 2026-11 개편: 섹션 교차 배경(bg-alt)·네이비 강조 섹션(band)·큰 섹션 제목·둥근 카드
  */
 @theme {
   /* ---------- Color: surface ---------- */
   --color-bg: #101116;
+  --color-bg-alt: #14161d; /* 섹션 리듬용 교차 배경 */
+  --color-band: #131a2a; /* 강조 섹션(대표 프로젝트) 네이비 */
+  --color-band-line: #233050;
   --color-surface: #1b1d25;
   --color-surface-raised: #22252f;
   --color-line: #2b2e3b;
@@ -25,6 +29,8 @@
   --color-accent: #3b82f6;
   --color-accent-hover: #2563eb;
   --color-accent-fg: #ffffff; /* accent 배경 위 글자 */
+  --color-accent-solid: #2563eb; /* 흰 글자를 올리는 채운 버튼 배경 (대비 5.2:1) */
+  --color-accent-solid-hover: #1d4ed8;
   --color-accent-text: #60a5fa; /* 어두운 배경 위 강조 텍스트 (대비 확보용 밝은 블루) */
   --color-accent-soft: rgb(59 130 246 / 0.12);
 
@@ -46,16 +52,19 @@
 
   --text-eyebrow: 0.75rem;
   --text-eyebrow--letter-spacing: 0.2em;
-  --text-display: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
-  --text-display--line-height: 1.15;
+  --text-display: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  --text-display--line-height: 1.12;
+  --text-title: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); /* 홈 섹션 제목 */
+  --text-title--line-height: 1.2;
 
   /* ---------- Shape ---------- */
-  --radius-card: 0.75rem;
+  --radius-card: 1.25rem;
+  --radius-inner: 0.75rem; /* 카드 안쪽 이미지 등 */
   --radius-control: 0.5rem;
 
   /* ---------- Layout ---------- */
   --container-content: 76rem;
   --spacing-gutter: 1rem;
-  --spacing-section: 5rem;
+  --spacing-section: 7rem;
   --spacing-header: 4rem;
 }

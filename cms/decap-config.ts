@@ -207,8 +207,8 @@ const projects: Field = {
     stringList("roles", "담당 역할"),
     stringList("technologies", "사용 기술", { hint: "Unity, C#, Lua 등은 로고 아이콘이 자동 표시됩니다." }),
 
-    image("thumbnail", "대표 이미지 (카드용)"),
-    image("heroImage", "상세 헤더 이미지", { hint: "비우면 대표 이미지를 사용합니다." }),
+    image("thumbnail", "대표 이미지 (카드용)", { hint: "프로젝트 타일. 권장 1200×800 (3:2)." }),
+    image("heroImage", "상세 헤더 / 홈 대표 키아트", { hint: "권장 1920×1080 (16:9). 비우면 대표 이미지를 사용합니다." }),
     {
       name: "gallery",
       label: "이미지 갤러리",
@@ -288,7 +288,7 @@ const site: Field = {
         string("headline", "메인 한 줄 소개"),
         opt(text("summary", "자기소개", { hint: "줄바꿈은 데스크톱 화면에서 그대로 유지됩니다." })),
         stringList("targetRoles", "목표 직무"),
-        image("heroImage", "메인 배경 이미지 (선택)"),
+        image("heroImage", "메인 히어로 비주얼 (선택)", { hint: "홈 첫 화면 오른쪽 원형 영역. 권장 1200×1200, 배경 투명 PNG/WebP." }),
       ],
     },
     {

@@ -34,10 +34,10 @@ export function ProjectHeader({ project }: { project: Project }) {
           프로젝트 목록으로
         </Link>
 
-        <div className="flex max-w-xl flex-col gap-3 pt-6 sm:pt-12">
+        <div className="flex max-w-xl flex-col gap-4 pt-8 pb-4 sm:pt-16 sm:pb-8">
           <Eyebrow>Project Case Study</Eyebrow>
-          <h1 className="font-display text-display font-extrabold tracking-tight text-fg">{project.title}</h1>
-          <p className="text-xl font-semibold text-fg">{project.genre}</p>
+          <h1 className="text-display font-bold tracking-[-0.05em] text-fg">{project.title}</h1>
+          <p className="text-xl font-semibold text-accent-text">{project.genre}</p>
           {project.subtitle && <p className="border-l-2 border-accent pl-4 text-lg text-fg-muted">{project.subtitle}</p>}
         </div>
 

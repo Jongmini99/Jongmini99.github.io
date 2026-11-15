@@ -8,18 +8,18 @@ type Variant = "primary" | "outline" | "ghost";
 type Size = "sm" | "md";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-control font-medium transition-colors duration-150 " +
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-150 " +
   "disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-accent-fg hover:bg-accent-hover",
+  primary: "bg-accent-solid text-accent-fg shadow-[0_10px_24px_rgb(59_130_246/0.25)] hover:bg-accent-solid-hover",
   outline: "border border-line-strong bg-surface/40 text-fg hover:border-accent hover:bg-surface",
   ghost: "text-fg-muted hover:bg-surface hover:text-fg",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-3.5 text-sm",
-  md: "h-11 px-5 text-[0.95rem]",
+  sm: "h-9 px-4 text-sm",
+  md: "h-12 px-6 text-[0.95rem]",
 };
 
 export function buttonClass({ variant = "outline", size = "md", className }: { variant?: Variant; size?: Size; className?: string } = {}) {
