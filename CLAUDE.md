@@ -1,105 +1,116 @@
 # CLAUDE.md — 허종민 포트폴리오 공통 작업 지침
 
-이 저장소에서 작업하는 사람과 AI가 공통으로 따르는 규칙이다. 구조·명령어 상세는 `README.md`, 관리자 CMS는 `docs/CMS_SETUP.md`, 배포는 `docs/DEPLOY.md`, 검증 이력은 `docs/VERIFICATION.md`를 본다.
+이 저장소에서 작업하는 사람과 AI가 공통으로 따르는 정적 규칙 정의서이다. 구조·명령어 상세는 `README.md`, 관리자 CMS는 `docs/CMS_SETUP.md`, 배포는 `docs/DEPLOY.md`, 검증 이력은 `docs/VERIFICATION.md`를 참조한다.
 
-## 1. 프로젝트 개요
+## 1. 프로젝트 개요 및 지원자 페르소나
 
-- 시스템 / 테크니컬 게임 기획자 허종민의 포트폴리오 사이트
-- 운영 주소: https://jongmini99.github.io · 관리자: https://jongmini99.github.io/admin/
-- 저장소: `Jongmini99/Jongmini99.github.io` (`main` push → GitHub Actions → GitHub Pages 자동 배포, 1~3분)
-- 스택: Next.js 16 (App Router, 정적 내보내기) · React 19 · TypeScript 6.0.3(고정, TS 7은 Next 호환 문제로 보류) · Tailwind CSS v4 · zod 4 · ESLint 9
-- CMS: Decap CMS(`/admin`) + GitHub 백엔드. 로그인은 Cloudflare Worker OAuth 프록시 `https://decap-oauth.jongmini99.workers.dev` (`cms/oauth-worker`)
+* **대상**: 시스템 게임 기획자 허종민의 포트폴리오 사이트
+* **핵심 정체성 및 강점**:
+  * **메인 포지션**: 시스템 게임 기획자 (신입 · 인턴십 · 저연차 채용 타겟)
+  * **프로토타이핑 역량**: 기획 설계 후 Unity 엔진과 C# 기반 지식을 직접 활용하여 플레이 가능한 프로토타입을 구현하고 검증하는 실행력 보유
+  * **실무 및 협업 경험**: IT 업체에서 산업기능요원으로 2년간 근무하며 다수의 프로젝트를 통해 기획 문서 작성, 일정 관리, 클라이언트 응대, QA 및 팀원 간 커뮤니케이션 프로세스 체득
+  * **주요 시스템 설계 경험**: 상자 및 레벨링 시스템 도입을 통한 전투 시스템 루프 개선 등
+  * **관심 분야 및 타겟**: 중견 이상 규모의 게임사 지향. PVP, 시뮬레이션, 생존 장르 및 스팀/콘솔 패키지 개발에 강점과 높은 관심 보유. 최근 게임 개발 파이프라인 및 인게임 시스템에 AI를 접목하기 위한 스터디 진행 중
+* **운영 주소**: `https://jongmini99.github.io` · **관리자**: `https://jongmini99.github.io/admin/`
+* **저장소**: `Jongmini99/Jongmini99.github.io` (`main` push → GitHub Actions → GitHub Pages 자동 배포, 1\~3분 소요)
+* **기술 스택**: Next.js 16 (App Router, 정적 내보내기) · React 19 · TypeScript 6.0.3 (고정, TS 7은 Next 호환 문제로 보류) · Tailwind CSS v4 · zod 4 · ESLint 9
+* **CMS 아키텍처**: Decap CMS (`/admin`) + GitHub 백엔드. OAuth 인증은 Cloudflare Worker 프록시(`https://decap-oauth.jongmini99.workers.dev`, 소스: `cms/oauth-worker`)를 경유한다.
 
-## 2. 작업 방식
+## 2. 작업 및 협업 프로토콜
 
-1. **승인 후 진행**: 디자인·구조 변경은 페이지별 변경 계획(무엇을, 어디에, 왜)을 먼저 공유하고 승인받은 뒤 작업한다. 단순 수정(문구, 간격, 라벨 제거 등)은 바로 진행한다.
-2. **사실을 지어내지 않는다**: 경력·수상·수치·연도·팀 구성 등 확인되지 않은 정보는 입력하지 않고 질문한다. 비워 둔 선택 필드는 UI에서 자동으로 숨겨지므로 빈칸이 정답이다.
-3. **임시 이미지는 임시임을 드러낸다**: 실제 게임 자료로 오해될 그래픽을 만들지 않는다. 임시 이미지는 `public/uploads/images/temp/`에 "TEMP IMAGE"와 권장 크기를 표기해 두고, 실제 이미지로 모두 교체되면 폴더째 삭제한다.
-4. **작업 전 최신화**: 관리자 CMS 저장도 `main`에 커밋되므로 작업 전 `git pull --rebase --autostash`.
-5. **완료 = 배포 확인까지**: 검증 → 커밋·푸시 → Actions 성공 확인 → 운영 주소에서 결과 확인 후 보고한다. 실패·생략한 단계는 그대로 보고한다.
-6. **보고는 한국어로**, 바뀐 점·검증 결과·사용자가 할 일을 구분해 짧게 정리한다.
+1. **승인 후 진행**: 디자인 및 아키텍처·구조 변경은 페이지별 변경 계획(무엇을, 어디에, 왜)을 먼저 공유하고 승인받은 뒤 작업한다. 단순 수정(오탈자, 간격 미세 조정, 라벨 제거 등)은 즉시 진행한다.
+2. **사실 기반 작성 (환각 금지)**: 경력·수상·수치·연도·팀 구성 등 확인되지 않은 정보는 절대 임의로 생성하지 않고 사용자에게 질문한다. 비워 둔 선택 필드는 UI에서 자동으로 숨겨지므로 빈칸을 유지한다.
+3. **콘텐츠 톤앤매너**: 화려한 수식어보다는 **'기획 의도 → Unity/C# 프로토타입 검증 → 시스템 개선 결과'**로 이어지는 논리적 구조와 실무 협업 경험(문서화, 일정 관리, QA)이 돋보이도록 구성한다.
+4. **임시 데이터 격리**: 실제 게임 자료로 오해될 그래픽을 생성하지 않는다. 임시 이미지는 `public/uploads/images/temp/` 경로에만 배치하고 이미지 내에 `"TEMP IMAGE"`와 권장 해상도를 명시한다. 실제 이미지로 전면 교체되면 해당 디렉터리를 삭제한다.
+5. **작업 전 동기화**: 관리자 CMS의 저장 내역도 `main` 브랜치에 직접 커밋되므로, 모든 로컬 작업 시작 전 반드시 `git pull --rebase --autostash`를 실행한다.
+6. **완료 기준**: 로컬 검증(`npm run check`) → 커밋 및 푸시 → GitHub Actions 빌드·배포 성공 확인 → 운영 URL에서 최종 렌더링 확인까지 마쳐야 완료로 간주한다. 생략되거나 실패한 단계가 있다면 숨기지 않고 보고한다.
+7. **보고 형식**: 모든 보고는 한국어로 작성하며, **\[변경 사항 / 검증 결과 / 사용자 후속 조치\]** 세 항목으로 구분하여 간결하게 정리한다.
 
-## 3. 개발 환경 (Windows)
+## 3. 크로스 플랫폼 및 로컬 개발 환경 (Windows 특화 규칙 포함)
 
-- Node.js는 관리자 권한 없이 휴대용으로 설치되어 있다. 셸마다 PATH를 추가한다.
-  - Git Bash: `export PATH="/c/Users/shb19/AppData/Local/Programs/node-v26.13.1-win-x64:$PATH"`
-  - PowerShell: `$env:Path = "C:\Users\shb19\AppData\Local\Programs\node-v26.13.1-win-x64;" + $env:Path`
-- PowerShell은 실행 정책 때문에 `npx`가 막힌다 → **`npx.cmd`** / `npm.cmd`를 쓴다.
-- Git Bash에서 `/`로 시작하는 값을 환경변수·인자로 넘기면 Windows 경로로 바뀐다 → 앞에 `MSYS_NO_PATHCONV=1`을 붙인다. (예: `MSYS_NO_PATHCONV=1 NEXT_PUBLIC_BASE_PATH=/portfolio npm run build`)
-- 브라우저 점검은 Microsoft Edge 헤드리스를 쓴다 (`scripts/audit-ui.mjs`).
+* **OS 호환성 원칙**: 모든 스크립트(`scripts/*`)와 `package.json` 명령어는 OS에 종속되지 않도록 작성한다. 경로 구분자는 Node.js `path` 모듈을 사용하며, 셸 스크립트 의존성을 최소화한다.
+* **Windows 로컬 환경 예외 처리**:
+  * 휴대용 Node.js 사용 시 세션별 PATH 등록 필요:
+    * Git Bash: `export PATH="/c/Users/shb19/AppData/Local/Programs/node-v26.13.1-win-x64:$PATH"`
+    * PowerShell: `$env:Path = "C:\Users\shb19\AppData\Local\Programs\node-v26.13.1-win-x64;" + $env:Path`
+  * PowerShell 실행 정책 우회: `npx` 및 `npm` 대신 **`npx.cmd`** / `npm.cmd`를 사용한다.
+  * Git Bash 경로 자동 변환 방지: `/`로 시작하는 환경변수나 인자를 전달할 때는 반드시 앞에 `MSYS_NO_PATHCONV=1`을 명시한다. (예: `MSYS_NO_PATHCONV=1 NEXT_PUBLIC_BASE_PATH=/portfolio npm run build`)
+* **헤드리스 브라우저 점검**: Microsoft Edge 헤드리스 모드를 사용한다 (`scripts/audit-ui.mjs`).
 
-## 4. 명령어
+## 4. 표준 명령어
 
 ```bash
-npm run dev               # 개발 서버 (http://localhost:3000, 관리자 /admin/index.html)
-npm run cms:local         # 로컬 CMS 백엔드 (GitHub 로그인 없이 로컬 파일 편집)
-npm run check             # 콘텐츠 검증 + 타입 + 린트 + OAuth 테스트 + 빌드 (커밋 전 필수)
-npx serve out -l 4173     # 빌드 결과 로컬 서빙
-npm run audit             # 가로 넘침 + 접근성 점검 (서빙 중일 때). AUDIT_URL로 운영 주소 점검 가능
+npm run dev               # 로컬 개발 서버 (http://localhost:3000, 관리자 /admin/index.html)
+npm run cms:local         # 로컬 CMS 백엔드 구동 (GitHub OAuth 없이 로컬 파일 직접 편집)
+npm run check             # 스키마·콘텐츠 검증 + 타입 체크 + 린트 + OAuth 테스트 + 프로덕션 빌드 (커밋 전 필수)
+npx serve out -l 4173     # 정적 빌드 결과물 로컬 서빙
+npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검 (로컬 서빙 중 실행, AUDIT_URL 지정 시 운영 주소 점검)
 ```
 
-`npm run check` 출력의 `Error: GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET not configured`는 "비밀값 없으면 500" 테스트의 정상 로그다.
+> **참고**: `npm run check` 실행 시 출력되는 `Error: GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET not configured`는 OAuth Worker의 환경변수 누락 방어(500 에러 반환) 단위 테스트의 정상 통과 로그이다.
 
-## 5. 코드 구조 규칙
+## 5. 아키텍처 및 코드 구조 규칙
 
-| 위치 | 규칙 |
-|---|---|
-| `content/` | 콘텐츠의 유일한 저장소. CMS가 수정하는 JSON. 코드에 콘텐츠를 하드코딩하지 않는다 |
-| `src/content/schema.ts` | zod 스키마가 타입의 단일 출처. 필드 추가 시 `cms/decap-config.ts`도 함께 수정 |
-| `src/content/loaders.ts` | 페이지는 이 로더로만 데이터를 읽는다 (서버 전용, 클라이언트 컴포넌트에서 import 금지) |
-| `cms/decap-config.ts` | CMS 필드 정의 → 빌드 시 `public/admin/config.yml` 자동 생성 (config.yml 직접 수정 금지) |
-| `src/styles/tokens.css` | 색상·글꼴·반경·여백 토큰. **컴포넌트에서 `#hex` 직접 사용 금지**, 토큰 유틸리티만 사용 |
-| `src/components/ui` | Button, Card, Badge, Typography, Media, Icon 등 기본 요소 — 새 스타일은 여기서 재사용 |
-| `src/components/layout/nav.ts` | 메뉴 정의 (홈 섹션 앵커) |
-| 정적 파일 경로 | CMS 업로드는 `/uploads/...`로 저장. `<img>`·다운로드 링크는 `withBasePath()`로 감싼다 |
-| 외부 링크 | `target="_blank" rel="noopener noreferrer"` + 화면 낭독기용 "(새 창)" |
-| 보안 | Markdown 원시 HTML 미렌더링 유지, `dangerouslySetInnerHTML` 사용 금지 |
+| 위치 | 핵심 규칙 및 제약사항 |
+| ----- | ----- |
+| `content/` | 모든 사이트 콘텐츠의 유일한 데이터 저장소(JSON). 프로필·프로젝트·경력·수상·연락처 등 **콘텐츠**는 컴포넌트에 하드코딩하지 않는다. 단, 섹션 제목·버튼·안내 문구 같은 **UI 고정 문구**는 컴포넌트에 둔다. |
+| `src/content/schema.ts` | **데이터 모델의 단일 진실 공급원(SSOT)**. Zod 스키마가 전체 타입을 결정한다. |
+| `cms/decap-config.ts` | CMS 필드 정의 파일. `schema.ts`와 구조가 일치해야 하며, 빌드 시 `public/admin/config.yml`을 자동 생성한다. (**`config.yml` 직접 수정 절대 금지**) |
+| `src/content/loaders.ts` | 페이지 데이터 로더. 서버 컴포넌트 전용이며 클라이언트 컴포넌트(`'use client'`)에서의 import를 금지한다. |
+| `src/styles/tokens.css` | 디자인 토큰(색상·타이포그래피·반경·여백) 정의. **컴포넌트 내 `#hex` 색상 코드 직접 하드코딩 금지**, 반드시 토큰 유틸리티 클래스를 사용한다. |
+| `src/components/ui` | 기본 UI 프리미티브(Button, Card, Badge, Typography, Media, Icon 등). 신규 UI 요소는 기존 프리미티브를 확장·재사용한다. |
+| `src/components/layout/nav.ts` | 글로벌 내비게이션 정의. 홈 섹션 앵커 ID와 1:1로 동기화되어야 한다. |
+| **정적 에셋 경로** | CMS 업로드 파일은 `/uploads/...`에 저장된다. 모든 `<img>` 태그 및 다운로드 링크는 반드시 `withBasePath()` 유틸리티로 감싼다. |
+| **외부 링크 및 보안** | 외부 링크는 `target="_blank" rel="noopener noreferrer"`와 스크린 리더용 `"(새 창)"` 텍스트를 포함한다. Markdown 원시 HTML 렌더링 및 `dangerouslySetInnerHTML` 사용을 엄격히 금지한다. |
+| **빌드 패치 격리** | Next.js 16 정적 내보내기의 프리페치 경로 버그 우회를 위해 `scripts/fix-export-prefetch.mjs`가 빌드 파이프라인에 포함되어 있다. 프레임워크 패치 이후에는 즉시 제거하여 기술 부채를 청산한다. |
 
-## 6. 디자인 규칙 (2026-11-16 개편 기준)
+## 6. 디자인 시스템 규칙 (2026-11-16 개편 기준)
 
-- **톤**: 어두운 배경 유지. 배경 `#101116` / 교차 배경 `bg-alt #14161D` / 강조 섹션 `band #131A2A` / 카드 `#1B1D25`
-- **포인트 색**: 블루 `#3B82F6`(accent). 어두운 배경 위 강조 글자는 `accent-text #60A5FA`, **흰 글자를 올리는 채운 버튼·배지는 `accent-solid #2563EB`** (accent 위 흰 글자는 대비 3.7:1로 기준 미달)
-- **글꼴**: Pretendard + Inter, 패키지 번들 (외부 폰트 서버 호출 금지)
-- **형태**: 카드 `rounded-card`(20px), 버튼은 알약형(`rounded-full`), 큰 제목은 좁은 자간(`tracking-[-0.04em]` 내외)
-- **라벨**: 섹션 제목 위 **영문 소제목(eyebrow) 라벨을 쓰지 않는다**. 홈 히어로의 영문 직함 라벨도 쓰지 않는다
-- **홈 구성 (한 페이지)**: 히어로(`#top`) → 대표 프로젝트 강조(`#featured`) → 프로젝트(`#projects`) → 소개(`#about`) → 이력 및 성과(`#career`) → 연락하기(`#contact`). 섹션 id를 바꾸면 `nav.ts`도 함께 바꾼다
-- **상세 페이지**: `/projects/<slug>/`는 CMS 섹션 구조(목차·탭·2열 half 배치)를 유지한다. `/projects/`는 목록 페이지
-- `/about/`, `/contact/`는 홈 섹션으로 이동시키는 페이지다 (noindex, sitemap 제외)
-- **이미지 권장 크기**: 히어로 비주얼 1200×1200(투명 PNG/WebP) · 대표 키아트/상세 헤더 1920×1080 · 썸네일 1200×800 · 갤러리 1600×900 · 업로드 전 1600px·500KB 이하로 줄이기. 영상은 YouTube 링크
+* **컬러 시스템 (다크 모드 고정)**:
+  * 기본 배경: `#101116` / 교차 섹션 배경(`bg-alt`): `#14161D` / 강조 섹션(`band`): `#131A2A` / 카드 표면: `#1B1D25`
+  * 포인트 컬러: 블루 `#3B82F6` (`accent`)
+  * 텍스트 및 대비 규칙: 어두운 배경 위 강조 텍스트는 `accent-text` (`#60A5FA`)를 사용한다. **흰색 텍스트가 올라가는 채워진 버튼 및 배지는 반드시 `accent-solid` (`#2563EB`)를 사용**한다. (`#3B82F6` 위 흰색 텍스트는 명도 대비 3.7:1로 WCAG AA 기준 미달)
+* **타이포그래피**: `Pretendard` + `Inter` 로컬 패키지 번들 사용 (외부 웹폰트 CDN 호출 금지). 대형 타이틀은 좁은 자간(`tracking-[-0.04em]` 내외)을 유지한다.
+* **컴포넌트 형태**: 카드는 `rounded-card` (`20px`), 버튼은 알약형(`rounded-full`)을 기본으로 한다.
+* **텍스트 라벨 제약**: 섹션 제목 상단에 **영문 소제목(eyebrow) 라벨을 배치하지 않는다**. 홈 히어로 섹션의 영문 직함 라벨 역시 사용하지 않는다.
+* **정보 구조 (IA)**:
+  * **홈 (`/`)**: 단일 페이지 스크롤 구조 — 히어로(`#top`) → 대표 프로젝트 강조(`#featured`) → 프로젝트 목록(`#projects`) → 소개(`#about`) → 이력 및 성과(`#career`) → 연락하기(`#contact`). 섹션 ID 변경 시 `nav.ts`도 함께 수정한다.
+  * **프로젝트 (`/projects/`, `/projects/<slug>/`)**: 목록 페이지 및 상세 페이지. 상세 페이지는 CMS 섹션 구조(목차·탭·2열 half 배치)를 유지한다.
+  * **리다이렉트 경로 (`/about/`, `/contact/`)**: 홈의 해당 섹션 앵커로 리다이렉트 처리하며, 검색 엔진 색인에서 제외(`noindex`, `sitemap` 제외)한다.
+* **미디어 규격**: 히어로 비주얼 `1200×1200` (투명 PNG/WebP) · 대표 키아트/상세 헤더 `1920×1080` · 썸네일 `1200×800` · 갤러리 `1600×900`. 대표 키아트·상세 헤더는 장축 `1920px`, 그 외 이미지는 장축 `1600px` 이하로 맞추고 용량은 `500KB` 이하로 최적화하며, 영상은 직접 호스팅하지 않고 YouTube 링크로 임베드한다.
 
-## 7. 접근성·품질 기준 (배포 전 필수)
+## 7. 접근성(A11y) 및 UI 레이아웃 무결성 기준
 
-- `npm run check` 통과
-- `npm run audit`: 주요 페이지 × **390 / 768 / 1440px**에서 **가로 넘침 0, axe(WCAG 2.1 AA + best-practice) 위반 0**
-- 키보드: 본문 바로가기, 메뉴, 목차, 미디어 탭(←/→), 라이트박스(Esc), 모바일 메뉴(Esc·포커스 복귀) 동작 유지
-- `prefers-reduced-motion: reduce`에서 애니메이션·부드러운 스크롤 비활성 (움직임은 `motion-safe:` 사용)
-- 장식 요소는 `aria-hidden`, 의미 있는 이미지는 대체 텍스트, 영역은 `aria-labelledby`로 제목 연결
-- 디자인 변경 시 1440px·390px 전체 화면 캡처로 확인하고 공유한다 (`AUDIT_SHOTS=폴더 npm run audit`)
+배포 전 아래 기준을 모두 충족해야 한다.
 
-알려진 함정:
-- 가로 스크롤 영역 안의 `sr-only`(absolute) 요소는 부모에 `relative`가 없으면 스크롤 영역 밖으로 빠져 페이지 가로 넘침을 만든다
-- flex 안의 가로 스크롤 목록에는 `min-w-0`이 필요하다
-- 흐린 빛 번짐(blur) 배경 위의 `text-fg-subtle`은 대비가 부족할 수 있다 → `text-fg-muted`
-- Next.js 16 정적 내보내기의 프리페치 경로 문제를 `scripts/fix-export-prefetch.mjs`로 보정 중 (빌드에 포함, Next 수정 시 제거)
+* **자동화 검증 통과**: `npm run check` 무결성 통과 및 `npm run audit` 실행 시 주요 페이지의 **390px / 768px / 1440px** 뷰포트에서 **가로 넘침(Horizontal Overflow) 0건**, **axe(WCAG 2.1 AA + best-practice) 위반 0건**을 달성해야 한다.
+* **키보드 내비게이션**: 본문 바로가기(Skip link), 글로벌 메뉴, 상세 페이지 목차, 미디어 탭(`←`/`→` 방향키), 라이트박스(`Esc` 닫기), 모바일 드로어 메뉴(`Esc` 닫기 및 트리거 요소로 포커스 복귀)가 정상 동작해야 한다.
+* **모션 제어**: `prefers-reduced-motion: reduce` 환경에서는 모든 전환 애니메이션 및 부드러운 스크롤을 비활성화한다 (모션 클래스는 반드시 `motion-safe:` 접두어 사용).
+* **시맨틱 및 ARIA**: 장식용 그래픽은 `aria-hidden="true"`, 의미를 전달하는 이미지는 구체적인 대체 텍스트(`alt`), 주요 섹션은 `aria-labelledby`로 제목과 연결한다.
+* **시각적 회귀 확인**: 디자인 또는 레이아웃 변경 시 `AUDIT_SHOTS=<폴더명> npm run audit`로 1440px 및 390px 전체 화면 스크린샷을 생성하여 레이아웃 깨짐을 육안으로 교차 검증한다.
 
-## 8. Git·배포
+### 레이아웃 방어 설계 원칙 (Known Pitfalls 방지)
 
-- 커밋 메시지: 한국어, 접두어 `feat:` 기능 / `fix:` 버그 / `style:` 디자인·표현 / `content:` 콘텐츠(CMS 커밋 형식과 동일) / `docs:` 문서 / `chore:` 기타. 본문에 변경 요점을 목록으로
-- 커밋 전 `npm run check`, 디자인 변경 시 `npm run audit`
-- 푸시 후 `gh run watch <id> --exit-status`로 배포 성공 확인, 운영 주소에서 결과 확인
-- 콘텐츠 스키마 오류는 CI에서 빌드가 중단되어 배포되지 않는다 (사이트는 이전 상태 유지)
+개별 컴포넌트 작업 시 아래 레이아웃 결함이 발생하지 않도록 래퍼 레벨에서 방어한다:
 
-## 9. CMS·비밀값
+1. **스크롤 컨테이너 내 `sr-only` 격리**: 가로 스크롤이 발생하는 영역 내부에 스크린 리더 전용(`sr-only`, `position: absolute`) 요소를 배치할 경우, 스크롤 컨테이너 자신 또는 그 안쪽 요소(예: 항목 버튼)에 반드시 `relative`를 지정해 기준 위치를 스크롤 영역 안에 두어, 요소가 뷰포트 밖으로 이탈해 가로 스크롤을 유발하는 현상을 차단한다.
+2. **Flexbox 축소 허용**: `display: flex` 컨테이너 내부에 가로 스크롤 목록이나 텍스트 말줄임 요소가 들어갈 경우, 자식 컨테이너에 반드시 `min-w-0`을 부여하여 Flex 아이템의 최소 너비 확장에 의한 레이아웃 붕괴를 방지한다.
+3. **블러 배경 위 명도 대비**: 가우시안 블러(`blur`) 효과가 적용된 배경 위에는 대비가 낮은 `text-fg-subtle` 사용을 금지하고, 최소 `text-fg-muted` 이상의 토큰을 사용한다.
 
-- GitHub OAuth App의 Client Secret은 **Cloudflare Worker Secret에만** 저장한다. 저장소·사이트·채팅·이슈에 붙여넣지 않는다
-  - 재등록: `cms/oauth-worker`에서 `npx.cmd wrangler secret put GITHUB_CLIENT_SECRET` (값은 입력창에 직접)
-  - 유출 시 GitHub OAuth App에서 재발급 → 위 명령으로 재등록 → 기존 Secret 삭제
-- Worker 주소는 비밀값이 아니며 저장소 Variables `DECAP_OAUTH_BASE_URL`에 있다
-- Worker 설정: `ALLOWED_ORIGINS=https://jongmini99.github.io`, `ALLOWED_SCOPES=public_repo` (`wrangler.toml`). 사이트 주소가 바뀌면 함께 수정 후 `wrangler deploy`
-- 관리자 저장 권한은 저장소 쓰기 권한자에게만 있다. `/admin`은 noindex·robots 차단
+## 8. Git 형상 관리 및 CI/CD 배포 규약
 
-## 10. 남은 작업 (2026-11-16 기준)
+* **커밋 메시지 컨벤션**: 한국어로 작성하며, 접두어는 `feat:`(기능), `fix:`(버그 수정), `style:`(디자인·UI 표현), `content:`(콘텐츠 데이터 수정, CMS 커밋과 동일), `docs:`(문서), `chore:`(빌드·설정 기타) 중 하나를 사용한다. 본문에는 변경 요점을 불릿 목록으로 명시한다.
+* **배포 파이프라인**:
+  1. 커밋 전 `npm run check` (디자인 변경 시 `npm run audit` 포함) 실행.
+  2. `main` 브랜치 푸시 후 `gh run watch <run-id> --exit-status` 명령으로 GitHub Actions CI/CD 파이프라인의 성공 여부를 끝까지 추적한다.
+  3. 콘텐츠 스키마 검증(`zod`) 실패 시 CI 단계에서 빌드가 즉시 중단되며, 기존 운영 사이트의 상태가 안전하게 유지된다.
 
-- [ ] 실제 이미지로 교체: 히어로 비주얼, 대표 키아트, 썸네일, 갤러리 → 교체 후 `public/uploads/images/temp/` 삭제
-- [ ] 플레이 영상(YouTube), 기획서 PDF, 이력서 파일, 연락처 이메일 입력
-- [ ] (선택) CMS 섹션의 "영문 소제목" 입력 칸 제거 여부 결정
+## 9. 보안 및 CMS 인증 인프라 관리
+
+* **비밀값 격리 (Zero-Trust)**: GitHub OAuth App의 `Client Secret`은 **오직 Cloudflare Worker Secret에만** 암호화하여 저장한다. 저장소 코드, 환경변수 파일, 프론트엔드 번들, 이슈·채팅 로그에 절대 노출하지 않는다.
+  * Secret 등록/갱신: `cms/oauth-worker` 디렉터리에서 `npx.cmd wrangler secret put GITHUB_CLIENT_SECRET` 실행 후 프롬프트에 직접 입력.
+  * 유출 의심 시 대응: GitHub OAuth App에서 즉시 기존 Secret 폐기 및 재발급 → Cloudflare Worker에 신규 Secret 등록 → 구 Secret 삭제.
+* **Worker 인프라 설정**: Worker 엔드포인트 URL은 공개 정보이며 저장소 Variables(`DECAP_OAUTH_BASE_URL`)로 관리한다. `wrangler.toml` 내 `ALLOWED_ORIGINS=https://jongmini99.github.io`, `ALLOWED_SCOPES=public_repo` 설정을 유지하며, 도메인 변경 시 동기화 후 `wrangler deploy`로 재배포한다.
+* **접근 제어**: 관리자 페이지(`/admin`)의 실제 저장 권한은 GitHub 저장소 쓰기(Write) 권한으로 통제되며, 검색 엔진 수집을 차단(`noindex`, `robots.txt` Disallow)한다.
+
+> **운영 안내**: 남은 작업(Todo) 및 에셋 교체 현황은 정적 지침서인 본 문서에 기록하지 않고, GitHub Issues 또는 별도의 프로젝트 트래커에서 관리한다.
