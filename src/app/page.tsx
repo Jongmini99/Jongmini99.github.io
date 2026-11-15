@@ -42,7 +42,6 @@ export default function HomePage() {
 
         <Container className="relative grid items-center gap-12 py-16 sm:py-20 lg:min-h-[46rem] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10 lg:py-24">
           <div className="flex flex-col gap-7">
-            {profile.roleTitle && <Eyebrow>{profile.roleTitle}</Eyebrow>}
             <h1 id="hero-title" className="max-w-3xl text-display font-bold tracking-[-0.05em] text-balance text-fg">
               {profile.headline}
             </h1>
