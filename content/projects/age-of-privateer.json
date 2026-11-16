@@ -1,0 +1,217 @@
+{
+  "id": "age-of-privateer",
+  "slug": "age-of-privateer",
+  "title": "Age of Privateer",
+  "subtitle": "대항해 시대를 배경으로 한 실시간 전략 카드 배틀",
+  "description": "실시간 전투와 덱 빌딩을 결합한 카드 배틀 게임 — Steam 얼리 액세스 출시",
+  "genre": "실시간 전략 카드 배틀 (덱 빌딩 · 로그라이크)",
+  "platform": "PC (Steam)",
+  "developmentPeriod": {
+    "start": "2023-08",
+    "end": "2024-07"
+  },
+  "developmentType": "팀 프로젝트",
+  "teamSize": 5,
+  "teamComposition": "PM 1명 / 기획·개발 2명 / 아트 2명",
+  "roles": [
+    "인 게임 시스템 기획·개발 (전투 중심)",
+    "방향성 검증용 최소 프로토타입 제작",
+    "1대 다수 전투 구조 설계",
+    "카드 시스템 데이터 테이블 설계·개선"
+  ],
+  "technologies": [
+    "Unity",
+    "C#"
+  ],
+  "thumbnail": {
+    "src": "/uploads/images/age-of-privateer/aop-thumbnail.jpg",
+    "alt": "Age of Privateer 인게임 카드 전투 화면 — 범선과 인어 형상의 적, 하단의 카드 패"
+  },
+  "heroImage": {
+    "src": "/uploads/images/age-of-privateer/aop-hero.jpg",
+    "alt": "Age of Privateer 인게임 카드 전투 화면 — 범선과 인어 형상의 적이 대치하고 하단에 카드 패가 펼쳐진 모습"
+  },
+  "gallery": [
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-01-voyage-map.jpg",
+      "alt": "항해할 다음 목적지를 선택하는 해도 화면",
+      "caption": "항해 목적지 선택"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-02-prototype-test.jpg",
+      "alt": "노트북으로 프로토타입을 플레이하는 유저 테스트 현장 사진",
+      "caption": "최소 프로토타입 유저 테스트 현장"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-03-battle-before-1v1.jpg",
+      "alt": "개선 전 1대1 전투 화면 — 아군 함선과 적 함선 1척이 대치",
+      "caption": "Before · 1대1 전투"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-04-battle-after-1vN.jpg",
+      "alt": "개선 후 1대 다수 전투 화면 — 아군 함선이 여러 적 함선과 대치",
+      "caption": "After · 1대 다수 전투"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-05-deck-concepts.jpg",
+      "alt": "일반·화염·속사·방어·분노·취약·회피 등 컨셉별로 카드를 분류한 덱 컨셉 구상표",
+      "caption": "다양한 컨셉의 덱 빌드 구상"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-06-card-data-table.jpg",
+      "alt": "카드·몬스터의 공격력·방어력·조건·행동 유형 등을 정리한 데이터 테이블",
+      "caption": "카드 시스템 데이터 작업"
+    }
+  ],
+  "videos": [],
+  "documents": [],
+  "externalLinks": [],
+  "achievements": [
+    {
+      "title": "Steam 얼리 액세스 출시",
+      "date": "2024.06.13"
+    }
+  ],
+  "featured": false,
+  "published": true,
+  "displayOrder": 20,
+  "sections": [
+    {
+      "id": "overview",
+      "type": "richText",
+      "title": "프로젝트 개요",
+      "visible": true,
+      "width": "full",
+      "body": "Age of Privateer는 대항해 시대를 배경으로 한 실시간 전략 카드 배틀 게임입니다.\n\n유저는 항해의 목적지를 향해 나아가며 전투와 다양한 랜덤 이벤트를 만납니다. 실시간으로 진행되는 전투에서 코스트와 적의 행동에 따라 카드를 전략적으로 사용하고, 보상으로 덱을 강화하는 **덱 빌딩**이 핵심 플레이입니다."
+    },
+    {
+      "id": "development-info",
+      "type": "projectInfo",
+      "title": "개발 정보",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "roles",
+      "type": "roles",
+      "title": "담당 역할 및 기여",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "direction",
+      "type": "cards",
+      "title": "3개월 막힌 방향을 최소 프로토타입으로 검증",
+      "visible": true,
+      "width": "full",
+      "intro": "초기에는 생존·어드벤처·전투·덱 빌딩을 융합한 장르를 기획했지만, 팀 역량에 비해 목표가 커서 3개월간 방향을 정하지 못했습니다. 일정이 정해진 상황에서 게임의 핵심을 정리해야 했습니다.",
+      "items": [
+        {
+          "title": "문제 — 모호한 방향성으로 3개월 정체",
+          "icon": "target",
+          "bullets": [
+            "여러 장르를 동시에 융합해 레퍼런스 부족",
+            "직접 플레이하지 않고 상상만으로 판단",
+            "배 위의 한정된 자원으로 생존 루프 설계가 어려움"
+          ]
+        },
+        {
+          "title": "판단 — 카드와 전투만 남긴 프로토타입",
+          "icon": "layers",
+          "bullets": [
+            "\"백견이 불여일행\" — 직접 플레이로 방향성 결정",
+            "카드 사용과 전투만 남긴 최소 프로토타입 제작"
+          ]
+        },
+        {
+          "title": "검증 — 전투 중심으로 확정",
+          "icon": "users",
+          "bullets": [
+            "유저 테스트에서 실시간 전투와 카드 사용에 긍정적 반응 확인",
+            "정체된 프로젝트의 방향성 확정"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-structure",
+      "type": "comparison",
+      "title": "1대1에서 1대 다수 전투로",
+      "visible": true,
+      "width": "full",
+      "intro": "방향성 확정 후 초기 전투는 1대1이었습니다. 몬스터 1마리의 행동만 보고 카드를 쓰는 '철권 같은' 경험이라 판단 요소가 적었습니다.",
+      "items": [
+        {
+          "label": "Before · 1대1",
+          "description": "몬스터 1마리의 행동만 보고 카드 사용. 전략적인 카드 사용을 위한 판단 요소가 적음.",
+          "image": {
+            "src": "/uploads/images/age-of-privateer/aop-gallery-03-battle-before-1v1.jpg",
+            "alt": "개선 전 1대1 전투 화면"
+          }
+        },
+        {
+          "label": "After · 1대 다수",
+          "description": "여러 몬스터의 행동을 보고 상황에 따라 공격 또는 수비를 선택. 전략적 판단 요소 증가.",
+          "image": {
+            "src": "/uploads/images/age-of-privateer/aop-gallery-04-battle-after-1vN.jpg",
+            "alt": "개선 후 1대 다수 전투 화면"
+          }
+        }
+      ]
+    },
+    {
+      "id": "deck-building",
+      "type": "cards",
+      "title": "덱 빌딩 시스템 개선",
+      "visible": true,
+      "width": "full",
+      "items": [
+        {
+          "title": "덱 컨셉 설계",
+          "icon": "layers",
+          "bullets": [
+            "동료 기획자와 공격/방어/상태 이상 중심 등 덱 컨셉 구상",
+            "코스트 소모와 적에게 적용되는 수치 기준으로 밸런싱"
+          ]
+        },
+        {
+          "title": "카드 데이터 테이블 효율화",
+          "icon": "database",
+          "bullets": [
+            "동료 기획자의 카드 콘텐츠가 실제 게임에서 동작하도록 데이터 테이블 기획",
+            "관리 난이도 의견을 수용해 테이블 11개 → 7개로 효율화",
+            "데이터 입력 작업 속도 개선"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "achievements",
+      "type": "achievements",
+      "title": "주요 성과",
+      "visible": true,
+      "width": "full"
+    },
+    {
+      "id": "media",
+      "type": "media",
+      "title": "미디어",
+      "visible": true,
+      "width": "full"
+    },
+    {
+      "id": "documents",
+      "type": "documents",
+      "title": "기획 문서 및 자료",
+      "visible": false,
+      "width": "half"
+    },
+    {
+      "id": "links",
+      "type": "links",
+      "title": "외부 링크",
+      "visible": false,
+      "width": "half"
+    }
+  ]
+}

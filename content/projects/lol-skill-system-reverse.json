@@ -1,0 +1,126 @@
+{
+  "id": "lol-skill-system-reverse",
+  "slug": "lol-skill-system-reverse",
+  "title": "리그 오브 레전드 스킬 시스템 역기획",
+  "subtitle": "전투의 핵심인 스킬의 구성 요소와 작동 방법, 예외 처리 분석",
+  "description": "리그 오브 레전드의 스킬 시스템을 역기획해 스킬 사용 → 타겟 지정 → 효과 적용 플로우와 예외 상황 처리 방법을 정리한 기획 문서",
+  "genre": "역기획 · MOBA 스킬 시스템",
+  "platform": "기획 문서",
+  "developmentType": "팀 프로젝트",
+  "teamSize": 3,
+  "roles": [
+    "팀장",
+    "모든 기획 과정 참여"
+  ],
+  "technologies": [],
+  "thumbnail": {
+    "src": "/uploads/images/lol-skill-system-reverse/lol-thumbnail.jpg",
+    "alt": "역기획서 페이지 — 스킬 사용 가능 상태 확인, 타겟 지정, 효과 적용 3단계로 구성된 스킬 시스템 구조도"
+  },
+  "gallery": [
+    {
+      "src": "/uploads/images/lol-skill-system-reverse/lol-gallery-01-structure-flow.jpg",
+      "alt": "스킬 시스템의 구조와 메인 플로우 — 스킬 사용, 타겟 지정, 스킬 효과 적용 3단계와 각 시스템 정의 표",
+      "caption": "스킬 시스템의 구조와 메인 플로우"
+    },
+    {
+      "src": "/uploads/images/lol-skill-system-reverse/lol-gallery-02-usable-check-flow.jpg",
+      "alt": "액티브 스킬 사용 가능 조건 확인 플로우차트 — 생존 상태, 스킬 레벨, 특수 효과, 재사용 대기시간, 자원 확인 후 분기",
+      "caption": "[문서 디테일] 스킬 사용 가능 상태 확인 플로우"
+    },
+    {
+      "src": "/uploads/images/lol-skill-system-reverse/lol-gallery-03-targeting-flow.jpg",
+      "alt": "타겟 지정 정의와 전체 플로우차트 — 강제 타겟, 즉시 시전 설정, 올바른 대상 여부에 따른 분기",
+      "caption": "타겟 지정 플로우"
+    },
+    {
+      "src": "/uploads/images/lol-skill-system-reverse/lol-gallery-04-targeting-exception.jpg",
+      "alt": "타겟 지정 예외처리 예시 — 사거리 밖 대상을 지정했을 때 챔피언 이동과 논타겟 스킬의 최대 사거리 시전 도식",
+      "caption": "[문서 디테일] 스킬 타겟 지정 시 예외 처리 방법 정리"
+    }
+  ],
+  "videos": [],
+  "documents": [
+    {
+      "title": "리그 오브 레전드 스킬 시스템 역기획서 (PDF)",
+      "file": "/uploads/documents/lol-skill-system-reverse.pdf",
+      "description": "69쪽"
+    }
+  ],
+  "externalLinks": [],
+  "achievements": [],
+  "featured": false,
+  "published": true,
+  "displayOrder": 50,
+  "sections": [
+    {
+      "id": "overview",
+      "type": "richText",
+      "title": "문서 개요",
+      "visible": true,
+      "width": "full",
+      "body": "리그 오브 레전드의 스킬 시스템을 역기획해 전투의 핵심인 스킬의 구성 요소와 작동 방법을 분석한 문서입니다.\n\n실제 전투에서 발생할 수 있는 다양한 **예외 상황의 처리 방법**에 집중해, 개발이 가능한 수준으로 스킬의 플로우와 규칙을 정리했습니다."
+    },
+    {
+      "id": "development-info",
+      "type": "projectInfo",
+      "title": "문서 정보",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "roles",
+      "type": "roles",
+      "title": "담당 역할",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "key-content",
+      "type": "cards",
+      "title": "주요 기획 내용 — 스킬 시스템 플로우 정리와 예외 처리",
+      "visible": true,
+      "width": "full",
+      "items": [
+        {
+          "title": "3단계 플로우로 시스템 구성",
+          "icon": "workflow",
+          "bullets": [
+            "스킬 사용 → 타겟 지정 → 스킬 효과 적용의 3개 플로우로 스킬 시스템 구성",
+            "스킬 구성 요소(패시브·액티브 스킬 등) 정의"
+          ]
+        },
+        {
+          "title": "규칙 정리와 플로우차트 도식화",
+          "icon": "layers",
+          "bullets": [
+            "각 플로우의 규칙을 상세히 정리",
+            "사용 가능 조건 확인·타겟 지정 과정을 플로우차트로 도식화"
+          ]
+        },
+        {
+          "title": "예외 처리",
+          "icon": "shield",
+          "bullets": [
+            "스킬 사용 시 발생하는 다양한 예외 상황을 예시로 정리",
+            "예: 사거리 밖 대상 지정, 타겟 지정 도중 대상 사망·위치 이동 등"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "type": "gallery",
+      "title": "문서 주요 페이지",
+      "visible": true,
+      "width": "full"
+    },
+    {
+      "id": "documents",
+      "type": "documents",
+      "title": "기획 문서",
+      "visible": true,
+      "width": "full"
+    }
+  ]
+}

@@ -5,9 +5,18 @@
       "items": [
         { "name": "Unity", "icon": "unity", "highlight": true },
         { "name": "C#", "icon": "csharp", "highlight": true },
-        { "name": "Lua", "icon": "lua", "highlight": true },
-        { "name": "MS-SQL", "icon": "database", "highlight": false },
-        { "name": "AI 활용 개발", "icon": "sparkles", "highlight": false }
+        { "name": "MSW (메이플스토리 월드)", "highlight": false },
+        { "name": "Python", "icon": "code", "highlight": false },
+        { "name": "VS Code", "icon": "code", "highlight": false },
+        { "name": "GitHub", "icon": "github", "highlight": false }
+      ]
+    },
+    {
+      "name": "AI 활용",
+      "items": [
+        { "name": "Claude Code", "icon": "sparkles", "highlight": true },
+        { "name": "ChatGPT", "icon": "sparkles", "highlight": false },
+        { "name": "Perplexity", "icon": "sparkles", "highlight": false }
       ]
     },
     {
@@ -21,7 +30,9 @@
     {
       "name": "협업 도구",
       "items": [
-        { "name": "Jira / Confluence", "icon": "kanban", "highlight": false }
+        { "name": "Notion", "icon": "file", "highlight": false },
+        { "name": "Figma", "icon": "layers", "highlight": false },
+        { "name": "PowerPoint · Excel · Word", "icon": "file", "highlight": false }
       ]
     }
   ]

@@ -3,27 +3,66 @@
   "slug": "zombie-project-x",
   "title": "좀비 프로젝트 X",
   "subtitle": "인간과 좀비, 두 진영의 비대칭 PvP 추격전",
-  "description": "인간과 좀비 두 진영으로 나뉘어 대결하는 2D 탑다운 PvP 슈팅 게임",
-  "genre": "2D 탑다운 PvP 슈팅",
-  "platform": "메이플스토리 월드",
+  "description": "인간과 좀비의 전투를 메인으로 하는 멀티 플레이 PvP 게임 — 메이플스토리 월드 개발 공모전 대상",
+  "genre": "멀티 PvP 전투 (2D 탑다운 슈팅)",
+  "platform": "PC · Mobile (메이플스토리 월드)",
   "developmentPeriod": { "start": "2023-03", "end": "2023-07" },
   "developmentType": "팀 프로젝트",
   "teamSize": 6,
   "teamComposition": "PM 2명 / 기획·개발 2명 / 아트 2명",
-  "roles": ["게임 기획 총괄", "시스템 설계", "콘텐츠 및 레벨 기획", "Lua 스크립트 구현"],
-  "technologies": ["Lua"],
-  "thumbnail": { "src": "/uploads/images/temp/project-thumbnail.svg", "alt": "임시 썸네일 이미지" },
-  "heroImage": { "src": "/uploads/images/temp/project-hero.svg", "alt": "임시 대표 이미지" },
-  "gallery": [
-    { "src": "/uploads/images/temp/gallery-1.svg", "alt": "임시 갤러리 이미지 1", "caption": "임시 이미지 — 실제 스크린샷으로 교체 예정" },
-    { "src": "/uploads/images/temp/gallery-2.svg", "alt": "임시 갤러리 이미지 2", "caption": "임시 이미지 — 실제 스크린샷으로 교체 예정" },
-    { "src": "/uploads/images/temp/gallery-3.svg", "alt": "임시 갤러리 이미지 3", "caption": "임시 이미지 — 실제 스크린샷으로 교체 예정" }
+  "roles": [
+    "인 게임 시스템 기획·개발 (전투 영역)",
+    "상자·레벨업 시스템 설계",
+    "무기 시스템·데이터 테이블 설계",
+    "MSW(Lua) 구현 및 검증"
   ],
-  "videos": [],
+  "technologies": ["MSW (메이플스토리 월드)", "Lua"],
+  "thumbnail": {
+    "src": "/uploads/images/zombie-project-x/zombie-thumbnail-keyart.jpg",
+    "alt": "좀비 프로젝트 X 키아트 — 좀비 캐릭터와 게임 로고, BETA OPEN 표시"
+  },
+  "heroImage": {
+    "src": "/uploads/images/zombie-project-x/zombie-hero-keyart.jpg",
+    "alt": "좀비 프로젝트 X 키아트 — 좀비 캐릭터와 게임 로고, 문구 '불로불사를 위한 프로젝트! 비밀을 파헤쳐라!'"
+  },
+  "gallery": [
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-01-box-levelup.jpg",
+      "alt": "상자 획득과 레벨업으로 무기가 강화되는 흐름을 보여 주는 인게임 화면 3단계"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-02-system-structure.jpg",
+      "alt": "좀비 프로젝트 X 시스템 구조도 — 인게임 영역(게임 진행·성장·전투·관전)과 아웃게임 영역(매치메이킹·재화 소모)",
+      "caption": "인 게임·아웃 게임 시스템 구조도와 담당 영역"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-03-weapon-table.jpg",
+      "alt": "무기 이름·레벨·사거리·쿨타임·탄속·탄 수·정확도·피해량 등을 정리한 무기 데이터 테이블",
+      "caption": "실제 적용된 무기 데이터 테이블"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-04-weapons.jpg",
+      "alt": "고유한 전투 스타일을 가진 무기 8종의 아이콘과 능력치 카드",
+      "caption": "고유한 전투 스타일을 가진 8종의 무기 콘텐츠"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-05-youtuber-play.jpg",
+      "alt": "유튜버 팡이요가 좀비 프로젝트 X를 플레이하는 방송 화면",
+      "caption": "이미지 출처: 팡이요 유튜브"
+    }
+  ],
+  "videos": [
+    {
+      "title": "실제 플레이 영상 (유튜버 팡이요)",
+      "youtubeUrl": "https://youtu.be/ijl7vVvPEHk?t=11",
+      "description": "외부 유튜버 플레이 영상 · 음량 주의"
+    }
+  ],
   "documents": [],
   "externalLinks": [],
   "achievements": [
-    { "title": "메이플스토리 월드 개발 공모전 대상", "date": "2024" },
+    { "title": "메이플스토리 월드 개발 공모전 대상", "date": "2023.07.13" },
+    { "title": "메이플스토리 월드 출시", "date": "2023.06.15" },
     { "title": "유튜브 크리에이터 팡이요의 게임 플레이 콘텐츠에 등장" }
   ],
   "featured": true,
@@ -36,7 +75,7 @@
       "title": "프로젝트 개요",
       "visible": true,
       "width": "full",
-      "body": "좀비 프로젝트 X는 인간과 좀비 두 진영으로 나뉘어 대결하는 2D 탑다운 PvP 슈팅 게임입니다.\n\n인간은 총기를 이용하여 좀비를 공격하고, 좀비는 인간 플레이어를 감염시켜 진영을 확장합니다. 제한시간 종료 시 승패가 결정되며, 인간과 좀비의 대립을 통한 긴장감 있는 추격전을 핵심 경험으로 설계했습니다."
+      "body": "좀비 프로젝트 X는 인간과 좀비의 전투를 메인으로 하는 멀티 플레이 PvP 게임입니다.\n\n게임이 시작되면 무작위로 좀비 플레이어가 정해지고, 좀비는 인간 플레이어와 접촉해 감염시킬 수 있습니다. 좀비는 모든 인간을 감염시키면, 인간은 제한 시간 동안 생존하거나 모든 좀비를 처치하면 승리합니다.\n\n게임은 인 게임과 아웃 게임 영역으로 나뉘며, 저는 **인 게임 전투 영역**의 시스템·콘텐츠 기획을 맡아 MSW 엔진으로 직접 개발하고 검증했습니다."
     },
     {
       "id": "development-info",
@@ -58,10 +97,40 @@
       "title": "게임 소개 및 핵심 플레이",
       "visible": true,
       "width": "full",
-      "intro": "인간과 좀비의 대립을 통한 긴장감 있는 추격전을 핵심 경험으로 설계한 **진영 간 비대칭 PvP** 구조입니다. 제한시간 종료 시 승패가 결정됩니다.",
+      "intro": "인간과 좀비의 대립을 통한 긴장감 있는 추격전을 핵심 경험으로 설계한 **진영 간 비대칭 PvP** 구조입니다.",
       "items": [
-        { "label": "인간 진영", "description": "총기를 이용하여 좀비를 공격합니다." },
-        { "label": "좀비 진영", "description": "인간 플레이어를 감염시켜 진영을 확장합니다." }
+        { "label": "인간 진영", "description": "총기로 좀비를 공격합니다. 제한 시간 동안 생존하거나 모든 좀비를 처치하면 승리합니다." },
+        { "label": "좀비 진영", "description": "인간과 접촉해 감염시켜 진영을 늘립니다. 모든 인간을 감염시키면 승리합니다." }
+      ]
+    },
+    {
+      "id": "combat-loop",
+      "type": "cards",
+      "title": "상자·레벨업 시스템으로 교전 빈도 높이기",
+      "visible": true,
+      "width": "full",
+      "intro": "전투 프로토타입 내부 테스트에서 인간 플레이어가 좀비를 피해 숨기만 해 '숨바꼭질 같다'는 피드백을 받았습니다. 맵 이동을 유도하는 두 시스템을 추가해 핵심 플레이인 전투가 더 자주 일어나도록 개선했습니다.",
+      "items": [
+        {
+          "title": "문제",
+          "icon": "target",
+          "bullets": ["인간 플레이어가 전투 대신 숨는 플레이에 집중", "\"전투보다 숨바꼭질 같다\"는 내부 테스트 피드백"]
+        },
+        {
+          "title": "상자 시스템",
+          "icon": "box",
+          "bullets": ["일정 시간마다 지정된 스폰 포인트에 상자 생성", "등급이 높을수록 경험치 획득량 증가", "높은 등급일수록 획득 시간이 늘어나 전략적 판단 요구"]
+        },
+        {
+          "title": "레벨업 시스템",
+          "icon": "chart",
+          "bullets": ["라운드 시작 시 Lv1, 최대 Lv3", "경험치 요구량 충족 시 레벨 상승", "레벨에 맞춰 장착 무기 강화"]
+        },
+        {
+          "title": "결과",
+          "icon": "crosshair",
+          "bullets": ["숨는 플레이 → 맵을 돌아다니는 플레이로 전환", "인간은 성장 기대감으로 탐험, 좀비는 이동하는 인간을 적극 추격", "전투 상황 발생 빈도 증가"]
+        }
       ]
     },
     {
@@ -82,14 +151,9 @@
           "bullets": ["전투를 통한 재화 획득", "재화를 활용한 신규 무기 구매", "인게임 상자 파밍", "경험치 획득 및 레벨업 강화"]
         },
         {
-          "title": "특수 좀비 시스템",
-          "icon": "biohazard",
-          "bullets": ["특수 좀비 4종", "좀비별 차별화된 전투 콘셉트", "콘셉트에 따른 스킬과 능력치 설계"]
-        },
-        {
           "title": "무기 및 아이템 시스템",
           "icon": "swords",
-          "bullets": ["무기별 전투 콘셉트 설계", "무기 특성에 따른 스탯 및 기능 구성"]
+          "bullets": ["반동·사거리 등 공격 데이터를 세분화한 데이터 테이블 설계", "고유한 전투 스타일의 무기 8종 추가", "일부 무기를 상점에서 판매해 반복 플레이 동기 부여"]
         }
       ]
     },
@@ -99,7 +163,7 @@
       "title": "기술 구현",
       "visible": true,
       "width": "half",
-      "items": ["Lua 기반 인게임 시스템 전반 구현"]
+      "items": ["MSW 엔진(Lua)으로 인 게임 전투 시스템을 직접 구현하고 내부 테스트로 검증", "무기 데이터 테이블 기반 무기 8종 구현"]
     },
     {
       "id": "achievements",
@@ -119,14 +183,14 @@
       "id": "documents",
       "type": "documents",
       "title": "기획 문서 및 자료",
-      "visible": true,
+      "visible": false,
       "width": "half"
     },
     {
       "id": "links",
       "type": "links",
       "title": "외부 링크",
-      "visible": true,
+      "visible": false,
       "width": "half"
     }
   ]

@@ -1,0 +1,246 @@
+{
+  "id": "ai-experience",
+  "slug": "ai-experience",
+  "title": "AI 활용 경험",
+  "subtitle": "Time Recall 프로토타입 개선 · 비주얼 노벨 팀 프로젝트 콘텐츠 제작",
+  "description": "AI로 기존 프로토타입을 다시 기획·개발해 4번의 테스트·개선을 반복하고, 팀 프로젝트의 퍼즐 레벨 디자인과 시나리오 데이터화에 AI를 활용한 경험",
+  "genre": "AI 활용 기획·개발 (탑다운 슈터 · 뱀서라이크 / 비주얼 노벨)",
+  "platform": "PC (Time Recall 프로토타입)",
+  "developmentType": "Time Recall: 약 3일 진행한 프로토타입 · 비주얼 노벨: 팀 프로젝트",
+  "roles": [
+    "Time Recall 기획 의도 재설정 및 검증",
+    "Time Recall 소규모 유저 테스트 진행 및 결과 분석",
+    "Claude Code·ChatGPT를 활용한 기획·개발과 직접 검수",
+    "비주얼 노벨 퍼즐 캐릭터 기믹 기획 및 AI 활용 레벨 디자인",
+    "비주얼 노벨 시나리오 데이터화 (AI로 Python 자동 추출 프로그램 제작)"
+  ],
+  "technologies": [
+    "Unity 6",
+    "Claude Code",
+    "ChatGPT",
+    "GitHub",
+    "Notion",
+    "Python"
+  ],
+  "gallery": [
+    {
+      "src": "/uploads/images/ai-experience/timerecall-gallery-01-prototype-v1.jpg",
+      "alt": "Time Recall 기존 1차 프로토타입 화면 — 단순한 도형 캐릭터와 조준점",
+      "caption": "Time Recall · 기존 프로토타입 (기획·개발 직접 진행)"
+    },
+    {
+      "src": "/uploads/images/ai-experience/timerecall-gallery-02-prototype-improved.jpg",
+      "alt": "Time Recall 개선 프로토타입 화면 — 격자 바닥 위의 플레이어와 적, 웨이브 표시",
+      "caption": "Time Recall · 개선 프로토타입 (AI 활용 기획·개발 후 직접 검수)"
+    },
+    {
+      "src": "/uploads/images/ai-experience/timerecall-gallery-03-balance-simulator.jpg",
+      "alt": "Time Recall 웹 전투 밸런스 시뮬레이터 화면 — 웨이브별 전투력 지표 그래프와 수치 조절 패널",
+      "caption": "Time Recall · 웹 전투 밸런스 시뮬레이터"
+    },
+    {
+      "src": "/uploads/images/ai-experience/vn-gallery-01-puzzle-level-ai.jpg",
+      "alt": "AI를 활용해 제작한 퍼즐 레벨 디자인 산출물 — 격자 맵과 블록 배치표",
+      "caption": "비주얼 노벨 · AI를 활용해 제작한 퍼즐 레벨 디자인 산출물"
+    },
+    {
+      "src": "/uploads/images/ai-experience/vn-gallery-02-puzzle-reference.jpg",
+      "alt": "실제 게임에 적용할 퍼즐 레벨 참고 이미지 — 알파벳으로 구분된 색 블록 격자",
+      "caption": "비주얼 노벨 · 실제 게임에 적용할 퍼즐 레벨 참고 이미지"
+    },
+    {
+      "src": "/uploads/images/ai-experience/vn-gallery-03-python-extractor.jpg",
+      "alt": "DOCX 시나리오를 엑셀 데이터로 변환하는 Python 자동 추출 프로그램 창",
+      "caption": "비주얼 노벨 · 실제 개발된 Python 자동 데이터 추출 프로그램"
+    },
+    {
+      "src": "/uploads/images/ai-experience/vn-gallery-04-extracted-data.jpg",
+      "alt": "자동 추출된 시나리오 데이터가 행 단위로 정리된 스프레드시트",
+      "caption": "비주얼 노벨 · 추출된 데이터를 실제 게임에 적용"
+    }
+  ],
+  "videos": [],
+  "documents": [],
+  "externalLinks": [],
+  "achievements": [],
+  "featured": false,
+  "published": true,
+  "displayOrder": 30,
+  "sections": [
+    {
+      "id": "overview",
+      "type": "richText",
+      "title": "프로젝트 개요",
+      "visible": true,
+      "width": "full",
+      "body": "기획 업무에 AI를 활용한 두 가지 경험을 정리했습니다.\n\n- **Time Recall** — 직접 기획·개발했던 1차 프로토타입을 유저 테스트 결과를 바탕으로 다시 기획하고, Claude Code와 ChatGPT를 활용해 개발한 뒤 직접 검수했습니다. 약 3일 동안 진행했으며, AI로 작업 효율을 높여 기존 일정으로는 불가능했던 4번의 테스트·개선 사이클을 진행했습니다.\n- **비주얼 노벨 팀 프로젝트** — 게임에 들어가는 퍼즐 콘텐츠의 레벨 디자인과, 소설 형태 시나리오의 데이터화 작업에 AI를 활용했습니다."
+    },
+    {
+      "id": "development-info",
+      "type": "projectInfo",
+      "title": "개발 정보",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "roles",
+      "type": "roles",
+      "title": "담당 역할 및 기여",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "tr-before-after",
+      "type": "comparison",
+      "title": "Time Recall — 기존 프로토타입과 개선 프로토타입",
+      "visible": true,
+      "width": "full",
+      "intro": "탑다운 슈터와 뱀서라이크를 융합한 게임으로, 기획 의도는 **\"작은 플레이 타임으로도 큰 폭의 성장을 경험하게 한다\"**입니다.",
+      "items": [
+        {
+          "label": "기존 프로토타입",
+          "description": "탑다운 슈팅 + 뱀서라이크 1차 프로토타입. 기획·개발을 100% 직접 진행했고, 유저 테스트로 큰 개선점을 도출했습니다.",
+          "image": {
+            "src": "/uploads/images/ai-experience/timerecall-gallery-01-prototype-v1.jpg",
+            "alt": "Time Recall 기존 1차 프로토타입 화면"
+          }
+        },
+        {
+          "label": "개선 프로토타입",
+          "description": "성장의 재미를 중심으로 기획 의도를 다시 잡고, Claude Code·ChatGPT로 기획·개발한 뒤 직접 검수했습니다. 완성도가 높아져 영역별로 더 집중적인 테스트가 가능해졌습니다.",
+          "image": {
+            "src": "/uploads/images/ai-experience/timerecall-gallery-02-prototype-improved.jpg",
+            "alt": "Time Recall 개선 프로토타입 화면"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tr-test-result",
+      "type": "infoTable",
+      "title": "Time Recall — 기존 프로토타입 소규모 테스트 결과",
+      "visible": true,
+      "width": "half",
+      "intro": "5점 척도 문항 평균 (테스터 5명)",
+      "rows": [
+        {
+          "label": "강화 효과 체감",
+          "value": "4.6"
+        },
+        {
+          "label": "카드 선택 고민",
+          "value": "1.8"
+        },
+        {
+          "label": "한 판 더 하고 싶음",
+          "value": "2.8"
+        }
+      ]
+    },
+    {
+      "id": "tr-problem",
+      "type": "richText",
+      "title": "Time Recall — 문제 정의",
+      "visible": true,
+      "width": "half",
+      "body": "강화 체감이 첫 무기 교체에서만 느껴지고, 강화 방향 선택에 대한 고민이 없었습니다.\n\n> 테스터 의견: \"다른 무기로 바꾼 순간에만 강화 효과가 크게 느껴지고, 이후에는 비슷한 경험이 반복되어 지루했다.\""
+    },
+    {
+      "id": "tr-growth-system",
+      "type": "cards",
+      "title": "Time Recall — 성장 시스템의 두 축: 판 안에서는 도약, 판 사이에서는 조금씩",
+      "visible": true,
+      "width": "full",
+      "intro": "AI와 함께 아이디어를 도출해 도약 강화와 영구 성장 시스템을 추가하고 방향성을 재설정했습니다. (프로토타입 v1.3 RuleConfig 기준 · 테스트용 콘텐츠)",
+      "items": [
+        {
+          "title": "도약 강화 (판 안 · 8분)",
+          "icon": "rocket",
+          "bullets": [
+            "웨이브 1~7마다 카드 선택, 판이 끝나면 초기화",
+            "규칙 변환 카드: Lv1 → Lv2(W3) → 진화(W5) → 각성(W7)",
+            "예: 관통 → 레일샷(무한 관통·탄속 ×2·피해 ×1.5), 확산 → 탄막(7갈래 + 벽 튕김), 폭발 → 연쇄 폭발"
+          ]
+        },
+        {
+          "title": "전략적 선택",
+          "icon": "swords",
+          "bullets": [
+            "카드 3유형과 적 콘텐츠를 다양화해 강화 시 전략적 선택 요구"
+          ]
+        },
+        {
+          "title": "영구 성장 (판 사이)",
+          "icon": "chart",
+          "bullets": [
+            "판 밖에 남는 유일한 자원은 코어",
+            "처치 시 역할별 확률로 드롭, 직접 주워야 하며 10초 뒤 소멸",
+            "로비 특성 트리·업적 보상으로 다음 판이 더 빨리 강해짐 (화력 특성 합 상한 30%)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tr-iteration",
+      "type": "bulletList",
+      "title": "Time Recall — 4번의 테스트·개선 이력 (v0 → v1.3)",
+      "visible": true,
+      "width": "full",
+      "intro": "웹 전투 시뮬레이터로 밸런스를 조절하고, 직접 플레이 테스트로 문제를 찾아 원인을 수치로 확인한 뒤 고쳤습니다.",
+      "items": [
+        "v0 — 기존 프로토타입 테스트(5명): 강화 체감이 첫 무기 교체에 몰림",
+        "v1.1 — 도약 강화를 추가해 웨이브마다 성장 체감 강화",
+        "v1.2 — 웹 전투 밸런스 시뮬레이터 개발, 수치 조정과 콘텐츠 추가",
+        "v1.3 — 적 처치 보상과 영구 성장 시스템 추가로 반복 플레이 동기 강화",
+        "검증 중 발견: 모든 무기의 넉백이 고정값이라 기관단총 사용 시 적이 접근하지 못함 → 플레이로 발견하고 코드로 원인 확인"
+      ]
+    },
+    {
+      "id": "vn-ai-content",
+      "type": "cards",
+      "title": "비주얼 노벨 팀 프로젝트 — AI 활용 콘텐츠 제작",
+      "visible": true,
+      "width": "full",
+      "items": [
+        {
+          "title": "AI 활용 퍼즐 레벨 디자인",
+          "icon": "layers",
+          "bullets": [
+            "게임에 들어가는 퍼즐 콘텐츠가 필요한 상황",
+            "각 캐릭터의 특성을 살린 기믹을 기획",
+            "AI로 레벨을 디자인해 다양한 퍼즐 스테이지를 만들고 검증"
+          ]
+        },
+        {
+          "title": "시나리오 데이터 추출 자동화",
+          "icon": "sparkles",
+          "bullets": [
+            "소설 형태로 작성된 DOCS 시나리오를 게임에 적용할 데이터로 변환해야 하는 상황",
+            "AI를 활용해 Python 자동 추출 프로그램을 만들어 실제 데이터 형식에 맞게 추출",
+            "반복 작업 시간을 줄여 개발 작업에 더 집중"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "type": "technologies",
+      "title": "기술 구현",
+      "visible": true,
+      "width": "full",
+      "items": [
+        "Claude Code로 웹 전투 밸런스 시뮬레이터 개발 (웨이브별 전투력 지표 확인)",
+        "Unity 6 · GitHub · Notion을 MCP로 연결해 AI 개발 환경 구성",
+        "AI 산출물을 직접 플레이로 검수하고 수정",
+        "AI를 활용해 Python 시나리오 데이터 자동 추출 프로그램 제작"
+      ]
+    },
+    {
+      "id": "media",
+      "type": "media",
+      "title": "미디어",
+      "visible": true,
+      "width": "full"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "cookierun-kingdom-bm",
+  "slug": "cookierun-kingdom-bm",
+  "title": "쿠키런: 킹덤 지표 및 BM 분석서",
+  "subtitle": "실제 지표로 매출 구조를 분석하고 가격 설계의 목적을 정리",
+  "description": "모바일 지표를 근거로 가설을 세우고, 이벤트·패치별 매출과 유저 수 변화, 상품(BM) 구성과 타겟 유저를 분석한 문서",
+  "genre": "BM 분석 · 모바일",
+  "platform": "기획 문서",
+  "developmentType": "팀 프로젝트",
+  "teamSize": 4,
+  "roles": [
+    "모든 기획 과정 참여"
+  ],
+  "technologies": [],
+  "thumbnail": {
+    "src": "/uploads/images/cookierun-kingdom-bm/cookierun-thumbnail.jpg",
+    "alt": "분석서 페이지 — 소닉·디즈니·BTS 콜라보 기간별 매출(Revenue) 추이 그래프"
+  },
+  "gallery": [
+    {
+      "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-01-collab-revenue.jpg",
+      "alt": "지표 분석: 콜라보 기간 — 소닉·디즈니·BTS 콜라보 이벤트 기간의 매출 추이 그래프 3개",
+      "caption": "[문서 디테일] 이벤트 기간별 매출 지표 분석"
+    },
+    {
+      "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-02-hypothesis.jpg",
+      "alt": "가설 수립 페이지 — 쿠키런: 킹덤이 다른 CCG 게임보다 다양한 BM을 제공한다는 가설과 근거, 결론",
+      "caption": "지표 기반 가설 설정 및 수립"
+    },
+    {
+      "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-03-bm-by-price.jpg",
+      "alt": "BM 분석: 가격별 BM — 쿠키뽑기·데코·크리스탈 패키지를 1만 원대 이하부터 6만 원대 이상까지 가격대별로 배치한 표",
+      "caption": "[문서 디테일] 각 BM의 가격과 구성 분류"
+    },
+    {
+      "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-04-bm-conclusion.jpg",
+      "alt": "BM 분석 결론 페이지 — 세그먼트화된 BM과 복수 콘텐츠 패키지 구성에 대한 정리",
+      "caption": "BM 패턴 분석 결론"
+    }
+  ],
+  "videos": [],
+  "documents": [
+    {
+      "title": "쿠키런: 킹덤 지표 및 BM 분석서 (PDF)",
+      "file": "/uploads/documents/cookierun-kingdom-bm-analysis.pdf",
+      "description": "72쪽"
+    }
+  ],
+  "externalLinks": [],
+  "achievements": [],
+  "featured": false,
+  "published": true,
+  "displayOrder": 60,
+  "sections": [
+    {
+      "id": "overview",
+      "type": "richText",
+      "title": "문서 개요",
+      "visible": true,
+      "width": "full",
+      "body": "쿠키런: 킹덤의 비즈니스 모델(BM)을 지표 분석을 기반으로 분석한 문서입니다.\n\n이벤트나 콘텐츠가 출시될 때마다 지표에 어떤 변화가 나타나는지 분석하고, 각 상품이 어떤 유저를 타겟으로 만들어졌는지 정리했습니다."
+    },
+    {
+      "id": "development-info",
+      "type": "projectInfo",
+      "title": "문서 정보",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "roles",
+      "type": "roles",
+      "title": "담당 역할",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "key-content",
+      "type": "cards",
+      "title": "주요 기획 내용 — 실제 지표 분석을 통한 가설 검증",
+      "visible": true,
+      "width": "full",
+      "items": [
+        {
+          "title": "지표 기반 가설 설정",
+          "icon": "chart",
+          "bullets": [
+            "모바일인덱스에서 제공하는 지표로 상황별 가설 설정"
+          ]
+        },
+        {
+          "title": "매출·유저 수 변화 검증",
+          "icon": "target",
+          "bullets": [
+            "이벤트 기간과 패치별 매출·유저 수 변화를 분석해 가설 검증"
+          ]
+        },
+        {
+          "title": "BM 구성·가격 분석",
+          "icon": "coins",
+          "bullets": [
+            "판매 상품(BM)의 구성과 가격을 타겟 유저에 맞춰 분류",
+            "실제 지표로 가설 검증"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "type": "gallery",
+      "title": "문서 주요 페이지",
+      "visible": true,
+      "width": "full"
+    },
+    {
+      "id": "documents",
+      "type": "documents",
+      "title": "기획 문서",
+      "visible": true,
+      "width": "full"
+    }
+  ]
+}
