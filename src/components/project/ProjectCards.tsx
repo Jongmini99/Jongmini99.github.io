@@ -110,9 +110,11 @@ export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: P
           <Link href={href(project)} className="outline-none after:absolute after:inset-0 after:content-['']">
             {project.title}
           </Link>
-          <span className="ml-2 align-middle font-display text-sm font-medium tracking-normal whitespace-nowrap text-fg-muted">
-            {formatPeriod(project.developmentPeriod)}
-          </span>
+          {project.developmentPeriod && (
+            <span className="ml-2 align-middle font-display text-sm font-medium tracking-normal whitespace-nowrap text-fg-muted">
+              {formatPeriod(project.developmentPeriod)}
+            </span>
+          )}
         </H>
         <p className={cx("text-sm text-fg-muted", !wide && "line-clamp-1")}>{project.genre} — {project.description}</p>
       </div>

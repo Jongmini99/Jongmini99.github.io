@@ -12,7 +12,7 @@ export function ProjectHeader({ project }: { project: Project }) {
   const meta = [
     { icon: Layers, label: "플랫폼", value: project.platform },
     { icon: Gamepad2, label: "장르", value: project.genre },
-    { icon: Calendar, label: "개발 기간", value: formatPeriod(project.developmentPeriod) },
+    project.developmentPeriod ? { icon: Calendar, label: "개발 기간", value: formatPeriod(project.developmentPeriod) } : null,
     project.teamSize ? { icon: Users, label: "팀 규모", value: `${project.teamSize}명` } : null,
     project.roles.length > 0 ? { icon: User, label: "담당 역할", value: project.roles.join(" · "), wide: true } : null,
   ].filter((m) => m !== null);

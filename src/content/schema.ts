@@ -173,10 +173,30 @@ export const ProjectSchema = z
     videos: list(VideoSchema),
     genre: text,
     platform: text,
-    developmentPeriod: z.object({
-      start: YearMonth,
-      end: z.preprocess(emptyToUndefined, YearMonth.optional()), // 없으면 "진행 중"
-    }),
+    /**
+     * 개발 기간 (선택). 기획 문서처럼 기간이 의미 없는 항목은 비워 두면 UI에서 숨겨진다.
+     * CMS가 비워 둔 { start: "", end: "" } 객체도 "기간 없음"으로 처리한다.
+     */
+    developmentPeriod: z.preprocess(
+      (v) => {
+        if (v === null || v === undefined || v === "") return undefined;
+        if (typeof v === "object") {
+          const { start, end } = v as { start?: unknown; end?: unknown };
+          if (!start && !end) return undefined;
+        }
+        return v;
+      },
+      z
+        .object({
+          // 시작 없이 종료만 입력한 경우 형식 오류 대신 원인을 바로 알려 준다.
+          start: z
+            .string()
+            .min(1, { message: "종료만 입력할 수 없습니다. 시작(YYYY-MM)을 입력하거나 종료도 비워 두세요.", abort: true })
+            .pipe(YearMonth),
+          end: z.preprocess(emptyToUndefined, YearMonth.optional()), // 없으면 "진행 중"
+        })
+        .optional(),
+    ),
     developmentType: optionalText, // 예: 팀 프로젝트
     teamSize: z.preprocess(emptyToUndefined, z.number().int().positive().optional()),
     teamComposition: optionalText, // 예: PM 2명 / 기획·개발 2명 / 아트 2명
@@ -199,8 +219,8 @@ export const ProjectSchema = z
       }
       ids.add(s.id);
     });
-    const { start, end } = p.developmentPeriod;
-    if (end && end < start) {
+    const period = p.developmentPeriod;
+    if (period?.end && period.end < period.start) {
       ctx.addIssue({ code: "custom", path: ["developmentPeriod", "end"], message: "종료일이 시작일보다 빠릅니다." });
     }
   });

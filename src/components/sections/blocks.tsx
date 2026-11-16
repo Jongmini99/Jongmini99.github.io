@@ -170,7 +170,7 @@ export function ProjectInfoBlock({ project }: { project: Project }) {
   const rows = [
     { label: "플랫폼", value: project.platform },
     { label: "장르", value: project.genre },
-    { label: "개발 기간", value: formatPeriod(project.developmentPeriod) },
+    project.developmentPeriod && { label: "개발 기간", value: formatPeriod(project.developmentPeriod) },
     project.developmentType && { label: "개발 형태", value: project.developmentType },
     project.teamSize && { label: "참여 인원", value: `${project.teamSize}명` },
     project.teamComposition && { label: "팀 구성", value: project.teamComposition },
