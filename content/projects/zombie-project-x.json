@@ -65,9 +65,9 @@
     { "title": "메이플스토리 월드 출시", "date": "2023.06.15" },
     { "title": "유튜브 크리에이터 팡이요의 게임 플레이 콘텐츠에 등장" }
   ],
-  "featured": true,
+  "featured": false,
   "published": true,
-  "displayOrder": 10,
+  "displayOrder": 20,
   "sections": [
     {
       "id": "overview",

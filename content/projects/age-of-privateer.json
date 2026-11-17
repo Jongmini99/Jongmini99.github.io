@@ -74,7 +74,7 @@
   ],
   "featured": false,
   "published": true,
-  "displayOrder": 20,
+  "displayOrder": 30,
   "sections": [
     {
       "id": "overview",
@@ -120,7 +120,7 @@
           "icon": "layers",
           "bullets": [
             "\"백견이 불여일행\" — 직접 플레이로 방향성 결정",
-            "카드 사용과 전투만 남긴 최소 프로토타입 제작"
+            "혼자 카드 사용과 전투만 남긴 최소 프로토타입 제작"
           ]
         },
         {
