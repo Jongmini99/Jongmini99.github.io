@@ -143,7 +143,7 @@ export default function HomePage() {
       {hasStrengths && (
         <section id="about" aria-labelledby="about-title" className="bg-bg-alt py-section">
           <Container className="flex flex-col gap-12">
-            <SectionTitle title="핵심 역량" id="about-title" description="시스템 기획자로서의 세 가지 강점입니다." />
+            <SectionTitle title="핵심 역량" id="about-title" description="만들어 보고 검증하는 기획자로서의 세 가지 강점입니다." />
             <CoreStrengthsGrid items={profile.coreStrengths} />
             {profile.gamerMetrics.length > 0 && (
               <div className="flex flex-col gap-5">
@@ -166,7 +166,7 @@ export default function HomePage() {
           <SectionTitle
             title="참여한 프로젝트"
             id="projects-title"
-            description="카드마다 문제 → 해결 → 결과를 요약했습니다. 자세한 기획 과정은 카드를 눌러 확인할 수 있습니다."
+            description="카드마다 문제 → 해결 → 결과를 정리했습니다. 기획 과정과 산출물은 카드를 눌러 확인할 수 있습니다."
             aside={
               projects.length > 0 && (
                 <ButtonLink href="/projects/" variant="outline" size="sm">
@@ -205,7 +205,7 @@ export default function HomePage() {
             <SectionTitle
               title="기획 활동"
               id="activities-title"
-              description="게임 제작 동아리, 게임 테스터, 행사 현장 참여 등 게임을 만들고 경험하는 현장에서 쌓은 활동입니다."
+              description="게임을 만들고 경험하는 현장을 직접 찾아다녔습니다. 동아리에서 프로토타입을 개발하고, 테스터와 행사 현장에서 유저 반응을 직접 확인했습니다."
             />
             <ActivitiesGrid items={profile.activities} />
           </Container>

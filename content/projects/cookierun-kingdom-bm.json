@@ -14,9 +14,9 @@
   "technologies": [],
   "track": "document",
   "keyTakeaways": {
-    "problem": "이벤트·패치에 따라 매출과 유저 수가 어떻게 변하는지, 판매 상품은 어떤 유저를 겨냥하는지 분석",
-    "solution": "모바일인덱스 지표로 가설을 세워 콜라보 기간별 매출 추이를 분석하고, BM 상품을 1만 원대 이하~6만 원대 이상 가격대별로 분류",
-    "result": "72쪽 분량의 지표·BM 분석서 완성"
+    "problem": "이벤트·패치마다 매출과 유저 수가 어떻게 변하는지, 각 상품이 어떤 유저를 겨냥하는지 분석할 필요",
+    "solution": "모바일인덱스 지표로 상황별 가설 설정, 콜라보 기간별 매출 추이 분석과 BM 상품 가격대별 분류",
+    "result": "실제 지표로 가설을 검증한 72쪽 분량의 지표·BM 분석서 완성"
   },
   "thumbnail": {
     "src": "/uploads/images/cookierun-kingdom-bm/cookierun-thumbnail.jpg",
@@ -83,7 +83,7 @@
     {
       "id": "key-content",
       "type": "cards",
-      "title": "주요 기획 내용 — 실제 지표 분석을 통한 가설 검증",
+      "title": "실제 지표로 매출 구조와 가격 설계 목적 분석",
       "visible": true,
       "width": "full",
       "items": [

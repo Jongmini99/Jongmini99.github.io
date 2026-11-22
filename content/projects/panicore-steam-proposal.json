@@ -15,9 +15,9 @@
   "technologies": [],
   "track": "document",
   "keyTakeaways": {
-    "problem": "당시 데모 단계였던 공포 게임 PANICORE의 적정 출시 가격과 Steam 상점 에셋 개선 방향 도출",
-    "solution": "동종 공포 게임 5종을 직접 플레이하고 가격 책정 요소를 비교 분석해 DEVOUR·Pacify와 같은 그룹으로 분류",
-    "result": "4.99 USD를 제안한 67쪽 제안서 완성 — 실제로 4.99 USD로 출시됨"
+    "problem": "당시 데모 버전이던 PANICORE의 적정 출시 가격과 Steam 상점 에셋 개선 방향을 도출할 필요",
+    "solution": "동종 공포 게임 5종을 직접 플레이하며 가격 책정 기준을 세우고, 기준에 따른 적정 가격 패턴 분석",
+    "result": "4.99 USD를 제안한 67쪽 제안서 완성 · 실제로 4.99 USD로 출시"
   },
   "thumbnail": {
     "src": "/uploads/images/panicore-steam-proposal/panicore-thumbnail.jpg",
@@ -88,7 +88,7 @@
     {
       "id": "key-content",
       "type": "cards",
-      "title": "주요 기획 내용 — 시장 분석을 통한 출시 방향성 기획",
+      "title": "공포 장르 트렌드를 근거로 출시 가격 제안",
       "visible": true,
       "width": "full",
       "items": [

@@ -181,7 +181,7 @@ const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
   {
     key: "game",
     title: "게임 기획 & 프로토타입",
-    description: "직접 기획하고 엔진으로 구현해 플레이로 검증한 게임 프로젝트",
+    description: "직접 기획하고 엔진으로 만들어 보며 플레이로 검증한 게임 프로젝트",
   },
   {
     key: "document",
