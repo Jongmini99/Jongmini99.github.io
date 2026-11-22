@@ -34,37 +34,37 @@
     {
       "game": "리그 오브 레전드",
       "metric": "마스터 550pt",
-      "description": "최고 티어"
+      "description": "MOBA · 최고 달성 티어"
     },
     {
       "game": "전략적 팀 전투 (TFT)",
       "metric": "마스터 220pt",
-      "description": "최고 티어"
+      "description": "오토배틀러 · 최고 달성 티어"
     },
     {
       "game": "이터널 리턴",
       "metric": "미스릴 7900pt",
-      "description": "최고 티어"
+      "description": "배틀로얄 · 최고 달성 티어"
     },
     {
       "game": "오버워치",
       "metric": "마스터",
-      "description": "최고 티어"
+      "description": "히어로 슈터 · 최고 달성 티어"
     },
     {
       "game": "마블 라이벌즈",
       "metric": "마스터",
-      "description": "최고 티어"
+      "description": "히어로 슈터 · 최고 달성 티어"
     },
     {
       "game": "배틀그라운드",
       "metric": "1,000시간 이상",
-      "description": "플레이 시간"
+      "description": "배틀로얄 슈팅 · 누적 플레이"
     },
     {
       "game": "Steam",
-      "metric": "248개 게임",
-      "description": "플레이한 게임 수"
+      "metric": "248개 게임 플레이",
+      "description": "PC 패키지 게임 · 장르별 탐색"
     }
   ],
   "activities": [

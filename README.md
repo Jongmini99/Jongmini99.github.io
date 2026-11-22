@@ -35,6 +35,11 @@ npm run audit             # 가로 넘침 + 접근성 점검 (npx serve out -l 4
 
 프로젝트 사이트(`/<repo>`)로 빌드를 확인하려면 `NEXT_PUBLIC_BASE_PATH=/<repo> npm run build`.
 
+## Antigravity (Gemini)
+
+Gemini 모델은 Orca에 연결된 Antigravity CLI(`agy`)로 사용한다. 프로젝트 지침은 `GEMINI.md` → `CLAUDE.md`.
+실행·읽기 전용 검토 방법은 [Antigravity 사용 안내](docs/ANTIGRAVITY.md)를 참조한다.
+
 ## 디자인 구조
 
 - **토큰** `src/styles/tokens.css`: 색상·폰트·반경·여백. 컴포넌트에서 `#hex` 직접 사용 금지 → `bg-surface`, `text-fg-muted`, `border-line`, `text-accent-text` 등 토큰 유틸리티만 사용.
