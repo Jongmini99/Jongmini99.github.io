@@ -12,6 +12,12 @@
     "모든 기획 과정 참여"
   ],
   "technologies": [],
+  "track": "document",
+  "keyTakeaways": {
+    "problem": "이벤트·패치에 따라 매출과 유저 수가 어떻게 변하는지, 판매 상품은 어떤 유저를 겨냥하는지 분석",
+    "solution": "모바일인덱스 지표로 가설을 세워 콜라보 기간별 매출 추이를 분석하고, BM 상품을 1만 원대 이하~6만 원대 이상 가격대별로 분류",
+    "result": "72쪽 분량의 지표·BM 분석서 완성"
+  },
   "thumbnail": {
     "src": "/uploads/images/cookierun-kingdom-bm/cookierun-thumbnail.jpg",
     "alt": "분석서 페이지 — 소닉·디즈니·BTS 콜라보 기간별 매출(Revenue) 추이 그래프"

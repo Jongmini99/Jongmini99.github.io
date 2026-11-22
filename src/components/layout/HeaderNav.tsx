@@ -78,7 +78,7 @@ export function HeaderNav({ resume }: { resume?: string }) {
   const resumeButton = resume && (
     <a href={withBasePath(resume)} download className={buttonClass({ variant: "outline", size: "sm" })}>
       <Download className="size-4" aria-hidden="true" />
-      이력서 다운로드
+      포트폴리오 PDF
     </a>
   );
 

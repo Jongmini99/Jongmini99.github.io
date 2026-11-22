@@ -13,6 +13,12 @@
     "모든 기획 과정 참여"
   ],
   "technologies": [],
+  "track": "document",
+  "keyTakeaways": {
+    "problem": "전투의 핵심인 스킬의 구성 요소와 작동 규칙을 개발 가능한 수준으로 정리",
+    "solution": "스킬 사용 → 타겟 지정 → 효과 적용 3단계 플로우로 구성하고, 플로우차트와 예외 상황 처리 방법을 정리",
+    "result": "69쪽 분량의 스킬 시스템 역기획서 완성"
+  },
   "thumbnail": {
     "src": "/uploads/images/lol-skill-system-reverse/lol-thumbnail.jpg",
     "alt": "역기획서 페이지 — 스킬 사용 가능 상태 확인, 타겟 지정, 효과 적용 3단계로 구성된 스킬 시스템 구조도"

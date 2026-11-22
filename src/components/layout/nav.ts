@@ -11,6 +11,7 @@ export type NavItem = {
 export const NAV_ITEMS: NavItem[] = [
   { label: "프로젝트", href: "/#projects", section: "projects", match: "/projects" },
   { label: "소개", href: "/#about", section: "about" },
+  { label: "활동", href: "/#activities", section: "activities" },
   { label: "이력 및 성과", href: "/#career", section: "career" },
   { label: "연락하기", href: "/#contact", section: "contact" },
 ];
@@ -20,6 +21,7 @@ export const SECTION_TO_NAV: Record<string, string> = {
   featured: "projects",
   projects: "projects",
   about: "about",
+  activities: "activities",
   career: "career",
   contact: "contact",
 };

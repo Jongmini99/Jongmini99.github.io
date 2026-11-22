@@ -23,6 +23,12 @@
     "Unity",
     "C#"
   ],
+  "track": "game",
+  "keyTakeaways": {
+    "problem": "여러 장르를 동시에 융합하려다 방향성이 모호해져 프로젝트가 3개월간 정체",
+    "solution": "카드 사용과 전투만 남긴 최소 프로토타입을 만들어 직접 플레이로 방향을 검증하고, 카드 데이터 테이블을 11개 → 7개로 효율화",
+    "result": "유저 테스트에서 실시간 전투·카드 사용에 긍정적 반응을 확인해 방향 확정 · Steam 얼리 액세스 출시"
+  },
   "thumbnail": {
     "src": "/uploads/images/age-of-privateer/aop-thumbnail.jpg",
     "alt": "Age of Privateer 인게임 카드 전투 화면 — 범선과 인어 형상의 적, 하단의 카드 패"

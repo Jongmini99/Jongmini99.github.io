@@ -13,6 +13,12 @@
     "모든 기획 과정 참여"
   ],
   "technologies": [],
+  "track": "document",
+  "keyTakeaways": {
+    "problem": "당시 데모 단계였던 공포 게임 PANICORE의 적정 출시 가격과 Steam 상점 에셋 개선 방향 도출",
+    "solution": "동종 공포 게임 5종을 직접 플레이하고 가격 책정 요소를 비교 분석해 DEVOUR·Pacify와 같은 그룹으로 분류",
+    "result": "4.99 USD를 제안한 67쪽 제안서 완성 — 실제로 4.99 USD로 출시됨"
+  },
   "thumbnail": {
     "src": "/uploads/images/panicore-steam-proposal/panicore-thumbnail.jpg",
     "alt": "제안서 페이지 — 적정 가격 산정 결론 4.99 USD"

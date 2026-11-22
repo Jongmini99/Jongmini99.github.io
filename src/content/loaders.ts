@@ -130,3 +130,23 @@ export function validateAllContent(): { projects: number; siteFiles: number } {
   (Object.keys(SITE_FILES) as SiteKey[]).forEach((k) => getSite(k));
   return { projects: projects.length, siteFiles: Object.keys(SITE_FILES).length };
 }
+
+/* ------------------------------------------------------------------ */
+/* 다운로드 파일                                                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * 사이트 내부 파일("/uploads/...")의 용량 표기 (예: "18.8MB"). 외부 URL이거나 파일이 없으면 undefined.
+ * 파일을 교체해도 빌드 시점에 자동으로 다시 계산된다.
+ */
+export function getFileSizeLabel(mediaPath: string | undefined): string | undefined {
+  if (!mediaPath || !mediaPath.startsWith("/")) return undefined;
+  const file = path.join(process.cwd(), "public", ...decodeURI(mediaPath).split("/").filter(Boolean));
+  try {
+    const bytes = fs.statSync(file).size;
+    if (bytes >= 1_000_000) return `${(bytes / 1_000_000).toFixed(1)}MB`;
+    return `${Math.max(1, Math.round(bytes / 1_000))}KB`;
+  } catch {
+    return undefined;
+  }
+}

@@ -17,6 +17,12 @@
     "MSW(Lua) 구현 및 검증"
   ],
   "technologies": ["MSW (메이플스토리 월드)", "Lua"],
+  "track": "game",
+  "keyTakeaways": {
+    "problem": "인간 플레이어가 전투 대신 숨는 플레이에 집중해, 테스트에서 \"전투보다 숨바꼭질 같다\"는 피드백을 받음",
+    "solution": "상자 파밍·레벨업(Lv1~3) 시스템과 무기 8종을 설계하고 MSW 엔진으로 직접 구현",
+    "result": "맵을 돌아다니는 플레이로 전환되어 교전 빈도 증가 · 메이플스토리 월드 개발 공모전 대상"
+  },
   "thumbnail": {
     "src": "/uploads/images/zombie-project-x/zombie-thumbnail-keyart.jpg",
     "alt": "좀비 프로젝트 X 키아트 — 좀비 캐릭터와 게임 로고, BETA OPEN 표시"

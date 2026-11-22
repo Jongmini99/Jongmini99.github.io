@@ -4,7 +4,7 @@
  * - content/ 폴더의 JSON(관리자 CMS가 수정)은 빌드 시 이 스키마로 검증된다.
  * - 검증 실패 시 빌드가 중단되어, 잘못된 데이터가 배포되지 않는다.
  * - 필드를 추가할 때는 optional로 추가해 기존 콘텐츠와의 호환성을 유지한다.
- * - CMS 설정(public/admin/config.yml)의 필드와 이 스키마를 함께 수정해야 한다.
+ * - CMS 설정(cms/decap-config.ts → public/admin/config.yml 생성)의 필드와 이 스키마를 함께 수정해야 한다.
  */
 import { z } from "zod";
 import { parseYouTubeId } from "../lib/youtube";
@@ -158,6 +158,27 @@ export type SectionType = Section["type"];
 /* 프로젝트                                                             */
 /* ------------------------------------------------------------------ */
 
+/** 홈 프로젝트 영역의 분류: 게임 제작·프로토타입 / 기획서·역기획·BM 분석 */
+export const PROJECT_TRACKS = ["game", "document"] as const;
+export type ProjectTrack = (typeof PROJECT_TRACKS)[number];
+
+/** 카드 겉면에 노출하는 3단 요약 (기획 의도/문제 → 구현/해결 → 검증 결과) */
+export const KeyTakeawaysSchema = z.object({
+  problem: text,
+  solution: text,
+  result: text,
+});
+
+/** 3칸이 모두 비어 있으면 "요약 없음"으로 처리 (CMS가 빈 객체를 저장하는 경우) */
+const optionalTakeaways = z.preprocess((v) => {
+  if (v === null || v === undefined || v === "") return undefined;
+  if (typeof v === "object") {
+    const { problem, solution, result } = v as Record<string, unknown>;
+    if (!problem && !solution && !result) return undefined;
+  }
+  return v;
+}, KeyTakeawaysSchema.optional());
+
 export const ProjectSchema = z
   .object({
     id: Slug,
@@ -202,6 +223,10 @@ export const ProjectSchema = z
     teamComposition: optionalText, // 예: PM 2명 / 기획·개발 2명 / 아트 2명
     roles: list(text),
     technologies: list(text),
+    /** 홈 프로젝트 분류 (선택). 비우면 분류 없는 목록으로 표시 */
+    track: z.preprocess(emptyToUndefined, z.enum(PROJECT_TRACKS).optional()),
+    /** 카드 3단 요약 (선택) */
+    keyTakeaways: optionalTakeaways,
     sections: list(SectionSchema),
     achievements: list(AchievementSchema),
     documents: list(DocumentSchema),
@@ -238,6 +263,32 @@ export const SettingsSchema = z.object({
   ogImage: optionalMedia,
 });
 
+/** 소개 섹션: 핵심 강점 카드 */
+export const CoreStrengthSchema = z.object({
+  title: text,
+  subtitle: optionalText,
+  description: text,
+  icon: optionalText,
+});
+
+/** 소개 섹션: 게임 플레이 지표 (티어·플레이 시간 등) */
+export const GamerMetricSchema = z.object({
+  game: text,
+  /** 예: "마스터 550pt", "1,000시간 이상" */
+  metric: text,
+  description: optionalText,
+});
+
+/** 기획 활동 (동아리·테스터·행사 참관·특강 등) */
+export const ActivityItemSchema = z.object({
+  title: text,
+  role: text,
+  organization: optionalText,
+  period: optionalText,
+  description: optionalText,
+  tags: list(text),
+});
+
 export const ProfileSchema = z.object({
   name: text,
   /** 영문 직함 (예: System & Technical Game Designer) */
@@ -249,6 +300,12 @@ export const ProfileSchema = z.object({
   targetRoles: list(text),
   /** 메인 히어로 비주얼 (선택) — 첫 화면 오른쪽 원형 영역 */
   heroImage: optionalImage,
+  /** 핵심 강점 카드 (비우면 숨김) */
+  coreStrengths: list(CoreStrengthSchema),
+  /** 게임 플레이 지표 (비우면 숨김) */
+  gamerMetrics: list(GamerMetricSchema),
+  /** 기획 활동 (비우면 홈 '기획 활동' 섹션 숨김) */
+  activities: list(ActivityItemSchema),
 });
 
 export const SkillsSchema = z.object({

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Trophy } from "lucide-react";
-import type { Project } from "@/content/schema";
+import type { Project, ProjectTrack } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
 import { DividedList } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
@@ -80,62 +80,144 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
   );
 }
 
+type HeadingLevel = "h2" | "h3" | "h4";
+
+const TAKEAWAY_ROWS = [
+  { key: "problem", label: "문제" },
+  { key: "solution", label: "해결" },
+  { key: "result", label: "결과" },
+] as const;
+
+/** 카드 3단 요약: 기획 의도/문제 → 구현/해결 → 검증 결과 */
+function KeyTakeaways({ takeaways }: { takeaways: NonNullable<Project["keyTakeaways"]> }) {
+  return (
+    <dl className="flex flex-col gap-2.5 border-t border-line pt-4">
+      {TAKEAWAY_ROWS.map(({ key, label }) => (
+        <div key={key} className="grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-2">
+          <dt
+            className={cx(
+              "rounded-md px-1.5 py-0.5 text-center text-xs font-bold",
+              key === "result" ? "bg-accent-solid text-accent-fg" : "bg-surface-raised text-fg-muted",
+            )}
+          >
+            {label}
+          </dt>
+          <dd className={cx("text-sm leading-relaxed", key === "result" ? "font-medium text-fg" : "text-fg-muted")}>
+            {takeaways[key]}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 /**
- * 프로젝트 이미지 타일: 이미지 위에 플랫폼 배지와 제목·기간을 얹는다.
+ * 프로젝트 카드: 이미지 + 제목 + 3단 요약(있으면) 또는 짧은 소개.
  * 카드 전체 클릭 영역은 제목 링크의 ::after 로 확장 — 링크는 하나만 존재한다.
  */
-export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: Project; wide?: boolean; headingLevel?: "h2" | "h3" }) {
+export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: Project; wide?: boolean; headingLevel?: HeadingLevel }) {
   const H = headingLevel;
   return (
     <article
       className={cx(
-        "group relative isolate overflow-hidden rounded-card border border-line bg-surface",
+        "group relative isolate flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface",
         "transition-[transform,border-color] duration-200 focus-within:border-accent hover:border-accent/60 motion-safe:hover:-translate-y-1",
       )}
     >
-      <div className={cx("aspect-[3/2]", wide && "md:aspect-[21/9]")}>
+      <div className={cx("relative aspect-[16/9] overflow-hidden", wide && "md:aspect-[21/9]")}>
         <MediaImage
           image={project.thumbnail}
           decorative
           placeholderLabel="대표 이미지 준비 중"
           className="transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
         />
-      </div>
-      <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-bg via-bg/50 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2.5 p-5 sm:p-6">
-        <span className="inline-flex w-fit items-center rounded-md border border-white/20 bg-bg/70 px-2.5 py-1 text-xs font-bold text-fg backdrop-blur-sm">
+        <span className="absolute top-4 left-4 inline-flex max-w-[calc(100%-2rem)] items-center rounded-md border border-white/20 bg-bg/80 px-2.5 py-1 text-xs font-bold text-fg backdrop-blur-sm">
           {project.platform}
         </span>
-        <H className="text-xl font-bold tracking-[-0.03em] text-fg sm:text-2xl">
-          <Link href={href(project)} className="outline-none after:absolute after:inset-0 after:content-['']">
-            {project.title}
-          </Link>
-          {project.developmentPeriod && (
-            <span className="ml-2 align-middle font-display text-sm font-medium tracking-normal whitespace-nowrap text-fg-muted">
-              {formatPeriod(project.developmentPeriod)}
-            </span>
-          )}
-        </H>
-        <p className={cx("text-sm text-fg-muted", !wide && "line-clamp-1")}>{project.genre} — {project.description}</p>
+        <ArrowUpRight
+          aria-hidden="true"
+          className="absolute top-4 right-4 size-9 rounded-full bg-bg/70 p-2 text-fg opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
+        />
       </div>
-      <ArrowUpRight
-        aria-hidden="true"
-        className="absolute top-5 right-5 size-9 rounded-full bg-bg/70 p-2 text-fg opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
-      />
+      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+        <div className="flex flex-col gap-1.5">
+          <H className="text-xl leading-snug font-bold tracking-[-0.03em] text-fg">
+            <Link href={href(project)} className="outline-none after:absolute after:inset-0 after:content-['']">
+              {project.title}
+            </Link>
+            {project.developmentPeriod && (
+              <span className="ml-2 align-middle font-display text-sm font-medium tracking-normal whitespace-nowrap text-fg-muted">
+                {formatPeriod(project.developmentPeriod)}
+              </span>
+            )}
+          </H>
+          <p className="text-sm text-accent-text">{project.genre}</p>
+        </div>
+        {project.keyTakeaways ? (
+          <KeyTakeaways takeaways={project.keyTakeaways} />
+        ) : (
+          <p className="text-sm leading-relaxed text-fg-muted">{project.description}</p>
+        )}
+      </div>
     </article>
   );
 }
 
-/** 프로젝트 수에 맞춘 타일 그리드 (1개: 넓게, 2개: 2열, 3개 이상: 3열) */
-export function ProjectGrid({ projects, headingLevel }: { projects: Project[]; headingLevel?: "h2" | "h3" }) {
+/** 프로젝트 수에 맞춘 카드 그리드 (1개: 넓게, 2개: 2열, 3개 이상: 3열) */
+export function ProjectGrid({ projects, headingLevel }: { projects: Project[]; headingLevel?: HeadingLevel }) {
   const n = projects.length;
   return (
     <ul className={cx("grid gap-5", n === 2 && "md:grid-cols-2", n >= 3 && "md:grid-cols-2 lg:grid-cols-3")}>
       {projects.map((p) => (
-        <li key={p.id}>
+        <li key={p.id} className="min-w-0">
           <ProjectTile project={p} wide={n === 1} headingLevel={headingLevel} />
         </li>
       ))}
     </ul>
+  );
+}
+
+const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
+  {
+    key: "game",
+    title: "게임 기획 & 프로토타입",
+    description: "직접 기획하고 엔진으로 구현해 플레이로 검증한 게임 프로젝트",
+  },
+  {
+    key: "document",
+    title: "기획서 & 역기획·분석",
+    description: "시스템 역기획, 지표·BM 분석, 출시 가격 제안 문서",
+  },
+];
+
+/**
+ * 홈 프로젝트 영역: 분류(track)별로 위아래 블록으로 나눠 보여 준다.
+ * 분류가 없는 프로젝트는 마지막에 제목 없이 이어서 표시한다.
+ */
+export function TrackedProjects({ projects, idPrefix = "track" }: { projects: Project[]; idPrefix?: string }) {
+  const groups = TRACKS.map((t) => ({ ...t, items: projects.filter((p) => p.track === t.key) })).filter((g) => g.items.length > 0);
+  const rest = projects.filter((p) => !p.track);
+  if (groups.length === 0) return <ProjectGrid projects={projects} />;
+  return (
+    <div className="flex flex-col gap-14">
+      {groups.map((g, i) => {
+        const headingId = `${idPrefix}-${g.key}`;
+        return (
+          <section key={g.key} aria-labelledby={headingId} className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
+              <h3 id={headingId} className="flex items-baseline gap-3 text-2xl font-bold tracking-[-0.03em] text-fg">
+                <span aria-hidden="true" className="font-display text-base font-semibold text-accent-text">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {g.title}
+              </h3>
+              <p className="text-sm text-fg-muted">{g.description}</p>
+            </div>
+            <ProjectGrid projects={g.items} headingLevel="h4" />
+          </section>
+        );
+      })}
+      {rest.length > 0 && <ProjectGrid projects={rest} />}
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import {
   getCareer,
   getContact,
   getFeaturedProjects,
+  getFileSizeLabel,
   getProfile,
   getPublishedProjects,
   getSkills,
@@ -13,12 +14,21 @@ import { SectionTitle } from "@/components/ui/Typography";
 import { Tag, TechBadge } from "@/components/ui/Badge";
 import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
-import { FeaturedBand, ProjectGrid } from "@/components/project/ProjectCards";
-import { AchievementGrid, CareerTimeline, ContactActions, SkillGroups } from "@/components/profile/ProfileBlocks";
+import { cx } from "@/lib/cx";
+import { FeaturedBand, TrackedProjects } from "@/components/project/ProjectCards";
+import {
+  AchievementGrid,
+  ActivitiesGrid,
+  CareerTimeline,
+  ContactActions,
+  CoreStrengthsGrid,
+  GamerMetrics,
+  SkillGroups,
+} from "@/components/profile/ProfileBlocks";
 
 /**
  * 홈 — 한 페이지에서 전체 내용을 확인한다.
- * 히어로 → 대표 프로젝트(강조) → 프로젝트 → 소개 → 이력 및 성과 → 연락하기
+ * 히어로 → 대표 프로젝트(강조) → 프로젝트(분류별) → 소개(핵심 강점·플레이 지표) → 기획 활동 → 이력 및 성과 → 연락하기
  * 섹션 id는 상단 메뉴(nav.ts)의 앵커와 맞춘다.
  */
 export default function HomePage() {
@@ -30,6 +40,8 @@ export default function HomePage() {
   const awards = getAwards();
   const contact = getContact();
   const heroSkills = skills.groups.flatMap((g) => g.items).filter((s) => s.highlight);
+  const resumeSize = getFileSizeLabel(contact.resume);
+  const resumeLabel = `포트폴리오 PDF 다운로드${resumeSize ? ` (${resumeSize})` : ""}`;
 
   return (
     <>
@@ -72,10 +84,15 @@ export default function HomePage() {
                 프로젝트 보기
                 <ArrowRight className="size-4" aria-hidden="true" />
               </ButtonLink>
+              {profile.coreStrengths.length > 0 && (
+                <ButtonLink href="/#about" variant="outline">
+                  핵심 역량 요약 보기
+                </ButtonLink>
+              )}
               {contact.resume ? (
-                <ButtonLink href={contact.resume} variant="outline" download>
+                <ButtonLink href={contact.resume} variant="ghost" download>
                   <Download className="size-4" aria-hidden="true" />
-                  이력서 다운로드
+                  {resumeLabel}
                 </ButtonLink>
               ) : (
                 <ButtonLink href="/#contact" variant="outline">
@@ -121,7 +138,7 @@ export default function HomePage() {
           <SectionTitle
             title="참여한 프로젝트"
             id="projects-title"
-            description="기획부터 구현까지 참여한 게임 프로젝트입니다."
+            description="카드마다 문제 → 해결 → 결과를 요약했습니다. 자세한 기획 과정은 카드를 눌러 확인할 수 있습니다."
             aside={
               projects.length > 0 && (
                 <ButtonLink href="/projects/" variant="outline" size="sm">
@@ -132,18 +149,31 @@ export default function HomePage() {
             }
           />
           {projects.length > 0 ? (
-            <ProjectGrid projects={projects} />
+            <TrackedProjects projects={projects} />
           ) : (
             <p className="text-fg-subtle">공개된 프로젝트가 없습니다.</p>
           )}
         </Container>
       </section>
 
-      {/* ---------------- ④ 소개 ---------------- */}
+      {/* ---------------- ④ 소개: 핵심 강점 → 플레이 지표 → 자기소개·기술 스택 ---------------- */}
       <section id="about" aria-labelledby="about-title" className="py-section">
         <Container className="flex flex-col gap-12">
-          <SectionTitle title="자기소개" id="about-title" />
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
+          <SectionTitle
+            title="자기소개"
+            id="about-title"
+            description={profile.coreStrengths.length > 0 ? "시스템 기획자로서의 세 가지 강점입니다." : undefined}
+          />
+          <CoreStrengthsGrid items={profile.coreStrengths} />
+          {profile.gamerMetrics.length > 0 && (
+            <div className="flex flex-col gap-5">
+              <h3 id="gamer-metrics-title" className="text-xl font-bold tracking-[-0.02em] text-fg">
+                최상위권 플레이 경험
+              </h3>
+              <GamerMetrics items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
+            </div>
+          )}
+          <div className="grid gap-10 border-t border-line pt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
             <div className="flex flex-col gap-6">
               <p className="text-2xl leading-snug font-semibold tracking-[-0.03em] text-fg">{profile.headline}</p>
               {profile.summary && (
@@ -170,8 +200,22 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------------- ⑤ 이력 및 성과 ---------------- */}
-      <section id="career" aria-labelledby="career-title" className="bg-bg-alt py-section">
+      {/* ---------------- ⑤ 기획 활동 ---------------- */}
+      {profile.activities.length > 0 && (
+        <section id="activities" aria-labelledby="activities-title" className="bg-bg-alt py-section">
+          <Container className="flex flex-col gap-12">
+            <SectionTitle
+              title="기획 활동"
+              id="activities-title"
+              description="게임 제작 동아리, 게임 테스터, 행사 현장 참여 등 게임을 만들고 경험하는 현장에서 쌓은 활동입니다."
+            />
+            <ActivitiesGrid items={profile.activities} />
+          </Container>
+        </section>
+      )}
+
+      {/* ---------------- ⑥ 이력 및 성과 ---------------- */}
+      <section id="career" aria-labelledby="career-title" className={cx("py-section", profile.activities.length === 0 && "bg-bg-alt")}>
         <Container className="flex flex-col gap-12">
           <SectionTitle title="이력 및 성과" id="career-title" />
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
@@ -187,7 +231,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------------- ⑥ 연락하기 ---------------- */}
+      {/* ---------------- ⑦ 연락하기 ---------------- */}
       <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden py-section">
         <div aria-hidden="true" className="pointer-events-none absolute bottom-[-20rem] left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
         <Container className="relative flex flex-col items-center gap-6 text-center">
@@ -195,7 +239,7 @@ export default function HomePage() {
             연락하기
           </h2>
           <p className="max-w-md leading-[1.8] text-fg-muted">채용 및 협업 관련 문의를 환영합니다.</p>
-          <ContactActions contact={contact} className="justify-center pt-2" />
+          <ContactActions contact={contact} resumeLabel={resumeLabel} className="justify-center pt-2" />
           {contact.email && (
             <p className="font-display text-sm text-fg-subtle">
               <a href={`mailto:${contact.email}`} className="underline-offset-4 hover:text-fg hover:underline">
