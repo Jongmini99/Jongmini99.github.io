@@ -92,7 +92,17 @@ const sectionCommon = (): Field[] => [
     ],
     { default: "full" },
   ),
-  opt(markdown("intro", "섹션 소개 문단")),
+  opt(markdown("intro", "섹션 소개 문단", { hint: "1~2문장 권장. 도표로 보여 줄 수 있는 내용은 글로 반복하지 않습니다." })),
+  {
+    name: "figures",
+    label: "섹션 도표 이미지 (제목 아래 크게 표시)",
+    widget: "list",
+    required: false,
+    default: [],
+    summary: "{{fields.alt}}",
+    hint: "구조도·플로우차트·전후 비교 화면 등. 2개면 나란히 표시됩니다. 갤러리에 같은 이미지가 있으면 미디어 탭에서는 자동으로 빠집니다.",
+    fields: image("x", "", { required: true, altRequired: true }).fields,
+  },
 ];
 
 const sectionType = (name: string, label: string, extra: Field[] = [], hint?: string): Field => ({
@@ -107,6 +117,17 @@ const sectionType = (name: string, label: string, extra: Field[] = [], hint?: st
 const SECTION_TYPES: Field[] = [
   sectionType("richText", "본문 (텍스트 + 이미지)", [markdown("body", "본문"), image("image", "옆에 표시할 이미지 (선택)")]),
   sectionType("bulletList", "목록", [stringList("items", "목록 항목")]),
+  sectionType("flow", "흐름 도표 (문제 → 조치 → 결과)", [
+    {
+      name: "steps",
+      label: "단계 (마지막 단계가 강조됨)",
+      widget: "list",
+      required: false,
+      default: [],
+      summary: "{{fields.label}}: {{fields.text}}",
+      fields: [string("label", "단계 이름", { hint: "예: 문제 / 조치 / 결과, v1.1" }), string("text", "한 줄 설명")],
+    },
+  ]),
   sectionType("cards", "카드 묶음 (핵심 시스템 등)", [
     {
       name: "items",
@@ -323,7 +344,7 @@ const site: Field = {
           default: [],
           summary: "{{fields.title}}",
           hint: "3개 권장. 비우면 표시되지 않습니다.",
-          fields: [string("title", "강점"), opt(string("subtitle", "한 줄 요약")), text("description", "설명"), icon()],
+          fields: [string("title", "강점"), opt(string("subtitle", "한 줄 요약")), text("description", "설명 (1문장 권장)"), stringList("keywords", "키워드 배지"), icon()],
         },
         {
           name: "gamerMetrics",

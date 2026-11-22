@@ -15,9 +15,9 @@
   "technologies": [],
   "track": "document",
   "keyTakeaways": {
-    "problem": "당시 데모 버전이던 PANICORE의 적정 출시 가격과 Steam 상점 에셋 개선 방향을 도출할 필요",
-    "solution": "동종 공포 게임 5종을 직접 플레이하며 가격 책정 기준을 세우고, 기준에 따른 적정 가격 패턴 분석",
-    "result": "4.99 USD를 제안한 67쪽 제안서 완성 · 실제로 4.99 USD로 출시"
+    "problem": "데모 버전 PANICORE의 적정 출시 가격 도출 필요",
+    "solution": "동종 공포 게임 5종을 플레이하며 가격 책정 기준 분석",
+    "result": "4.99 USD 제안 → 실제 4.99 USD로 출시"
   },
   "thumbnail": {
     "src": "/uploads/images/panicore-steam-proposal/panicore-thumbnail.jpg",
@@ -69,7 +69,7 @@
       "title": "문서 개요",
       "visible": true,
       "width": "full",
-      "body": "공포 장르의 Steam 게임 시장을 분석해 글로벌 게임 트렌드를 파악한 문서입니다.\n\n문서 작성 당시 데모 버전이던 **PANICORE**의 Steam 출시 방향성을 논리적으로 설계하고, Steam 상점 에셋을 개선해 보는 작업을 진행했습니다."
+      "body": "공포 장르 Steam 시장을 분석해, 당시 데모 버전이던 **PANICORE**의 출시 가격과 Steam 상점 에셋 개선안을 제안한 문서입니다."
     },
     {
       "id": "development-info",
@@ -87,33 +87,44 @@
     },
     {
       "id": "key-content",
-      "type": "cards",
+      "type": "flow",
       "title": "공포 장르 트렌드를 근거로 출시 가격 제안",
       "visible": true,
       "width": "full",
-      "items": [
+      "figures": [
         {
-          "title": "동종 게임 분석",
-          "icon": "users",
-          "bullets": [
-            "동종 게임들을 직접 플레이하며 공통점과 차별점 분석"
-          ]
+          "src": "/uploads/images/panicore-steam-proposal/panicore-gallery-01-pricing-factors.jpg",
+          "alt": "PANICORE와 동종 게임 5종의 가격 책정 요소 측정 결과 표 — 출시일, 엔진, 매출 추정치, 판매가, 플레이 타임, 리소스 개수 등",
+          "caption": "[문서 디테일] 시장 분석을 통한 가격 책정 요소 선정"
         },
         {
-          "title": "가격 책정 기준 설정",
-          "icon": "layers",
-          "bullets": [
-            "시스템적 차별성과 에셋 등 가격 책정에 필요한 기준 설정",
-            "설정한 기준으로 각 게임의 적정 가격 패턴 분석"
-          ]
+          "src": "/uploads/images/panicore-steam-proposal/panicore-gallery-02-discount-history.jpg",
+          "alt": "Pacify 할인 히스토리 분석 그래프 — DAU, 가격, 누적 판매량 추이와 여름 세일 구간 표시",
+          "caption": "동종 게임 할인 히스토리 분석"
         },
         {
-          "title": "출시 가격 제안",
-          "icon": "coins",
-          "bullets": [
-            "4.99 USD로 적정 가격 책정",
-            "실제로 4.99 USD로 출시됨"
-          ]
+          "src": "/uploads/images/panicore-steam-proposal/panicore-gallery-03-price-conclusion.jpg",
+          "alt": "적정 가격 산정 결론 — PANICORE를 DEVOUR·Pacify와 같은 그룹으로 묶어 4.99 USD로 제안",
+          "caption": "[문서 디테일] 분석 결과를 통한 패턴 도출로 적정 가격 책정"
+        },
+        {
+          "src": "/uploads/images/panicore-steam-proposal/panicore-gallery-04-store-asset.jpg",
+          "alt": "Steam 상점 페이지 As-is와 To-be 비교 — 캡슐 이미지와 대표 스크린샷, 구매 영역 개선안",
+          "caption": "Steam 상점 에셋 개선안 (As-is / To-be)"
+        }
+      ],
+      "steps": [
+        {
+          "label": "동종 게임 분석",
+          "text": "동종 게임을 직접 플레이하며 공통점·차별점 분석"
+        },
+        {
+          "label": "기준 설정",
+          "text": "시스템 차별성·에셋 등 가격 책정 기준으로 패턴 분석"
+        },
+        {
+          "label": "출시 가격 제안",
+          "text": "4.99 USD 제안 → 실제 4.99 USD로 출시"
         }
       ]
     },
@@ -128,7 +139,7 @@
       "id": "media",
       "type": "gallery",
       "title": "문서 주요 페이지",
-      "visible": true,
+      "visible": false,
       "width": "full"
     },
     {

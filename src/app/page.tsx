@@ -166,7 +166,7 @@ export default function HomePage() {
           <SectionTitle
             title="참여한 프로젝트"
             id="projects-title"
-            description="카드마다 문제 → 해결 → 결과를 정리했습니다. 기획 과정과 산출물은 카드를 눌러 확인할 수 있습니다."
+            description="카드마다 문제 → 해결 → 결과를 정리했습니다."
             aside={
               projects.length > 0 && (
                 <ButtonLink href="/projects/" variant="outline" size="sm">
@@ -205,7 +205,7 @@ export default function HomePage() {
             <SectionTitle
               title="기획 활동"
               id="activities-title"
-              description="게임을 만들고 경험하는 현장을 직접 찾아다녔습니다. 동아리에서 프로토타입을 개발하고, 테스터와 행사 현장에서 유저 반응을 직접 확인했습니다."
+              description="게임을 만들고 경험하는 현장을 직접 찾아다녔습니다."
             />
             <ActivitiesGrid items={profile.activities} />
           </Container>

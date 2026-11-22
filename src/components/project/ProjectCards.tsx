@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Trophy } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CircleAlert, Trophy, Wrench } from "lucide-react";
 import type { Project, ProjectTrack } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
 import { DividedList } from "@/components/ui/Badge";
@@ -83,31 +83,39 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
 type HeadingLevel = "h2" | "h3" | "h4";
 
 const TAKEAWAY_ROWS = [
-  { key: "problem", label: "문제" },
-  { key: "solution", label: "해결" },
-  { key: "result", label: "결과" },
+  { key: "problem", label: "문제", icon: CircleAlert },
+  { key: "solution", label: "해결", icon: Wrench },
+  { key: "result", label: "결과", icon: Trophy },
 ] as const;
 
-/** 카드 3단 요약: 기획 의도/문제 → 구현/해결 → 검증 결과 */
+/** 카드 3단 요약: 문제 → 해결 → 결과를 세로 단계 도표로 잇는다. 결과 단계 강조. */
 function KeyTakeaways({ takeaways }: { takeaways: NonNullable<Project["keyTakeaways"]> }) {
   return (
-    <dl className="flex flex-col gap-2.5 border-t border-line pt-4">
-      {TAKEAWAY_ROWS.map(({ key, label }) => (
-        <div key={key} className="grid grid-cols-[2.75rem_minmax(0,1fr)] items-baseline gap-2">
-          <dt
-            className={cx(
-              "rounded-md px-1.5 py-0.5 text-center text-xs font-bold",
-              key === "result" ? "bg-accent-solid text-accent-fg" : "bg-surface-raised text-fg-muted",
+    <ol aria-label="문제 → 해결 → 결과 요약" className="flex flex-col border-t border-line pt-4">
+      {TAKEAWAY_ROWS.map(({ key, label, icon: StepIcon }, i) => {
+        const result = key === "result";
+        return (
+          <li key={key} className="relative grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-3 pb-3 last:pb-0">
+            {i < TAKEAWAY_ROWS.length - 1 && (
+              <span aria-hidden="true" className="absolute top-7 bottom-0 left-[0.8125rem] w-px bg-line-strong" />
             )}
-          >
-            {label}
-          </dt>
-          <dd className={cx("text-sm leading-relaxed", key === "result" ? "font-medium text-fg" : "text-fg-muted")}>
-            {takeaways[key]}
-          </dd>
-        </div>
-      ))}
-    </dl>
+            <span
+              aria-hidden="true"
+              className={cx(
+                "relative flex size-7 items-center justify-center rounded-full",
+                result ? "bg-accent-solid text-accent-fg" : "bg-surface-raised text-fg-muted",
+              )}
+            >
+              <StepIcon className="size-3.5" />
+            </span>
+            <div className="flex min-w-0 flex-col pt-0.5">
+              <p className={cx("text-xs font-bold", result ? "text-accent-text" : "text-fg-subtle")}>{label}</p>
+              <p className={cx("text-sm leading-snug", result ? "font-semibold text-fg" : "text-fg-muted")}>{takeaways[key]}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 

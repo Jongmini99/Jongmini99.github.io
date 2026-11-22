@@ -102,7 +102,16 @@ export function CoreStrengthsGrid({ items }: { items: Profile["coreStrengths"] }
             <h3 className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{s.title}</h3>
             {s.subtitle && <p className="text-sm font-semibold text-accent-text">{s.subtitle}</p>}
           </div>
-          <p className="text-[0.95rem] leading-[1.8] text-fg-muted">{s.description}</p>
+          <p className="text-[0.95rem] leading-[1.75] text-fg-muted">{s.description}</p>
+          {s.keywords.length > 0 && (
+            <ul aria-label={`${s.title} 키워드`} className="mt-auto flex flex-wrap gap-1.5 pt-1">
+              {s.keywords.map((k) => (
+                <li key={k}>
+                  <Tag>{k}</Tag>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ol>

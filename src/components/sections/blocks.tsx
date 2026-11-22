@@ -1,7 +1,7 @@
 /**
  * 서버 렌더링 섹션 블록. 각 블록은 (section, project) 데이터만 받아 그린다.
  */
-import { ArrowUpRight, Award, CodeXml, Download, FileText, Link as LinkIcon } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Award, CodeXml, Download, FileText, Link as LinkIcon } from "lucide-react";
 import type { Project, Section } from "@/content/schema";
 import { Card } from "@/components/ui/Card";
 import { Markdown } from "@/components/ui/Markdown";
@@ -48,6 +48,40 @@ export function BulletListBlock({ section }: { section: Of<"bulletList"> }) {
         ))}
       </ul>
     </Card>
+  );
+}
+
+/** 흐름 도표: 단계 박스를 화살표로 잇는다. 좁은 화면에서는 세로, 넓은 화면에서는 가로. 마지막 단계 강조. */
+export function FlowBlock({ section }: { section: Of<"flow"> }) {
+  const steps = section.steps;
+  if (steps.length === 0) return <EmptyState />;
+  // 단계가 많으면 가로 배치 시작 폭을 넓힌다 (Tailwind 정적 클래스).
+  const wide = steps.length > 3;
+  return (
+    <ol className={cx("flex flex-col gap-2", wide ? "lg:flex-row lg:gap-0" : "md:flex-row md:gap-0")}>
+      {steps.map((step, i) => {
+        const last = i === steps.length - 1;
+        return (
+          <li key={i} className={cx("flex min-w-0 flex-1 flex-col items-center gap-2", wide ? "lg:flex-row lg:gap-0" : "md:flex-row md:gap-0")}>
+            {i > 0 && (
+              <span aria-hidden="true" className={cx("flex shrink-0 items-center justify-center text-fg-subtle", wide ? "lg:w-7" : "md:w-8")}>
+                <ArrowDown className={cx("size-4", wide ? "lg:hidden" : "md:hidden")} />
+                <ArrowRight className={cx("hidden size-4", wide ? "lg:block" : "md:block")} />
+              </span>
+            )}
+            <div
+              className={cx(
+                "flex h-full w-full min-w-0 flex-col gap-1.5 rounded-card border p-4 sm:p-5",
+                last ? "border-accent-solid bg-accent-solid text-accent-fg" : "border-line bg-surface",
+              )}
+            >
+              <span className={cx("text-xs font-bold tracking-wide", last ? "text-accent-fg" : "text-accent-text")}>{step.label}</span>
+              <span className={cx("text-[0.95rem] leading-snug font-semibold", last ? "text-accent-fg" : "text-fg")}>{step.text}</span>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 

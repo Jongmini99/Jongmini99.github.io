@@ -103,7 +103,17 @@ const sectionBase = {
   intro: optionalText,
   /** 데스크톱 레이아웃 폭. half는 인접한 half 섹션과 2열로 배치된다. */
   width: z.enum(["full", "half"]).default("full"),
+  /** 섹션 도표: 제목·소개 아래에 크게 표시하는 이미지 (구조도·플로우차트·전후 비교 등). 2개면 2열. */
+  figures: list(ImageSchema),
 };
+
+/** 흐름 도표 한 단계 (예: 문제 → 조치 → 결과, v0 → v1.3) */
+export const FlowStepSchema = z.object({
+  /** 단계 이름 (짧게: 문제 / 조치 / 결과 / v1.1 등) */
+  label: text,
+  /** 한 줄 설명 */
+  text: text,
+});
 
 export const CardItemSchema = z.object({
   title: text,
@@ -118,6 +128,8 @@ export const SectionSchema = z.discriminatedUnion("type", [
   /* --- 직접 작성하는 콘텐츠 섹션 --- */
   z.object({ ...sectionBase, type: z.literal("richText"), body: text, image: optionalImage }),
   z.object({ ...sectionBase, type: z.literal("bulletList"), items: list(text) }),
+  /** 단계를 화살표로 이은 흐름 도표. 마지막 단계가 강조된다. */
+  z.object({ ...sectionBase, type: z.literal("flow"), steps: list(FlowStepSchema) }),
   z.object({ ...sectionBase, type: z.literal("cards"), items: list(CardItemSchema) }),
   z.object({
     ...sectionBase,
@@ -268,6 +280,8 @@ export const CoreStrengthSchema = z.object({
   title: text,
   subtitle: optionalText,
   description: text,
+  /** 키워드 배지 (설명을 짧게 유지하고 요점은 배지로) */
+  keywords: list(text),
   icon: optionalText,
 });
 

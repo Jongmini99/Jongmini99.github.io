@@ -10,6 +10,7 @@ import {
   CardsBlock,
   ComparisonBlock,
   DocumentsBlock,
+  FlowBlock,
   InfoTableBlock,
   LinksBlock,
   ProjectInfoBlock,
@@ -20,13 +21,18 @@ import {
 import { Gallery } from "./Gallery";
 import { Videos } from "./Videos";
 import { MediaTabs } from "./MediaTabs";
+import { galleryRemainder } from "./SectionFigures";
 
 function SectionBody({ section, project }: { section: Section; project: Project }) {
+  // 섹션 도표로 이미 보여 준 이미지는 갤러리에서 뺀다.
+  const gallery = galleryRemainder(project.gallery, project.sections);
   switch (section.type) {
     case "richText":
       return <RichTextBlock section={section} />;
     case "bulletList":
       return <BulletListBlock section={section} />;
+    case "flow":
+      return <FlowBlock section={section} />;
     case "cards":
       return <CardsBlock section={section} />;
     case "infoTable":
@@ -40,25 +46,23 @@ function SectionBody({ section, project }: { section: Section; project: Project 
     case "technologies":
       return <TechnologiesBlock section={section} project={project} />;
     case "gallery":
-      return <Gallery images={project.gallery} label={`${project.title} 이미지 갤러리`} />;
+      return <Gallery images={gallery} label={`${project.title} 이미지 갤러리`} />;
     case "videos":
       return <Videos videos={project.videos} />;
-    case "media":
-      return (
-        <MediaTabs
-          label={`${project.title} 미디어`}
-          tabs={[
-            {
-              key: "images",
-              label: "이미지 갤러리",
-              icon: "image",
-              count: project.gallery.length,
-              panel: <Gallery images={project.gallery} label={`${project.title} 이미지 갤러리`} />,
-            },
-            { key: "videos", label: "플레이 영상", icon: "video", count: project.videos.length, panel: <Videos videos={project.videos} /> },
-          ]}
-        />
-      );
+    case "media": {
+      const tabs = [
+        {
+          key: "images",
+          label: "이미지 갤러리",
+          icon: "image" as const,
+          count: gallery.length,
+          panel: <Gallery images={gallery} label={`${project.title} 이미지 갤러리`} />,
+        },
+        { key: "videos", label: "플레이 영상", icon: "video" as const, count: project.videos.length, panel: <Videos videos={project.videos} /> },
+      ].filter((t) => t.count > 0);
+      if (tabs.length === 0) return <Gallery images={[]} label={`${project.title} 이미지 갤러리`} />;
+      return <MediaTabs label={`${project.title} 미디어`} tabs={tabs} />;
+    }
     case "documents":
       return <DocumentsBlock project={project} />;
     case "achievements":

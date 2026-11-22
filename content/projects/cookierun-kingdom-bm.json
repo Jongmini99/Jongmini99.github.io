@@ -14,9 +14,9 @@
   "technologies": [],
   "track": "document",
   "keyTakeaways": {
-    "problem": "이벤트·패치마다 매출과 유저 수가 어떻게 변하는지, 각 상품이 어떤 유저를 겨냥하는지 분석할 필요",
-    "solution": "모바일인덱스 지표로 상황별 가설 설정, 콜라보 기간별 매출 추이 분석과 BM 상품 가격대별 분류",
-    "result": "실제 지표로 가설을 검증한 72쪽 분량의 지표·BM 분석서 완성"
+    "problem": "이벤트·패치별 매출 변화와 상품별 타겟 분석 필요",
+    "solution": "모바일인덱스 지표로 가설 설정 · BM 가격대별 분류",
+    "result": "72쪽 지표·BM 분석서 완성"
   },
   "thumbnail": {
     "src": "/uploads/images/cookierun-kingdom-bm/cookierun-thumbnail.jpg",
@@ -64,7 +64,7 @@
       "title": "문서 개요",
       "visible": true,
       "width": "full",
-      "body": "쿠키런: 킹덤의 비즈니스 모델(BM)을 지표 분석을 기반으로 분석한 문서입니다.\n\n이벤트나 콘텐츠가 출시될 때마다 지표에 어떤 변화가 나타나는지 분석하고, 각 상품이 어떤 유저를 타겟으로 만들어졌는지 정리했습니다."
+      "body": "쿠키런: 킹덤의 비즈니스 모델(BM)을 지표로 분석한 문서입니다. 이벤트·콘텐츠 출시에 따른 지표 변화와 상품별 타겟 유저를 정리했습니다."
     },
     {
       "id": "development-info",
@@ -82,32 +82,44 @@
     },
     {
       "id": "key-content",
-      "type": "cards",
+      "type": "flow",
       "title": "실제 지표로 매출 구조와 가격 설계 목적 분석",
       "visible": true,
       "width": "full",
-      "items": [
+      "figures": [
         {
-          "title": "지표 기반 가설 설정",
-          "icon": "chart",
-          "bullets": [
-            "모바일인덱스에서 제공하는 지표로 상황별 가설 설정"
-          ]
+          "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-02-hypothesis.jpg",
+          "alt": "가설 수립 페이지 — 쿠키런: 킹덤이 다른 CCG 게임보다 다양한 BM을 제공한다는 가설과 근거, 결론",
+          "caption": "지표 기반 가설 설정 및 수립"
         },
         {
-          "title": "매출·유저 수 변화 검증",
-          "icon": "target",
-          "bullets": [
-            "이벤트 기간과 패치별 매출·유저 수 변화를 분석해 가설 검증"
-          ]
+          "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-01-collab-revenue.jpg",
+          "alt": "지표 분석: 콜라보 기간 — 소닉·디즈니·BTS 콜라보 이벤트 기간의 매출 추이 그래프 3개",
+          "caption": "[문서 디테일] 이벤트 기간별 매출 지표 분석"
         },
         {
-          "title": "BM 구성·가격 분석",
-          "icon": "coins",
-          "bullets": [
-            "판매 상품(BM)의 구성과 가격을 타겟 유저에 맞춰 분류",
-            "실제 지표로 가설 검증"
-          ]
+          "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-03-bm-by-price.jpg",
+          "alt": "BM 분석: 가격별 BM — 쿠키뽑기·데코·크리스탈 패키지를 1만 원대 이하부터 6만 원대 이상까지 가격대별로 배치한 표",
+          "caption": "[문서 디테일] 각 BM의 가격과 구성 분류"
+        },
+        {
+          "src": "/uploads/images/cookierun-kingdom-bm/cookierun-gallery-04-bm-conclusion.jpg",
+          "alt": "BM 분석 결론 페이지 — 세그먼트화된 BM과 복수 콘텐츠 패키지 구성에 대한 정리",
+          "caption": "BM 패턴 분석 결론"
+        }
+      ],
+      "steps": [
+        {
+          "label": "가설 설정",
+          "text": "모바일인덱스 지표로 상황별 가설 설정"
+        },
+        {
+          "label": "검증",
+          "text": "이벤트 기간·패치별 매출·유저 수 변화 분석"
+        },
+        {
+          "label": "BM 분류",
+          "text": "판매 상품의 구성·가격을 타겟 유저별로 분류"
         }
       ]
     },
@@ -115,7 +127,7 @@
       "id": "media",
       "type": "gallery",
       "title": "문서 주요 페이지",
-      "visible": true,
+      "visible": false,
       "width": "full"
     },
     {

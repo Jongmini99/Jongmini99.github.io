@@ -3,8 +3,9 @@ import type { Section } from "@/content/schema";
 import { SectionHeading } from "@/components/ui/Typography";
 import { Markdown } from "@/components/ui/Markdown";
 import { Inbox } from "lucide-react";
+import { SectionFigures } from "./SectionFigures";
 
-/** 모든 상세 섹션의 공통 틀: 앵커 id, 제목, 소개 문단 */
+/** 모든 상세 섹션의 공통 틀: 앵커 id, 제목, 소개 문단, 섹션 도표 */
 export function SectionShell({ section, children, aside }: { section: Section; children?: ReactNode; aside?: ReactNode }) {
   const headingId = `${section.id}-heading`;
   return (
@@ -14,7 +15,10 @@ export function SectionShell({ section, children, aside }: { section: Section; c
         {aside}
       </div>
       {section.intro && <Markdown>{section.intro}</Markdown>}
+      {/* 본문형 섹션은 글 다음에, 그 외 섹션은 단계·카드보다 먼저 도표를 보여 준다. */}
+      {section.type !== "richText" && <SectionFigures figures={section.figures} title={section.title} />}
       {children}
+      {section.type === "richText" && <SectionFigures figures={section.figures} title={section.title} />}
     </section>
   );
 }
