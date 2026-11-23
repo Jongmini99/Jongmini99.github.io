@@ -1,5 +1,5 @@
 # GitHub Pages 배포
-# - main 브랜치 push (관리자 CMS 저장 포함) → 검증 → 빌드 → 배포
+# - main 브랜치 push → 검증 → 빌드 → 배포
 # - Pull Request → 검증·빌드만 수행 (배포하지 않음)
 # 저장소 Settings → Pages → Source 를 "GitHub Actions"로 설정해야 한다.
 name: Deploy to GitHub Pages
@@ -50,26 +50,17 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test OAuth proxy
-        run: npm run test:oauth
-
       - name: Build (static export)
         run: npm run build
         env:
           # 사용자 사이트: "" / 프로젝트 사이트: "/<repo>"
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
-          # 관리자 CMS 로그인용 OAuth 프록시 주소 (Settings → Secrets and variables → Actions → Variables)
-          # 비밀값이 아닌 공개 URL이므로 Variables에 저장한다. Client Secret은 Cloudflare Worker에만 둔다.
-          DECAP_OAUTH_BASE_URL: ${{ vars.DECAP_OAUTH_BASE_URL }}
 
       - name: Verify export output
         run: |
           test -f out/index.html
           test -f out/404.html
-          test -f out/admin/index.html
-          test -f out/admin/config.yml
-          test -f out/admin/decap/decap-cms.js
           echo "exported $(find out -name 'index.html' | wc -l) pages"
 
       - name: Upload artifact

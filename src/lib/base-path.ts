@@ -2,7 +2,7 @@
  * GitHub Pages 프로젝트 사이트(/repo-name) 대응.
  *
  * next/link 의 <Link>와 next/navigation 은 basePath를 자동으로 붙이므로 이 함수가 필요 없다.
- * CMS가 저장한 "/uploads/..." 같은 정적 파일 경로를 <img src>, <a href download>에
+ * 콘텐츠 JSON에 저장된 "/uploads/..." 같은 정적 파일 경로를 <img src>, <a href download>에
  * 직접 쓸 때만 withBasePath()로 감싼다.
  */
 export const BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/+$/, "");

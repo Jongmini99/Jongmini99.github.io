@@ -35,11 +35,11 @@ type MediaImageProps = {
   priority?: boolean;
   /** 장식용이면 alt를 비운다 (인접 텍스트가 같은 정보를 전달할 때) */
   decorative?: boolean;
-  /** CMS에서 대체 텍스트를 비워 둔 경우 사용할 문맥 기반 설명 */
+  /** 콘텐츠에서 대체 텍스트를 비워 둔 경우 사용할 문맥 기반 설명 */
   fallbackAlt?: string;
 };
 
-/** CMS 이미지 렌더링. 이미지가 없으면 플레이스홀더. 부모가 크기/비율을 정한다. */
+/** 콘텐츠 이미지 렌더링. 이미지가 없으면 플레이스홀더. 부모가 크기/비율을 정한다. */
 export function MediaImage({ image, className, placeholderLabel, priority, decorative, fallbackAlt }: MediaImageProps) {
   if (!image) return <MediaPlaceholder label={placeholderLabel} className={className} />;
   return (

@@ -2,7 +2,7 @@ import ReactMarkdown, { type Components } from "react-markdown";
 import { cx } from "@/lib/cx";
 
 /**
- * CMS Markdown 렌더러.
+ * 콘텐츠 Markdown 렌더러.
  * 원시 HTML은 렌더링하지 않는다(react-markdown 기본 동작) — XSS 방지.
  */
 const components: Components = {

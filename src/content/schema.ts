@@ -1,10 +1,9 @@
 /**
  * 콘텐츠 스키마 — 사이트 데이터 타입의 단일 출처(Single Source of Truth)
  *
- * - content/ 폴더의 JSON(관리자 CMS가 수정)은 빌드 시 이 스키마로 검증된다.
+ * - content/ 폴더의 JSON은 빌드 시 이 스키마로 검증된다.
  * - 검증 실패 시 빌드가 중단되어, 잘못된 데이터가 배포되지 않는다.
  * - 필드를 추가할 때는 optional로 추가해 기존 콘텐츠와의 호환성을 유지한다.
- * - CMS 설정(cms/decap-config.ts → public/admin/config.yml 생성)의 필드와 이 스키마를 함께 수정해야 한다.
  */
 import { z } from "zod";
 import { parseYouTubeId } from "../lib/youtube";
@@ -13,14 +12,14 @@ import { parseYouTubeId } from "../lib/youtube";
 /* 공통 원시 타입                                                       */
 /* ------------------------------------------------------------------ */
 
-/** CMS는 비워 둔 선택 필드를 "" 또는 null로 저장할 수 있으므로 undefined로 정규화한다. */
+/** 비워 둔 선택 필드가 "" 또는 null로 저장되어도 undefined로 정규화한다. */
 const emptyToUndefined = (v: unknown) => (v === "" || v === null ? undefined : v);
 
 const text = z.string().trim().min(1, "비어 있을 수 없습니다.");
 const optionalText = z.preprocess(emptyToUndefined, z.string().trim().optional());
 const optionalUrl = z.preprocess(emptyToUndefined, z.url().optional());
 
-/** 빈 배열 기본값 (CMS가 필드를 생략해도 안전하게 처리) */
+/** 빈 배열 기본값 (필드를 생략해도 안전하게 처리) */
 const list = <T extends z.ZodType>(item: T) =>
   z.preprocess((v) => (v === null || v === undefined ? [] : v), z.array(item));
 
@@ -48,12 +47,12 @@ export const Slug = z
 
 export const ImageSchema = z.object({
   src: MediaPath,
-  /** 대체 텍스트. CMS 갤러리에서는 필수 입력, 그 외 비어 있으면 UI가 문맥(제목 등)으로 대체한다. */
+  /** 대체 텍스트. 비어 있으면 UI가 문맥(제목 등)으로 대체한다. */
   alt: optionalText,
   caption: optionalText,
 });
 
-/** 선택 이미지: CMS가 비워 둔 { src: "" } 객체도 "이미지 없음"으로 처리 */
+/** 선택 이미지: 비워 둔 { src: "" } 객체도 "이미지 없음"으로 처리 */
 const optionalImage = z.preprocess((v) => {
   if (v === null || v === undefined || v === "") return undefined;
   if (typeof v === "object" && !(v as { src?: unknown }).src) return undefined;
@@ -181,7 +180,7 @@ export const KeyTakeawaysSchema = z.object({
   result: text,
 });
 
-/** 3칸이 모두 비어 있으면 "요약 없음"으로 처리 (CMS가 빈 객체를 저장하는 경우) */
+/** 3칸이 모두 비어 있으면 "요약 없음"으로 처리 (빈 객체로 저장된 경우) */
 const optionalTakeaways = z.preprocess((v) => {
   if (v === null || v === undefined || v === "") return undefined;
   if (typeof v === "object") {
@@ -208,7 +207,7 @@ export const ProjectSchema = z
     platform: text,
     /**
      * 개발 기간 (선택). 기획 문서처럼 기간이 의미 없는 항목은 비워 두면 UI에서 숨겨진다.
-     * CMS가 비워 둔 { start: "", end: "" } 객체도 "기간 없음"으로 처리한다.
+     * 비워 둔 { start: "", end: "" } 객체도 "기간 없음"으로 처리한다.
      */
     developmentPeriod: z.preprocess(
       (v) => {

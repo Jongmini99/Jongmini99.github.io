@@ -1,6 +1,6 @@
 # CLAUDE.md — 허종민 포트폴리오 공통 작업 지침
 
-이 저장소에서 작업하는 사람과 AI가 공통으로 따르는 정적 규칙 정의서이다. 구조·명령어 상세는 `README.md`, 관리자 CMS는 `docs/CMS_SETUP.md`, 배포는 `docs/DEPLOY.md`, 검증 이력은 `docs/VERIFICATION.md`를 참조한다.
+이 저장소에서 작업하는 사람과 AI가 공통으로 따르는 정적 규칙 정의서이다. 구조·명령어 상세는 `README.md`, 배포는 `docs/DEPLOY.md`, 검증 이력은 `docs/VERIFICATION.md`를 참조한다.
 
 ## 1. 프로젝트 개요 및 지원자 페르소나
 
@@ -11,10 +11,10 @@
   * **실무 및 협업 경험**: IT 업체에서 산업기능요원으로 2년간 근무하며 다수의 프로젝트를 통해 기획 문서 작성, 일정 관리, 클라이언트 응대, QA 및 팀원 간 커뮤니케이션 프로세스 체득
   * **주요 시스템 설계 경험**: 상자 및 레벨링 시스템 도입을 통한 전투 시스템 루프 개선 등
   * **관심 분야 및 타겟**: 중견 이상 규모의 게임사 지향. PVP, 시뮬레이션, 생존 장르 및 스팀/콘솔 패키지 개발에 강점과 높은 관심 보유. 최근 게임 개발 파이프라인 및 인게임 시스템에 AI를 접목하기 위한 스터디 진행 중
-* **운영 주소**: `https://jongmini99.github.io` · **관리자**: `https://jongmini99.github.io/admin/`
+* **운영 주소**: `https://jongmini99.github.io`
 * **저장소**: `Jongmini99/Jongmini99.github.io` (`main` push → GitHub Actions → GitHub Pages 자동 배포, 1\~3분 소요)
 * **기술 스택**: Next.js 16 (App Router, 정적 내보내기) · React 19 · TypeScript 6.0.3 (고정, TS 7은 Next 호환 문제로 보류) · Tailwind CSS v4 · zod 4 · ESLint 9
-* **CMS 아키텍처**: Decap CMS (`/admin`) + GitHub 백엔드. OAuth 인증은 Cloudflare Worker 프록시(`https://decap-oauth.jongmini99.workers.dev`, 소스: `cms/oauth-worker`)를 경유한다.
+* **콘텐츠 관리**: 별도 관리자 CMS 없이 `content/` JSON을 직접 수정한다 (2026-11-23 Decap CMS·OAuth Worker 제거).
 
 ## 2. 작업 및 협업 프로토콜
 
@@ -22,7 +22,7 @@
 2. **사실 기반 작성 (환각 금지)**: 경력·수상·수치·연도·팀 구성 등 확인되지 않은 정보는 절대 임의로 생성하지 않고 사용자에게 질문한다. 비워 둔 선택 필드는 UI에서 자동으로 숨겨지므로 빈칸을 유지한다.
 3. **콘텐츠 톤앤매너**: 화려한 수식어보다는 **'기획 의도 → Unity/C# 프로토타입 검증 → 시스템 개선 결과'**로 이어지는 논리적 구조와 실무 협업 경험(문서화, 일정 관리, QA)이 돋보이도록 구성한다. 문장 형식(합쇼체·명사형 불릿·결과형 헤드라인 등)은 `docs/WRITING_PERSONA.md`를 따른다.
 4. **임시 데이터 격리**: 실제 게임 자료로 오해될 그래픽을 생성하지 않는다. 임시 이미지는 `public/uploads/images/temp/` 경로에만 배치하고 이미지 내에 `"TEMP IMAGE"`와 권장 해상도를 명시한다. 실제 이미지로 전면 교체되면 해당 디렉터리를 삭제한다.
-5. **작업 전 동기화**: 관리자 CMS의 저장 내역도 `main` 브랜치에 직접 커밋되므로, 모든 로컬 작업 시작 전 반드시 `git pull --rebase --autostash`를 실행한다.
+5. **작업 전 동기화**: 다른 환경(GitHub 웹 편집 등)의 커밋과 충돌하지 않도록 모든 로컬 작업 시작 전 반드시 `git pull --rebase --autostash`를 실행한다.
 6. **완료 기준**: 로컬 검증(`npm run check`) → 커밋 및 푸시 → GitHub Actions 빌드·배포 성공 확인 → 운영 URL에서 최종 렌더링 확인까지 마쳐야 완료로 간주한다. 생략되거나 실패한 단계가 있다면 숨기지 않고 보고한다.
 7. **보고 형식**: 모든 보고는 한국어로 작성하며, **\[변경 사항 / 검증 결과 / 사용자 후속 조치\]** 세 항목으로 구분하여 간결하게 정리한다.
 
@@ -40,14 +40,12 @@
 ## 4. 표준 명령어
 
 ```bash
-npm run dev               # 로컬 개발 서버 (http://localhost:3000, 관리자 /admin/index.html)
-npm run cms:local         # 로컬 CMS 백엔드 구동 (GitHub OAuth 없이 로컬 파일 직접 편집)
-npm run check             # 스키마·콘텐츠 검증 + 타입 체크 + 린트 + OAuth 테스트 + 프로덕션 빌드 (커밋 전 필수)
+npm run dev               # 로컬 개발 서버 (http://localhost:3000)
+npm run check             # 스키마·콘텐츠 검증 + 타입 체크 + 린트 + 프로덕션 빌드 (커밋 전 필수)
 npx serve out -l 4173     # 정적 빌드 결과물 로컬 서빙
 npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검 (로컬 서빙 중 실행, AUDIT_URL 지정 시 운영 주소 점검)
 ```
 
-> **참고**: `npm run check` 실행 시 출력되는 `Error: GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET not configured`는 OAuth Worker의 환경변수 누락 방어(500 에러 반환) 단위 테스트의 정상 통과 로그이다.
 
 ## 5. 아키텍처 및 코드 구조 규칙
 
@@ -55,12 +53,11 @@ npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검
 | ----- | ----- |
 | `content/` | 모든 사이트 콘텐츠의 유일한 데이터 저장소(JSON). 프로필·프로젝트·경력·수상·연락처 등 **콘텐츠**는 컴포넌트에 하드코딩하지 않는다. 단, 섹션 제목·버튼·안내 문구 같은 **UI 고정 문구**는 컴포넌트에 둔다. |
 | `src/content/schema.ts` | **데이터 모델의 단일 진실 공급원(SSOT)**. Zod 스키마가 전체 타입을 결정한다. |
-| `cms/decap-config.ts` | CMS 필드 정의 파일. `schema.ts`와 구조가 일치해야 하며, 빌드 시 `public/admin/config.yml`을 자동 생성한다. (**`config.yml` 직접 수정 절대 금지**) |
 | `src/content/loaders.ts` | 페이지 데이터 로더. 서버 컴포넌트 전용이며 클라이언트 컴포넌트(`'use client'`)에서의 import를 금지한다. |
 | `src/styles/tokens.css` | 디자인 토큰(색상·타이포그래피·반경·여백) 정의. **컴포넌트 내 `#hex` 색상 코드 직접 하드코딩 금지**, 반드시 토큰 유틸리티 클래스를 사용한다. |
 | `src/components/ui` | 기본 UI 프리미티브(Button, Card, Badge, Typography, Media, Icon 등). 신규 UI 요소는 기존 프리미티브를 확장·재사용한다. |
 | `src/components/layout/nav.ts` | 글로벌 내비게이션 정의. 홈 섹션 앵커 ID와 1:1로 동기화되어야 한다. |
-| **정적 에셋 경로** | CMS 업로드 파일은 `/uploads/...`에 저장된다. 모든 `<img>` 태그 및 다운로드 링크는 반드시 `withBasePath()` 유틸리티로 감싼다. |
+| **정적 에셋 경로** | 업로드 파일은 `public/uploads/...`에 두고 `/uploads/...` 경로로 참조한다. 모든 `<img>` 태그 및 다운로드 링크는 반드시 `withBasePath()` 유틸리티로 감싼다. |
 | **외부 링크 및 보안** | 외부 링크는 `target="_blank" rel="noopener noreferrer"`와 스크린 리더용 `"(새 창)"` 텍스트를 포함한다. Markdown 원시 HTML 렌더링 및 `dangerouslySetInnerHTML` 사용을 엄격히 금지한다. |
 | **빌드 패치 격리** | Next.js 16 정적 내보내기의 프리페치 경로 버그 우회를 위해 `scripts/fix-export-prefetch.mjs`가 빌드 파이프라인에 포함되어 있다. 프레임워크 패치 이후에는 즉시 제거하여 기술 부채를 청산한다. |
 
@@ -75,7 +72,7 @@ npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검
 * **텍스트 라벨 제약**: 섹션 제목 상단에 **영문 소제목(eyebrow) 라벨을 배치하지 않는다**. 홈 히어로 섹션의 영문 직함 라벨 역시 사용하지 않는다.
 * **정보 구조 (IA)**:
   * **홈 (`/`)**: 단일 페이지 스크롤 구조 — 히어로(`#top`, 자기소개 문단은 여기에만 표시) → 핵심 역량(`#about`, 강점 3가지·플레이 지표) → 대표 프로젝트 강조(`#featured`) → 프로젝트 목록(`#projects`, `track` 기준 게임 제작/기획 문서 2단 분류 + 카드 3단 요약) → 기술 스택(`#skills`) → 기획 활동(`#activities`) → 이력 및 성과(`#career`) → 연락하기(`#contact`). 섹션 ID 변경 시 `nav.ts`도 함께 수정한다.
-  * **프로젝트 (`/projects/`, `/projects/<slug>/`)**: 목록 페이지 및 상세 페이지. 상세 페이지는 CMS 섹션 구조(목차·탭·2열 half 배치)를 유지한다.
+  * **프로젝트 (`/projects/`, `/projects/<slug>/`)**: 목록 페이지 및 상세 페이지. 상세 페이지는 콘텐츠 섹션 구조(목차·탭·2열 half 배치)를 유지한다.
   * **리다이렉트 경로 (`/about/`, `/contact/`)**: 홈의 해당 섹션 앵커로 리다이렉트 처리하며, 검색 엔진 색인에서 제외(`noindex`, `sitemap` 제외)한다.
 * **미디어 규격**: 히어로 프로필 사진 `900×1200` (3:4 세로) · 대표 키아트/상세 헤더 `1920×1080` · 썸네일 `1200×800` · 갤러리 `1600×900`. 대표 키아트·상세 헤더는 장축 `1920px`, 그 외 이미지는 장축 `1600px` 이하로 맞추고 용량은 `500KB` 이하로 최적화하며, 영상은 직접 호스팅하지 않고 YouTube 링크로 임베드한다.
 
@@ -99,18 +96,15 @@ npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검
 
 ## 8. Git 형상 관리 및 CI/CD 배포 규약
 
-* **커밋 메시지 컨벤션**: 한국어로 작성하며, 접두어는 `feat:`(기능), `fix:`(버그 수정), `style:`(디자인·UI 표현), `content:`(콘텐츠 데이터 수정, CMS 커밋과 동일), `docs:`(문서), `chore:`(빌드·설정 기타) 중 하나를 사용한다. 본문에는 변경 요점을 불릿 목록으로 명시한다.
+* **커밋 메시지 컨벤션**: 한국어로 작성하며, 접두어는 `feat:`(기능), `fix:`(버그 수정), `style:`(디자인·UI 표현), `content:`(콘텐츠 데이터 수정), `docs:`(문서), `chore:`(빌드·설정 기타) 중 하나를 사용한다. 본문에는 변경 요점을 불릿 목록으로 명시한다.
 * **배포 파이프라인**:
   1. 커밋 전 `npm run check` (디자인 변경 시 `npm run audit` 포함) 실행.
   2. `main` 브랜치 푸시 후 `gh run watch <run-id> --exit-status` 명령으로 GitHub Actions CI/CD 파이프라인의 성공 여부를 끝까지 추적한다.
   3. 콘텐츠 스키마 검증(`zod`) 실패 시 CI 단계에서 빌드가 즉시 중단되며, 기존 운영 사이트의 상태가 안전하게 유지된다.
 
-## 9. 보안 및 CMS 인증 인프라 관리
+## 9. 보안
 
-* **비밀값 격리 (Zero-Trust)**: GitHub OAuth App의 `Client Secret`은 **오직 Cloudflare Worker Secret에만** 암호화하여 저장한다. 저장소 코드, 환경변수 파일, 프론트엔드 번들, 이슈·채팅 로그에 절대 노출하지 않는다.
-  * Secret 등록/갱신: `cms/oauth-worker` 디렉터리에서 `npx.cmd wrangler secret put GITHUB_CLIENT_SECRET` 실행 후 프롬프트에 직접 입력.
-  * 유출 의심 시 대응: GitHub OAuth App에서 즉시 기존 Secret 폐기 및 재발급 → Cloudflare Worker에 신규 Secret 등록 → 구 Secret 삭제.
-* **Worker 인프라 설정**: Worker 엔드포인트 URL은 공개 정보이며 저장소 Variables(`DECAP_OAUTH_BASE_URL`)로 관리한다. `wrangler.toml` 내 `ALLOWED_ORIGINS=https://jongmini99.github.io`, `ALLOWED_SCOPES=public_repo` 설정을 유지하며, 도메인 변경 시 동기화 후 `wrangler deploy`로 재배포한다.
-* **접근 제어**: 관리자 페이지(`/admin`)의 실제 저장 권한은 GitHub 저장소 쓰기(Write) 권한으로 통제되며, 검색 엔진 수집을 차단(`noindex`, `robots.txt` Disallow)한다.
+* **비밀값 격리**: API 키·토큰 등 비밀값은 저장소 코드, 환경변수 파일, 프론트엔드 번들, 이슈·채팅 로그에 절대 노출하지 않는다.
+* **관리자 페이지 없음**: 2026-11-23 Decap CMS(`/admin`)와 Cloudflare OAuth Worker를 제거했다. 다시 도입할 때는 구조 변경으로 보고 계획 승인 후 진행한다.
 
 > **운영 안내**: 남은 작업(Todo) 및 에셋 교체 현황은 정적 지침서인 본 문서에 기록하지 않고, GitHub Issues 또는 별도의 프로젝트 트래커에서 관리한다.

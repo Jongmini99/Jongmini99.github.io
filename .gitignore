@@ -12,9 +12,6 @@ next-env.d.ts
 .env.*
 !.env.example
 
-# cloudflare worker
-cms/oauth-worker/.wrangler/
-cms/oauth-worker/.dev.vars
 
 # os / editor
 .DS_Store
@@ -25,6 +22,3 @@ Thumbs.db
 # logs
 npm-debug.log*
 
-# Decap CMS 생성물 (scripts/prepare-cms.ts)
-public/admin/decap/
-public/admin/config.yml
