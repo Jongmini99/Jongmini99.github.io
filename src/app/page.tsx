@@ -119,7 +119,7 @@ export default function HomePage() {
                 aria-hidden="true"
                 className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgb(59_130_246/0.22),transparent_70%)] blur-2xl"
               />
-              <div className="relative aspect-[3/4] overflow-hidden rounded-card border border-line shadow-[0_30px_80px_rgb(0_0_0/0.45)] motion-safe:animate-[float_6s_ease-in-out_infinite]">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-card border border-line shadow-[0_30px_80px_rgb(0_0_0/0.45)] motion-safe:animate-[float_3.5s_ease-in-out_infinite]">
                 <MediaImage image={profile.heroImage} priority fallbackAlt={`${profile.name} 프로필 사진`} />
               </div>
             </div>
