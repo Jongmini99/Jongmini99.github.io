@@ -112,21 +112,18 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 히어로 비주얼: 원형 빛 배경 위에 이미지를 띄운다 */}
-          <div aria-hidden="true" className="relative mx-auto aspect-square w-full max-w-[22rem] sm:max-w-[28rem] lg:max-w-[32rem]">
-            <div className="absolute inset-[4%] rounded-full border border-dashed border-line-strong/70" />
-            <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle_at_35%_30%,rgb(96_165_250/0.35),rgb(30_41_70/0.6)_55%,rgb(19_26_42/0.9))] shadow-[inset_-24px_-30px_60px_rgb(0_0_0/0.35),0_30px_80px_rgb(59_130_246/0.18)]" />
-            {profile.heroImage && (
-              <div className="absolute inset-[6%] motion-safe:animate-[float_6s_ease-in-out_infinite]">
-                <MediaImage
-                  image={profile.heroImage}
-                  decorative
-                  priority
-                  className="object-contain drop-shadow-[0_24px_24px_rgb(0_0_0/0.35)]"
-                />
+          {/* 히어로 비주얼: 3:4 프로필 사진 카드 */}
+          {profile.heroImage && (
+            <div className="relative mx-auto w-full max-w-[18rem] sm:max-w-[22rem] lg:max-w-[24rem]">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgb(59_130_246/0.22),transparent_70%)] blur-2xl"
+              />
+              <div className="relative aspect-[3/4] overflow-hidden rounded-card border border-line shadow-[0_30px_80px_rgb(0_0_0/0.45)]">
+                <MediaImage image={profile.heroImage} priority fallbackAlt={`${profile.name} 프로필 사진`} />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </Container>
 
         <a

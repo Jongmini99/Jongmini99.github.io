@@ -36,17 +36,6 @@
   }
 }
 
-/* 히어로 비주얼 둥둥 뜨는 효과 */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
 /* 모션 최소화 설정을 존중: 사용자가 허용한 경우에만 부드러운 스크롤 */
 @media (prefers-reduced-motion: no-preference) {
   html {

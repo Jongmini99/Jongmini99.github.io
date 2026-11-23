@@ -335,7 +335,7 @@ const site: Field = {
         text("headline", "메인 소개 문구", { hint: "줄바꿈은 데스크톱 화면에서 그대로 유지됩니다." }),
         opt(text("summary", "자기소개", { hint: "줄바꿈은 데스크톱 화면에서 그대로 유지됩니다." })),
         stringList("targetRoles", "목표 직무"),
-        image("heroImage", "메인 히어로 비주얼 (선택)", { hint: "홈 첫 화면 오른쪽 원형 영역. 권장 1200×1200, 배경 투명 PNG/WebP." }),
+        image("heroImage", "메인 히어로 비주얼 (선택)", { hint: "홈 첫 화면 오른쪽 프로필 사진 카드. 권장 900×1200 (3:4) 세로 사진." }),
         {
           name: "coreStrengths",
           label: "핵심 강점 (소개 섹션 카드)",
