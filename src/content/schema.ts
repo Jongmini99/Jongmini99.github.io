@@ -238,6 +238,16 @@ export const ProjectSchema = z
     track: z.preprocess(emptyToUndefined, z.enum(PROJECT_TRACKS).optional()),
     /** 카드 3단 요약 (선택) */
     keyTakeaways: optionalTakeaways,
+    /** 홈 대표 프로젝트 화면의 핵심 성과 불릿 (선택, 3~4개 권장) */
+    highlights: list(text),
+    /**
+     * 홈 대표 프로젝트 화면의 무음 반복 영상 (선택). 10초 내외·5MB 이하 mp4.
+     * 전체 플레이 영상은 videos(YouTube)로 등록한다.
+     */
+    heroVideo: z.preprocess(
+      (v) => (v && typeof v === "object" && !(v as { src?: unknown }).src ? undefined : v),
+      z.object({ src: MediaPath, poster: optionalImage }).optional(),
+    ),
     sections: list(SectionSchema),
     achievements: list(AchievementSchema),
     documents: list(DocumentSchema),
@@ -290,6 +300,10 @@ export const GamerMetricSchema = z.object({
   /** 예: "마스터 550pt", "1,000시간 이상" */
   metric: text,
   description: optionalText,
+  /** 공식 티어 엠블럼 이미지 (선택). 없으면 icon → 게임 이름 머리글자 순으로 대체 */
+  emblem: optionalImage,
+  /** 게임 로고 아이콘 키 (선택, Icon 레지스트리) */
+  icon: optionalText,
 });
 
 /** 기획 활동 (동아리·테스터·행사 참관·특강 등) */
@@ -311,13 +325,13 @@ export const ProfileSchema = z.object({
   /** 자기소개 (Markdown) */
   summary: optionalText,
   targetRoles: list(text),
-  /** 메인 히어로 비주얼 (선택) — 첫 화면 오른쪽 원형 영역 */
+  /** 메인 히어로 비주얼 (선택) — 첫 화면 오른쪽 3:4 사진 카드 */
   heroImage: optionalImage,
-  /** 핵심 강점 카드 (비우면 숨김) */
+  /** 핵심 강점 (2026-11-24 홈 개편 후 화면에 표시하지 않음. 히어로 성과 배지·도구 아이콘으로 대체, 원문 보관용) */
   coreStrengths: list(CoreStrengthSchema),
   /** 게임 플레이 지표 (비우면 숨김) */
   gamerMetrics: list(GamerMetricSchema),
-  /** 기획 활동 (비우면 홈 '기획 활동' 섹션 숨김) */
+  /** 기획을 위한 활동 (홈 '게임 기획을 위한 경험' 섹션. 플레이 지표와 함께 비우면 섹션 숨김) */
   activities: list(ActivityItemSchema),
 });
 
@@ -329,7 +343,7 @@ export const SkillsSchema = z.object({
         z.object({
           name: text,
           icon: optionalText,
-          /** 메인 히어로에 배지로 노출 */
+          /** 메인 히어로의 도구 아이콘 줄에 노출 */
           highlight: z.boolean().default(false),
         }),
       ),
@@ -356,8 +370,12 @@ export const AwardsSchema = z.object({
       date: optionalText,
       description: optionalText,
       url: optionalUrl,
-      /** 메인 "주요 성과"에 노출 */
+      /** 메인 히어로의 성과 배지로 노출 */
       highlight: z.boolean().default(false),
+      /** 수상 증빙 이미지 (상장 등, 선택). 있으면 홈 수상 화면에 크게 표시 */
+      image: optionalImage,
+      /** 관련 프로젝트 slug (선택). 홈 수상 화면에서 해당 프로젝트로 연결 */
+      projectSlug: z.preprocess(emptyToUndefined, Slug.optional()),
     }),
   ),
 });

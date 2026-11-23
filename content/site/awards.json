@@ -1,7 +1,30 @@
 {
   "items": [
-    { "title": "메이플스토리 월드 개발 공모전 대상", "category": "award", "date": "2023.07.13", "description": "좀비 프로젝트 X", "highlight": true },
-    { "title": "Age of Privateer — Steam 얼리 액세스", "category": "release", "date": "2024.06.13", "description": "실시간 전략 카드 배틀", "highlight": true },
-    { "title": "IT 기획 경력 약 2년", "category": "career", "description": "산업기능요원", "highlight": true }
+    {
+      "title": "메이플스토리 월드 개발 공모전 대상",
+      "category": "award",
+      "date": "2023.07.13",
+      "description": "좀비 프로젝트 X",
+      "highlight": true,
+      "image": {
+        "src": "/uploads/images/temp/award-certificate-temp.jpg",
+        "alt": "메이플스토리 월드 개발 공모전 대상 상장 (임시 이미지)"
+      },
+      "projectSlug": "zombie-project-x"
+    },
+    {
+      "title": "Age of Privateer — Steam 얼리 액세스",
+      "category": "release",
+      "date": "2024.06.13",
+      "description": "실시간 전략 카드 배틀",
+      "highlight": true,
+      "projectSlug": "age-of-privateer"
+    },
+    {
+      "title": "IT 기획 경력 약 2년",
+      "category": "career",
+      "description": "산업기능요원",
+      "highlight": true
+    }
   ]
 }

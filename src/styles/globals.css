@@ -47,6 +47,19 @@
   }
 }
 
+/*
+ * 홈 앞 3화면(히어로·대표 프로젝트·수상)을 PPT처럼 화면 단위로 맞춘다.
+ * 데스크톱 + 동작 허용 환경에서만. proximity라 그 아래 긴 섹션은 자유롭게 스크롤된다.
+ */
+@media (width >= 64rem) and (prefers-reduced-motion: no-preference) {
+  html:has([data-snap-home]) {
+    scroll-snap-type: y proximity;
+  }
+  [data-snap-home] > section {
+    scroll-margin-top: var(--spacing-header);
+  }
+}
+
 /* 모션 최소화 설정을 존중: 사용자가 허용한 경우에만 부드러운 스크롤 */
 @media (prefers-reduced-motion: no-preference) {
   html {

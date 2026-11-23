@@ -65,6 +65,6 @@
   /* ---------- Layout ---------- */
   --container-content: 76rem;
   --spacing-gutter: 1rem;
-  --spacing-section: 7rem;
+  --spacing-section: 9rem; /* 2026-11-24: 정보 밀도를 낮추기 위해 7rem → 9rem */
   --spacing-header: 4rem;
 }

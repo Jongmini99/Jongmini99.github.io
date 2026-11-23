@@ -32,7 +32,25 @@ import {
   Workflow,
   type LucideIcon,
 } from "lucide-react";
-import { siConfluence, siGithub, siJira, siLua, siSteam, siUnity, siYoutube, type SimpleIcon } from "simple-icons";
+import {
+  siBattledotnet,
+  siClaude,
+  siConfluence,
+  siFigma,
+  siGithub,
+  siJira,
+  siLeagueoflegends,
+  siLua,
+  siNotion,
+  siPerplexity,
+  siPubg,
+  siPython,
+  siRiotgames,
+  siSteam,
+  siUnity,
+  siYoutube,
+  type SimpleIcon,
+} from "simple-icons";
 
 const UI_ICONS = {
   award: Award,
@@ -70,6 +88,15 @@ const BRAND_ICONS = {
   steam: siSteam,
   jira: siJira,
   confluence: siConfluence,
+  claude: siClaude,
+  python: siPython,
+  notion: siNotion,
+  figma: siFigma,
+  perplexity: siPerplexity,
+  leagueoflegends: siLeagueoflegends,
+  riotgames: siRiotgames,
+  battlenet: siBattledotnet,
+  pubg: siPubg,
 } satisfies Record<string, SimpleIcon>;
 
 /** 공식 로고를 쓸 수 없는 기술은 텍스트 모노그램으로 표시 */

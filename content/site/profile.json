@@ -52,12 +52,22 @@
     {
       "game": "리그 오브 레전드",
       "metric": "마스터 550pt",
-      "description": "MOBA · 최고 달성 티어"
+      "description": "MOBA · 최고 달성 티어",
+      "emblem": {
+        "src": "/uploads/images/emblems/riot-master.png",
+        "alt": "마스터 티어 엠블럼"
+      },
+      "icon": "leagueoflegends"
     },
     {
       "game": "전략적 팀 전투 (TFT)",
       "metric": "마스터 220pt",
-      "description": "오토배틀러 · 최고 달성 티어"
+      "description": "오토배틀러 · 최고 달성 티어",
+      "emblem": {
+        "src": "/uploads/images/emblems/riot-master.png",
+        "alt": "마스터 티어 엠블럼"
+      },
+      "icon": "riotgames"
     },
     {
       "game": "이터널 리턴",
@@ -67,7 +77,8 @@
     {
       "game": "오버워치",
       "metric": "마스터",
-      "description": "히어로 슈터 · 최고 달성 티어"
+      "description": "히어로 슈터 · 최고 달성 티어",
+      "icon": "battlenet"
     },
     {
       "game": "마블 라이벌즈",
@@ -77,12 +88,14 @@
     {
       "game": "배틀그라운드",
       "metric": "1,000시간 이상",
-      "description": "배틀로얄 슈팅 · 누적 플레이"
+      "description": "배틀로얄 슈팅 · 누적 플레이",
+      "icon": "pubg"
     },
     {
       "game": "Steam",
       "metric": "248개 게임 플레이",
-      "description": "PC 패키지 게임 · 장르별 탐색"
+      "description": "PC 패키지 게임 · 장르별 탐색",
+      "icon": "steam"
     }
   ],
   "activities": [

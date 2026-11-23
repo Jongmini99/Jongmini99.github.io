@@ -1,14 +1,19 @@
 /**
  * 사이트 정보(프로필·성과·연락처) 표시 블록 — 홈 한 페이지 섹션에서 사용
  */
-import { Download, Mail } from "lucide-react";
-import type { Awards, Career, Contact, Profile, Skills } from "@/content/schema";
+import { ArrowRight, Download, Mail } from "lucide-react";
+import type { Awards, Career, Contact, Profile, Project } from "@/content/schema";
 import { ButtonLink } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
-import { Tag, TechBadge } from "@/components/ui/Badge";
+import { Icon, hasIcon } from "@/components/ui/Icon";
+import { MediaImage } from "@/components/ui/Media";
+import { Tag } from "@/components/ui/Badge";
+import { Container } from "@/components/layout/Container";
+import { withBasePath } from "@/lib/base-path";
 import { cx } from "@/lib/cx";
 
-const CATEGORY_ICON: Record<Awards["items"][number]["category"], string> = {
+type AwardItem = Awards["items"][number];
+
+const CATEGORY_ICON: Record<AwardItem["category"], string> = {
   award: "trophy",
   release: "rocket",
   exhibition: "gamepad",
@@ -16,7 +21,7 @@ const CATEGORY_ICON: Record<Awards["items"][number]["category"], string> = {
   other: "award",
 };
 
-export const CATEGORY_LABEL: Record<Awards["items"][number]["category"], string> = {
+export const CATEGORY_LABEL: Record<AwardItem["category"], string> = {
   award: "수상",
   release: "출시",
   exhibition: "전시",
@@ -24,8 +29,36 @@ export const CATEGORY_LABEL: Record<Awards["items"][number]["category"], string>
   other: "기타",
 };
 
+/** 히어로 성과 배지: highlight 표시된 수상·출시·경력을 아이콘 알약으로 한 줄에 보여 준다. */
+export function HeroProofBadges({ items }: { items: AwardItem[] }) {
+  if (items.length === 0) return null;
+  return (
+    <ul aria-label="주요 성과" className="flex flex-wrap gap-2.5">
+      {items.map((a) => (
+        <li
+          key={a.title}
+          className="inline-flex items-center gap-2.5 rounded-full border border-line-strong bg-surface/70 py-1.5 pr-4 pl-1.5 text-[0.95rem] font-semibold text-fg"
+        >
+          <span
+            className={cx(
+              "flex size-8 items-center justify-center rounded-full",
+              a.category === "award" ? "bg-accent-solid text-accent-fg" : "bg-surface-raised text-accent-text",
+            )}
+          >
+            <Icon name={CATEGORY_ICON[a.category]} className="size-4" />
+          </span>
+          <span>
+            <span className="sr-only">{CATEGORY_LABEL[a.category]}: </span>
+            {a.title}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /** 수상·출시·전시 카드 그리드 */
-export function AchievementGrid({ items }: { items: Awards["items"] }) {
+export function AchievementGrid({ items }: { items: AwardItem[] }) {
   if (items.length === 0) return <p className="text-sm text-fg-subtle">등록된 이력이 없습니다.</p>;
   return (
     <ul className="grid gap-4 sm:grid-cols-2">
@@ -63,6 +96,82 @@ export function AchievementGrid({ items }: { items: Awards["items"] }) {
   );
 }
 
+/**
+ * 홈 수상 화면: 상장 이미지 + 관련 프로젝트 키아트를 겹쳐 보여 주고, 수상명을 크게 강조한다.
+ * 상장 이미지가 없으면 프로젝트 키아트만, 둘 다 없으면 플레이스홀더를 보여 준다.
+ */
+export function AwardShowcase({ award, project, id }: { award: AwardItem; project?: Project; id: string }) {
+  const headingId = `${id}-title`;
+  const keyart = project?.heroImage ?? project?.thumbnail;
+  return (
+    <section
+      id={id}
+      aria-labelledby={headingId}
+      className="relative flex items-center overflow-hidden bg-bg-alt py-section lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start lg:py-12"
+    >
+      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-[-10%] size-[40rem] -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
+      <Container className="relative grid items-center gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+        {/* 상장 + 키아트 콜라주 */}
+        <div className="relative mx-auto w-full max-w-[20rem] pb-16 sm:max-w-[22rem] lg:max-w-[21rem]">
+          <div className="aspect-[3/4] overflow-hidden rounded-card border border-line-strong bg-surface shadow-[0_30px_80px_rgb(0_0_0/0.45)] motion-safe:lg:-rotate-2">
+            <MediaImage image={award.image ?? keyart} fallbackAlt={`${award.title} 상장`} placeholderLabel="상장 이미지 준비 중" />
+          </div>
+          {award.image && keyart && (
+            <div className="absolute right-[-12%] bottom-0 w-[72%] overflow-hidden rounded-card border border-line-strong shadow-[0_24px_60px_rgb(0_0_0/0.55)] motion-safe:lg:rotate-2">
+              <div className="aspect-video">
+                <MediaImage image={keyart} decorative />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-7">
+          <span className="flex size-16 items-center justify-center rounded-2xl bg-accent-solid text-accent-fg shadow-[0_12px_40px_rgb(37_99_235/0.35)]">
+            <Icon name="trophy" className="size-8" />
+          </span>
+          <div className="flex flex-col gap-3">
+            <p className="flex items-center gap-2 text-lg font-semibold text-accent-text">
+              <span>{CATEGORY_LABEL[award.category]}</span>
+              {award.date && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span className="font-display">{award.date}</span>
+                </>
+              )}
+            </p>
+            <h2 id={headingId} className="text-title font-bold tracking-[-0.04em] text-balance text-fg">
+              {award.title}
+            </h2>
+          </div>
+          {project && (
+            <div className="flex flex-col gap-4">
+              <p className="text-xl font-semibold tracking-[-0.02em] text-fg">
+                「{project.title}」 <span className="font-normal text-fg-muted">· {project.genre}</span>
+              </p>
+              {project.keyTakeaways && (
+                <ul className="flex flex-col gap-2.5 text-lg text-fg-muted">
+                  {(["problem", "solution", "result"] as const).map((k) => (
+                    <li key={k} className="flex items-start gap-3">
+                      <span aria-hidden="true" className={cx("mt-2.5 size-1.5 shrink-0 rounded-full", k === "result" ? "bg-accent" : "bg-fg-subtle")} />
+                      <span className={cx(k === "result" && "font-semibold text-fg")}>{project.keyTakeaways![k]}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className="pt-2">
+                <ButtonLink href={`/projects/${project.slug}/`} variant="primary">
+                  {project.title} 자세히 보기
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </ButtonLink>
+              </div>
+            </div>
+          )}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 /** 경력 타임라인 */
 export function CareerTimeline({ items }: { items: Career["items"] }) {
   if (items.length === 0) return <p className="text-sm text-fg-subtle">등록된 경력이 없습니다.</p>;
@@ -83,58 +192,37 @@ export function CareerTimeline({ items }: { items: Career["items"] }) {
   );
 }
 
-/** 핵심 강점 카드 그리드 (데스크톱 3열, 모바일 1열) */
-export function CoreStrengthsGrid({ items }: { items: Profile["coreStrengths"] }) {
+/**
+ * 플레이 지표: 공식 티어 엠블럼(있으면) → 게임 로고 아이콘 → 게임 이름 머리글자 순으로 시각화하고
+ * 티어 이름을 크게 보여 준다. 글보다 엠블럼으로 먼저 읽히도록 한다.
+ */
+export function GamerEmblems({ items, labelledBy }: { items: Profile["gamerMetrics"]; labelledBy?: string }) {
   if (items.length === 0) return null;
   return (
-    <ol className="grid gap-4 md:grid-cols-3">
-      {items.map((s, i) => (
-        <li key={s.title} className="flex min-w-0 flex-col gap-4 rounded-card border border-line bg-surface p-6">
-          <div className="flex items-center justify-between gap-3">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-inner bg-accent-soft text-accent-text">
-              <Icon name={s.icon ?? "sparkles"} className="size-5" />
-            </span>
-            <span aria-hidden="true" className="font-display text-sm font-semibold text-fg-subtle">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <h3 className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{s.title}</h3>
-            {s.subtitle && <p className="text-sm font-semibold text-accent-text">{s.subtitle}</p>}
-          </div>
-          <p className="text-[0.95rem] leading-[1.75] text-fg-muted">{s.description}</p>
-          {s.keywords.length > 0 && (
-            <ul aria-label={`${s.title} 키워드`} className="mt-auto flex flex-wrap gap-1.5 pt-1">
-              {s.keywords.map((k) => (
-                <li key={k}>
-                  <Tag>{k}</Tag>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-/** 게임 플레이 지표 배지 — 폭에 따라 자연스럽게 줄바꿈 (390px에서 1~2열) */
-export function GamerMetrics({ items, labelledBy }: { items: Profile["gamerMetrics"]; labelledBy?: string }) {
-  if (items.length === 0) return null;
-  return (
-    <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((m) => (
-        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col gap-1 rounded-inner border border-line bg-surface px-4 py-3.5">
-          <span className="text-sm font-semibold break-keep text-fg">{m.game}</span>
-          <span className="text-lg font-bold tracking-[-0.02em] text-accent-text">{m.metric}</span>
-          {m.description && <span className="text-xs text-fg-muted">{m.description}</span>}
+        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 rounded-card border border-line bg-surface px-4 py-6 text-center">
+          <span aria-hidden="true" className="flex size-20 items-center justify-center">
+            {m.emblem ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="size-20 object-contain" />
+            ) : (
+              <span className="flex size-16 items-center justify-center rounded-full bg-surface-raised text-fg">
+                {hasIcon(m.icon) ? <Icon name={m.icon} className="size-8" /> : <span className="text-xl font-bold">{m.game.slice(0, 1)}</span>}
+              </span>
+            )}
+          </span>
+          <span className="flex flex-col gap-1">
+            <span className="text-xl font-bold tracking-[-0.02em] text-accent-text">{m.metric}</span>
+            <span className="text-sm font-semibold break-keep text-fg">{m.game}</span>
+          </span>
         </li>
       ))}
     </ul>
   );
 }
 
-/** 기획 활동 카드 그리드 (sm 이상 2열) */
+/** 기획을 위한 활동 카드 그리드 (sm 이상 2열) */
 export function ActivitiesGrid({ items }: { items: Profile["activities"] }) {
   if (items.length === 0) return null;
   return (
@@ -149,7 +237,7 @@ export function ActivitiesGrid({ items }: { items: Profile["activities"] }) {
                 {a.organization && <span>{a.organization}</span>}
               </p>
             )}
-            <h3 className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{a.title}</h3>
+            <h4 className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{a.title}</h4>
             <p className="text-sm font-semibold text-accent-text">{a.role}</p>
           </div>
           {a.description && <p className="text-[0.95rem] leading-[1.75] text-fg-muted">{a.description}</p>}
@@ -192,26 +280,6 @@ export function ContactActions({ contact, resumeLabel, className }: { contact: C
           {resumeLabel ?? "포트폴리오 PDF 다운로드"}
         </ButtonLink>
       )}
-    </div>
-  );
-}
-
-/** 기술 스택 그룹 */
-export function SkillGroups({ skills, className }: { skills: Skills; className?: string }) {
-  return (
-    <div className={cx("grid gap-4", className)}>
-      {skills.groups.map((g) => (
-        <div key={g.name} className="rounded-card border border-line bg-surface p-5 sm:p-6">
-          <h3 className="mb-4 text-sm font-semibold text-fg-muted">{g.name}</h3>
-          <ul className="flex flex-wrap gap-2">
-            {g.items.map((s) => (
-              <li key={s.name}>
-                <TechBadge name={s.name} icon={s.icon} size="sm" />
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
     </div>
   );
 }

@@ -93,10 +93,16 @@ for (const page of PAGES) {
 
     if (SHOTS) {
       fs.mkdirSync(SHOTS, { recursive: true });
-      const h = await evaluate("document.documentElement.scrollHeight");
-      await send("Emulation.setDeviceMetricsOverride", { width, height: Math.min(h, 12000), deviceScaleFactor: 1, mobile: false });
+      // 화면 높이(900)는 유지한 채 페이지 전체를 캡처한다.
+      // 화면 높이를 페이지 길이로 늘리면 100svh 기준 섹션(홈 앞 3화면)이 함께 늘어나 실제와 다르게 찍힌다.
+      const h = Math.min(await evaluate("document.documentElement.scrollHeight"), 12000);
+      await evaluate("Promise.all([...document.images].map((i) => (i.loading = 'eager', i.decode().catch(() => {}))))");
       await sleep(800);
-      const shot = await send("Page.captureScreenshot", { format: "png" });
+      const shot = await send("Page.captureScreenshot", {
+        format: "png",
+        captureBeyondViewport: true,
+        clip: { x: 0, y: 0, width, height: h, scale: 1 },
+      });
       const name = `${page.replace(/\W+/g, "_") || "home"}-${width}.png`;
       fs.writeFileSync(path.join(SHOTS, name), Buffer.from(shot.result.data, "base64"));
     }

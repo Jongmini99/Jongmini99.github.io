@@ -3,36 +3,95 @@
     {
       "name": "개발",
       "items": [
-        { "name": "Unity", "icon": "unity", "highlight": true },
-        { "name": "C#", "icon": "csharp", "highlight": true },
-        { "name": "MSW (메이플스토리 월드)", "highlight": false },
-        { "name": "Python", "icon": "code", "highlight": false },
-        { "name": "VS Code", "icon": "code", "highlight": false },
-        { "name": "GitHub", "icon": "github", "highlight": false }
+        {
+          "name": "Unity",
+          "icon": "unity",
+          "highlight": true
+        },
+        {
+          "name": "C#",
+          "icon": "csharp",
+          "highlight": true
+        },
+        {
+          "name": "MSW (메이플스토리 월드)",
+          "highlight": false
+        },
+        {
+          "name": "Python",
+          "icon": "python",
+          "highlight": true
+        },
+        {
+          "name": "VS Code",
+          "icon": "code",
+          "highlight": false
+        },
+        {
+          "name": "GitHub",
+          "icon": "github",
+          "highlight": true
+        }
       ]
     },
     {
       "name": "AI 활용",
       "items": [
-        { "name": "Claude Code", "icon": "sparkles", "highlight": true },
-        { "name": "ChatGPT", "icon": "sparkles", "highlight": false },
-        { "name": "Perplexity", "icon": "sparkles", "highlight": false }
+        {
+          "name": "Claude Code",
+          "icon": "claude",
+          "highlight": true
+        },
+        {
+          "name": "ChatGPT",
+          "icon": "sparkles",
+          "highlight": true
+        },
+        {
+          "name": "Perplexity",
+          "icon": "perplexity",
+          "highlight": false
+        }
       ]
     },
     {
       "name": "기획",
       "items": [
-        { "name": "게임 시스템 기획", "icon": "layers", "highlight": true },
-        { "name": "테크니컬 기획", "icon": "workflow", "highlight": false },
-        { "name": "QA / 일정 관리", "icon": "calendar-check", "highlight": false }
+        {
+          "name": "게임 시스템 기획",
+          "icon": "layers",
+          "highlight": false
+        },
+        {
+          "name": "테크니컬 기획",
+          "icon": "workflow",
+          "highlight": false
+        },
+        {
+          "name": "QA / 일정 관리",
+          "icon": "calendar-check",
+          "highlight": false
+        }
       ]
     },
     {
       "name": "협업 도구",
       "items": [
-        { "name": "Notion", "icon": "file", "highlight": false },
-        { "name": "Figma", "icon": "layers", "highlight": false },
-        { "name": "PowerPoint · Excel · Word", "icon": "file", "highlight": false }
+        {
+          "name": "Notion",
+          "icon": "notion",
+          "highlight": true
+        },
+        {
+          "name": "Figma",
+          "icon": "figma",
+          "highlight": true
+        },
+        {
+          "name": "PowerPoint · Excel · Word",
+          "icon": "file",
+          "highlight": false
+        }
       ]
     }
   ]

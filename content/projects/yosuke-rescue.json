@@ -32,6 +32,19 @@
     "solution": "일괄 QA 구조 · 플레이 요소 고정 후 외형만 교체",
     "result": "결함 18건 발견 · 3일간 5개 월드 교체, 테스트 194/194 통과"
   },
+  "highlights": [
+    "역할별 AI 에이전트 6종 설계 · 결정과 검증은 직접",
+    "4주 · 스테이지 25개 · 몬스터 44종 · 보스 5종",
+    "일괄 QA 구조로 대기열 43건 연속 실행, 결함 18건 발견",
+    "세계관 3일 만에 교체 · 자동 테스트 194/194 통과"
+  ],
+  "heroVideo": {
+    "src": "/uploads/videos/temp/yosuke-hero-loop.mp4",
+    "poster": {
+      "src": "/uploads/videos/temp/yosuke-hero-loop-poster.jpg",
+      "alt": "요스케 구출 대작전 플레이 화면"
+    }
+  },
   "thumbnail": {
     "src": "/uploads/images/yosuke-rescue/yosuke-thumbnail-neon-street.jpg",
     "alt": "요스케 구출 대작전 3-2 밤 네온 번화가 스테이지 — 상가 건물 앞 도로 위의 플레이어와 적, 토큰 블록"
