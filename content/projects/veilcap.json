@@ -1,0 +1,493 @@
+{
+  "id": "veilcap",
+  "slug": "veilcap",
+  "title": "베일캡 프로젝트",
+  "subtitle": "현재 개발 중인 프로젝트이며, 허락을 받아 포트폴리오에 첨부합니다.",
+  "tagline": "AI 에이전트 팀을 설계·운영해 추리 재판 비주얼 노벨 구현",
+  "description": "Google Sheets 시나리오를 검증해 실행하는 대화 연출 시스템과 키워드 지목·증거 제시 추리 재판을 역할별 AI 에이전트 5종으로 구현 중인 2D 비주얼 노벨",
+  "genre": "2D 비주얼 노벨 · 추리 재판",
+  "platform": "PC (Windows) · Unity 6.3 LTS (URP)",
+  "developmentPeriod": {
+    "start": "2026-06"
+  },
+  "developmentType": "팀 프로젝트 (기획/개발 담당 · AI 에이전트 팀 운영)",
+  "teamSize": 7,
+  "teamComposition": "PM 1 · 아트 4 · 기획 1 · 개발 1",
+  "roles": [
+    "게임 기획·방향 결정과 AI 결과물 검수",
+    "역할별 AI 에이전트 5종(아키텍트·게임 개발·아트 통합·시나리오 데이터·QA)과 파일 소유권 규칙 설계",
+    "REQ/TASK/TEST/BUG 번호로 설계 문서·커밋·테스트·QA 보고서 연결",
+    "원화 요청 프롬프트 검토 및 생성 원화 제공",
+    "퍼즐 캐릭터 기믹 기획 및 AI 활용 레벨 디자인",
+    "시나리오 데이터화 (AI로 Python 자동 추출 프로그램 제작)"
+  ],
+  "technologies": [
+    "Unity 6.3 LTS (URP)",
+    "C#",
+    "Claude Code",
+    "Google Sheets",
+    "Python",
+    "ffmpeg",
+    "Stable Audio 3",
+    "Irodori-TTS"
+  ],
+  "track": "ai",
+  "keyTakeaways": {
+    "problem": "시나리오 데이터·대화 연출·추리 재판을 함께 구현",
+    "solution": "역할별 AI 에이전트 5종 · REQ/TASK/TEST/BUG 추적",
+    "result": "자동 테스트 1,071개 통과(실패 0) · 트레일러 자동 제작"
+  },
+  "pipeline": {
+    "title": "AI 개발 파이프라인 — 에이전트 팀 운영",
+    "intro": "기획·방향·검수는 본인, 설계·개발·아트 통합·시나리오 데이터·QA는 역할별 AI 에이전트가 맡았습니다.",
+    "steps": [
+      {
+        "owner": "me",
+        "label": "기획·결정",
+        "text": "기획·방향 결정, 원화 프롬프트 검토·생성 원화 제공"
+      },
+      {
+        "owner": "ai",
+        "label": "설계",
+        "text": "아키텍트 에이전트가 REQ·TASK 설계 문서 작성",
+        "tools": [
+          "Claude Code"
+        ]
+      },
+      {
+        "owner": "ai",
+        "label": "구현",
+        "text": "게임 개발·아트 통합·시나리오 데이터 에이전트가 분담 구현",
+        "tools": [
+          "Claude Code",
+          "Unity 6.3"
+        ]
+      },
+      {
+        "owner": "ai",
+        "label": "QA",
+        "text": "QA 에이전트가 자동 테스트·QA 보고서(MD+PDF) 작성"
+      },
+      {
+        "owner": "me",
+        "label": "검수·기록",
+        "text": "QA 통과 작업만 커밋, 결정은 선택지·근거와 함께 기록"
+      }
+    ],
+    "loop": "REQ/TASK/TEST/BUG 번호로 요구 → 구현 → 검증을 연결해 반복",
+    "summary": [
+      "역할별 AI 에이전트 5종 설계 · 같은 파일 동시 수정 금지 규칙",
+      "Unity 작업은 배치 모드로만 실행해 사용자 작업과 분리",
+      "자동 테스트 EditMode 938 · PlayMode 133 통과(실패 0)",
+      "게임 자동 녹화 + 스크립트 편집으로 트레일러 제작"
+    ]
+  },
+  "thumbnail": {
+    "src": "/uploads/images/veilcap/veilcap-thumbnail-cutin.jpg",
+    "alt": "추리 재판 정답 컷인 화면 — 손가락으로 지목하는 캐릭터와 깨지는 마법진"
+  },
+  "heroImage": {
+    "src": "/uploads/images/veilcap/veilcap-hero-cutin.jpg",
+    "alt": "추리 재판 정답 컷인 화면 — 손가락으로 지목하는 캐릭터와 깨지는 마법진"
+  },
+  "gallery": [
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-05-cafe-dialogue.jpg",
+      "alt": "카페 배경에 캐릭터 3명이 서 있고 하단 대화창에 사유의 대사가 표시된 화면",
+      "caption": "일상 파트 · 대화 연출 (캐릭터 배치·표정)"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-06-choice.jpg",
+      "alt": "캐릭터들 위로 발언 3개가 선택지로 표시된 키워드 캐치 화면",
+      "caption": "일상 파트 · 선택지와 분기"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-07-backlog.jpg",
+      "alt": "화자 이름과 대사가 순서대로 정리된 대사 로그 창",
+      "caption": "대사 로그 (백로그)"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-08-save.jpg",
+      "alt": "새 슬롯 저장 버튼과 저장 슬롯 2개가 표시된 저장하기 창",
+      "caption": "저장 (슬롯)"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-09-load.jpg",
+      "alt": "자동 저장 슬롯과 수동 저장 슬롯 2개가 표시된 불러오기 창",
+      "caption": "불러오기 (자동 저장 포함)"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-04-emote-icons.jpg",
+      "alt": "카페 배경의 캐릭터 3명 머리 위에 느낌표·물음표·하트 감정 아이콘이 표시된 화면",
+      "caption": "감정 아이콘 (크레용 스타일, 테스트 캡처)"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-03-trial-hall.jpg",
+      "alt": "오르골이 놓인 재판장 전경과 증언대의 캐릭터, 화면 위 큰 글씨 서술문",
+      "caption": "추리 재판 · 재판장 전경"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-01-trial-keyword.jpg",
+      "alt": "증언대 캐릭터 옆에 발언이 큰 글씨로 표시되고 키워드에 밑줄이 그어진 재판 화면, 우측 상단 목숨 3개",
+      "caption": "추리 재판 · 발언 속 키워드 지목"
+    },
+    {
+      "src": "/uploads/images/veilcap/veilcap-gallery-02-trial-cutin.jpg",
+      "alt": "추리 재판 정답 컷인 화면 — 손가락으로 지목하는 캐릭터와 깨지는 마법진",
+      "caption": "추리 재판 · 정답 컷인"
+    }
+  ],
+  "videos": [
+    {
+      "title": "베일캡 프로젝트 트레일러",
+      "youtubeUrl": "https://youtu.be/o6srfZD4vRk",
+      "description": "2분 2초 · 재판 장면은 시스템 시연용 데모 사건"
+    }
+  ],
+  "documents": [
+    {
+      "title": "논의(재판) 시스템 설계 v0.2 (PDF)",
+      "file": "/uploads/documents/veilcap-trial-system-design-v0.2.pdf",
+      "description": "22쪽 · 아키텍트 에이전트 작성, 본인 결정 반영"
+    },
+    {
+      "title": "TASK-611 QA 보고서 — UI 리스킨 (PDF)",
+      "file": "/uploads/documents/veilcap-qa-report-task-611.pdf",
+      "description": "19쪽 · QA 에이전트 작성"
+    }
+  ],
+  "externalLinks": [],
+  "achievements": [],
+  "featured": false,
+  "published": true,
+  "displayOrder": 8,
+  "sections": [
+    {
+      "id": "overview",
+      "type": "richText",
+      "title": "프로젝트 개요",
+      "visible": true,
+      "width": "full",
+      "body": "> 현재 개발 중인 프로젝트이며, 허락을 받아 포트폴리오에 첨부합니다. 게임명은 정해지지 않았습니다.\n\n베일캡 팀이 Unity 6.3으로 개발 중인 2D 비주얼 노벨입니다. Google Sheets로 쓴 시나리오를 검증해 실행하는 데이터 기반 대화 연출과, 발언 속 키워드를 지목하고 증거를 제시하는 추리 재판 파트를 구현했습니다.\n\n기획/개발을 맡아 설계·개발·아트 통합·시나리오 데이터·QA를 나눠 맡는 AI 에이전트 팀을 직접 설계해 운영했습니다."
+    },
+    {
+      "id": "development-info",
+      "type": "projectInfo",
+      "title": "개발 정보",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "roles",
+      "type": "roles",
+      "title": "담당 역할 및 기여",
+      "visible": true,
+      "width": "half"
+    },
+    {
+      "id": "trial-system",
+      "type": "flow",
+      "title": "추리 재판 — 키워드 지목에서 정답 컷인까지",
+      "visible": true,
+      "width": "full",
+      "intro": "재판 화면은 대화창 없이 발언을 큰 글씨로 보여 주고, 증언대에는 화자 1명만 세웁니다.",
+      "figures": [
+        {
+          "src": "/uploads/images/veilcap/veilcap-gallery-01-trial-keyword.jpg",
+          "alt": "증언대 캐릭터 옆에 발언이 큰 글씨로 표시되고 키워드에 밑줄이 그어진 재판 화면, 우측 상단 목숨 3개",
+          "caption": "추리 재판 · 발언 속 키워드 지목"
+        },
+        {
+          "src": "/uploads/images/veilcap/veilcap-gallery-02-trial-cutin.jpg",
+          "alt": "추리 재판 정답 컷인 화면 — 손가락으로 지목하는 캐릭터와 깨지는 마법진",
+          "caption": "추리 재판 · 정답 컷인"
+        }
+      ],
+      "steps": [
+        {
+          "label": "논의",
+          "text": "발언 속 강조 키워드를 직접 클릭해 지목"
+        },
+        {
+          "label": "증거 제시",
+          "text": "단서 목록에서 증거를 골라 제시"
+        },
+        {
+          "label": "목숨",
+          "text": "오답 시 감소, 모두 잃으면 게임 오버"
+        },
+        {
+          "label": "정답 컷인",
+          "text": "약 2.2초 컷인 · 섬광 민감성을 고려해 강한 흰 섬광 제외"
+        }
+      ]
+    },
+    {
+      "id": "systems",
+      "type": "cards",
+      "title": "데이터 기반 대화 연출 시스템",
+      "visible": true,
+      "width": "full",
+      "intro": "시나리오 시트의 명령 칸만으로 연출을 지정하도록 데이터 계층과 런타임을 분리했습니다.",
+      "figures": [
+        {
+          "src": "/uploads/images/veilcap/veilcap-gallery-05-cafe-dialogue.jpg",
+          "alt": "카페 배경에 캐릭터 3명이 서 있고 하단 대화창에 사유의 대사가 표시된 화면",
+          "caption": "일상 파트 · 대화 연출 (캐릭터 배치·표정)"
+        },
+        {
+          "src": "/uploads/images/veilcap/veilcap-gallery-06-choice.jpg",
+          "alt": "캐릭터들 위로 발언 3개가 선택지로 표시된 키워드 캐치 화면",
+          "caption": "일상 파트 · 선택지와 분기"
+        }
+      ],
+      "items": [
+        {
+          "title": "시나리오 데이터 파이프라인",
+          "icon": "database",
+          "bullets": [
+            "Google Sheets → 에디터 임포터 → 검증 → ScriptableObject 런타임 DB",
+            "E/W/R 오류 코드로 잘못된 ID·누락 리소스·분기 순환 등 진단",
+            "원천을 Excel 등으로 바꿔도 런타임 영향 없음"
+          ]
+        },
+        {
+          "title": "대화 연출",
+          "icon": "sparkles",
+          "bullets": [
+            "화자·표정·좌/중/우 배치·이동·흔들기·페이드를 명령 칸으로 지정",
+            "감정 아이콘 10종 · 대사 이모지 6종",
+            "자동 진행·스킵·대사 로그·선택지·저장/불러오기(자동 저장)"
+          ]
+        },
+        {
+          "title": "UI 리스킨 · 일본어 음성",
+          "icon": "layers",
+          "bullets": [
+            "전체 UI를 9-slice 스킨과 자체 트윈으로 교체, 16:9·16:10·21:9·4:3 캡처 검증",
+            "화면 글자는 한국어, 음성은 일본어 TTS (트레일러 대사 22개 + 외침 1개)",
+            "음성 중 배경음악 자동 감쇠, 자동 진행은 음성 종료까지 대기"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traceability",
+      "type": "flow",
+      "title": "요구부터 검증까지 번호로 추적",
+      "visible": true,
+      "width": "full",
+      "intro": "AI가 만든 결과물을 되짚을 수 있도록 모든 작업을 번호로 연결하고, QA를 통과한 작업 단위만 커밋했습니다.",
+      "steps": [
+        {
+          "label": "REQ",
+          "text": "설계 문서에 요구사항·선택지·권장안·결정 근거 기록"
+        },
+        {
+          "label": "TASK",
+          "text": "작업 단위로 나눠 에이전트별로 배정"
+        },
+        {
+          "label": "TEST",
+          "text": "EditMode·PlayMode 자동 테스트로 검증"
+        },
+        {
+          "label": "BUG · QA",
+          "text": "QA 보고서(MD+PDF) 통과 작업만 커밋"
+        }
+      ]
+    },
+    {
+      "id": "qa-cases",
+      "type": "cards",
+      "title": "QA로 발견하고 수정한 결함",
+      "visible": true,
+      "width": "full",
+      "items": [
+        {
+          "title": "스킵 중 키워드 클릭 (BUG-401)",
+          "icon": "shield",
+          "bullets": [
+            "현상: 스킵 중 키워드 클릭이 목숨을 깎음",
+            "조치: QA에서 발견해 수정"
+          ]
+        },
+        {
+          "title": "대사 이모지 공백 (BUG-611-05)",
+          "icon": "code",
+          "bullets": [
+            "현상: 대사 이모지가 공백으로 표시",
+            "조치: TMP 이모지 대체 스프라이트로 해결"
+          ]
+        },
+        {
+          "title": "컷인 외침과 음성 충돌",
+          "icon": "crosshair",
+          "bullets": [
+            "현상: 외침이 답 대사 음성에 덮이고 음성이 끊김",
+            "조치: 컷인 중 행 음성 보류, 외침만 키 지정 정지"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "type": "infoTable",
+      "title": "자동 테스트 1,071개 통과 (실패 0)",
+      "visible": true,
+      "width": "full",
+      "intro": "2026-11-25 기준입니다.",
+      "rows": [
+        {
+          "label": "EditMode",
+          "value": "938개 통과"
+        },
+        {
+          "label": "PlayMode",
+          "value": "133개 통과 · 실패 0"
+        },
+        {
+          "label": "검증 범위",
+          "value": "대사 진행·연출 동기화·스킵/자동·선택지/분기·로그·저장/불러오기·재판 흐름·컷인/음성 순서·화면비별 레이아웃"
+        },
+        {
+          "label": "QA 보고서",
+          "value": "TASK-150 · 306 · 317 · 410 · 611 등"
+        },
+        {
+          "label": "코드 규모",
+          "value": "런타임·에디터 C# 약 130개 파일(약 2.1만 줄) · 테스트 C# 70여 개 파일"
+        }
+      ]
+    },
+    {
+      "id": "trailer-pipeline",
+      "type": "flow",
+      "title": "트레일러를 자동 녹화·스크립트 편집으로 제작",
+      "visible": true,
+      "width": "full",
+      "intro": "원본을 다시 녹화해도 스크립트를 다시 실행하면 같은 편집 결과가 나옵니다.",
+      "steps": [
+        {
+          "label": "녹화",
+          "text": "배치 모드 PlayMode 테스트로 장면 재생, 가상 입력으로 클릭·스킵 재현"
+        },
+        {
+          "label": "편집",
+          "text": "Python + ffmpeg로 박자 맞춤 컷·하단 자막·분리 믹스(-16 LUFS)"
+        },
+        {
+          "label": "결과",
+          "text": "2분 2초 트레일러 · 재판 콜드 오픈 → 타이틀 → 일상 파트"
+        }
+      ]
+    },
+    {
+      "id": "vn-ai-content",
+      "type": "cards",
+      "title": "AI 활용 퍼즐 레벨 디자인 · 시나리오 데이터화",
+      "visible": true,
+      "width": "full",
+      "intro": "2026년 6월부터 참여한 팀 프로젝트(PM 1 · 아트 4 · 기획 1 · 개발 1)에서 기획/개발을 맡아 진행한 작업입니다.",
+      "figures": [
+        {
+          "src": "/uploads/images/veilcap/veilcap-vn-gallery-01-puzzle-level-ai.jpg",
+          "alt": "AI를 활용해 제작한 퍼즐 레벨 디자인 산출물 — 격자 맵과 블록 배치표",
+          "caption": "AI를 활용해 제작한 퍼즐 레벨 디자인 산출물"
+        },
+        {
+          "src": "/uploads/images/veilcap/veilcap-vn-gallery-02-puzzle-reference.jpg",
+          "alt": "실제 게임에 적용할 퍼즐 레벨 참고 이미지 — 알파벳으로 구분된 색 블록 격자",
+          "caption": "실제 게임에 적용할 퍼즐 레벨 참고 이미지"
+        },
+        {
+          "src": "/uploads/images/veilcap/veilcap-vn-gallery-03-python-extractor.jpg",
+          "alt": "DOCX 시나리오를 엑셀 데이터로 변환하는 Python 자동 추출 프로그램 창",
+          "caption": "실제 개발된 Python 자동 데이터 추출 프로그램"
+        },
+        {
+          "src": "/uploads/images/veilcap/veilcap-vn-gallery-04-extracted-data.jpg",
+          "alt": "자동 추출된 시나리오 데이터가 행 단위로 정리된 스프레드시트",
+          "caption": "추출된 데이터를 실제 게임에 적용"
+        }
+      ],
+      "items": [
+        {
+          "title": "AI 활용 퍼즐 레벨 디자인",
+          "icon": "layers",
+          "bullets": [
+            "본인: 캐릭터 특성을 살린 기믹 기획",
+            "AI(GPT): 퍼즐 레벨 설계",
+            "본인 검수: 풀이 과정을 직접 시뮬레이션해 풀 수 있는지 확인"
+          ]
+        },
+        {
+          "title": "시나리오 데이터 추출 자동화",
+          "icon": "sparkles",
+          "bullets": [
+            "DOCX 소설형 시나리오 → 엑셀 데이터 변환 Python 프로그램 (Claude Code·GPT)",
+            "Review 시트로 화자 없음·형식 불일치 등 검토할 줄을 따로 모아 직접 검수 (본인 요청)",
+            "수작업 대비 작업 시간 단축"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "type": "bulletList",
+      "title": "현재 한계와 진행 예정",
+      "visible": true,
+      "width": "full",
+      "items": [
+        "미니게임: 공통 진입·복귀 계약과 퍼즐 설계 문서까지 작성, 구현 전",
+        "정답 컷인 원화 1장뿐이라 컷인 캐릭터 고정",
+        "음성은 트레일러 대사만 제작, 직접 청취 검수 전",
+        "재판 화면 일부 겹침(오답 배너·라운드 배너) 개선 예정",
+        "Windows 에디터 배치 실행 기준 검증, 실제 빌드·모바일·Switch 미검증"
+      ]
+    },
+    {
+      "id": "credits",
+      "type": "infoTable",
+      "title": "크레딧 및 자산 표기",
+      "visible": true,
+      "width": "full",
+      "rows": [
+        {
+          "label": "캐릭터·배경 일러스트",
+          "value": "베일캡 팀 아트 파트 (허락을 받아 사용)"
+        },
+        {
+          "label": "AI 생성 이미지",
+          "value": "재판장 배경 2종 · 정답 컷인 원화 · 감정 아이콘 10종 · 대사 이모지 6종 — 프롬프트 검토 후 이미지 생성 AI로 제작"
+        },
+        {
+          "label": "음악·효과음",
+          "value": "생성 음원 (Stable Audio 3)"
+        },
+        {
+          "label": "일본어 음성",
+          "value": "로컬 TTS 합성 (Irodori-TTS) · 실존 인물·성우 목소리 복제 없음"
+        },
+        {
+          "label": "폰트",
+          "value": "KoPub 바탕체 · Noto Sans JP (SIL OFL 1.1)"
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "type": "media",
+      "title": "미디어",
+      "visible": true,
+      "width": "full"
+    },
+    {
+      "id": "documents",
+      "type": "documents",
+      "title": "설계 문서 · QA 보고서",
+      "visible": true,
+      "width": "full"
+    }
+  ]
+}

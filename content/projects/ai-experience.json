@@ -2,32 +2,29 @@
   "id": "ai-experience",
   "slug": "ai-experience",
   "title": "AI 활용 경험",
-  "subtitle": "Time Recall 프로토타입 개선 · 비주얼 노벨 「붉은 밤의 마녀사냥」 콘텐츠 제작",
+  "subtitle": "Time Recall 프로토타입 개선",
   "tagline": "기존 프로토타입을 AI를 활용해 개선하는 프로젝트 진행",
-  "description": "AI로 기존 프로토타입을 다시 기획·개발해 4번의 자체 테스트·개선을 반복하고, 팀 프로젝트의 퍼즐 레벨 디자인과 시나리오 데이터화에 AI를 활용한 경험",
+  "description": "AI로 기존 프로토타입을 다시 기획·개발해 4번의 자체 테스트·개선을 반복한 경험",
   "genre": "AI 활용 기획·개발",
   "platform": "PC (Time Recall 프로토타입)",
-  "developmentType": "개인 프로토타입 · 팀 프로젝트",
+  "developmentType": "개인 프로토타입",
   "roles": [
     "Time Recall 기획 의도 재설정 및 검증",
     "Time Recall 소규모 유저 테스트 진행 및 결과 분석",
-    "AI(ChatGPT·Claude Code) 설계안 검수·채택 판단과 플레이 검증",
-    "비주얼 노벨 퍼즐 캐릭터 기믹 기획 및 AI 활용 레벨 디자인",
-    "비주얼 노벨 시나리오 데이터화 (AI로 Python 자동 추출 프로그램 제작)"
+    "AI(ChatGPT·Claude Code) 설계안 검수·채택 판단과 플레이 검증"
   ],
   "technologies": [
     "Unity 6",
     "Claude Code",
     "ChatGPT",
     "GitHub",
-    "Notion",
-    "Python"
+    "Notion"
   ],
   "track": "ai",
   "keyTakeaways": {
     "problem": "테스트(5명) 결과 강화 체감이 첫 무기 교체에만 몰림",
     "solution": "도약 강화·영구 성장으로 재기획, Claude Code로 구현",
-    "result": "약 3일간 4번 개선(v0 → v1.3) · 시나리오 데이터 추출 자동화"
+    "result": "약 3일간 4번 개선(v0 → v1.3)"
   },
   "pipeline": {
     "title": "AI 개발 파이프라인 — Time Recall",
@@ -98,26 +95,6 @@
       "src": "/uploads/images/ai-experience/timerecall-gallery-03-balance-simulator.jpg",
       "alt": "Time Recall 웹 전투 밸런스 시뮬레이터 화면 — 웨이브별 전투력 지표 그래프와 수치 조절 패널",
       "caption": "Time Recall · 웹 전투 밸런스 시뮬레이터"
-    },
-    {
-      "src": "/uploads/images/ai-experience/vn-gallery-01-puzzle-level-ai.jpg",
-      "alt": "AI를 활용해 제작한 퍼즐 레벨 디자인 산출물 — 격자 맵과 블록 배치표",
-      "caption": "비주얼 노벨 · AI를 활용해 제작한 퍼즐 레벨 디자인 산출물"
-    },
-    {
-      "src": "/uploads/images/ai-experience/vn-gallery-02-puzzle-reference.jpg",
-      "alt": "실제 게임에 적용할 퍼즐 레벨 참고 이미지 — 알파벳으로 구분된 색 블록 격자",
-      "caption": "비주얼 노벨 · 실제 게임에 적용할 퍼즐 레벨 참고 이미지"
-    },
-    {
-      "src": "/uploads/images/ai-experience/vn-gallery-03-python-extractor.jpg",
-      "alt": "DOCX 시나리오를 엑셀 데이터로 변환하는 Python 자동 추출 프로그램 창",
-      "caption": "비주얼 노벨 · 실제 개발된 Python 자동 데이터 추출 프로그램"
-    },
-    {
-      "src": "/uploads/images/ai-experience/vn-gallery-04-extracted-data.jpg",
-      "alt": "자동 추출된 시나리오 데이터가 행 단위로 정리된 스프레드시트",
-      "caption": "비주얼 노벨 · 추출된 데이터를 실제 게임에 적용"
     }
   ],
   "videos": [],
@@ -134,7 +111,7 @@
       "title": "프로젝트 개요",
       "visible": true,
       "width": "full",
-      "body": "기획 업무에 AI를 활용한 두 가지 경험입니다.\n\n- **Time Recall** — 기존 프로토타입을 다시 기획하고 AI로 개발해, 약 3일간 4번의 자체 테스트·개선 진행\n- **비주얼 노벨 「붉은 밤의 마녀사냥」** — 퍼즐 레벨 디자인과 시나리오 데이터화에 AI 활용"
+      "body": "기존 Time Recall 프로토타입을 다시 기획하고 AI로 개발해, 약 3일간 4번의 자체 테스트·개선을 진행했습니다."
     },
     {
       "id": "development-info",
@@ -331,56 +308,6 @@
       ]
     },
     {
-      "id": "vn-ai-content",
-      "type": "cards",
-      "title": "비주얼 노벨 「붉은 밤의 마녀사냥」 — AI 활용 콘텐츠 제작",
-      "visible": true,
-      "width": "full",
-      "intro": "2026년 6월부터 진행 중인 Unity 팀 프로젝트(PM 1 · 아트 4 · 기획 1 · 개발 1)에서 기획/개발을 맡고 있습니다.",
-      "figures": [
-        {
-          "src": "/uploads/images/ai-experience/vn-gallery-01-puzzle-level-ai.jpg",
-          "alt": "AI를 활용해 제작한 퍼즐 레벨 디자인 산출물 — 격자 맵과 블록 배치표",
-          "caption": "비주얼 노벨 · AI를 활용해 제작한 퍼즐 레벨 디자인 산출물"
-        },
-        {
-          "src": "/uploads/images/ai-experience/vn-gallery-02-puzzle-reference.jpg",
-          "alt": "실제 게임에 적용할 퍼즐 레벨 참고 이미지 — 알파벳으로 구분된 색 블록 격자",
-          "caption": "비주얼 노벨 · 실제 게임에 적용할 퍼즐 레벨 참고 이미지"
-        },
-        {
-          "src": "/uploads/images/ai-experience/vn-gallery-03-python-extractor.jpg",
-          "alt": "DOCX 시나리오를 엑셀 데이터로 변환하는 Python 자동 추출 프로그램 창",
-          "caption": "비주얼 노벨 · 실제 개발된 Python 자동 데이터 추출 프로그램"
-        },
-        {
-          "src": "/uploads/images/ai-experience/vn-gallery-04-extracted-data.jpg",
-          "alt": "자동 추출된 시나리오 데이터가 행 단위로 정리된 스프레드시트",
-          "caption": "비주얼 노벨 · 추출된 데이터를 실제 게임에 적용"
-        }
-      ],
-      "items": [
-        {
-          "title": "AI 활용 퍼즐 레벨 디자인",
-          "icon": "layers",
-          "bullets": [
-            "본인: 캐릭터 특성을 살린 기믹 기획",
-            "AI(GPT): 퍼즐 레벨 설계",
-            "본인 검수: 풀이 과정을 직접 시뮬레이션해 풀 수 있는지 확인"
-          ]
-        },
-        {
-          "title": "시나리오 데이터 추출 자동화",
-          "icon": "sparkles",
-          "bullets": [
-            "DOCX 소설형 시나리오 → 엑셀 데이터 변환 Python 프로그램 (Claude Code·GPT)",
-            "Review 시트로 화자 없음·형식 불일치 등 검토할 줄을 따로 모아 직접 검수 (본인 요청)",
-            "수작업 대비 작업 시간 단축"
-          ]
-        }
-      ]
-    },
-    {
       "id": "technical",
       "type": "technologies",
       "title": "기술 구현",
@@ -389,8 +316,7 @@
       "items": [
         "Claude Code로 웹 전투 밸런스 시뮬레이터 개발 (웨이브별 전투력 지표 확인)",
         "Unity 6 · GitHub · Notion을 MCP로 연결해 AI 개발 환경 구성",
-        "AI 산출물을 직접 플레이로 검수하고 수정",
-        "AI를 활용해 Python 시나리오 데이터 자동 추출 프로그램 제작"
+        "AI 산출물을 직접 플레이로 검수하고 수정"
       ]
     },
     {
