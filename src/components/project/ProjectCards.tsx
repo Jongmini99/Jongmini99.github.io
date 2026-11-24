@@ -14,6 +14,7 @@ import type { Awards, Project, ProjectTrack } from "@/content/schema";
 
 type AwardItem = Awards["items"][number];
 import { MediaImage } from "@/components/ui/Media";
+import { AwardMedal } from "@/components/ui/AwardMedal";
 import { YouTubeFrame } from "@/components/sections/Videos";
 import { WorkflowCards } from "./WorkflowCards";
 import { ButtonLink } from "@/components/ui/Button";
@@ -351,7 +352,7 @@ export function ProjectTile({
   award,
 }: {
   project: Project;
-  /** 이 프로젝트로 받은 상 (awards.json의 projectSlug로 연결) — 썸네일 배지와 이름 앞 트로피로 표시 */
+  /** 이 프로젝트로 받은 상 (awards.json의 projectSlug로 연결) — 썸네일 오른쪽 아래 메달과 이름 앞 트로피로 표시 */
   award?: AwardItem;
   wide?: boolean;
   /** 홈 한 화면 배치용: 여백·글자 크기를 줄인다 (데스크톱만) */
@@ -383,13 +384,16 @@ export function ProjectTile({
           <span className="inline-flex max-w-full items-center rounded-md border border-white/20 bg-bg/80 px-2.5 py-1 text-xs font-bold text-fg backdrop-blur-sm">
             {project.platform}
           </span>
-          {award && (
-            <span className="inline-flex max-w-full items-center gap-1.5 rounded-md bg-accent-solid px-2.5 py-1 text-xs font-bold text-accent-fg shadow-lg">
-              <Trophy className="size-3.5 shrink-0" aria-hidden="true" />
-              {award.title}
-            </span>
-          )}
         </div>
+        {/* 수상 강조: 썸네일 오른쪽 아래 큰 메달 + 짧은 수상 문구 */}
+        {award && (
+          <div className="absolute right-3 bottom-3 flex max-w-[calc(100%-1.5rem)] flex-col items-center gap-1 sm:right-4 sm:bottom-4">
+            <AwardMedal className="w-16 drop-shadow-[0_6px_14px_rgb(0_0_0/0.55)] sm:w-20 xl:w-24" />
+            <span className="max-w-full rounded-full border border-award-gold/50 bg-bg/85 px-3 py-1 text-center text-xs font-bold text-award-gold-text shadow-lg backdrop-blur-sm sm:text-sm">
+              {award.badge ?? award.title}
+            </span>
+          </div>
+        )}
         <ArrowUpRight
           aria-hidden="true"
           className="absolute top-4 right-4 size-9 rounded-full bg-bg/70 p-2 text-fg opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"

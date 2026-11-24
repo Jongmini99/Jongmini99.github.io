@@ -39,6 +39,13 @@
   --color-rival-text: #f87171;
   --color-rival-soft: rgb(239 68 68 / 0.12);
 
+  /* ---------- Color: 수상 메달 (프로젝트 카드의 수상 강조) ---------- */
+  --color-award-gold: #e9c46a;
+  --color-award-gold-deep: #b8892e;
+  --color-award-gold-text: #f2d48a; /* 어두운 배경 위 금색 글자 */
+  --color-award-ribbon: #dc2626;
+  --color-award-ribbon-deep: #991b1b;
+
   /* ---------- Color: state ---------- */
   --color-focus: #93c5fd;
   --color-danger: #f87171;

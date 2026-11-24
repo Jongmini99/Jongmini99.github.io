@@ -424,6 +424,8 @@ export const AwardsSchema = z.object({
       category: z.enum(["award", "release", "exhibition", "career", "other"]).default("other"),
       date: optionalText,
       description: optionalText,
+      /** 프로젝트 카드 수상 메달 아래 짧은 문구 (선택, 예: "공모전 대상 수상"). 비우면 title 사용 */
+      badge: optionalText,
       url: optionalUrl,
       /** 메인 히어로의 성과 배지로 노출 */
       highlight: z.boolean().default(false),
