@@ -30,6 +30,7 @@ export function youTubeEmbedUrl(id: string): string {
   return `https://www.youtube-nocookie.com/embed/${id}`;
 }
 
-export function youTubeThumbnailUrl(id: string): string {
-  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+/** hq: 480×360(4:3, 항상 존재) · maxres: 1280×720(16:9, 업로드 해상도가 낮으면 없음) */
+export function youTubeThumbnailUrl(id: string, size: "hq" | "maxres" = "hq"): string {
+  return `https://i.ytimg.com/vi/${id}/${size === "maxres" ? "maxresdefault" : "hqdefault"}.jpg`;
 }

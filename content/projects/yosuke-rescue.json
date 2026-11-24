@@ -89,13 +89,6 @@
       "alt": "요스케 구출 대작전 AI 개발 파이프라인 — 기획·결정(본인) → 설계·제작·검사(AI) → 검증(본인) 반복 구조와 핵심 성과"
     }
   },
-  "heroVideo": {
-    "src": "/uploads/videos/temp/yosuke-hero-loop.mp4",
-    "poster": {
-      "src": "/uploads/videos/temp/yosuke-hero-loop-poster.jpg",
-      "alt": "요스케 구출 대작전 플레이 화면"
-    }
-  },
   "thumbnail": {
     "src": "/uploads/images/yosuke-rescue/yosuke-thumbnail-neon-street.jpg",
     "alt": "요스케 구출 대작전 3-2 밤 네온 번화가 스테이지 — 상가 건물 앞 도로 위의 플레이어와 적, 토큰 블록"
@@ -131,7 +124,13 @@
       "caption": "5-5 최종 보스 「클로드 코드」"
     }
   ],
-  "videos": [],
+  "videos": [
+    {
+      "title": "요스케 구출 대작전 트레일러",
+      "youtubeUrl": "https://youtu.be/3XiJS-uXrgo",
+      "description": "AI 에이전트 팀으로 만든 3D 플랫포머 트레일러"
+    }
+  ],
   "documents": [],
   "externalLinks": [],
   "achievements": [

@@ -3,6 +3,7 @@ import type React from "react";
 import { ArrowRight, ArrowUpRight, Check, CircleAlert, Sparkles, Trophy, User, Wrench } from "lucide-react";
 import type { Project, ProjectTrack } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
+import { YouTubeFrame } from "@/components/sections/Videos";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
@@ -21,13 +22,14 @@ function splitActor(label: string): { name: string; actor?: "human" | "ai" } {
 /**
  * 홈 대표 프로젝트 화면 (첫 화면 다음 두 번째 화면).
  * 제목은 작게, 강조할 내용(한 줄 소개·핵심 성과 불릿·작업 흐름)은 크게 보여 준다.
- * 비주얼은 무음 반복 영상(heroVideo) → 상세 헤더 이미지 → 대표 이미지 순.
+ * 비주얼은 YouTube 영상(videos 첫 번째, 클릭 시 재생) → 무음 반복 영상(heroVideo) → 상세 헤더 이미지 → 대표 이미지 순.
  * 작업 흐름은 상세 페이지의 첫 흐름 도표(flow) 섹션을 그대로 가져온다.
  */
 export function FeaturedBand({ project, id }: { project: Project; id: string }) {
   const image = project.heroImage ?? project.thumbnail;
   const headingId = `${id}-title`;
   const flow = project.sections.find((s): s is Extract<Project["sections"][number], { type: "flow" }> => s.type === "flow" && s.visible);
+  const youtube = project.videos[0];
   const video = project.heroVideo;
   return (
     <section
@@ -84,7 +86,9 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
 
           <div className="overflow-hidden rounded-card border border-band-line shadow-[0_28px_65px_rgb(0_0_0/0.45)]">
             <div className="relative aspect-video bg-surface">
-              {video ? (
+              {youtube ? (
+                <YouTubeFrame video={youtube} thumbnail="maxres" />
+              ) : video ? (
                 <>
                   {/* 동작 줄이기 설정이면 영상 대신 정지 화면을 보여 준다 */}
                   <video

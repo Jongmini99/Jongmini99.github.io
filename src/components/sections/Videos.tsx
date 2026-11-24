@@ -9,16 +9,16 @@ import { parseYouTubeId, youTubeEmbedUrl, youTubeThumbnailUrl } from "@/lib/yout
 
 type Video = z.infer<typeof VideoSchema>;
 
-/** 클릭 전까지 iframe을 로드하지 않는 YouTube 임베드 (성능·개인정보) */
-function LiteYouTube({ video }: { video: Video }) {
+/**
+ * 클릭 전까지 iframe을 로드하지 않는 YouTube 재생 영역 (성능·개인정보).
+ * 부모가 relative + 비율(aspect-video)을 정해 주면 그 안을 꽉 채운다.
+ */
+export function YouTubeFrame({ video, thumbnail = "hq" }: { video: Video; thumbnail?: "hq" | "maxres" }) {
   const [active, setActive] = useState(false);
   const id = parseYouTubeId(video.youtubeUrl);
   if (!id) return null;
 
-  return (
-    <figure className="flex flex-col gap-2">
-      <div className="relative aspect-video overflow-hidden rounded-card border border-line bg-surface">
-        {active ? (
+  return active ? (
           <iframe
             src={`${youTubeEmbedUrl(id)}?autoplay=1&rel=0`}
             title={video.title}
@@ -26,18 +26,25 @@ function LiteYouTube({ video }: { video: Video }) {
             allowFullScreen
             className="absolute inset-0 size-full"
           />
-        ) : (
-          <button type="button" onClick={() => setActive(true)} className="group absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={youTubeThumbnailUrl(id)} alt="" loading="lazy" className="size-full object-cover opacity-80" />
-            <span className="absolute inset-0 flex items-center justify-center">
-              <span className="flex size-16 items-center justify-center rounded-full bg-accent text-accent-fg transition-colors duration-150 group-hover:bg-accent-hover">
-                <Play className="size-7 translate-x-0.5" aria-hidden="true" fill="currentColor" />
-              </span>
-            </span>
-            <span className="sr-only">영상 재생: {video.title}</span>
-          </button>
-        )}
+  ) : (
+    <button type="button" onClick={() => setActive(true)} className="group absolute inset-0">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={youTubeThumbnailUrl(id, thumbnail)} alt="" loading="lazy" className="size-full object-cover opacity-80" />
+      <span className="absolute inset-0 flex items-center justify-center">
+        <span className="flex size-16 items-center justify-center rounded-full bg-accent-solid text-accent-fg transition-colors duration-150 group-hover:bg-accent-solid-hover">
+          <Play className="size-7 translate-x-0.5" aria-hidden="true" fill="currentColor" />
+        </span>
+      </span>
+      <span className="sr-only">영상 재생: {video.title}</span>
+    </button>
+  );
+}
+
+function LiteYouTube({ video }: { video: Video }) {
+  return (
+    <figure className="flex flex-col gap-2">
+      <div className="relative aspect-video overflow-hidden rounded-card border border-line bg-surface">
+        <YouTubeFrame video={video} />
       </div>
       <figcaption>
         <span className="font-semibold text-fg">{video.title}</span>
