@@ -8,10 +8,15 @@ import {
   getPublishedProjects,
 } from "@/content/loaders";
 import { Container } from "@/components/layout/Container";
-import { SectionTitle } from "@/components/ui/Typography";
+import { SectionIntro, SectionTitle } from "@/components/ui/Typography";
 import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
-import { FeaturedBand, FeaturedPipeline, ProjectGrid, TRACKS } from "@/components/project/ProjectCards";
+import {
+  FeaturedBand,
+  FeaturedPipeline,
+  ProjectGrid,
+  TRACKS,
+} from "@/components/project/ProjectCards";
 import { cx } from "@/lib/cx";
 import { Icon } from "@/components/ui/Icon";
 import { withBasePath } from "@/lib/base-path";
@@ -40,7 +45,8 @@ import { TrailerButton } from "@/components/project/TrailerButton";
  */
 
 /** 데스크톱에서 한 화면(헤더 제외)을 채우고 화면 단위로 스냅되는 섹션 */
-const SLIDE = "relative flex items-center py-section lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start lg:py-8";
+const SLIDE =
+  "relative flex items-center py-section lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start lg:py-8";
 
 /** 제목 일부(accent)를 강조색으로 */
 function AccentTitle({ title, accent }: { title: string; accent?: string }) {
@@ -70,16 +76,16 @@ function IntroTitle({
   return (
     <div className="flex flex-col gap-3">
       <p className="text-sm font-semibold text-fg-muted">{parent}</p>
-      <h2 id={id} className="text-3xl font-bold tracking-[-0.04em] break-keep text-fg sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
-        <AccentTitle title={intro?.title ?? fallback} accent={intro?.titleAccent} />
+      <h2
+        id={id}
+        className="text-3xl font-bold tracking-[-0.04em] break-keep text-fg sm:text-4xl lg:text-[2.75rem] lg:leading-tight"
+      >
+        <AccentTitle
+          title={intro?.title ?? fallback}
+          accent={intro?.titleAccent}
+        />
       </h2>
-      {intro?.intro && (
-        <div className="flex flex-col gap-1 break-keep text-fg-muted lg:text-[1.0625rem]">
-          {intro.intro.split("\n").map((line) => (
-            <p key={line}>{line}</p>
-          ))}
-        </div>
-      )}
+      {intro?.intro && <SectionIntro text={intro.intro} />}
     </div>
   );
 }
@@ -88,14 +94,26 @@ export default function HomePage() {
   const profile = getProfile();
   const projects = getPublishedProjects();
   const featured = getFeaturedProjects()[0];
-  const hasPipeline = !!featured?.sections.some((s) => s.type === "flow" && s.visible && (s.figures.length > 0 || s.steps.length > 0));
+  const hasPipeline = !!featured?.sections.some(
+    (s) =>
+      s.type === "flow" &&
+      s.visible &&
+      (s.figures.length > 0 || s.steps.length > 0),
+  );
   const awards = getAwards();
   const contact = getContact();
   const proofBadges = awards.items.filter((a) => a.highlight);
   const play = profile.playShowcase;
-  const topAward = awards.items.find((a) => a.category === "award" && a.highlight);
+  const topAward = awards.items.find(
+    (a) => a.category === "award" && a.highlight,
+  );
   // 프로젝트는 분류(track)별로 한 화면씩. 분류 없는 프로젝트는 마지막 화면에 붙인다.
-  const projectSlides: { key: string; title: string; description?: string; items: typeof projects }[] = TRACKS.map((t) => ({
+  const projectSlides: {
+    key: string;
+    title: string;
+    description?: string;
+    items: typeof projects;
+  }[] = TRACKS.map((t) => ({
     key: t.key,
     title: t.title,
     description: t.description,
@@ -111,13 +129,28 @@ export default function HomePage() {
   const spyItems: SpyItem[] = [
     { id: "top", label: "소개" },
     ...(featured ? [{ id: "featured", label: "대표 프로젝트" }] : []),
-    ...(featured && hasPipeline ? [{ id: "featured-pipeline", label: "AI 게임 제작 파이프라인" }] : []),
+    ...(featured && hasPipeline
+      ? [{ id: "featured-pipeline", label: "AI 게임 제작 파이프라인" }]
+      : []),
     ...(projectSlides.length > 0
-      ? projectSlides.map((slide, i) => ({ id: i === 0 ? "projects" : `projects-${slide.key}`, label: slide.title || "참여한 프로젝트" }))
+      ? projectSlides.map((slide, i) => ({
+          id: i === 0 ? "projects" : `projects-${slide.key}`,
+          label: slide.title || "참여한 프로젝트",
+        }))
       : [{ id: "projects", label: "참여한 프로젝트" }]),
-    ...(profile.gamerMetrics.length > 0 ? [{ id: "experience", label: "최상위권 플레이 경험" }] : []),
+    ...(profile.gamerMetrics.length > 0
+      ? [{ id: "experience", label: "최상위권 플레이 경험" }]
+      : []),
     ...(profile.activities.length > 0
-      ? [{ id: profile.gamerMetrics.length > 0 ? "experience-field" : "experience", label: "만들고 경험하는 현장" }]
+      ? [
+          {
+            id:
+              profile.gamerMetrics.length > 0
+                ? "experience-field"
+                : "experience",
+            label: "만들고 경험하는 현장",
+          },
+        ]
       : []),
   ];
   const resumeSize = getFileSizeLabel(contact.resume);
@@ -133,7 +166,10 @@ export default function HomePage() {
           aria-labelledby="hero-title"
           className="relative flex items-center overflow-hidden lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start"
         >
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+          >
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.035)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_70%_45%,black,transparent_65%)] bg-size-[56px_56px]" />
             <div className="absolute top-1/2 right-[-10%] size-[44rem] -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
           </div>
@@ -141,7 +177,10 @@ export default function HomePage() {
           <Container className="relative grid items-center gap-14 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12 lg:py-10">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
-                <h1 id="hero-title" className="max-w-3xl text-display font-bold tracking-[-0.05em] text-balance text-fg whitespace-pre-line">
+                <h1
+                  id="hero-title"
+                  className="max-w-3xl text-display font-bold tracking-[-0.05em] text-balance text-fg whitespace-pre-line"
+                >
                   {/* **강조** 구간은 포인트 색으로 표시 */}
                   {profile.headline.split("**").map((part, i) =>
                     i % 2 === 1 ? (
@@ -156,22 +195,37 @@ export default function HomePage() {
               </div>
               {/* 줄바꿈은 넓은 화면에서만 유지 (좁은 화면에서는 자연스럽게 흐르도록) */}
               {profile.summary && (
-                <p className="max-w-2xl text-[1.05rem] leading-[1.85] break-keep text-fg-muted md:whitespace-pre-line">{profile.summary}</p>
+                <p className="max-w-2xl text-[1.05rem] leading-[1.85] break-keep text-fg-muted md:whitespace-pre-line">
+                  {profile.summary}
+                </p>
               )}
               {profile.coreStrengths.length > 0 && (
-                <section aria-labelledby="strengths-title" className="flex flex-col gap-3">
-                  <h2 id="strengths-title" className="text-base font-bold text-fg">
+                <section
+                  aria-labelledby="strengths-title"
+                  className="flex flex-col gap-3"
+                >
+                  <h2
+                    id="strengths-title"
+                    className="text-base font-bold text-fg"
+                  >
                     나의 강점
                   </h2>
                   <ol className="flex flex-col gap-2.5">
                     {profile.coreStrengths.map((s, i) => (
                       <li key={s.title} className="flex gap-3">
-                        <span aria-hidden="true" className="w-6 shrink-0 font-display text-sm leading-6 font-semibold text-accent-text">
+                        <span
+                          aria-hidden="true"
+                          className="w-6 shrink-0 font-display text-sm leading-6 font-semibold text-accent-text"
+                        >
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <div className="flex min-w-0 flex-col gap-0.5">
-                          <h3 className="text-[0.98rem] leading-6 font-semibold text-fg">{s.title}</h3>
-                          <p className="text-sm break-keep text-fg-muted">{s.description}</p>
+                          <h3 className="text-[0.98rem] leading-6 font-semibold text-fg">
+                            {s.title}
+                          </h3>
+                          <p className="text-sm break-keep text-fg-muted">
+                            {s.description}
+                          </p>
                         </div>
                       </li>
                     ))}
@@ -182,9 +236,14 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-3">
                 {/* 대표 프로젝트에 트레일러가 있으면: 이동하면서 바로 재생 (스크롤과 다른 동작이라 버튼으로 둔다) */}
                 {featured?.videos[0] ? (
-                  <TrailerButton targetId="featured">AI 프로젝트 트레일러 보기</TrailerButton>
+                  <TrailerButton targetId="featured">
+                    AI 프로젝트 트레일러 보기
+                  </TrailerButton>
                 ) : (
-                  <ButtonLink href={featured ? "/#featured" : "/#projects"} variant="primary">
+                  <ButtonLink
+                    href={featured ? "/#featured" : "/#projects"}
+                    variant="primary"
+                  >
                     {featured ? "대표 프로젝트 보기" : "프로젝트 보기"}
                     <ArrowDown className="size-4" aria-hidden="true" />
                   </ButtonLink>
@@ -210,7 +269,11 @@ export default function HomePage() {
                   className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgb(59_130_246/0.22),transparent_70%)] blur-2xl"
                 />
                 <div className="relative aspect-[3/4] overflow-hidden rounded-card border border-line shadow-[0_30px_80px_rgb(0_0_0/0.45)] motion-safe:animate-[float_3.5s_ease-in-out_infinite]">
-                  <MediaImage image={profile.heroImage} priority fallbackAlt={`${profile.name} 프로필 사진`} />
+                  <MediaImage
+                    image={profile.heroImage}
+                    priority
+                    fallbackAlt={`${profile.name} 프로필 사진`}
+                  />
                 </div>
                 {/* 수상 증빙: 사진 왼쪽 아래에 겹친 작은 상장 (누르면 크게 보기) */}
                 {topAward?.image && (
@@ -225,20 +288,27 @@ export default function HomePage() {
               </div>
             )}
           </Container>
-
         </section>
 
         {/* ---------------- ② 대표 프로젝트 ---------------- */}
         {featured && <FeaturedBand project={featured} id="featured" />}
-        {featured && <FeaturedPipeline project={featured} id="featured-pipeline" />}
-
+        {featured && (
+          <FeaturedPipeline project={featured} id="featured-pipeline" />
+        )}
 
         {/* ---------------- ④ 프로젝트: 분류별로 한 화면씩 ---------------- */}
         {projectSlides.map((slide, i) => {
           const first = i === 0;
-          const headingId = first ? "projects-title" : `projects-${slide.key}-title`;
+          const headingId = first
+            ? "projects-title"
+            : `projects-${slide.key}-title`;
           return (
-            <section key={slide.key} id={first ? "projects" : `projects-${slide.key}`} aria-labelledby={headingId} className={SLIDE}>
+            <section
+              key={slide.key}
+              id={first ? "projects" : `projects-${slide.key}`}
+              aria-labelledby={headingId}
+              className={SLIDE}
+            >
               <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
                 <SectionTitle
                   title={slide.title || "참여한 프로젝트"}
@@ -253,13 +323,22 @@ export default function HomePage() {
                     ) : undefined
                   }
                 />
-                <ProjectGrid projects={slide.items} awards={awards.items} headingLevel="h3" compact />
+                <ProjectGrid
+                  projects={slide.items}
+                  awards={awards.items}
+                  headingLevel="h3"
+                  compact
+                />
               </Container>
             </section>
           );
         })}
         {projectSlides.length === 0 && (
-          <section id="projects" aria-labelledby="projects-title" className={SLIDE}>
+          <section
+            id="projects"
+            aria-labelledby="projects-title"
+            className={SLIDE}
+          >
             <Container className="flex w-full flex-col gap-8">
               <SectionTitle title="참여한 프로젝트" id="projects-title" />
               <p className="text-fg-subtle">공개된 프로젝트가 없습니다.</p>
@@ -269,25 +348,51 @@ export default function HomePage() {
 
         {/* ---------------- ⑤ 게임 디자인을 위한 경험: 플레이 / 현장 한 화면씩 ---------------- */}
         {profile.gamerMetrics.length > 0 && (
-          <section id="experience" aria-labelledby="experience-title" className={cx(SLIDE, "bg-bg-alt")}>
+          <section
+            id="experience"
+            aria-labelledby="experience-title"
+            className={cx(SLIDE, "bg-bg-alt")}
+          >
             <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-              <IntroTitle parent="게임 디자인을 위한 경험" id="experience-title" intro={play} fallback="최상위권 플레이 경험" />
-              <div className={cx("grid gap-10", play?.steam && "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12")}>
+              <IntroTitle
+                parent="게임 디자인을 위한 경험"
+                id="experience-title"
+                intro={play}
+                fallback="최상위권 플레이 경험"
+              />
+              <div
+                className={cx(
+                  "grid gap-10",
+                  play?.steam &&
+                    "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12",
+                )}
+              >
                 <div className="flex flex-col gap-6">
-                  <h3 id="gamer-metrics-title" className="self-start rounded-full border border-line-strong px-4 py-1.5 text-base font-semibold text-fg">
+                  <h3
+                    id="gamer-metrics-title"
+                    className="self-start rounded-full border border-line-strong px-4 py-1.5 text-base font-semibold text-fg"
+                  >
                     {play?.gamesLabel ?? "최상위권 플레이 경험"}
                   </h3>
-                  <GamerEmblems items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
+                  <GamerEmblems
+                    items={profile.gamerMetrics}
+                    labelledBy="gamer-metrics-title"
+                  />
                 </div>
                 {play?.steam && (
                   <div className="flex min-w-0 flex-col gap-6">
                     {/* Steam 플레이 경험: 아이콘 + 플레이한 게임 수를 따로 강조 */}
                     <h3 className="flex items-center gap-3 self-start rounded-full border border-line-strong py-1 pr-5 pl-1 text-fg">
-                      <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-surface-raised">
+                      <span
+                        aria-hidden="true"
+                        className="flex size-9 items-center justify-center rounded-full bg-surface-raised"
+                      >
                         <Icon name="steam" className="size-5" />
                       </span>
                       <span className="text-base font-semibold">Steam</span>
-                      <span className="text-lg font-bold tracking-[-0.02em] text-accent-text">{play.steam.metric}</span>
+                      <span className="text-lg font-bold tracking-[-0.02em] text-accent-text">
+                        {play.steam.metric}
+                      </span>
                     </h3>
                     <figure className="flex flex-col gap-2">
                       <a
@@ -297,10 +402,22 @@ export default function HomePage() {
                         className="block overflow-hidden rounded-card border border-line-strong transition-colors duration-150 hover:border-accent/60"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={withBasePath(play.steam.image.src)} alt={play.steam.image.alt ?? play.steam.metric} loading="lazy" decoding="async" width={1682} height={1112} className="h-auto w-full" />
+                        <img
+                          src={withBasePath(play.steam.image.src)}
+                          alt={play.steam.image.alt ?? play.steam.metric}
+                          loading="lazy"
+                          decoding="async"
+                          width={1682}
+                          height={1112}
+                          className="h-auto w-full"
+                        />
                         <span className="sr-only">(원본 이미지 새 창)</span>
                       </a>
-                      {play.steam.label && <figcaption className="text-sm text-fg-muted">{play.steam.label}</figcaption>}
+                      {play.steam.label && (
+                        <figcaption className="text-sm text-fg-muted">
+                          {play.steam.label}
+                        </figcaption>
+                      )}
                     </figure>
                   </div>
                 )}
@@ -310,17 +427,25 @@ export default function HomePage() {
         )}
         {profile.activities.length > 0 && (
           <section
-            id={profile.gamerMetrics.length > 0 ? "experience-field" : "experience"}
+            id={
+              profile.gamerMetrics.length > 0
+                ? "experience-field"
+                : "experience"
+            }
             aria-labelledby="experience-field-title"
             className={cx(SLIDE, "bg-bg-alt")}
           >
             <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-              <IntroTitle parent="게임 디자인을 위한 경험" id="experience-field-title" intro={profile.activityIntro} fallback="만들고 경험하는 현장" />
+              <IntroTitle
+                parent="게임 디자인을 위한 경험"
+                id="experience-field-title"
+                intro={profile.activityIntro}
+                fallback="만들고 경험하는 현장"
+              />
               <ActivitiesGrid items={profile.activities} headingLevel="h3" />
             </Container>
           </section>
         )}
-
       </div>
     </>
   );

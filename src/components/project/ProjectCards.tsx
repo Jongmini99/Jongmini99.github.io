@@ -17,6 +17,7 @@ import { MediaImage } from "@/components/ui/Media";
 import { YouTubeFrame } from "@/components/sections/Videos";
 import { WorkflowCards } from "./WorkflowCards";
 import { ButtonLink } from "@/components/ui/Button";
+import { SectionIntro } from "@/components/ui/Typography";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -194,19 +195,22 @@ export function FeaturedPipeline({
       </div>
       {/*
         도표를 크게: 이 화면만 폭을 96rem까지 넓히되 두 가지 상한을 둔다.
-        - 세로: 데스크톱 한 화면에 들어가도록 (100svh − 헤더·위아래 여백·제목·카드 글 영역 약 25rem) × 32/9(16:9 카드 두 장) + 카드 간격
+        - 세로: 데스크톱 한 화면에 들어가도록 (100svh − 헤더·위아래 여백·상위 라벨·제목·설명 2줄·카드 글 영역 약 31.5rem) × 32/9(16:9 카드 두 장) + 카드 간격
         - 가로: 오른쪽 섹션 점 내비게이션의 현재 위치 라벨(84rem↑ 번호, 100rem↑ 번호+이름)과 겹치지 않도록 좌우 여백(--spy) 확보
       */}
       <Container className="relative lg:max-w-[96rem]">
-        <div className="mx-auto flex w-full flex-col gap-6 [--spy:0px] min-[84rem]:[--spy:6.5rem] min-[100rem]:[--spy:14rem] lg:max-w-[min(100%,calc((100svh_-_25rem)_*_3.55_+_1.25rem),calc(100vw_-_2_*_var(--spy)))] lg:gap-8">
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <div className="mx-auto flex w-full flex-col gap-6 [--spy:0px] min-[84rem]:[--spy:6.5rem] min-[100rem]:[--spy:14rem] lg:max-w-[min(100%,calc((100svh_-_31.5rem)_*_3.55_+_1.25rem),calc(100vw_-_2_*_var(--spy)))] lg:gap-8">
+          <div className="flex flex-col gap-3">
+            <p className="text-sm font-semibold text-fg-muted">
+              {project.title}
+            </p>
             <h2
               id={headingId}
               className="text-[clamp(1.5rem,1.1rem+1.2vw,2.1rem)] font-bold tracking-[-0.04em] text-fg"
             >
               {flow.title}
             </h2>
-            <p className="text-sm text-fg-muted">{project.title}</p>
+            {flow.intro && <SectionIntro text={flow.intro} />}
           </div>
           {flow.figures.length > 0 ? (
             <WorkflowCards figures={flow.figures} label={flow.title} />
@@ -503,16 +507,19 @@ export const TRACKS: {
   {
     key: "ai",
     title: "AI 프로젝트",
-    description: "기획과 검수는 직접 맡고, 구현은 AI와 협업해 만든 프로젝트",
+    description:
+      "문제 정의, 채택 판단, 검수 기준은 직접 맡고 아이디어 후보, 코드 구현, 반복 작업은 AI에 맡겼습니다.\nAI 결과물은 반드시 직접 플레이하거나 직접 풀어 보는 방식으로 검수한 뒤 반영했습니다.",
   },
   {
     key: "game",
     title: "기획/개발을 직접 진행한 프로젝트",
-    description: "직접 기획하고 엔진으로 개발해 출시·수상까지 이어진 프로젝트",
+    description:
+      "Unity·MSW 엔진으로 기획을 직접 프로토타이핑하며 검증하고 개선했습니다.\n개발자·아티스트 등 팀원과 협업해 메이플스토리 월드 개발 공모전 대상 수상과 Steam 출시까지 완수했습니다.",
   },
   {
     key: "document",
     title: "게임 디자인 문서 작성",
-    description: "시스템 역기획, 지표·BM 분석, 출시 가격 제안 문서",
+    description:
+      "문서는 대상과 용도에 맞춰 형태를 바꿔 작성합니다.\n스킬 시스템의 플로우와 예외 처리, 실제 지표로 검증한 매출 구조, 동종 게임 분석에 근거한 출시 가격을 정리했습니다.",
   },
 ];
