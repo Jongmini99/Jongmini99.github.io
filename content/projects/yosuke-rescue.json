@@ -100,13 +100,13 @@
   },
   "gallery": [
     {
-      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-05-worldmap.jpg",
-      "alt": "도시 단면 디오라마 월드맵 전경 — 스테이지를 잇는 경로와 상점 버튼",
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-08-worldmap.jpg",
+      "alt": "도시 단면 디오라마 월드맵 전경 — 스테이지를 잇는 경로와 상점·업적 메뉴",
       "caption": "단면 디오라마 월드맵"
     },
     {
-      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-01-neighborhood.jpg",
-      "alt": "1-1 동네 상가 거리 스테이지 — 점프 중인 플레이어 캐릭터와 공중의 토큰",
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-02-neighborhood.jpg",
+      "alt": "1-1 동네 상가 거리 스테이지 — 상가 앞 도로를 달리는 플레이어 캐릭터와 공중의 토큰",
       "caption": "1-1 동네 상가 거리"
     },
     {
@@ -115,14 +115,44 @@
       "caption": "1-2 내려찍기로 토큰 블록을 깨는 순간"
     },
     {
-      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-02-neon-street.jpg",
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-04-neon-street.jpg",
       "alt": "3-2 밤 네온 번화가 스테이지 — 상가 건물 앞의 적과 블록",
       "caption": "3-2 밤 네온 번화가"
     },
     {
-      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-04-final-boss.jpg",
-      "alt": "5-5 최종 보스전 — 체력 바가 표시된 보스를 플레이어가 밟는 순간",
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-05-tower.jpg",
+      "alt": "5-2 초고층 타워 스테이지 — 사무실 층을 지나는 플레이어와 적, 블록",
+      "caption": "5-2 초고층 타워"
+    },
+    {
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-06-boss-fight.jpg",
+      "alt": "1-5 보스전 — 체력 바가 표시된 보스 「뿔난돼지」와 플레이어",
+      "caption": "1-5 보스 「뿔난돼지」"
+    },
+    {
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-07-final-boss.jpg",
+      "alt": "5-5 최종 보스전 — 체력 바가 표시된 블록형 보스와 네온 기둥 아레나",
       "caption": "5-5 최종 보스 「클로드 코드」"
+    },
+    {
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-01-title.jpg",
+      "alt": "요스케 구출 대작전 타이틀 화면 — 로고와 캐릭터, 전체 랭킹 TOP 5 패널, 새로 시작·이어하기·업적·체험 모드·설정 메뉴",
+      "caption": "타이틀 화면"
+    },
+    {
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-09-shop.jpg",
+      "alt": "상점 화면 — 토큰으로 최대 HP·이동 속도·추가 점프를 강화하는 능력치 강화 탭",
+      "caption": "상점 — 토큰으로 능력치 강화"
+    },
+    {
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-10-achievements.jpg",
+      "alt": "업적 화면 — 카테고리 탭과 업적 목록, 달성 보상 토큰",
+      "caption": "업적 34종과 보상 토큰"
+    },
+    {
+      "src": "/uploads/images/yosuke-rescue/yosuke-gallery-11-result.jpg",
+      "alt": "5-5 클리어 결과 화면 — 최종 점수와 등급, 처리 시간, 토큰 적립, 새로 해금된 업적",
+      "caption": "스테이지 결과 화면"
     }
   ],
   "videos": [
@@ -223,8 +253,8 @@
       "width": "full",
       "figures": [
         {
-          "src": "/uploads/images/yosuke-rescue/yosuke-gallery-01-neighborhood.jpg",
-          "alt": "1-1 동네 상가 거리 스테이지 — 점프 중인 플레이어 캐릭터와 공중의 토큰",
+          "src": "/uploads/images/yosuke-rescue/yosuke-gallery-02-neighborhood.jpg",
+          "alt": "1-1 동네 상가 거리 스테이지 — 상가 앞 도로를 달리는 플레이어 캐릭터와 공중의 토큰",
           "caption": "1-1 동네 상가 거리"
         },
         {
@@ -403,13 +433,13 @@
       "intro": "기믹 동작은 그대로 두고 표현만 바꾸는 표를 직접 정했습니다. 스토리(인턴 → 정규직 전환)와 월드맵 구조(도시 단면 디오라마)도 결정했습니다.",
       "figures": [
         {
-          "src": "/uploads/images/yosuke-rescue/yosuke-gallery-02-neon-street.jpg",
+          "src": "/uploads/images/yosuke-rescue/yosuke-gallery-04-neon-street.jpg",
           "alt": "3-2 밤 네온 번화가 스테이지 — 상가 건물 앞의 적과 블록",
           "caption": "3-2 밤 네온 번화가"
         },
         {
-          "src": "/uploads/images/yosuke-rescue/yosuke-gallery-04-final-boss.jpg",
-          "alt": "5-5 최종 보스전 — 체력 바가 표시된 보스를 플레이어가 밟는 순간",
+          "src": "/uploads/images/yosuke-rescue/yosuke-gallery-07-final-boss.jpg",
+          "alt": "5-5 최종 보스전 — 체력 바가 표시된 블록형 보스와 네온 기둥 아레나",
           "caption": "5-5 최종 보스 「클로드 코드」"
         }
       ],

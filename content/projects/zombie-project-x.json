@@ -7,7 +7,10 @@
   "description": "인간과 좀비의 전투를 메인으로 하는 멀티 플레이 PvP 게임 — 메이플스토리 월드 개발 공모전 대상",
   "genre": "멀티 PvP 전투 (2D 탑다운 슈팅)",
   "platform": "PC · Mobile (메이플스토리 월드)",
-  "developmentPeriod": { "start": "2023-03", "end": "2023-07" },
+  "developmentPeriod": {
+    "start": "2023-03",
+    "end": "2023-07"
+  },
   "developmentType": "팀 프로젝트",
   "teamSize": 6,
   "teamComposition": "PM 2명 / 기획·개발 2명 / 아트 2명",
@@ -17,7 +20,10 @@
     "무기 시스템·데이터 테이블 설계",
     "MSW(Lua) 구현 및 검증"
   ],
-  "technologies": ["MSW (메이플스토리 월드)", "Lua"],
+  "technologies": [
+    "MSW (메이플스토리 월드)",
+    "Lua"
+  ],
   "track": "game",
   "keyTakeaways": {
     "problem": "숨기만 하는 플레이로 \"전투보다 숨바꼭질 같다\"는 피드백",
@@ -33,6 +39,46 @@
     "alt": "좀비 프로젝트 X 키아트 — 좀비 캐릭터와 게임 로고, 문구 '불로불사를 위한 프로젝트! 비밀을 파헤쳐라!'"
   },
   "gallery": [
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-06-lobby.jpg",
+      "alt": "연구소 로비 화면 — 게임 참가(2~5인)·매칭 준비 버튼과 상점·가방·가이드 메뉴",
+      "caption": "아웃게임 · 연구소 로비"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-07-guide.jpg",
+      "alt": "게임 가이드 화면 — 조작 방법·생존자·좀비 탭과 생존자 승리 조건, 상자로 무기를 강화하는 규칙 설명",
+      "caption": "아웃게임 · 게임 가이드"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-08-shop.jpg",
+      "alt": "상점 화면 — 좀비 스킨 패키지 특가와 캐릭터 상품 목록",
+      "caption": "아웃게임 · 상점"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-09-round-start.jpg",
+      "alt": "인게임 1라운드 시작 안내 화면 — 「잠시 후 숙주 좀비가 결정됩니다」 알림과 남은 시간",
+      "caption": "인게임 · 라운드 시작"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-10-zombie-play.jpg",
+      "alt": "좀비가 된 플레이어 시점의 인게임 화면 — 좀비 전용 체력 바와 스킬 버튼",
+      "caption": "인게임 · 좀비 시점 플레이"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-11-human-win.jpg",
+      "alt": "인게임 생존자 승리 연출 화면 — HUMAN WIN 배너",
+      "caption": "인게임 · 생존자 승리"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-12-zombie-win.jpg",
+      "alt": "인게임 좀비 승리 연출 화면 — ZOMBIE WIN 배너",
+      "caption": "인게임 · 좀비 승리"
+    },
+    {
+      "src": "/uploads/images/zombie-project-x/zombie-gallery-13-result.jpg",
+      "alt": "라운드 결과 화면 — 순위별 좀비 킬·생존·감염 수와 획득 재화",
+      "caption": "인게임 · 결과와 재화 정산"
+    },
     {
       "src": "/uploads/images/zombie-project-x/zombie-gallery-01-box-levelup.jpg",
       "alt": "상자 획득과 레벨업으로 무기가 강화되는 흐름을 보여 주는 인게임 화면 3단계"
@@ -51,11 +97,6 @@
       "src": "/uploads/images/zombie-project-x/zombie-gallery-04-weapons.jpg",
       "alt": "고유한 전투 스타일을 가진 무기 8종의 아이콘과 능력치 카드",
       "caption": "고유한 전투 스타일을 가진 8종의 무기 콘텐츠"
-    },
-    {
-      "src": "/uploads/images/zombie-project-x/zombie-gallery-05-youtuber-play.jpg",
-      "alt": "유튜버 팡이요가 좀비 프로젝트 X를 플레이하는 방송 화면",
-      "caption": "이미지 출처: 팡이요 유튜브"
     }
   ],
   "videos": [
@@ -68,8 +109,14 @@
   "documents": [],
   "externalLinks": [],
   "achievements": [
-    { "title": "메이플스토리 월드 개발 공모전 대상", "date": "2023.07.13" },
-    { "title": "메이플스토리 월드 출시", "date": "2023.06.15" }
+    {
+      "title": "메이플스토리 월드 개발 공모전 대상",
+      "date": "2023.07.13"
+    },
+    {
+      "title": "메이플스토리 월드 출시",
+      "date": "2023.06.15"
+    }
   ],
   "featured": false,
   "published": true,

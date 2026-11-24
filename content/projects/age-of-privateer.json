@@ -45,6 +45,21 @@
       "caption": "항해 목적지 선택"
     },
     {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-07-route-map.jpg",
+      "alt": "목적지까지의 경로를 선택하는 항로 지도 — 적·보스·보물·이벤트 노드",
+      "caption": "항로 노드 선택"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-08-shadow-sea-event.jpg",
+      "alt": "그림자의 해역 항해 이벤트 창 — 해역 설명과 항해 난이도, 항해 시작 버튼",
+      "caption": "해역 이벤트"
+    },
+    {
+      "src": "/uploads/images/age-of-privateer/aop-gallery-09-relic-select.jpg",
+      "alt": "유물 선택 화면 — 펜던트·회중시계·책 3종 유물과 효과 설명",
+      "caption": "유물 선택"
+    },
+    {
       "src": "/uploads/images/age-of-privateer/aop-gallery-02-prototype-test.jpg",
       "alt": "노트북으로 프로토타입을 플레이하는 유저 테스트 현장 사진",
       "caption": "최소 프로토타입 유저 테스트 현장"
@@ -70,7 +85,13 @@
       "caption": "카드 시스템 데이터 작업"
     }
   ],
-  "videos": [],
+  "videos": [
+    {
+      "title": "Age of Privateer 트레일러",
+      "youtubeUrl": "https://youtu.be/HM0VGSrono0",
+      "description": "Steam 상점 페이지 공식 트레일러"
+    }
+  ],
   "documents": [],
   "externalLinks": [],
   "achievements": [

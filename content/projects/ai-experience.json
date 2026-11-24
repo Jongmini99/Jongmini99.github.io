@@ -82,14 +82,14 @@
   },
   "gallery": [
     {
-      "src": "/uploads/images/ai-experience/timerecall-gallery-01-prototype-v1.jpg",
-      "alt": "Time Recall 기존 1차 프로토타입 화면 — 단순한 도형 캐릭터와 조준점",
-      "caption": "Time Recall · 기존 프로토타입 (기획·개발 직접 진행)"
-    },
-    {
       "src": "/uploads/images/ai-experience/timerecall-gallery-02-prototype-improved.jpg",
       "alt": "Time Recall 개선 프로토타입 화면 — 격자 바닥 위의 플레이어와 적, 웨이브 표시",
       "caption": "Time Recall · 개선 프로토타입 (AI 활용 기획·개발 후 직접 검수)"
+    },
+    {
+      "src": "/uploads/images/ai-experience/timerecall-gallery-01-prototype-v1.jpg",
+      "alt": "Time Recall 기존 1차 프로토타입 화면 — 단순한 도형 캐릭터와 조준점",
+      "caption": "Time Recall · 기존 프로토타입 (기획·개발 직접 진행)"
     },
     {
       "src": "/uploads/images/ai-experience/timerecall-gallery-03-balance-simulator.jpg",
