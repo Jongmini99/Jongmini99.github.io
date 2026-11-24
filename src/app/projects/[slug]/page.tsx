@@ -7,6 +7,7 @@ import { SectionRenderer } from "@/components/sections/SectionRenderer";
 import { ProjectTocDesktop, ProjectTocMobile } from "@/components/sections/ProjectToc";
 import { buildToc, groupSections } from "@/components/sections/structure";
 import { Container } from "@/components/layout/Container";
+import { ScrollToTopOnEnter } from "@/components/layout/ScrollToTopOnEnter";
 
 type Params = { slug: string };
 
@@ -48,6 +49,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
 
   return (
     <article data-toc-page>
+      <ScrollToTopOnEnter />
       <ProjectHeader project={project} />
       {project.pipeline && <ProjectPipeline pipeline={project.pipeline} />}
       {toc.length > 0 && <ProjectTocMobile entries={toc} />}
