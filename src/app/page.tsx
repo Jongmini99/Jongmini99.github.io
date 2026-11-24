@@ -1,7 +1,6 @@
 import { ArrowDown, ArrowRight, Download } from "lucide-react";
 import {
   getAwards,
-  getCareer,
   getContact,
   getFeaturedProjects,
   getFileSizeLabel,
@@ -18,9 +17,7 @@ import { Icon } from "@/components/ui/Icon";
 import { withBasePath } from "@/lib/base-path";
 import { SectionSpy, type SpyItem } from "@/components/layout/SectionSpy";
 import {
-  AchievementGrid,
   ActivitiesGrid,
-  CareerTimeline,
   GamerEmblems,
   CATEGORY_LABEL,
   HeroProofBadges,
@@ -37,7 +34,7 @@ import { TrailerButton } from "@/components/project/TrailerButton";
  *   ② 대표 프로젝트(#featured): 한 줄 소개·핵심 성과·영상
  *   ②-2 AI 게임 제작 파이프라인(#featured-pipeline): 대표 프로젝트의 작업 흐름 도표
  * 그 아래도 한 화면 = 한 섹션: 프로젝트(#projects AI / #projects-game 기획·개발 / #projects-document 문서) →
- *   경험(#experience 플레이 / #experience-field 현장) → 이력 및 성과(#career)
+ *   경험(#experience 플레이 / #experience-field 현장)
  * 연락하기는 섹션 없이 상단 바의 작은 버튼(연락처 대화상자)으로 제공한다.
  * 섹션 id는 상단 메뉴(nav.ts)의 앵커와 맞춘다.
  */
@@ -92,7 +89,6 @@ export default function HomePage() {
   const projects = getPublishedProjects();
   const featured = getFeaturedProjects()[0];
   const hasPipeline = !!featured?.sections.some((s) => s.type === "flow" && s.visible && (s.figures.length > 0 || s.steps.length > 0));
-  const career = getCareer();
   const awards = getAwards();
   const contact = getContact();
   const proofBadges = awards.items.filter((a) => a.highlight);
@@ -123,7 +119,6 @@ export default function HomePage() {
     ...(profile.activities.length > 0
       ? [{ id: profile.gamerMetrics.length > 0 ? "experience-field" : "experience", label: "만들고 경험하는 현장" }]
       : []),
-    { id: "career", label: "이력 및 성과" },
   ];
   const resumeSize = getFileSizeLabel(contact.resume);
   const resumeLabel = `포트폴리오 PDF 다운로드${resumeSize ? ` (${resumeSize})` : ""}`;
@@ -325,23 +320,6 @@ export default function HomePage() {
             </Container>
           </section>
         )}
-
-      {/* ---------------- ⑥ 이력 및 성과 ---------------- */}
-        <section id="career" aria-labelledby="career-title" className={SLIDE}>
-          <Container className="flex flex-col gap-14">
-            <SectionTitle title="이력 및 성과" id="career-title" />
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
-              <div className="flex flex-col gap-5">
-                <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">경력</h3>
-                <CareerTimeline items={career.items} />
-              </div>
-              <div className="flex flex-col gap-5">
-                <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">수상 · 출시 · 전시</h3>
-                <AchievementGrid items={awards.items} />
-              </div>
-            </div>
-          </Container>
-        </section>
 
       </div>
     </>
