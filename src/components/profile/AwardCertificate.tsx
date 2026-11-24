@@ -42,7 +42,7 @@ export function AwardCertificate({ title, label, date, image, className }: Props
           <Trophy className="size-3.5 shrink-0" aria-hidden="true" />
           <span>
             {label}
-            {date && <span className="block font-display font-medium opacity-90">{date}</span>}
+            {date && <span className="block font-display font-medium">{date}</span>}
           </span>
         </span>
         <span className="sr-only">{`${title} 상장 크게 보기`}</span>
