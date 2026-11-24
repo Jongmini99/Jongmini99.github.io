@@ -26,6 +26,7 @@ import {
   HeroProofBadges,
 } from "@/components/profile/ProfileBlocks";
 import { AwardCertificate } from "@/components/profile/AwardCertificate";
+import { TrailerButton } from "@/components/project/TrailerButton";
 
 /**
  * 홈 — 한 페이지에서 전체 내용을 확인한다.
@@ -181,10 +182,15 @@ export default function HomePage() {
               )}
               <HeroProofBadges items={proofBadges} />
               <div className="flex flex-wrap gap-3">
-                <ButtonLink href={featured ? "/#featured" : "/#projects"} variant="primary">
-                  {featured ? "대표 프로젝트 보기" : "프로젝트 보기"}
-                  <ArrowDown className="size-4" aria-hidden="true" />
-                </ButtonLink>
+                {/* 대표 프로젝트에 트레일러가 있으면: 이동하면서 바로 재생 (스크롤과 다른 동작이라 버튼으로 둔다) */}
+                {featured?.videos[0] ? (
+                  <TrailerButton targetId="featured">AI 프로젝트 트레일러 보기</TrailerButton>
+                ) : (
+                  <ButtonLink href={featured ? "/#featured" : "/#projects"} variant="primary">
+                    {featured ? "대표 프로젝트 보기" : "프로젝트 보기"}
+                    <ArrowDown className="size-4" aria-hidden="true" />
+                  </ButtonLink>
+                )}
                 {contact.resume ? (
                   <ButtonLink href={contact.resume} variant="outline" download>
                     <Download className="size-4" aria-hidden="true" />

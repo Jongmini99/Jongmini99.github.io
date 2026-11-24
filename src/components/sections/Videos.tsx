@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import type { z } from "zod";
 import type { VideoSchema } from "@/content/schema";
 import { MediaPlaceholder } from "@/components/ui/Media";
 import { parseYouTubeId, youTubeEmbedUrl, youTubeThumbnailUrl } from "@/lib/youtube";
+import { PLAY_TRAILER_EVENT } from "@/components/project/TrailerButton";
 
 type Video = z.infer<typeof VideoSchema>;
 
@@ -13,13 +14,40 @@ type Video = z.infer<typeof VideoSchema>;
  * 클릭 전까지 iframe을 로드하지 않는 YouTube 재생 영역 (성능·개인정보).
  * 부모가 relative + 비율(aspect-video)을 정해 주면 그 안을 꽉 채운다.
  */
-export function YouTubeFrame({ video, thumbnail = "hq" }: { video: Video; thumbnail?: "hq" | "maxres" }) {
+export function YouTubeFrame({
+  video,
+  thumbnail = "hq",
+  listenPlayEvent,
+}: {
+  video: Video;
+  thumbnail?: "hq" | "maxres";
+  /** true면 히어로 트레일러 버튼의 재생 요청(PLAY_TRAILER_EVENT)을 받아 바로 재생하고 플레이어로 포커스를 옮긴다 */
+  listenPlayEvent?: boolean;
+}) {
   const [active, setActive] = useState(false);
+  const [focusOnLoad, setFocusOnLoad] = useState(false);
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const id = parseYouTubeId(video.youtubeUrl);
+
+  useEffect(() => {
+    if (!listenPlayEvent) return;
+    const play = () => {
+      setActive(true);
+      setFocusOnLoad(true);
+    };
+    window.addEventListener(PLAY_TRAILER_EVENT, play);
+    return () => window.removeEventListener(PLAY_TRAILER_EVENT, play);
+  }, [listenPlayEvent]);
+
+  useEffect(() => {
+    if (active && focusOnLoad) frameRef.current?.focus({ preventScroll: true });
+  }, [active, focusOnLoad]);
+
   if (!id) return null;
 
   return active ? (
           <iframe
+            ref={frameRef}
             src={`${youTubeEmbedUrl(id)}?autoplay=1&rel=0`}
             title={video.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

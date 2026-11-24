@@ -90,7 +90,7 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
           <div className="overflow-hidden rounded-card border border-band-line shadow-[0_28px_65px_rgb(0_0_0/0.45)]">
             <div className="relative aspect-video bg-surface">
               {youtube ? (
-                <YouTubeFrame video={youtube} thumbnail="maxres" />
+                <YouTubeFrame video={youtube} thumbnail="maxres" listenPlayEvent />
               ) : video ? (
                 <>
                   {/* 동작 줄이기 설정이면 영상 대신 정지 화면을 보여 준다 */}
