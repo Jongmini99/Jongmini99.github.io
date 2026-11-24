@@ -32,12 +32,6 @@
   ],
   "gamerMetrics": [
     {
-      "game": "배틀그라운드",
-      "metric": "1,000시간 이상",
-      "description": "배틀로얄 슈팅 · 누적 플레이",
-      "icon": "pubg"
-    },
-    {
       "game": "리그 오브 레전드",
       "metric": "마스터 550pt",
       "description": "MOBA · 최고 달성 티어",
@@ -56,6 +50,12 @@
         "alt": "마스터 티어 엠블럼"
       },
       "icon": "riotgames"
+    },
+    {
+      "game": "배틀그라운드",
+      "metric": "1,000시간 이상",
+      "description": "배틀로얄 슈팅 · 누적 플레이",
+      "icon": "pubg"
     },
     {
       "game": "이터널 리턴",
