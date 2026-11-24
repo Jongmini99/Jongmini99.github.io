@@ -142,8 +142,17 @@ export default function HomePage() {
           <Container className="relative grid items-center gap-14 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12 lg:py-10">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
-                <h1 id="hero-title" className="max-w-3xl text-display font-bold tracking-[-0.05em] text-balance text-fg md:whitespace-pre-line">
-                  {profile.headline}
+                <h1 id="hero-title" className="max-w-3xl text-display font-bold tracking-[-0.05em] text-balance text-fg whitespace-pre-line">
+                  {/* **강조** 구간은 포인트 색으로 표시 */}
+                  {profile.headline.split("**").map((part, i) =>
+                    i % 2 === 1 ? (
+                      <span key={i} className="text-accent-text">
+                        {part}
+                      </span>
+                    ) : (
+                      part
+                    ),
+                  )}
                 </h1>
               </div>
               {/* 줄바꿈은 넓은 화면에서만 유지 (좁은 화면에서는 자연스럽게 흐르도록) */}

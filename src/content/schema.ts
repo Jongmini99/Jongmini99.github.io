@@ -371,7 +371,7 @@ export const ProfileSchema = z.object({
   name: text,
   /** 영문 직함 (예: System & Technical Game Designer) */
   roleTitle: optionalText,
-  /** 메인 한 줄 소개 */
+  /** 메인 한 줄 소개 (히어로 큰 제목). 줄바꿈은 넓은 화면에서 유지, **이 구간**은 포인트 색으로 강조 */
   headline: text,
   /** 자기소개 (Markdown) */
   summary: optionalText,
