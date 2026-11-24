@@ -256,6 +256,8 @@ export const ProjectSchema = z
     teamSize: z.preprocess(emptyToUndefined, z.number().int().positive().optional()),
     teamComposition: optionalText, // 예: PM 2명 / 기획·개발 2명 / 아트 2명
     roles: list(text),
+    /** 상세 헤더 '담당 역할' 칸의 한 줄 요약 (선택). 비우면 roles를 이어 붙여 표시 */
+    roleSummary: optionalText,
     technologies: list(text),
     /** 홈 프로젝트 분류 (선택). 비우면 분류 없는 목록으로 표시 */
     track: z.preprocess(emptyToUndefined, z.enum(PROJECT_TRACKS).optional()),
