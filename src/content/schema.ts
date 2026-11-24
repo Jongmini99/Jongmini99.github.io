@@ -384,7 +384,7 @@ export const ProfileSchema = z.object({
   gamerMetrics: list(GamerMetricSchema),
   /** 플레이 경험 화면 머리말·Steam 기록 (선택) */
   playShowcase: z.preprocess(emptyToUndefined, PlayShowcaseSchema.optional()),
-  /** 기획을 위한 활동 (홈 '게임 기획을 위한 경험' 섹션. 플레이 지표와 함께 비우면 섹션 숨김) */
+  /** 기획을 위한 활동 (홈 '게임 디자인을 위한 경험' 섹션. 플레이 지표와 함께 비우면 섹션 숨김) */
   activities: list(ActivityItemSchema),
   /** 활동 화면 머리말 (선택) */
   activityIntro: z.preprocess(emptyToUndefined, SectionIntroSchema.optional()),

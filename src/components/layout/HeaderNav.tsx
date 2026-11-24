@@ -10,6 +10,7 @@ import { withBasePath } from "@/lib/base-path";
 import { cx } from "@/lib/cx";
 import type { Contact } from "@/content/schema";
 import { ContactDialog } from "./ContactDialog";
+import { useScrollTarget } from "./useScrollTarget";
 
 const normalize = (pathname: string) => pathname.replace(/\/+$/, "") || "/";
 
@@ -50,7 +51,14 @@ function useActiveSection(enabled: boolean): string | null {
 
 export function HeaderNav({ resume, contact }: { resume?: string; contact: Contact }) {
   const pathname = usePathname();
-  const section = useActiveSection(normalize(pathname) === "/");
+  const isHome = normalize(pathname) === "/";
+  const observed = useActiveSection(isHome);
+  // 메뉴 클릭으로 이동하는 동안은 지나가는 섹션 대신 목표 메뉴를 현재 위치로 표시
+  const [target, lockTarget] = useScrollTarget();
+  const section = isHome ? (target ?? observed) : null;
+  const onNavigate = (item: NavItem) => {
+    if (isHome && item.section) lockTarget(item.section);
+  };
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -97,6 +105,7 @@ export function HeaderNav({ resume, contact }: { resume?: string; contact: Conta
                 <Link
                   href={item.href}
                   aria-current={current}
+                  onClick={() => onNavigate(item)}
                   className={cx(
                     "relative flex h-full items-center px-4 text-[0.95rem] transition-colors duration-150",
                     active ? "font-semibold text-fg" : "text-fg-muted hover:text-fg",
@@ -147,7 +156,10 @@ export function HeaderNav({ resume, contact }: { resume?: string; contact: Conta
                   <Link
                     href={item.href}
                     aria-current={current}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      onNavigate(item);
+                      setOpen(false);
+                    }}
                     className={cx(
                       "flex h-12 items-center rounded-control px-3",
                       active ? "bg-accent-soft font-semibold text-fg" : "text-fg-muted hover:bg-surface hover:text-fg",

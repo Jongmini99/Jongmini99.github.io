@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cx } from "@/lib/cx";
+import { useScrollTarget } from "./useScrollTarget";
 
 export type SpyItem = { id: string; label: string };
 
@@ -13,7 +14,10 @@ export type SpyItem = { id: string; label: string };
  * - 데스크톱(한 화면 = 한 섹션 구조)에서만 보인다
  */
 export function SectionSpy({ items }: { items: SpyItem[] }) {
-  const [active, setActive] = useState<string | null>(items[0]?.id ?? null);
+  const [observed, setActive] = useState<string | null>(items[0]?.id ?? null);
+  // 점을 눌러 이동하는 동안은 지나가는 섹션 대신 목표 섹션을 현재 위치로 표시
+  const [target, lockTarget] = useScrollTarget();
+  const active = target ?? observed;
 
   useEffect(() => {
     const targets = items.map((i) => document.getElementById(i.id)).filter((el): el is HTMLElement => el !== null);
@@ -40,6 +44,7 @@ export function SectionSpy({ items }: { items: SpyItem[] }) {
               <a
                 href={`#${item.id}`}
                 aria-current={current ? "location" : undefined}
+                onClick={() => lockTarget(item.id)}
                 className="group relative flex h-7 items-center justify-end gap-3 pl-3 outline-none"
               >
                 {/*

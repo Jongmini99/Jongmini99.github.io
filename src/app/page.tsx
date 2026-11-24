@@ -301,11 +301,11 @@ export default function HomePage() {
           </section>
         )}
 
-        {/* ---------------- ⑤ 게임 기획을 위한 경험: 플레이 / 현장 한 화면씩 ---------------- */}
+        {/* ---------------- ⑤ 게임 디자인을 위한 경험: 플레이 / 현장 한 화면씩 ---------------- */}
         {profile.gamerMetrics.length > 0 && (
           <section id="experience" aria-labelledby="experience-title" className={cx(SLIDE, "bg-bg-alt")}>
             <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-              <IntroTitle parent="게임 기획을 위한 경험" id="experience-title" intro={play} fallback="최상위권 플레이 경험" />
+              <IntroTitle parent="게임 디자인을 위한 경험" id="experience-title" intro={play} fallback="최상위권 플레이 경험" />
               <div className={cx("grid gap-10", play?.steam && "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12")}>
                 <div className="flex flex-col gap-6">
                   <h3 id="gamer-metrics-title" className="self-start rounded-full border border-line-strong px-4 py-1.5 text-base font-semibold text-fg">
@@ -349,7 +349,7 @@ export default function HomePage() {
             className={cx(SLIDE, "bg-bg-alt")}
           >
             <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-              <IntroTitle parent="게임 기획을 위한 경험" id="experience-field-title" intro={profile.activityIntro} fallback="만들고 경험하는 현장" />
+              <IntroTitle parent="게임 디자인을 위한 경험" id="experience-field-title" intro={profile.activityIntro} fallback="만들고 경험하는 현장" />
               <ActivitiesGrid items={profile.activities} headingLevel="h3" />
             </Container>
           </section>
