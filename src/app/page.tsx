@@ -124,7 +124,7 @@ function ShowcaseSection({
       aria-labelledby={headingId}
       className={cx(SLIDE, className)}
     >
-      <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
+      <Container wide className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
         <IntroTitle id={headingId} intro={data} fallback={fallback} />
         <WorkflowCards
           figures={data.items}
@@ -370,7 +370,7 @@ export default function HomePage() {
                 aria-labelledby={headingId}
                 className={SLIDE}
               >
-                <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
+                <Container wide className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
                   <SectionTitle
                     title={slide.title || "참여한 프로젝트"}
                     id={headingId}
@@ -440,7 +440,7 @@ export default function HomePage() {
             aria-labelledby="experience-title"
             className={cx(SLIDE, "bg-bg-alt")}
           >
-            <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
+            <Container wide className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
               <IntroTitle
                 parent="게임 디자인을 위한 경험"
                 id="experience-title"
@@ -522,7 +522,7 @@ export default function HomePage() {
             aria-labelledby="experience-field-title"
             className={cx(SLIDE, "bg-bg-alt")}
           >
-            <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
+            <Container wide className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
               <IntroTitle
                 parent="게임 디자인을 위한 경험"
                 id="experience-field-title"

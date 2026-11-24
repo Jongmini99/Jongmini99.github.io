@@ -66,6 +66,20 @@
   }
 }
 
+/*
+ * 큰 모니터(1536px 이상)에서 전체 크기를 완만하게 키운다. rem 기반 여백·글자가 함께 커진다.
+ * 폭·높이 중 작은 쪽 기준 (1920×1080 ≈ 17px, 2560×1440 ≈ 19px 상한). 1rem = 브라우저 기본 글자 크기.
+ */
+@media (min-width: 96rem) {
+  html {
+    font-size: clamp(
+      1rem,
+      min(calc(1rem + (100vw - 96rem) * 0.003), calc(1rem + (100vh - 54rem) * 0.005)),
+      1.1875rem
+    );
+  }
+}
+
 /* 모션 최소화 설정을 존중: 사용자가 허용한 경우에만 부드러운 스크롤 */
 @media (prefers-reduced-motion: no-preference) {
   html {
