@@ -1,10 +1,10 @@
 {
   "name": "허종민",
   "roleTitle": "System Game Designer",
-  "headline": "AI를 활용하는 게임기획자 허종민입니다.",
-  "summary": "게임의 재미를 만드는 시스템을 기획하고,\nUnity·MSW 엔진으로 직접 만들어 보며 검증합니다.\n기획과 검수는 직접 맡고, 구현은 AI(Claude Code)와 협업합니다.",
+  "headline": "AI를 활용해 만들어 보고 검증하는 기획자 허종민입니다.",
+  "summary": "테크니컬 디자이너를 목표로 다양한 프로젝트의 기획에 참여하고 이를 직접 개발했습니다.\n현재는 AI를 활용해 개발을 진행하고, 최종 검수와 방향성 제시를 직접 맡고 있습니다.",
   "targetRoles": [
-    "시스템 게임 기획자"
+    "테크니컬 디자이너"
   ],
   "heroImage": {
     "src": "/uploads/images/profile/profile-photo.jpg",
@@ -13,38 +13,20 @@
   "coreStrengths": [
     {
       "title": "기획·개발 역량 동시 보유",
-      "subtitle": "문서 작성부터 프로토타입 검증까지",
-      "description": "기획 문서를 용도에 맞게 쓰고, 엔진으로 직접 만들어 검증합니다.",
-      "keywords": [
-        "기획 문서 작성",
-        "Unity·MSW 프로토타입",
-        "AI 구현 · 직접 검수"
-      ],
+      "description": "다양한 게임 기획 문서 작성 역량과 직접 프로토타입 개발을 통해 검증까지!",
+      "keywords": [],
       "icon": "code"
     },
     {
-      "title": "2년 IT 실무와 협업 경험",
-      "subtitle": "20개 이상의 프로젝트 완료 경험",
-      "description": "IT 회사 기획자(산업기능요원)로 약 2년간 근무했습니다.",
-      "keywords": [
-        "기획서 작성",
-        "일정 관리",
-        "QA",
-        "고객사 응대",
-        "인디팀·동아리 협업"
-      ],
+      "title": "다양한 프로젝트 실무와 협업 경험",
+      "description": "현업 실무 경험과 다양한 게임 개발 팀 프로젝트 참여 경험 보유",
+      "keywords": [],
       "icon": "briefcase"
     },
     {
       "title": "최상위권 플레이 경험과 높은 게임 이해도",
-      "subtitle": "다수 경쟁 게임 최상위권 티어 달성",
-      "description": "경쟁 게임 최상위권 티어를 달성하며 장르별 메타와 전투 규칙을 익혔습니다.",
-      "keywords": [
-        "MOBA",
-        "히어로 슈터",
-        "배틀로얄",
-        "오토배틀러"
-      ],
+      "description": "다수의 최상위권 티어 달성 경험을 통한 게임 이해도 보유",
+      "keywords": [],
       "icon": "trophy"
     }
   ],

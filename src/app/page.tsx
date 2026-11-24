@@ -7,11 +7,9 @@ import {
   getFileSizeLabel,
   getProfile,
   getPublishedProjects,
-  getSkills,
 } from "@/content/loaders";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/Typography";
-import { TechBadge } from "@/components/ui/Badge";
 import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
 import { FeaturedBand, ProjectGrid, TRACKS } from "@/components/project/ProjectCards";
@@ -89,13 +87,11 @@ function IntroTitle({
 
 export default function HomePage() {
   const profile = getProfile();
-  const skills = getSkills();
   const projects = getPublishedProjects();
   const featured = getFeaturedProjects()[0];
   const career = getCareer();
   const awards = getAwards();
   const contact = getContact();
-  const heroSkills = skills.groups.flatMap((g) => g.items).filter((s) => s.highlight);
   const proofBadges = awards.items.filter((a) => a.highlight);
   const play = profile.playShowcase;
   const topAward = awards.items.find((a) => a.category === "award" && a.highlight);
@@ -154,7 +150,27 @@ export default function HomePage() {
               </div>
               {/* 줄바꿈은 넓은 화면에서만 유지 (좁은 화면에서는 자연스럽게 흐르도록) */}
               {profile.summary && (
-                <p className="max-w-xl text-[1.05rem] leading-[1.85] text-fg-muted md:whitespace-pre-line">{profile.summary}</p>
+                <p className="max-w-2xl text-[1.05rem] leading-[1.85] break-keep text-fg-muted md:whitespace-pre-line">{profile.summary}</p>
+              )}
+              {profile.coreStrengths.length > 0 && (
+                <section aria-labelledby="strengths-title" className="flex flex-col gap-3">
+                  <h2 id="strengths-title" className="text-base font-bold text-fg">
+                    나의 강점
+                  </h2>
+                  <ol className="flex flex-col gap-2.5">
+                    {profile.coreStrengths.map((s, i) => (
+                      <li key={s.title} className="flex gap-3">
+                        <span aria-hidden="true" className="w-6 shrink-0 font-display text-sm leading-6 font-semibold text-accent-text">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <div className="flex min-w-0 flex-col gap-0.5">
+                          <h3 className="text-[0.98rem] leading-6 font-semibold text-fg">{s.title}</h3>
+                          <p className="text-sm break-keep text-fg-muted">{s.description}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
               )}
               <HeroProofBadges items={proofBadges} />
               <div className="flex flex-wrap gap-3">
@@ -173,15 +189,6 @@ export default function HomePage() {
                   </ButtonLink>
                 )}
               </div>
-              {heroSkills.length > 0 && (
-                <ul aria-label="사용 도구" className="flex flex-wrap gap-2">
-                  {heroSkills.map((s) => (
-                    <li key={s.name}>
-                      <TechBadge name={s.name} icon={s.icon} size="sm" />
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
 
             {/* 히어로 비주얼: 3:4 프로필 사진 카드 */}
