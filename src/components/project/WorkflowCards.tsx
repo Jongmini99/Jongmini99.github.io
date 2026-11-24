@@ -46,7 +46,7 @@ export function WorkflowCards({ figures, label }: { figures: Image[]; label: str
                 onClick={() => open(i)}
                 className="group flex h-full w-full items-center gap-4 rounded-inner border border-band-line bg-bg/40 p-3 text-left transition-colors duration-150 hover:border-accent/60"
               >
-                <span className="relative aspect-video w-36 shrink-0 overflow-hidden rounded-md border border-band-line sm:w-44">
+                <span className="relative aspect-video w-36 shrink-0 overflow-hidden rounded-md border border-band-line sm:w-44 xl:w-48 2xl:w-56">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={withBasePath(f.src)} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
                 </span>
