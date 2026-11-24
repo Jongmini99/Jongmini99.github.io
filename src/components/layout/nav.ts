@@ -13,7 +13,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "수상", href: "/#award", section: "award" },
   { label: "경험", href: "/#experience", section: "experience" },
   { label: "이력 및 성과", href: "/#career", section: "career" },
-  { label: "연락하기", href: "/#contact", section: "contact" },
 ];
 
 /** 홈에서 스크롤 위치 추적 대상 (대표 프로젝트 화면은 '프로젝트' 메뉴로 표시) */
@@ -25,5 +24,4 @@ export const SECTION_TO_NAV: Record<string, string> = {
   experience: "experience",
   "experience-field": "experience",
   career: "career",
-  contact: "contact",
 };

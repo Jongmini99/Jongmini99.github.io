@@ -1,8 +1,8 @@
 /**
  * 사이트 정보(프로필·성과·연락처) 표시 블록 — 홈 한 페이지 섹션에서 사용
  */
-import { ArrowRight, Download, Mail } from "lucide-react";
-import type { Awards, Career, Contact, Profile, Project } from "@/content/schema";
+import { ArrowRight } from "lucide-react";
+import type { Awards, Career, Profile, Project } from "@/content/schema";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon, hasIcon } from "@/components/ui/Icon";
 import { MediaImage } from "@/components/ui/Media";
@@ -254,33 +254,5 @@ export function ActivitiesGrid({ items, headingLevel = "h4" }: { items: Profile[
         </li>
       ))}
     </ul>
-  );
-}
-
-/** 연락 버튼 묶음. 값이 없는 항목은 표시하지 않는다. */
-export function ContactActions({ contact, resumeLabel, className }: { contact: Contact; resumeLabel?: string; className?: string }) {
-  const hasAny = contact.email || contact.github || contact.resume;
-  if (!hasAny) return <p className="text-sm text-fg-subtle">연락처 정보를 준비 중입니다.</p>;
-  return (
-    <div className={cx("flex flex-wrap gap-3", className)}>
-      {contact.email && (
-        <ButtonLink href={`mailto:${contact.email}`} variant="primary">
-          <Mail className="size-5" aria-hidden="true" />
-          이메일로 연락하기
-        </ButtonLink>
-      )}
-      {contact.github && (
-        <ButtonLink href={contact.github} variant="outline">
-          <Icon name="github" className="size-5" />
-          GitHub
-        </ButtonLink>
-      )}
-      {contact.resume && (
-        <ButtonLink href={contact.resume} variant="outline" download>
-          <Download className="size-5" aria-hidden="true" />
-          {resumeLabel ?? "포트폴리오 PDF 다운로드"}
-        </ButtonLink>
-      )}
-    </div>
   );
 }

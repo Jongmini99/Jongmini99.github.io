@@ -18,7 +18,7 @@ export function SiteHeader() {
             {profile.name} <span className="font-semibold text-fg-muted">Portfolio</span>
           </span>
         </Link>
-        <HeaderNav resume={contact.resume} />
+        <HeaderNav resume={contact.resume} contact={contact} />
       </div>
     </header>
   );

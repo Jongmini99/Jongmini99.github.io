@@ -56,6 +56,11 @@
   html:has([data-snap-home]) {
     scroll-snap-type: y mandatory;
   }
+  /* 마지막 화면 아래 푸터까지 내려갈 수 있도록 페이지 끝도 스냅 지점으로 둔다 */
+  html:has([data-snap-home]) body > footer,
+  html:has([data-snap-home]) footer[data-site-footer] {
+    scroll-snap-align: end;
+  }
   [data-snap-home] > * {
     scroll-margin-top: var(--spacing-header);
   }

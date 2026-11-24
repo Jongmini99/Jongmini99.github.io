@@ -8,6 +8,8 @@ import { NAV_ITEMS, SECTION_TO_NAV, type NavItem } from "./nav";
 import { buttonClass } from "@/components/ui/Button";
 import { withBasePath } from "@/lib/base-path";
 import { cx } from "@/lib/cx";
+import type { Contact } from "@/content/schema";
+import { ContactDialog } from "./ContactDialog";
 
 const normalize = (pathname: string) => pathname.replace(/\/+$/, "") || "/";
 
@@ -46,7 +48,7 @@ function useActiveSection(enabled: boolean): string | null {
   return enabled ? active : null;
 }
 
-export function HeaderNav({ resume }: { resume?: string }) {
+export function HeaderNav({ resume, contact }: { resume?: string; contact: Contact }) {
   const pathname = usePathname();
   const section = useActiveSection(normalize(pathname) === "/");
   const [open, setOpen] = useState(false);
@@ -109,10 +111,13 @@ export function HeaderNav({ resume }: { resume?: string }) {
         </ul>
       </nav>
 
-      <div className="hidden lg:block">{resumeButton}</div>
+      <div className="flex items-center gap-2">
+        <div className="hidden lg:block">{resumeButton}</div>
+        {/* 연락하기: 작은 버튼 → 연락처 대화상자 (모든 화면 크기) */}
+        <ContactDialog contact={contact} onOpen={() => setOpen(false)} />
 
-      {/* 모바일 토글 */}
-      <button
+        {/* 모바일 토글 */}
+        <button
         ref={toggleRef}
         type="button"
         className="inline-flex size-10 items-center justify-center rounded-control text-fg hover:bg-surface lg:hidden"
@@ -123,6 +128,7 @@ export function HeaderNav({ resume }: { resume?: string }) {
         {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
         <span className="sr-only">{open ? "메뉴 닫기" : "메뉴 열기"}</span>
       </button>
+      </div>
 
       {/* 모바일 패널 */}
       <div
