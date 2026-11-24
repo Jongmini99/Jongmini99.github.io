@@ -4,6 +4,7 @@ import type { Project } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
 import { ProjectBackLink } from "./ProjectOrigin";
 import { PlayBuildButton, PlayBuildNote } from "./PlayBuild";
+import { MediaShowcase } from "./MediaShowcase";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -21,6 +22,54 @@ export function ProjectHeader({ project }: { project: Project }) {
       : null,
   ].filter((m) => m !== null);
 
+  // 영상·스크린샷이 있는 게임·AI 프로젝트: 스팀 상점 페이지처럼 왼쪽 미디어 + 오른쪽 정보
+  if (project.track !== "document" && (project.videos.length > 0 || project.gallery.length > 0)) {
+    return (
+      <header className="relative overflow-hidden border-b border-line bg-bg-alt">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-40 -left-32 size-[32rem] rounded-full bg-accent/10 blur-3xl" />
+        </div>
+        <Container className="relative flex flex-col gap-6 pt-8 pb-10 sm:pt-10">
+          <div className="flex flex-col gap-3">
+            <Breadcrumb title={project.title} />
+            <ProjectBackLink slug={project.slug} />
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] lg:gap-10">
+            <MediaShowcase videos={project.videos} images={project.gallery} title={project.title} />
+
+            <div className="flex min-w-0 flex-col gap-5">
+              <div className="flex flex-col gap-3">
+                <h1 className="text-[clamp(1.9rem,1.4rem+1.6vw,2.75rem)] leading-[1.15] font-bold tracking-[-0.04em] text-balance text-fg">
+                  {project.title}
+                </h1>
+                <p className="text-lg font-semibold text-accent-text">{project.genre}</p>
+                {project.subtitle && <p className="border-l-2 border-accent pl-4 text-base text-fg-muted">{project.subtitle}</p>}
+              </div>
+
+              <dl aria-label="프로젝트 정보" className="flex flex-col divide-y divide-line rounded-card border border-line bg-surface/70">
+                {meta.map((m) => (
+                  <div key={m.label} className="flex items-start gap-3 px-4 py-3">
+                    <m.icon className="mt-0.5 size-5 shrink-0 text-fg-muted" aria-hidden="true" strokeWidth={1.5} />
+                    <dt className="w-16 shrink-0 text-sm text-fg-muted">{m.label}</dt>
+                    <dd className="min-w-0 text-sm font-semibold text-fg">{m.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              {project.playBuild && (
+                <div className="flex flex-col items-start gap-3">
+                  <PlayBuildButton build={project.playBuild} idPrefix="project" variant="primary" />
+                  <PlayBuildNote build={project.playBuild} idPrefix="project" showNote />
+                </div>
+              )}
+            </div>
+          </div>
+        </Container>
+      </header>
+    );
+  }
+
   return (
     <header className="relative overflow-hidden border-b border-line">
       {/* 배경 이미지: 오른쪽에 배치하고 왼쪽으로 그라데이션 */}
@@ -33,30 +82,7 @@ export function ProjectHeader({ project }: { project: Project }) {
 
       <Container className="relative flex flex-col gap-8 pt-8 pb-8 sm:pt-10">
         <div className="flex flex-col gap-3">
-          {/* 현재 위치: 소개 › 프로젝트 › 이 프로젝트 */}
-          <nav aria-label="현재 위치">
-            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-fg-muted">
-              <li>
-                <Link href="/#top" className="hover:text-fg">
-                  소개
-                </Link>
-              </li>
-              <li aria-hidden="true">
-                <ChevronRight className="size-3.5" />
-              </li>
-              <li>
-                <Link href="/projects/" className="hover:text-fg">
-                  프로젝트
-                </Link>
-              </li>
-              <li aria-hidden="true">
-                <ChevronRight className="size-3.5" />
-              </li>
-              <li aria-current="page" className="font-semibold text-fg">
-                {project.title}
-              </li>
-            </ol>
-          </nav>
+          <Breadcrumb title={project.title} />
           <ProjectBackLink slug={project.slug} />
         </div>
 
@@ -94,5 +120,34 @@ export function ProjectHeader({ project }: { project: Project }) {
         </ul>
       </Container>
     </header>
+  );
+}
+
+/** 현재 위치: 소개 › 프로젝트 › 이 프로젝트 */
+function Breadcrumb({ title }: { title: string }) {
+  return (
+    <nav aria-label="현재 위치">
+      <ol className="flex flex-wrap items-center gap-1.5 text-sm text-fg-muted">
+        <li>
+          <Link href="/#top" className="hover:text-fg">
+            소개
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronRight className="size-3.5" />
+        </li>
+        <li>
+          <Link href="/projects/" className="hover:text-fg">
+            프로젝트
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronRight className="size-3.5" />
+        </li>
+        <li aria-current="page" className="font-semibold text-fg">
+          {title}
+        </li>
+      </ol>
+    </nav>
   );
 }

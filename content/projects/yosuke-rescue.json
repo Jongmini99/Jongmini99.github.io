@@ -582,13 +582,6 @@
           "value": "Esc / B 버튼, Start"
         }
       ]
-    },
-    {
-      "id": "media",
-      "type": "media",
-      "title": "플레이 화면",
-      "visible": true,
-      "width": "full"
     }
   ]
 }

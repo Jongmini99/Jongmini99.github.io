@@ -477,13 +477,6 @@
       ]
     },
     {
-      "id": "media",
-      "type": "media",
-      "title": "미디어",
-      "visible": true,
-      "width": "full"
-    },
-    {
       "id": "documents",
       "type": "documents",
       "title": "설계 문서 · QA 보고서",

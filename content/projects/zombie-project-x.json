@@ -210,13 +210,6 @@
       "width": "half"
     },
     {
-      "id": "media",
-      "type": "media",
-      "title": "미디어",
-      "visible": true,
-      "width": "full"
-    },
-    {
       "id": "documents",
       "type": "documents",
       "title": "기획 문서 및 자료",

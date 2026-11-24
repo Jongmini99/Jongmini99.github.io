@@ -318,13 +318,6 @@
         "Unity 6 · GitHub · Notion을 MCP로 연결해 AI 개발 환경 구성",
         "AI 산출물을 직접 플레이로 검수하고 수정"
       ]
-    },
-    {
-      "id": "media",
-      "type": "media",
-      "title": "미디어",
-      "visible": false,
-      "width": "full"
     }
   ]
 }
