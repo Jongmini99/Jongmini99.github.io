@@ -51,8 +51,10 @@ export function WorkflowCards({ figures, label }: { figures: Image[]; label: str
                   <img src={withBasePath(f.src)} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
                 </span>
                 <span className="flex min-w-0 flex-col gap-1">
-                  <span className="font-display text-xs font-semibold text-accent-text">AI · {String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-[0.95rem] leading-snug font-bold text-fg">{title}</span>
+                  <span className="text-[0.95rem] leading-snug font-bold text-fg">
+                    <span className="mr-1.5 font-display text-accent-text">{String(i + 1).padStart(2, "0")}</span>
+                    {title}
+                  </span>
                   {description && <span className="text-sm leading-snug break-keep text-fg-muted">{description}</span>}
                   <span className="mt-0.5 inline-flex items-center gap-1 text-xs font-semibold text-fg-muted group-hover:text-accent-text">
                     <Maximize2 className="size-3.5" aria-hidden="true" />
