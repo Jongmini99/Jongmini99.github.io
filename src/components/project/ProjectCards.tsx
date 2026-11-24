@@ -6,6 +6,7 @@ import type { Awards, Project, ProjectTrack } from "@/content/schema";
 type AwardItem = Awards["items"][number];
 import { MediaImage } from "@/components/ui/Media";
 import { YouTubeFrame } from "@/components/sections/Videos";
+import { WorkflowCards } from "./WorkflowCards";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
@@ -115,8 +116,14 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
           </div>
         </div>
 
-        {/* 작업 흐름: 사람(결정·검증)과 AI(설계·제작·검사)를 구분해 보여 준다 */}
-        {flow && flow.steps.length > 0 && (
+        {/* 작업 흐름: 도표가 있으면 도표 카드(클릭 시 확대), 없으면 단계 카드 — 사람(결정·검증)과 AI(설계·제작·검사)를 구분 */}
+        {flow && flow.figures.length > 0 && (
+          <div className="flex flex-col gap-4 border-t border-band-line pt-8">
+            <h3 className="text-base font-bold text-fg">{flow.title}</h3>
+            <WorkflowCards figures={flow.figures} label={flow.title} />
+          </div>
+        )}
+        {flow && flow.figures.length === 0 && flow.steps.length > 0 && (
           <div className="flex flex-col gap-4 border-t border-band-line pt-8">
             <h3 className="text-base font-bold text-fg">{flow.title}</h3>
             <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(var(--n),minmax(0,1fr))]" style={{ "--n": flow.steps.length } as React.CSSProperties}>
