@@ -94,32 +94,7 @@ export function HeaderNav({ resume, contact }: { resume?: string; contact: Conta
 
   return (
     <>
-      {/* 데스크톱 메뉴 */}
-      <nav aria-label="주요 메뉴" className="hidden h-full lg:block">
-        <ul className="flex h-full items-center gap-1">
-          {NAV_ITEMS.map((item) => {
-            const current = activeState(pathname, item, section);
-            const active = current !== undefined;
-            return (
-              <li key={item.href} className="h-full">
-                <Link
-                  href={item.href}
-                  aria-current={current}
-                  onClick={() => onNavigate(item)}
-                  className={cx(
-                    "relative flex h-full items-center px-4 text-[0.95rem] transition-colors duration-150",
-                    active ? "font-semibold text-fg" : "text-fg-muted hover:text-fg",
-                  )}
-                >
-                  {item.label}
-                  {active && <span aria-hidden="true" className="absolute inset-x-4 bottom-0 h-0.5 bg-accent" />}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-
+      {/* 데스크톱은 상단 메뉴 없이 홈 오른쪽 섹션 점 내비게이션(SectionSpy)으로 이동한다 (2026-11-25) */}
       <div className="flex items-center gap-2">
         <div className="hidden lg:block">{resumeButton}</div>
         {/* 연락하기: 작은 버튼 → 연락처 대화상자 (모든 화면 크기) */}
@@ -146,7 +121,7 @@ export function HeaderNav({ resume, contact }: { resume?: string; contact: Conta
         hidden={!open}
         className="absolute inset-x-0 top-full border-b border-line bg-bg/95 backdrop-blur-md lg:hidden"
       >
-        <nav aria-label="주요 메뉴 (모바일)" className="mx-auto max-w-(--container-content) px-4 py-4 sm:px-6">
+        <nav aria-label="주요 메뉴" className="mx-auto max-w-(--container-content) px-4 py-4 sm:px-6">
           <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => {
               const current = activeState(pathname, item, section);
