@@ -72,13 +72,21 @@
     {
       "game": "이터널 리턴",
       "metric": "미스릴 7900pt",
-      "description": "배틀로얄 · 최고 달성 티어"
+      "description": "배틀로얄 · 최고 달성 티어",
+      "emblem": {
+        "src": "/uploads/images/emblems/eternalreturn-mithril.png",
+        "alt": "미스릴 티어 엠블럼"
+      }
     },
     {
       "game": "오버워치",
       "metric": "마스터",
       "description": "히어로 슈터 · 최고 달성 티어",
-      "icon": "battlenet"
+      "icon": "battlenet",
+      "emblem": {
+        "src": "/uploads/images/emblems/overwatch-master.png",
+        "alt": "마스터 티어 엠블럼"
+      }
     },
     {
       "game": "마블 라이벌즈",
