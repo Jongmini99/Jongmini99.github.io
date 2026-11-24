@@ -187,7 +187,7 @@
     "items": [
       {
         "src": "/uploads/images/career/field-01-cclime-app.jpg",
-        "alt": "끌리메 에스테틱 앱 소개 화면 — 오로라 배경의 앱 메인 화면",
+        "alt": "끌리메 에스테틱 앱 홈 화면 — 다음 예약, 방문 예약하기 버튼, 등급·남은 관리 수·최근 방문일",
         "caption": "끌리메 에스테틱 앱 개발 프로젝트 — 담당 업무: 기획 · PM · QA"
       },
       {
@@ -197,12 +197,12 @@
       },
       {
         "src": "/uploads/images/career/field-03-imin-fintech.jpg",
-        "alt": "아임인 핀테크 앱 홍보 이미지 — '모이자! 아임인' 문구와 앱 화면",
+        "alt": "아임인 앱 소개 이미지 — \"함께라서 더 쉬운 목돈 마련, 소셜 플랫폼 아임인\" 문구와 앱 홈 화면",
         "caption": "아임인 핀테크 앱 개발 프로젝트 — 담당 업무: PM · QA"
       },
       {
-        "src": "/uploads/images/career/field-04-hazzys-event-game.jpg",
-        "alt": "Hazzys On The Wheels 이벤트 게임 키 비주얼 — 스케이트보드를 탄 강아지 캐릭터들",
+        "src": "/uploads/images/career/field-04-hazzys-rowing-crew.jpg",
+        "alt": "Hazzys Rowing Crew 이벤트 게임 시작 화면 — 노를 든 강아지 캐릭터들과 게임시작 버튼",
         "caption": "Hazzys 이벤트 게임 런칭 — 담당 업무: PM · QA"
       }
     ]
