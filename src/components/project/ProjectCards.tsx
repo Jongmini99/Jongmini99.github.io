@@ -223,16 +223,34 @@ export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: P
       </div>
       <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
         <div className="flex flex-col gap-1.5">
-          <H className="text-xl leading-snug font-bold tracking-[-0.03em] text-fg">
-            <Link href={href(project)} className="outline-none after:absolute after:inset-0 after:content-['']">
-              {project.title}
-            </Link>
-            {project.developmentPeriod && (
-              <span className="ml-2 align-middle font-display text-sm font-medium tracking-normal whitespace-nowrap text-fg-muted">
-                {formatPeriod(project.developmentPeriod)}
+          {project.tagline ? (
+            /* 한줄 요약을 크게, 프로젝트 이름·기간은 그 위에 작게 */
+            <H className="flex flex-col gap-1.5">
+              <span className="text-sm font-semibold text-fg-muted">
+                {project.title}
+                {project.developmentPeriod && (
+                  <span className="ml-2 font-display font-medium whitespace-nowrap">{formatPeriod(project.developmentPeriod)}</span>
+                )}
               </span>
-            )}
-          </H>
+              <Link
+                href={href(project)}
+                className="text-xl leading-snug font-bold tracking-[-0.03em] text-balance text-fg outline-none after:absolute after:inset-0 after:content-['']"
+              >
+                {project.tagline}
+              </Link>
+            </H>
+          ) : (
+            <H className="text-xl leading-snug font-bold tracking-[-0.03em] text-fg">
+              <Link href={href(project)} className="outline-none after:absolute after:inset-0 after:content-['']">
+                {project.title}
+              </Link>
+              {project.developmentPeriod && (
+                <span className="ml-2 align-middle font-display text-sm font-medium tracking-normal whitespace-nowrap text-fg-muted">
+                  {formatPeriod(project.developmentPeriod)}
+                </span>
+              )}
+            </H>
+          )}
           <p className="text-sm text-accent-text">{project.genre}</p>
         </div>
         {project.keyTakeaways ? (

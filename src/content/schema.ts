@@ -261,6 +261,8 @@ export const ProjectSchema = z
     track: z.preprocess(emptyToUndefined, z.enum(PROJECT_TRACKS).optional()),
     /** 카드 3단 요약 (선택) */
     keyTakeaways: optionalTakeaways,
+    /** 프로젝트 카드의 큰 제목으로 쓰는 한줄 요약 (선택). 비우면 프로젝트 이름을 크게 표시 */
+    tagline: optionalText,
     /** 상세 페이지 상단 AI 개발 파이프라인 칸 (선택) */
     pipeline: z.preprocess(emptyToUndefined, PipelineSchema.optional()),
     /** 홈 대표 프로젝트 화면의 핵심 성과 불릿 (선택, 3~4개 권장) */
