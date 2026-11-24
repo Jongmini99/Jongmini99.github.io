@@ -27,7 +27,7 @@
     "Unity MCP",
     "Blender MCP"
   ],
-  "track": "game",
+  "track": "ai",
   "keyTakeaways": {
     "problem": "공유 에디터 충돌 · 4주 차 세계관 전면 교체",
     "solution": "일괄 QA 구조 · 플레이 요소 고정 후 외형만 교체",

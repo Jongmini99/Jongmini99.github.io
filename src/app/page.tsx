@@ -36,7 +36,7 @@ import {
  *   ① 히어로(#top): 한 줄 소개·자기소개·성과 배지·도구 아이콘·사진
  *   ② 대표 프로젝트(#featured): 한 줄 소개·핵심 성과·영상·AI 작업 흐름
  *   ③ 수상(#award): 상장 + 프로젝트 키아트
- * 그 아래도 한 화면 = 한 섹션: 프로젝트(#projects 게임 / #projects-document 문서) →
+ * 그 아래도 한 화면 = 한 섹션: 프로젝트(#projects AI / #projects-game 기획·개발 / #projects-document 문서) →
  *   경험(#experience 플레이 / #experience-field 현장) → 이력 및 성과(#career)
  * 연락하기는 섹션 없이 상단 바의 작은 버튼(연락처 대화상자)으로 제공한다.
  * 섹션 id는 상단 메뉴(nav.ts)의 앵커와 맞춘다.
@@ -83,53 +83,6 @@ function IntroTitle({
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-/** 분류 제목 (01 게임 기획 & 프로토타입) */
-function TrackHeading({ index, title, description, id }: { index: number; title: string; description?: string; id: string }) {
-  return (
-    <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
-      <h3 id={id} className="flex items-baseline gap-3 text-2xl font-bold tracking-[-0.03em] text-fg">
-        <span aria-hidden="true" className="font-display text-base font-semibold text-accent-text">
-          {String(index).padStart(2, "0")}
-        </span>
-        {title}
-      </h3>
-      {description && <p className="text-sm text-fg-muted">{description}</p>}
-    </div>
-  );
-}
-
-/** 앞 화면에서 이어지는 섹션 제목: 상위 섹션 이름을 작게, 이 화면 제목을 크게 */
-function ContinuedTitle({
-  parent,
-  title,
-  id,
-  index,
-  description,
-}: {
-  parent: string;
-  title: string;
-  id: string;
-  index?: number;
-  description?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-3">
-      <p className="text-sm font-semibold text-fg-muted">{parent}</p>
-      <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
-        <h2 id={id} className="flex items-baseline gap-3 text-3xl font-bold tracking-[-0.03em] text-fg sm:text-4xl">
-          {index !== undefined && (
-            <span aria-hidden="true" className="font-display text-lg font-semibold text-accent-text">
-              {String(index).padStart(2, "0")}
-            </span>
-          )}
-          {title}
-        </h2>
-        {description && <p className="text-sm text-fg-muted">{description}</p>}
-      </div>
     </div>
   );
 }
@@ -198,15 +151,6 @@ export default function HomePage() {
                 <h1 id="hero-title" className="max-w-3xl text-display font-bold tracking-[-0.05em] text-balance text-fg md:whitespace-pre-line">
                   {profile.headline}
                 </h1>
-                <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                  <span className="text-2xl font-bold tracking-[-0.03em] text-accent-text">{profile.name}</span>
-                  {profile.targetRoles.length > 0 && (
-                    <>
-                      <span aria-hidden="true" className="hidden h-5 w-px bg-line-strong sm:block" />
-                      <span className="w-full text-lg text-fg-muted sm:w-auto">{profile.targetRoles.join(" / ")}</span>
-                    </>
-                  )}
-                </p>
               </div>
               {/* 줄바꿈은 넓은 화면에서만 유지 (좁은 화면에서는 자연스럽게 흐르도록) */}
               {profile.summary && (
@@ -269,25 +213,20 @@ export default function HomePage() {
           return (
             <section key={slide.key} id={first ? "projects" : `projects-${slide.key}`} aria-labelledby={headingId} className={SLIDE}>
               <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-                {first ? (
-                  <SectionTitle
-                    title="참여한 프로젝트"
-                    id={headingId}
-                    description="카드마다 문제 → 해결 → 결과를 정리했습니다."
-                    aside={
+                <SectionTitle
+                  title={slide.title || "참여한 프로젝트"}
+                  id={headingId}
+                  description={slide.description}
+                  aside={
+                    first ? (
                       <ButtonLink href="/projects/" variant="outline" size="sm">
                         전체 프로젝트
                         <ArrowRight className="size-4" aria-hidden="true" />
                       </ButtonLink>
-                    }
-                  />
-                ) : (
-                  <ContinuedTitle parent="참여한 프로젝트" title={slide.title} id={headingId} index={i + 1} description={slide.description} />
-                )}
-                {first && slide.title && (
-                  <TrackHeading index={i + 1} title={slide.title} description={slide.description} id={`projects-${slide.key}-track`} />
-                )}
-                <ProjectGrid projects={slide.items} headingLevel={first && slide.title ? "h4" : "h3"} compact />
+                    ) : undefined
+                  }
+                />
+                <ProjectGrid projects={slide.items} headingLevel="h3" compact />
               </Container>
             </section>
           );

@@ -20,6 +20,7 @@ export const SECTION_TO_NAV: Record<string, string> = {
   featured: "projects",
   award: "award",
   projects: "projects",
+  "projects-game": "projects",
   "projects-document": "projects",
   experience: "experience",
   "experience-field": "experience",

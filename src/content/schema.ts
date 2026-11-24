@@ -193,7 +193,7 @@ export type SectionType = Section["type"];
 /* ------------------------------------------------------------------ */
 
 /** 홈 프로젝트 영역의 분류: 게임 제작·프로토타입 / 기획서·역기획·BM 분석 */
-export const PROJECT_TRACKS = ["game", "document"] as const;
+export const PROJECT_TRACKS = ["ai", "game", "document"] as const;
 export type ProjectTrack = (typeof PROJECT_TRACKS)[number];
 
 /** 카드 겉면에 노출하는 3단 요약 (기획 의도/문제 → 구현/해결 → 검증 결과) */

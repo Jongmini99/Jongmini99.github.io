@@ -309,13 +309,18 @@ export function ProjectGrid({
 
 export const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
   {
+    key: "ai",
+    title: "AI 프로젝트",
+    description: "기획과 검수는 직접 맡고, 구현은 AI와 협업해 만든 프로젝트",
+  },
+  {
     key: "game",
-    title: "게임 기획 & 프로토타입",
-    description: "직접 기획하고 엔진으로 만들어 보며 플레이로 검증한 게임 프로젝트",
+    title: "기획/개발을 직접 진행한 프로젝트",
+    description: "직접 기획하고 엔진으로 개발해 출시·수상까지 이어진 프로젝트",
   },
   {
     key: "document",
-    title: "기획서 & 역기획·분석",
+    title: "게임 디자인 문서 작성",
     description: "시스템 역기획, 지표·BM 분석, 출시 가격 제안 문서",
   },
 ];
