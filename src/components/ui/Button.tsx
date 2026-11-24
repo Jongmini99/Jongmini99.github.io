@@ -37,6 +37,7 @@ type ButtonLinkProps = {
   /** "새 창" 안내 아이콘 표시 여부. 외부 URL은 자동으로 새 창 */
   showExternalIcon?: boolean;
   "aria-label"?: string;
+  "aria-describedby"?: string;
 };
 
 const isExternal = (href: string) => /^(https?:)?\/\//.test(href);
@@ -50,6 +51,14 @@ const isSpecial = (href: string) => /^(mailto|tel):/.test(href);
 export function ButtonLink({ href, children, variant, size, className, download, showExternalIcon, ...rest }: ButtonLinkProps) {
   const cls = buttonClass({ variant, size, className });
 
+  // 외부 파일 다운로드(GitHub Releases 등): 빈 새 탭이 남지 않도록 같은 창에서 받는다
+  if (download && isExternal(href)) {
+    return (
+      <a href={href} className={cls} {...rest}>
+        {children}
+      </a>
+    );
+  }
   if (isExternal(href)) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls} {...rest}>

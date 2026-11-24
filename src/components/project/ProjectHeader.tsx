@@ -3,6 +3,7 @@ import { ChevronRight, Calendar, Gamepad2, Layers, User, Users } from "lucide-re
 import type { Project } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
 import { ProjectBackLink } from "./ProjectOrigin";
+import { PlayBuildButton, PlayBuildNote } from "./PlayBuild";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -63,6 +64,12 @@ export function ProjectHeader({ project }: { project: Project }) {
           <h1 className="text-display font-bold tracking-[-0.05em] text-fg">{project.title}</h1>
           <p className="text-xl font-semibold text-accent-text">{project.genre}</p>
           {project.subtitle && <p className="border-l-2 border-accent pl-4 text-lg text-fg-muted">{project.subtitle}</p>}
+          {project.playBuild && (
+            <div className="flex flex-col items-start gap-3 pt-2">
+              <PlayBuildButton build={project.playBuild} idPrefix="project" variant="primary" />
+              <PlayBuildNote build={project.playBuild} idPrefix="project" showNote />
+            </div>
+          )}
         </div>
 
         <ul aria-label="프로젝트 정보" className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-[repeat(4,minmax(0,auto))_minmax(0,1fr)]">

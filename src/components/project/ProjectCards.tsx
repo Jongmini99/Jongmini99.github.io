@@ -10,6 +10,7 @@ import {
   User,
   Wrench,
 } from "lucide-react";
+import { PlayBuildButton, PlayBuildNote } from "./PlayBuild";
 import type { Awards, Project, ProjectTrack } from "@/content/schema";
 
 type AwardItem = Awards["items"][number];
@@ -60,7 +61,7 @@ export function FeaturedBand({
         <div className="absolute -top-32 -left-24 size-[30rem] rounded-full bg-accent/15 blur-3xl" />
         <div className="absolute -right-24 -bottom-40 size-[34rem] rounded-full bg-accent/10 blur-3xl" />
       </div>
-      <Container className="relative flex flex-col gap-10 lg:gap-12">
+      <Container className="relative flex flex-col gap-10 lg:gap-12 2xl:max-w-[min(100rem,calc(100vw_-_20rem))] min-[140rem]:max-w-[min(116rem,calc(100vw_-_20rem))] min-[120rem]:gap-14">
         {/* 제목 줄: 작게 */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="rounded-full bg-accent-solid px-3 py-1 text-sm font-bold text-accent-fg">
@@ -68,11 +69,11 @@ export function FeaturedBand({
           </span>
           <h2
             id={headingId}
-            className="text-lg font-bold tracking-[-0.02em] text-fg sm:text-xl"
+            className="text-lg font-bold tracking-[-0.02em] text-fg sm:text-xl 2xl:text-2xl min-[120rem]:text-[1.75rem]"
           >
             {project.title}
           </h2>
-          <p className="text-sm text-fg-muted">
+          <p className="text-sm text-fg-muted 2xl:text-base">
             {project.genre}
             {project.developmentPeriod && (
               <span className="font-display">
@@ -83,10 +84,10 @@ export function FeaturedBand({
           </p>
         </div>
 
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14 2xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] 2xl:gap-16">
           <div className="flex flex-col gap-7">
             {(project.subtitle || project.description) && (
-              <p className="text-[clamp(1.75rem,1.2rem+1.8vw,2.6rem)] leading-[1.25] font-bold tracking-[-0.04em] text-balance text-fg">
+              <p className="text-[clamp(1.75rem,1rem+2vw,4rem)] leading-[1.25] font-bold tracking-[-0.04em] text-balance text-fg">
                 {project.subtitle ?? project.description}
               </p>
             )}
@@ -95,7 +96,7 @@ export function FeaturedBand({
                 {project.highlights.map((h) => (
                   <li
                     key={h}
-                    className="flex items-start gap-3 text-lg leading-snug text-fg"
+                    className="flex items-start gap-3 text-lg leading-snug text-fg 2xl:text-xl min-[120rem]:text-2xl"
                   >
                     <Check
                       className="mt-0.5 size-5 shrink-0 text-accent-text"
@@ -106,25 +107,33 @@ export function FeaturedBand({
                 ))}
               </ul>
             )}
-            <div className="flex flex-wrap gap-3 pt-1">
-              <ButtonLink href={href(project)} variant="primary">
-                프로젝트 상세 보기
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </ButtonLink>
-              {project.externalLinks.slice(0, 2).map((l) => (
-                <ButtonLink
-                  key={l.url}
-                  href={l.url}
-                  variant="outline"
-                  showExternalIcon
-                >
-                  {l.label}
+            <div className="flex flex-col gap-3 pt-1">
+              <div className="flex flex-wrap gap-3">
+                <ButtonLink href={href(project)} variant="primary">
+                  프로젝트 상세 보기
+                  <ArrowRight className="size-4" aria-hidden="true" />
                 </ButtonLink>
-              ))}
+                {project.playBuild && (
+                  <PlayBuildButton build={project.playBuild} idPrefix={id} />
+                )}
+                {project.externalLinks.slice(0, 2).map((l) => (
+                  <ButtonLink
+                    key={l.url}
+                    href={l.url}
+                    variant="outline"
+                    showExternalIcon
+                  >
+                    {l.label}
+                  </ButtonLink>
+                ))}
+              </div>
+              {project.playBuild && (
+                <PlayBuildNote build={project.playBuild} idPrefix={id} />
+              )}
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-card border border-band-line shadow-[0_28px_65px_rgb(0_0_0/0.45)]">
+          <div className="w-full overflow-hidden rounded-card border border-band-line shadow-[0_28px_65px_rgb(0_0_0/0.45)] lg:max-w-[calc((100svh_-_17rem)_*_16_/_9)] lg:justify-self-end">
             <div className="relative aspect-video bg-surface">
               {youtube ? (
                 <YouTubeFrame

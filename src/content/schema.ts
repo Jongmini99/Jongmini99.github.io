@@ -277,6 +277,24 @@ export const ProjectSchema = z
       (v) => (v && typeof v === "object" && !(v as { src?: unknown }).src ? undefined : v),
       z.object({ src: MediaPath, poster: optionalImage }).optional(),
     ),
+    /**
+     * 플레이 빌드 다운로드 (선택). 100MB가 넘는 ZIP은 저장소에 넣을 수 없으므로
+     * GitHub Releases 등에 올리고 그 주소를 적는다. 홈 대표 화면·상세 헤더에 버튼으로 표시.
+     */
+    playBuild: z.preprocess(
+      (v) => (v && typeof v === "object" && !(v as { url?: unknown }).url ? undefined : v),
+      z
+        .object({
+          url: z.url(),
+          /** 예: Windows 10/11 */
+          platform: text,
+          /** 예: 221MB */
+          size: text,
+          /** 상세 헤더에만 보이는 추가 안내 (예: 보안 경고 창 대처법) */
+          note: optionalText,
+        })
+        .optional(),
+    ),
     sections: list(SectionSchema),
     achievements: list(AchievementSchema),
     documents: list(DocumentSchema),
