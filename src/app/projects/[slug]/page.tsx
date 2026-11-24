@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, getPublishedProjects, getVisibleSections } from "@/content/loaders";
 import { ProjectHeader } from "@/components/project/ProjectHeader";
+import { ProjectPipeline } from "@/components/project/ProjectPipeline";
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
 import { ProjectTocDesktop, ProjectTocMobile } from "@/components/sections/ProjectToc";
 import { buildToc, groupSections } from "@/components/sections/structure";
@@ -48,6 +49,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
   return (
     <article data-toc-page>
       <ProjectHeader project={project} />
+      {project.pipeline && <ProjectPipeline pipeline={project.pipeline} />}
       {toc.length > 0 && <ProjectTocMobile entries={toc} />}
 
       <Container className="grid gap-10 py-10 lg:grid-cols-[13.5rem_minmax(0,1fr)] lg:gap-12 lg:py-14">

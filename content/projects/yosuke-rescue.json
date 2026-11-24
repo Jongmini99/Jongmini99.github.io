@@ -38,6 +38,56 @@
     "일괄 QA 구조로 대기열 43건 연속 실행, 결함 18건 발견",
     "세계관 3일 만에 교체 · 자동 테스트 194/194 통과"
   ],
+  "pipeline": {
+    "title": "AI 개발 파이프라인",
+    "intro": "결정은 본인, 설계·제작·검사는 역할별 AI 에이전트가 맡고, 빌드를 직접 플레이해 개선 목록으로 다시 투입했습니다.",
+    "steps": [
+      {
+        "owner": "me",
+        "label": "기획·결정",
+        "text": "테마·사양·우선순위 결정, 승인·반려, 원화 준비"
+      },
+      {
+        "owner": "ai",
+        "label": "설계",
+        "text": "아키텍트 에이전트가 설계·작업 지시서 작성",
+        "tools": [
+          "Claude Code"
+        ]
+      },
+      {
+        "owner": "ai",
+        "label": "제작",
+        "text": "레벨 데이터·3D 모델·C# 구현·URP 셰이더",
+        "tools": [
+          "Claude Code",
+          "Unity MCP",
+          "Blender MCP"
+        ]
+      },
+      {
+        "owner": "ai",
+        "label": "검사",
+        "text": "QA 에이전트가 정적 검사·자동 플레이·회귀 테스트"
+      },
+      {
+        "owner": "me",
+        "label": "검증",
+        "text": "Unity 빌드를 직접 플레이해 확인"
+      }
+    ],
+    "loop": "플레이 결과를 개선 목록으로 만들어 1단계로 다시 투입",
+    "summary": [
+      "역할별 AI 에이전트 6종 설계 · 결정과 검증은 직접",
+      "4주 · 스테이지 25개 · 몬스터 44종 · 보스 5종",
+      "일괄 QA 구조로 대기열 43건 연속 실행, 결함 18건 발견",
+      "세계관 3일 만에 교체 · 자동 테스트 194/194 통과"
+    ],
+    "image": {
+      "src": "/uploads/images/yosuke-rescue/yosuke-pipeline.png",
+      "alt": "요스케 구출 대작전 AI 개발 파이프라인 — 기획·결정(본인) → 설계·제작·검사(AI) → 검증(본인) 반복 구조와 핵심 성과"
+    }
+  },
   "heroVideo": {
     "src": "/uploads/videos/temp/yosuke-hero-loop.mp4",
     "poster": {

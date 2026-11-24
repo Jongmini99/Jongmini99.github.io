@@ -114,6 +114,29 @@ export const FlowStepSchema = z.object({
   text: text,
 });
 
+/** 상세 페이지 상단 "AI 개발 파이프라인" 한 단계 */
+export const PipelineStepSchema = z.object({
+  /** 담당: 본인(me) / AI(ai) */
+  owner: z.enum(["me", "ai"]),
+  label: text,
+  text: text,
+  /** 이 단계에서 쓴 도구 (선택) */
+  tools: list(text),
+});
+
+/** 상세 페이지 제목 바로 아래에 표시하는 파이프라인 요약 칸 (선택) */
+export const PipelineSchema = z.object({
+  title: text,
+  intro: optionalText,
+  steps: z.array(PipelineStepSchema).min(2, "단계는 2개 이상이어야 합니다."),
+  /** 마지막 단계 → 첫 단계로 되돌아가는 반복 설명 (선택) */
+  loop: optionalText,
+  /** 핵심 요약 (3~4개 권장) */
+  summary: list(text),
+  /** 같은 내용을 담은 PNG (선택). 다운로드 링크로 제공 */
+  image: optionalImage,
+});
+
 export const CardItemSchema = z.object({
   title: text,
   body: optionalText, // Markdown
@@ -238,6 +261,8 @@ export const ProjectSchema = z
     track: z.preprocess(emptyToUndefined, z.enum(PROJECT_TRACKS).optional()),
     /** 카드 3단 요약 (선택) */
     keyTakeaways: optionalTakeaways,
+    /** 상세 페이지 상단 AI 개발 파이프라인 칸 (선택) */
+    pipeline: z.preprocess(emptyToUndefined, PipelineSchema.optional()),
     /** 홈 대표 프로젝트 화면의 핵심 성과 불릿 (선택, 3~4개 권장) */
     highlights: list(text),
     /**

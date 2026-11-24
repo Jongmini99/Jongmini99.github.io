@@ -28,6 +28,52 @@
     "solution": "도약 강화·영구 성장으로 재기획, Claude Code로 구현",
     "result": "약 3일간 4번 개선(v0 → v1.3) · 시나리오 데이터 추출 자동화"
   },
+  "pipeline": {
+    "title": "AI 개발 파이프라인 — Time Recall",
+    "intro": "제안과 코드는 AI, 문제 정의·채택 판단·플레이 검증은 본인이 맡았습니다.",
+    "steps": [
+      {
+        "owner": "me",
+        "label": "문제 정의",
+        "text": "소규모 테스트(5명) 결과로 '강화 체감이 첫 무기 교체에만 몰림' 정의"
+      },
+      {
+        "owner": "ai",
+        "label": "설계안 제안",
+        "text": "성장 곡선 등 설계안과 시뮬레이터 지표 제안"
+      },
+      {
+        "owner": "me",
+        "label": "검수·채택",
+        "text": "도약 강화·영구 성장으로 방향 재설정, 지표 확정"
+      },
+      {
+        "owner": "ai",
+        "label": "구현",
+        "text": "게임 코드와 웹 전투 밸런스 시뮬레이터 작성",
+        "tools": [
+          "Claude Code",
+          "Unity 6"
+        ]
+      },
+      {
+        "owner": "me",
+        "label": "플레이 검증",
+        "text": "자체 테스트로 원인을 수치·코드로 확인해 수정 지시"
+      }
+    ],
+    "loop": "약 3일간 4번 반복해 v0 → v1.3으로 개선",
+    "summary": [
+      "테스트(5명)로 문제 정의 — 강화 체감이 첫 무기 교체에만 몰림",
+      "도약 강화·영구 성장으로 재기획, Claude Code로 구현",
+      "웹 전투 시뮬레이터와 자체 테스트로 약 3일간 4번 개선",
+      "AI 결과물 검수 — 성장 곡선 수정, 넉백 고정값 문제를 코드로 확인"
+    ],
+    "image": {
+      "src": "/uploads/images/ai-experience/timerecall-pipeline.png",
+      "alt": "Time Recall AI 개발 파이프라인 — 문제 정의(본인) → 설계안 제안(AI) → 검수·채택(본인) → 구현(AI) → 플레이 검증(본인) 반복 구조와 핵심 요약"
+    }
+  },
   "thumbnail": {
     "src": "/uploads/images/ai-experience/timerecall-hero-gameview.jpg",
     "alt": "Time Recall 개선 프로토타입 게임 화면 — 격자 바닥 위의 플레이어와 적, 웨이브·코어 표시"
