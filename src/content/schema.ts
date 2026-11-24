@@ -329,10 +329,6 @@ export const GamerMetricSchema = z.object({
   description: optionalText,
   /** 공식 티어 엠블럼 이미지 (선택). 없으면 icon → 게임 이름 머리글자 순으로 대체 */
   emblem: optionalImage,
-  /** 게임 대표 아이콘 이미지 (선택, 정사각형). 있으면 홈 플레이 경험 카드에 크게 표시 */
-  image: optionalImage,
-  /** 지표 앞 라벨 (선택, 예: "최고 티어") */
-  metricLabel: optionalText,
   /** 게임 로고 아이콘 키 (선택, Icon 레지스트리) */
   icon: optionalText,
 });
@@ -345,7 +341,8 @@ export const PlayShowcaseSchema = z.object({
   intro: optionalText,
   /** 게임 카드 묶음 라벨 (예: "이해도가 높은 게임") */
   gamesLabel: optionalText,
-  steam: z.preprocess(emptyToUndefined, z.object({ label: text, image: ImageSchema }).optional()),
+  /** Steam 플레이 기록: metric(예: "248개 게임 플레이")은 Steam 아이콘과 따로 강조, image는 플레이 시간 스크린샷 */
+  steam: z.preprocess(emptyToUndefined, z.object({ metric: text, label: optionalText, image: ImageSchema }).optional()),
 });
 
 /** 기획 활동 (동아리·테스터·행사 참관·특강 등) */

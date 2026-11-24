@@ -16,6 +16,7 @@ import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
 import { FeaturedBand, ProjectGrid, TRACKS } from "@/components/project/ProjectCards";
 import { cx } from "@/lib/cx";
+import { Icon } from "@/components/ui/Icon";
 import { withBasePath } from "@/lib/base-path";
 import { SectionSpy, type SpyItem } from "@/components/layout/SectionSpy";
 import {
@@ -313,19 +314,29 @@ export default function HomePage() {
                   <GamerEmblems items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
                 </div>
                 {play?.steam && (
-                  <figure className="flex min-w-0 flex-col gap-6">
-                    <figcaption className="self-start rounded-full border border-line-strong px-4 py-1.5 text-base font-semibold text-fg">{play.steam.label}</figcaption>
-                    <a
-                      href={withBasePath(play.steam.image.src)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block overflow-hidden rounded-card border border-line-strong transition-colors duration-150 hover:border-accent/60"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={withBasePath(play.steam.image.src)} alt={play.steam.image.alt ?? play.steam.label} loading="lazy" decoding="async" width={1682} height={1112} className="h-auto w-full" />
-                      <span className="sr-only">(원본 이미지 새 창)</span>
-                    </a>
-                  </figure>
+                  <div className="flex min-w-0 flex-col gap-6">
+                    {/* Steam 플레이 경험: 아이콘 + 플레이한 게임 수를 따로 강조 */}
+                    <h3 className="flex items-center gap-3 self-start rounded-full border border-line-strong py-1 pr-5 pl-1 text-fg">
+                      <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-surface-raised">
+                        <Icon name="steam" className="size-5" />
+                      </span>
+                      <span className="text-base font-semibold">Steam</span>
+                      <span className="text-lg font-bold tracking-[-0.02em] text-accent-text">{play.steam.metric}</span>
+                    </h3>
+                    <figure className="flex flex-col gap-2">
+                      <a
+                        href={withBasePath(play.steam.image.src)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block overflow-hidden rounded-card border border-line-strong transition-colors duration-150 hover:border-accent/60"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={withBasePath(play.steam.image.src)} alt={play.steam.image.alt ?? play.steam.metric} loading="lazy" decoding="async" width={1682} height={1112} className="h-auto w-full" />
+                        <span className="sr-only">(원본 이미지 새 창)</span>
+                      </a>
+                      {play.steam.label && <figcaption className="text-sm text-fg-muted">{play.steam.label}</figcaption>}
+                    </figure>
+                  </div>
                 )}
               </div>
             </Container>

@@ -199,34 +199,22 @@ export function CareerTimeline({ items }: { items: Career["items"] }) {
 export function GamerEmblems({ items, labelledBy }: { items: Profile["gamerMetrics"]; labelledBy?: string }) {
   if (items.length === 0) return null;
   return (
-    <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3">
+    <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-4 sm:grid-cols-3">
       {items.map((m) => (
-        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 text-center">
-          {/* 게임 아이콘 (없으면 티어 엠블럼 → 로고 아이콘 → 머리글자) */}
-          <span aria-hidden="true" className="relative flex size-24 items-center justify-center [@media(max-height:56rem)]:lg:size-20 xl:size-28">
-            {m.image ? (
+        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 rounded-card border border-line bg-surface px-4 py-6 text-center lg:py-5">
+          <span aria-hidden="true" className="flex size-20 items-center justify-center">
+            {m.emblem ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={withBasePath(m.image.src)} alt="" loading="lazy" decoding="async" className="size-full rounded-2xl border border-line-strong object-cover" />
-            ) : m.emblem ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="size-full object-contain" />
+              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="size-20 object-contain" />
             ) : (
-              <span className="flex size-full items-center justify-center rounded-2xl bg-surface-raised text-fg">
-                {hasIcon(m.icon) ? <Icon name={m.icon} className="size-10" /> : <span className="text-2xl font-bold">{m.game.slice(0, 1)}</span>}
+              <span className="flex size-16 items-center justify-center rounded-full bg-surface-raised text-fg">
+                {hasIcon(m.icon) ? <Icon name={m.icon} className="size-8" /> : <span className="text-xl font-bold">{m.game.slice(0, 1)}</span>}
               </span>
-            )}
-            {/* 티어 엠블럼은 아이콘 오른쪽 아래에 작게 */}
-            {m.image && m.emblem && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="absolute -right-3 -bottom-3 size-12 object-contain drop-shadow-[0_4px_10px_rgb(0_0_0/0.6)]" />
             )}
           </span>
           <span className="flex flex-col gap-1">
-            <span className="text-base font-bold tracking-[-0.02em] break-keep text-fg xl:text-lg">{m.game}</span>
-            <span className="text-sm break-keep text-fg-muted">
-              {m.metricLabel && <span>{m.metricLabel}: </span>}
-              <span className="font-semibold text-accent-text">{m.metric}</span>
-            </span>
+            <span className="text-xl font-bold tracking-[-0.02em] text-accent-text">{m.metric}</span>
+            <span className="text-sm font-semibold break-keep text-fg">{m.game}</span>
           </span>
         </li>
       ))}
