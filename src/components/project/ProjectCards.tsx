@@ -196,15 +196,12 @@ export function FeaturedPipeline({
       </div>
       {/*
         도표를 크게: 이 화면만 폭을 96rem까지 넓히되 두 가지 상한을 둔다.
-        - 세로: 데스크톱 한 화면에 들어가도록 (100svh − 헤더·위아래 여백·상위 라벨·제목·설명 2줄·카드 글 영역 약 31.5rem) × 32/9(16:9 카드 두 장) + 카드 간격
+        - 세로: 데스크톱 한 화면에 들어가도록 (100svh − 헤더·위아래 여백·제목·설명 2줄·카드 글 영역 약 30rem) × 32/9(16:9 카드 두 장) + 카드 간격
         - 가로: 오른쪽 섹션 점 내비게이션의 현재 위치 라벨(84rem↑ 번호, 100rem↑ 번호+이름)과 겹치지 않도록 좌우 여백(--spy) 확보
       */}
       <Container className="relative lg:max-w-[96rem]">
-        <div className="mx-auto flex w-full flex-col gap-6 [--spy:0px] min-[84rem]:[--spy:6.5rem] min-[100rem]:[--spy:14rem] lg:max-w-[min(100%,calc((100svh_-_31.5rem)_*_3.55_+_1.25rem),calc(100vw_-_2_*_var(--spy)))] lg:gap-8">
+        <div className="mx-auto flex w-full flex-col gap-6 [--spy:0px] min-[84rem]:[--spy:6.5rem] min-[100rem]:[--spy:14rem] lg:max-w-[min(100%,calc((100svh_-_30rem)_*_3.55_+_1.25rem),calc(100vw_-_2_*_var(--spy)))] lg:gap-8">
           <div className="flex flex-col gap-3">
-            <p className="text-sm font-semibold text-fg-muted">
-              {project.title}
-            </p>
             <h2
               id={headingId}
               className="text-[clamp(1.5rem,1.1rem+1.2vw,2.1rem)] font-bold tracking-[-0.04em] text-fg"
