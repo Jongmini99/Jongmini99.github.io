@@ -1,6 +1,15 @@
 import Link from "next/link";
 import type React from "react";
-import { ArrowRight, ArrowUpRight, Check, CircleAlert, Sparkles, Trophy, User, Wrench } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  CircleAlert,
+  Sparkles,
+  Trophy,
+  User,
+  Wrench,
+} from "lucide-react";
 import type { Awards, Project, ProjectTrack } from "@/content/schema";
 
 type AwardItem = Awards["items"][number];
@@ -28,7 +37,13 @@ function splitActor(label: string): { name: string; actor?: "human" | "ai" } {
  * 비주얼은 YouTube 영상(videos 첫 번째, 클릭 시 재생) → 무음 반복 영상(heroVideo) → 상세 헤더 이미지 → 대표 이미지 순.
  * 작업 흐름(AI 게임 제작 파이프라인)은 다음 화면(FeaturedPipeline)으로 나눠 보여 준다.
  */
-export function FeaturedBand({ project, id }: { project: Project; id: string }) {
+export function FeaturedBand({
+  project,
+  id,
+}: {
+  project: Project;
+  id: string;
+}) {
   const image = project.heroImage ?? project.thumbnail;
   const headingId = `${id}-title`;
   const youtube = project.videos[0];
@@ -46,13 +61,23 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
       <Container className="relative flex flex-col gap-10 lg:gap-12">
         {/* 제목 줄: 작게 */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <span className="rounded-full bg-accent-solid px-3 py-1 text-sm font-bold text-accent-fg">대표 프로젝트</span>
-          <h2 id={headingId} className="text-lg font-bold tracking-[-0.02em] text-fg sm:text-xl">
+          <span className="rounded-full bg-accent-solid px-3 py-1 text-sm font-bold text-accent-fg">
+            대표 프로젝트
+          </span>
+          <h2
+            id={headingId}
+            className="text-lg font-bold tracking-[-0.02em] text-fg sm:text-xl"
+          >
             {project.title}
           </h2>
           <p className="text-sm text-fg-muted">
             {project.genre}
-            {project.developmentPeriod && <span className="font-display"> · {formatPeriod(project.developmentPeriod)}</span>}
+            {project.developmentPeriod && (
+              <span className="font-display">
+                {" "}
+                · {formatPeriod(project.developmentPeriod)}
+              </span>
+            )}
           </p>
         </div>
 
@@ -66,8 +91,14 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
             {project.highlights.length > 0 && (
               <ul aria-label="핵심 성과" className="flex flex-col gap-3">
                 {project.highlights.map((h) => (
-                  <li key={h} className="flex items-start gap-3 text-lg leading-snug text-fg">
-                    <Check className="mt-0.5 size-5 shrink-0 text-accent-text" aria-hidden="true" />
+                  <li
+                    key={h}
+                    className="flex items-start gap-3 text-lg leading-snug text-fg"
+                  >
+                    <Check
+                      className="mt-0.5 size-5 shrink-0 text-accent-text"
+                      aria-hidden="true"
+                    />
                     <span>{h}</span>
                   </li>
                 ))}
@@ -79,7 +110,12 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
                 <ArrowRight className="size-4" aria-hidden="true" />
               </ButtonLink>
               {project.externalLinks.slice(0, 2).map((l) => (
-                <ButtonLink key={l.url} href={l.url} variant="outline" showExternalIcon>
+                <ButtonLink
+                  key={l.url}
+                  href={l.url}
+                  variant="outline"
+                  showExternalIcon
+                >
                   {l.label}
                 </ButtonLink>
               ))}
@@ -89,14 +125,20 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
           <div className="overflow-hidden rounded-card border border-band-line shadow-[0_28px_65px_rgb(0_0_0/0.45)]">
             <div className="relative aspect-video bg-surface">
               {youtube ? (
-                <YouTubeFrame video={youtube} thumbnail="maxres" listenPlayEvent />
+                <YouTubeFrame
+                  video={youtube}
+                  thumbnail="maxres"
+                  listenPlayEvent
+                />
               ) : video ? (
                 <>
                   {/* 동작 줄이기 설정이면 영상 대신 정지 화면을 보여 준다 */}
                   <video
                     className="size-full object-cover motion-reduce:hidden"
                     src={withBasePath(video.src)}
-                    poster={video.poster ? withBasePath(video.poster.src) : undefined}
+                    poster={
+                      video.poster ? withBasePath(video.poster.src) : undefined
+                    }
                     autoPlay
                     muted
                     loop
@@ -109,12 +151,15 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
                   </div>
                 </>
               ) : (
-                <MediaImage image={image} decorative placeholderLabel="대표 이미지 준비 중" />
+                <MediaImage
+                  image={image}
+                  decorative
+                  placeholderLabel="대표 이미지 준비 중"
+                />
               )}
             </div>
           </div>
         </div>
-
       </Container>
     </section>
   );
@@ -124,9 +169,19 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
  * 홈 대표 프로젝트 다음 화면: 상세 페이지의 첫 흐름(flow) 섹션을 가져와 보여 준다.
  * 도표가 있으면 큰 도표 카드(클릭 시 확대), 없으면 단계 카드 — 사람(결정·검증)과 AI(설계·제작·검사)를 구분.
  */
-export function FeaturedPipeline({ project, id }: { project: Project; id: string }) {
-  const flow = project.sections.find((s): s is Extract<Project["sections"][number], { type: "flow" }> => s.type === "flow" && s.visible);
-  if (!flow || (flow.figures.length === 0 && flow.steps.length === 0)) return null;
+export function FeaturedPipeline({
+  project,
+  id,
+}: {
+  project: Project;
+  id: string;
+}) {
+  const flow = project.sections.find(
+    (s): s is Extract<Project["sections"][number], { type: "flow" }> =>
+      s.type === "flow" && s.visible,
+  );
+  if (!flow || (flow.figures.length === 0 && flow.steps.length === 0))
+    return null;
   const headingId = `${id}-title`;
   return (
     <section
@@ -137,53 +192,76 @@ export function FeaturedPipeline({ project, id }: { project: Project; id: string
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 -right-24 size-[30rem] rounded-full bg-accent/10 blur-3xl" />
       </div>
-      <Container className="relative flex flex-col gap-6 lg:gap-8">
-        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <h2 id={headingId} className="text-[clamp(1.5rem,1.1rem+1.2vw,2.1rem)] font-bold tracking-[-0.04em] text-fg">
-            {flow.title}
-          </h2>
-          <p className="text-sm text-fg-muted">{project.title}</p>
-        </div>
-        {flow.figures.length > 0 ? (
-          <WorkflowCards figures={flow.figures} label={flow.title} />
-        ) : (
-          <div>
-            <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(var(--n),minmax(0,1fr))]" style={{ "--n": flow.steps.length } as React.CSSProperties}>
-              {flow.steps.map((step, i) => {
-                const { name, actor } = splitActor(step.label);
-                const human = actor === "human";
-                return (
-                  <li
-                    key={i}
-                    className={cx(
-                      "flex min-w-0 flex-col gap-2 rounded-inner border p-4",
-                      human ? "border-accent/60 bg-accent-soft" : "border-band-line bg-bg/40",
-                    )}
-                  >
-                    <p className="flex items-center gap-2">
-                      {actor && (
-                        <span
-                          className={cx(
-                            "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold",
-                            human ? "bg-accent-solid text-accent-fg" : "bg-surface-raised text-fg-muted",
-                          )}
-                        >
-                          {human ? <User className="size-3" aria-hidden="true" /> : <Sparkles className="size-3" aria-hidden="true" />}
-                          {human ? "본인" : "AI"}
-                        </span>
-                      )}
-                      <span className="text-sm font-bold text-fg">
-                        <span className="sr-only">{i + 1}단계: </span>
-                        {name}
-                      </span>
-                    </p>
-                    <p className="text-sm leading-snug text-fg-muted">{step.text}</p>
-                  </li>
-                );
-              })}
-            </ol>
+      {/*
+        도표를 크게: 이 화면만 폭을 96rem까지 넓히되 두 가지 상한을 둔다.
+        - 세로: 데스크톱 한 화면에 들어가도록 (100svh − 헤더·위아래 여백·제목·카드 글 영역 약 25rem) × 32/9(16:9 카드 두 장) + 카드 간격
+        - 가로: 오른쪽 섹션 점 내비게이션의 현재 위치 라벨(84rem↑ 번호, 100rem↑ 번호+이름)과 겹치지 않도록 좌우 여백(--spy) 확보
+      */}
+      <Container className="relative lg:max-w-[96rem]">
+        <div className="mx-auto flex w-full flex-col gap-6 [--spy:0px] min-[84rem]:[--spy:6.5rem] min-[100rem]:[--spy:14rem] lg:max-w-[min(100%,calc((100svh_-_25rem)_*_3.55_+_1.25rem),calc(100vw_-_2_*_var(--spy)))] lg:gap-8">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <h2
+              id={headingId}
+              className="text-[clamp(1.5rem,1.1rem+1.2vw,2.1rem)] font-bold tracking-[-0.04em] text-fg"
+            >
+              {flow.title}
+            </h2>
+            <p className="text-sm text-fg-muted">{project.title}</p>
           </div>
-        )}
+          {flow.figures.length > 0 ? (
+            <WorkflowCards figures={flow.figures} label={flow.title} />
+          ) : (
+            <div>
+              <ol
+                className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(var(--n),minmax(0,1fr))]"
+                style={{ "--n": flow.steps.length } as React.CSSProperties}
+              >
+                {flow.steps.map((step, i) => {
+                  const { name, actor } = splitActor(step.label);
+                  const human = actor === "human";
+                  return (
+                    <li
+                      key={i}
+                      className={cx(
+                        "flex min-w-0 flex-col gap-2 rounded-inner border p-4",
+                        human
+                          ? "border-accent/60 bg-accent-soft"
+                          : "border-band-line bg-bg/40",
+                      )}
+                    >
+                      <p className="flex items-center gap-2">
+                        {actor && (
+                          <span
+                            className={cx(
+                              "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold",
+                              human
+                                ? "bg-accent-solid text-accent-fg"
+                                : "bg-surface-raised text-fg-muted",
+                            )}
+                          >
+                            {human ? (
+                              <User className="size-3" aria-hidden="true" />
+                            ) : (
+                              <Sparkles className="size-3" aria-hidden="true" />
+                            )}
+                            {human ? "본인" : "AI"}
+                          </span>
+                        )}
+                        <span className="text-sm font-bold text-fg">
+                          <span className="sr-only">{i + 1}단계: </span>
+                          {name}
+                        </span>
+                      </p>
+                      <p className="text-sm leading-snug text-fg-muted">
+                        {step.text}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          )}
+        </div>
       </Container>
     </section>
   );
@@ -198,28 +276,57 @@ const TAKEAWAY_ROWS = [
 ] as const;
 
 /** 카드 3단 요약: 문제 → 해결 → 결과를 세로 단계 도표로 잇는다. 결과 단계 강조. */
-function KeyTakeaways({ takeaways }: { takeaways: NonNullable<Project["keyTakeaways"]> }) {
+function KeyTakeaways({
+  takeaways,
+}: {
+  takeaways: NonNullable<Project["keyTakeaways"]>;
+}) {
   return (
-    <ol aria-label="문제 → 해결 → 결과 요약" className="flex flex-col border-t border-line pt-4">
+    <ol
+      aria-label="문제 → 해결 → 결과 요약"
+      className="flex flex-col border-t border-line pt-4"
+    >
       {TAKEAWAY_ROWS.map(({ key, label, icon: StepIcon }, i) => {
         const result = key === "result";
         return (
-          <li key={key} className="relative grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-3 pb-3 last:pb-0">
+          <li
+            key={key}
+            className="relative grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-3 pb-3 last:pb-0"
+          >
             {i < TAKEAWAY_ROWS.length - 1 && (
-              <span aria-hidden="true" className="absolute top-7 bottom-0 left-[0.8125rem] w-px bg-line-strong" />
+              <span
+                aria-hidden="true"
+                className="absolute top-7 bottom-0 left-[0.8125rem] w-px bg-line-strong"
+              />
             )}
             <span
               aria-hidden="true"
               className={cx(
                 "relative flex size-7 items-center justify-center rounded-full",
-                result ? "bg-accent-solid text-accent-fg" : "bg-surface-raised text-fg-muted",
+                result
+                  ? "bg-accent-solid text-accent-fg"
+                  : "bg-surface-raised text-fg-muted",
               )}
             >
               <StepIcon className="size-3.5" />
             </span>
             <div className="flex min-w-0 flex-col pt-0.5">
-              <p className={cx("text-xs font-bold", result ? "text-accent-text" : "text-fg-subtle")}>{label}</p>
-              <p className={cx("text-sm leading-snug", result ? "font-semibold text-fg" : "text-fg-muted")}>{takeaways[key]}</p>
+              <p
+                className={cx(
+                  "text-xs font-bold",
+                  result ? "text-accent-text" : "text-fg-subtle",
+                )}
+              >
+                {label}
+              </p>
+              <p
+                className={cx(
+                  "text-sm leading-snug",
+                  result ? "font-semibold text-fg" : "text-fg-muted",
+                )}
+              >
+                {takeaways[key]}
+              </p>
             </div>
           </li>
         );
@@ -255,7 +362,13 @@ export function ProjectTile({
         "transition-[transform,border-color] duration-200 focus-within:border-accent hover:border-accent/60 motion-safe:hover:-translate-y-1",
       )}
     >
-      <div className={cx("relative aspect-[16/9] overflow-hidden", wide && "md:aspect-[21/9]", compact && "lg:aspect-[2/1]")}>
+      <div
+        className={cx(
+          "relative aspect-[16/9] overflow-hidden",
+          wide && "md:aspect-[21/9]",
+          compact && "lg:aspect-[2/1]",
+        )}
+      >
         <MediaImage
           image={project.thumbnail}
           decorative
@@ -278,16 +391,28 @@ export function ProjectTile({
           className="absolute top-4 right-4 size-9 rounded-full bg-bg/70 p-2 text-fg opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
         />
       </div>
-      <div className={cx("flex flex-1 flex-col gap-4 p-5 sm:p-6", compact && "lg:gap-3 lg:p-5")}>
+      <div
+        className={cx(
+          "flex flex-1 flex-col gap-4 p-5 sm:p-6",
+          compact && "lg:gap-3 lg:p-5",
+        )}
+      >
         <div className="flex flex-col gap-1.5">
           {project.tagline ? (
             /* 한줄 요약을 크게, 프로젝트 이름·기간은 그 위에 작게 */
             <H className="flex flex-col gap-1.5">
               <span className="text-sm font-semibold text-fg-muted">
-                {award && <Trophy className="mr-1.5 inline size-4 -translate-y-px text-accent-text" aria-hidden="true" />}
+                {award && (
+                  <Trophy
+                    className="mr-1.5 inline size-4 -translate-y-px text-accent-text"
+                    aria-hidden="true"
+                  />
+                )}
                 {project.title}
                 {project.developmentPeriod && (
-                  <span className="ml-2 font-display font-medium whitespace-nowrap">{formatPeriod(project.developmentPeriod)}</span>
+                  <span className="ml-2 font-display font-medium whitespace-nowrap">
+                    {formatPeriod(project.developmentPeriod)}
+                  </span>
                 )}
               </span>
               <Link
@@ -302,7 +427,10 @@ export function ProjectTile({
             </H>
           ) : (
             <H className="text-xl leading-snug font-bold tracking-[-0.03em] text-fg">
-              <Link href={href(project)} className="outline-none after:absolute after:inset-0 after:content-['']">
+              <Link
+                href={href(project)}
+                className="outline-none after:absolute after:inset-0 after:content-['']"
+              >
                 {project.title}
               </Link>
               {project.developmentPeriod && (
@@ -317,7 +445,9 @@ export function ProjectTile({
         {project.keyTakeaways ? (
           <KeyTakeaways takeaways={project.keyTakeaways} />
         ) : (
-          <p className="text-sm leading-relaxed text-fg-muted">{project.description}</p>
+          <p className="text-sm leading-relaxed text-fg-muted">
+            {project.description}
+          </p>
         )}
       </div>
     </article>
@@ -352,7 +482,9 @@ export function ProjectGrid({
         <li key={p.id} className="min-w-0">
           <ProjectTile
             project={p}
-            award={awards.find((a) => a.category === "award" && a.projectSlug === p.slug)}
+            award={awards.find(
+              (a) => a.category === "award" && a.projectSlug === p.slug,
+            )}
             wide={n === 1 && !compact}
             compact={compact}
             headingLevel={headingLevel}
@@ -363,7 +495,11 @@ export function ProjectGrid({
   );
 }
 
-export const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
+export const TRACKS: {
+  key: ProjectTrack;
+  title: string;
+  description: string;
+}[] = [
   {
     key: "ai",
     title: "AI 프로젝트",
