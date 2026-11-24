@@ -157,5 +157,54 @@
     "title": "게임을 만들고 경험하는 현장을 직접 찾아다녔습니다",
     "titleAccent": "직접",
     "intro": "게임 제작 동아리에서 프로토타입을 개발하고 테스터와 행사 현장에서 유저 반응을 직접 확인했습니다.\n또한 게임 개발 커뮤니티에서 활동하며 다양한 특강들을 꾸준히 듣고 정리하고 있습니다."
+  },
+  "aiAutomation": {
+    "title": "기획에 필요한 반복 업무는 AI 도구로 자동화합니다",
+    "titleAccent": "AI 도구로 자동화",
+    "intro": "수치 검증, 시나리오 데이터 변환, 퍼즐 레벨 설계처럼 기획에 필요한 반복 작업을 AI로 만든 도구에 맡겼습니다.\n도구가 낸 결과는 직접 플레이하거나 직접 풀어 보며 검수한 뒤 반영했습니다.",
+    "items": [
+      {
+        "src": "/uploads/images/ai-experience/timerecall-gallery-03-balance-simulator.jpg",
+        "alt": "Time Recall 웹 전투 밸런스 시뮬레이터 화면 — 웨이브별 전투력 지표 그래프와 수치 조절 패널",
+        "caption": "웹 전투 밸런스 시뮬레이터 — Time Recall · Claude Code로 구현, 웨이브별 전투력 지표로 수치 조정"
+      },
+      {
+        "src": "/uploads/images/veilcap/veilcap-vn-gallery-03-python-extractor.jpg",
+        "alt": "DOCX 시나리오를 엑셀 데이터로 변환하는 Python 자동 추출 프로그램 창",
+        "caption": "시나리오 텍스트 추출기 — 베일캡 프로젝트 · 소설 형태 DOCX를 \"화자: 대사\" 데이터로 자동 변환"
+      },
+      {
+        "src": "/uploads/images/veilcap/veilcap-vn-gallery-01-puzzle-level-ai.jpg",
+        "alt": "AI를 활용해 제작한 퍼즐 레벨 디자인 산출물 — 격자 맵과 블록 배치표",
+        "caption": "AI 활용 퍼즐 레벨 디자인 — 베일캡 프로젝트 · 기믹은 직접 설계, GPT가 만든 레벨은 직접 풀어 검수"
+      }
+    ]
+  },
+  "fieldWork": {
+    "title": "IT 기획자로 쌓은 현업 실무 경험",
+    "titleAccent": "현업 실무 경험",
+    "intro": "IT 회사 두 곳에서 산업기능요원(IT 기획자)으로 약 2년간 근무하며 20개 이상의 프로젝트를 완료했습니다.\n기획서 작성, 일정 관리, QA, 고객사 응대를 맡아 팀원과 협업하며 실무 프로세스를 익혔습니다.",
+    "items": [
+      {
+        "src": "/uploads/images/career/field-01-cclime-app.jpg",
+        "alt": "끌리메 에스테틱 앱 소개 화면 — 오로라 배경의 앱 메인 화면",
+        "caption": "끌리메 에스테틱 앱 개발 프로젝트 — 담당 업무: 기획 · PM · QA"
+      },
+      {
+        "src": "/uploads/images/career/field-02-zemplay-app.jpg",
+        "alt": "Zemplay 게임 마케팅 앱 로그인 화면",
+        "caption": "Zemplay 게임 마케팅 앱 프로젝트 — 담당 업무: 기획 · PM · QA"
+      },
+      {
+        "src": "/uploads/images/career/field-03-imin-fintech.jpg",
+        "alt": "아임인 핀테크 앱 홍보 이미지 — '모이자! 아임인' 문구와 앱 화면",
+        "caption": "아임인 핀테크 앱 개발 프로젝트 — 담당 업무: PM · QA"
+      },
+      {
+        "src": "/uploads/images/career/field-04-hazzys-event-game.jpg",
+        "alt": "Hazzys On The Wheels 이벤트 게임 키 비주얼 — 스케이트보드를 탄 강아지 캐릭터들",
+        "caption": "Hazzys 이벤트 게임 런칭 — 담당 업무: PM · QA"
+      }
+    ]
   }
 }

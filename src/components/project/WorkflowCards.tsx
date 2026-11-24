@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import type { z } from "zod";
 import type { ImageSchema } from "@/content/schema";
 import { withBasePath } from "@/lib/base-path";
+import { cx } from "@/lib/cx";
 
 type Image = z.infer<typeof ImageSchema>;
 
@@ -19,10 +20,28 @@ function splitCaption(caption: string | undefined, fallback: string) {
 }
 
 /**
- * 홈 AI 게임 제작 파이프라인 화면의 워크플로우 도표 카드 (세로 카드: 위 큰 도표 + 아래 제목·설명).
+ * 홈 이미지 카드 (AI 게임 제작 파이프라인 도표·AI 업무 자동화·현업 실무 경험) (세로 카드: 위 큰 도표 + 아래 제목·설명).
  * 도표 글씨가 작아 카드를 누르면 라이트박스로 크게 보여 준다 (←/→ 이동, Esc 닫기).
  */
-export function WorkflowCards({ figures, label }: { figures: Image[]; label: string }) {
+const GRID = { 2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" } as const;
+const ASPECT = { video: "aspect-video", portrait: "aspect-[4/5]" } as const;
+
+export function WorkflowCards({
+  figures,
+  label,
+  columns = 2,
+  aspect = "video",
+  numberPrefix,
+}: {
+  figures: Image[];
+  label: string;
+  /** 데스크톱 열 수 */
+  columns?: keyof typeof GRID;
+  /** 썸네일 비율 (portrait: 세로 이미지, 위쪽 기준으로 자름) */
+  aspect?: keyof typeof ASPECT;
+  /** 번호 앞 접두어 (예: "AI" → "AI · 01") */
+  numberPrefix?: string;
+}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [current, setCurrent] = useState<number | null>(null);
   const open = (i: number) => {
@@ -36,7 +55,7 @@ export function WorkflowCards({ figures, label }: { figures: Image[]; label: str
 
   return (
     <>
-      <ul className="grid gap-5 md:grid-cols-2">
+      <ul className={cx("grid gap-5", GRID[columns])}>
         {figures.map((f, i) => {
           const { title, description } = splitCaption(f.caption, label);
           return (
@@ -46,19 +65,22 @@ export function WorkflowCards({ figures, label }: { figures: Image[]; label: str
                 onClick={() => open(i)}
                 className="group flex h-full w-full flex-col overflow-hidden rounded-card border border-band-line bg-bg/40 text-left transition-colors duration-150 hover:border-accent/60"
               >
-                <span className="relative block aspect-video w-full overflow-hidden border-b border-band-line">
+                <span className={cx("relative block w-full overflow-hidden border-b border-band-line", ASPECT[aspect])}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={withBasePath(f.src)}
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    className="size-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.02]"
+                    className="size-full object-cover object-top motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.02]"
                   />
                 </span>
                 <span className="flex min-w-0 flex-col gap-1.5 p-4 sm:p-5">
                   <span className="text-lg leading-snug font-bold text-fg">
-                    <span className="mr-2 font-display text-accent-text">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="mr-2 font-display text-accent-text">
+                      {numberPrefix && `${numberPrefix} · `}
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     {title}
                   </span>
                   {description && <span className="text-[0.95rem] leading-snug break-keep text-fg-muted">{description}</span>}

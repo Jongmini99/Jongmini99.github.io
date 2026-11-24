@@ -367,6 +367,12 @@ export const SectionIntroSchema = z.object({
   intro: optionalText,
 });
 
+/** 홈 이미지 카드 섹션 (현업 실무 경험·AI 업무 자동화): 머리말 + 카드 이미지. caption은 "제목 — 설명" 형식 */
+export const ShowcaseSectionSchema = SectionIntroSchema.extend({
+  items: list(ImageSchema),
+});
+
+
 export const ProfileSchema = z.object({
   name: text,
   /** 영문 직함 (예: System & Technical Game Designer) */
@@ -388,6 +394,10 @@ export const ProfileSchema = z.object({
   activities: list(ActivityItemSchema),
   /** 활동 화면 머리말 (선택) */
   activityIntro: z.preprocess(emptyToUndefined, SectionIntroSchema.optional()),
+  /** 홈 'AI 업무 자동화' 섹션 (선택, 카드가 없으면 숨김) — AI 프로젝트 화면 다음 */
+  aiAutomation: z.preprocess(emptyToUndefined, ShowcaseSectionSchema.optional()),
+  /** 홈 '현업 실무 경험' 섹션 (선택, 카드가 없으면 숨김) — 프로젝트 화면들 다음 */
+  fieldWork: z.preprocess(emptyToUndefined, ShowcaseSectionSchema.optional()),
 });
 
 export const SkillsSchema = z.object({

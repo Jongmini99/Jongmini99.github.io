@@ -1,3 +1,8 @@
+import { Fragment } from "react";
+import type { z } from "zod";
+import type { ShowcaseSectionSchema } from "@/content/schema";
+import { WorkflowCards } from "@/components/project/WorkflowCards";
+import { ProjectOriginTracker } from "@/components/project/ProjectOrigin";
 import { ArrowDown, ArrowRight, Download } from "lucide-react";
 import {
   getAwards,
@@ -68,14 +73,16 @@ function IntroTitle({
   intro,
   fallback,
 }: {
-  parent: string;
+  parent?: string;
   id: string;
   intro?: { title: string; titleAccent?: string; intro?: string };
   fallback: string;
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-sm font-semibold text-fg-muted">{parent}</p>
+      {parent && (
+        <p className="text-sm font-semibold text-fg-muted">{parent}</p>
+      )}
       <h2
         id={id}
         className="text-3xl font-bold tracking-[-0.04em] break-keep text-fg sm:text-4xl lg:text-[2.75rem] lg:leading-tight"
@@ -87,6 +94,47 @@ function IntroTitle({
       </h2>
       {intro?.intro && <SectionIntro text={intro.intro} />}
     </div>
+  );
+}
+
+type ShowcaseSectionData = z.infer<typeof ShowcaseSectionSchema>;
+
+/** 이미지 카드 화면 (AI 업무 자동화·현업 실무 경험): 머리말 + 카드. 카드를 누르면 크게 보기 */
+function ShowcaseSection({
+  id,
+  data,
+  fallback,
+  columns,
+  aspect,
+  numberPrefix,
+  className,
+}: {
+  id: string;
+  data: ShowcaseSectionData;
+  fallback: string;
+  columns: 3 | 4;
+  aspect?: "video" | "portrait";
+  numberPrefix?: string;
+  className?: string;
+}) {
+  const headingId = `${id}-title`;
+  return (
+    <section
+      id={id}
+      aria-labelledby={headingId}
+      className={cx(SLIDE, className)}
+    >
+      <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
+        <IntroTitle id={headingId} intro={data} fallback={fallback} />
+        <WorkflowCards
+          figures={data.items}
+          label={data.title}
+          columns={columns}
+          aspect={aspect}
+          numberPrefix={numberPrefix}
+        />
+      </Container>
+    </section>
   );
 }
 
@@ -125,6 +173,12 @@ export default function HomePage() {
     if (lastSlide) lastSlide.items.push(...untracked);
     else projectSlides.push({ key: "all", title: "", items: untracked });
   }
+  const aiAutomation = profile.aiAutomation?.items.length
+    ? profile.aiAutomation
+    : undefined;
+  const fieldWork = profile.fieldWork?.items.length
+    ? profile.fieldWork
+    : undefined;
   // 오른쪽 점 내비게이션(Scrollspy) 항목: 화면(섹션) 순서와 같다
   const spyItems: SpyItem[] = [
     { id: "top", label: "소개" },
@@ -133,11 +187,17 @@ export default function HomePage() {
       ? [{ id: "featured-pipeline", label: "AI 게임 제작 파이프라인" }]
       : []),
     ...(projectSlides.length > 0
-      ? projectSlides.map((slide, i) => ({
-          id: i === 0 ? "projects" : `projects-${slide.key}`,
-          label: slide.title || "참여한 프로젝트",
-        }))
+      ? projectSlides.flatMap((slide, i) => [
+          {
+            id: i === 0 ? "projects" : `projects-${slide.key}`,
+            label: slide.title || "참여한 프로젝트",
+          },
+          ...(slide.key === "ai" && aiAutomation
+            ? [{ id: "ai-automation", label: "AI 업무 자동화" }]
+            : []),
+        ])
       : [{ id: "projects", label: "참여한 프로젝트" }]),
+    ...(fieldWork ? [{ id: "career-field", label: "현업 실무 경험" }] : []),
     ...(profile.gamerMetrics.length > 0
       ? [{ id: "experience", label: "최상위권 플레이 경험" }]
       : []),
@@ -159,6 +219,7 @@ export default function HomePage() {
   return (
     <>
       <SectionSpy items={spyItems} />
+      <ProjectOriginTracker from="home" />
       <div data-snap-home>
         {/* ---------------- ① Hero ---------------- */}
         <section
@@ -303,34 +364,49 @@ export default function HomePage() {
             ? "projects-title"
             : `projects-${slide.key}-title`;
           return (
-            <section
-              key={slide.key}
-              id={first ? "projects" : `projects-${slide.key}`}
-              aria-labelledby={headingId}
-              className={SLIDE}
-            >
-              <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-                <SectionTitle
-                  title={slide.title || "참여한 프로젝트"}
-                  id={headingId}
-                  description={slide.description}
-                  aside={
-                    first ? (
-                      <ButtonLink href="/projects/" variant="outline" size="sm">
-                        전체 프로젝트
-                        <ArrowRight className="size-4" aria-hidden="true" />
-                      </ButtonLink>
-                    ) : undefined
-                  }
+            <Fragment key={slide.key}>
+              <section
+                id={first ? "projects" : `projects-${slide.key}`}
+                aria-labelledby={headingId}
+                className={SLIDE}
+              >
+                <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
+                  <SectionTitle
+                    title={slide.title || "참여한 프로젝트"}
+                    id={headingId}
+                    description={slide.description}
+                    aside={
+                      first ? (
+                        <ButtonLink
+                          href="/projects/"
+                          variant="outline"
+                          size="sm"
+                        >
+                          전체 프로젝트
+                          <ArrowRight className="size-4" aria-hidden="true" />
+                        </ButtonLink>
+                      ) : undefined
+                    }
+                  />
+                  <ProjectGrid
+                    projects={slide.items}
+                    awards={awards.items}
+                    headingLevel="h3"
+                    compact
+                  />
+                </Container>
+              </section>
+              {/* ④-1 AI 업무 자동화: AI 프로젝트 화면 바로 다음 */}
+              {slide.key === "ai" && aiAutomation && (
+                <ShowcaseSection
+                  id="ai-automation"
+                  data={aiAutomation}
+                  fallback="AI 업무 자동화"
+                  columns={3}
+                  numberPrefix="AI"
                 />
-                <ProjectGrid
-                  projects={slide.items}
-                  awards={awards.items}
-                  headingLevel="h3"
-                  compact
-                />
-              </Container>
-            </section>
+              )}
+            </Fragment>
           );
         })}
         {projectSlides.length === 0 && (
@@ -344,6 +420,17 @@ export default function HomePage() {
               <p className="text-fg-subtle">공개된 프로젝트가 없습니다.</p>
             </Container>
           </section>
+        )}
+
+        {/* ---------------- ④-2 현업 실무 경험: 프로젝트 화면들 다음 ---------------- */}
+        {fieldWork && (
+          <ShowcaseSection
+            id="career-field"
+            data={fieldWork}
+            fallback="현업 실무 경험"
+            columns={4}
+            aspect="portrait"
+          />
         )}
 
         {/* ---------------- ⑤ 게임 디자인을 위한 경험: 플레이 / 현장 한 화면씩 ---------------- */}

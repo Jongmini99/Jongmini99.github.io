@@ -4,61 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { Download, Menu, X } from "lucide-react";
-import { NAV_ITEMS, SECTION_TO_NAV, type NavItem } from "./nav";
+import { NAV_ITEMS, type NavItem } from "./nav";
 import { buttonClass } from "@/components/ui/Button";
 import { withBasePath } from "@/lib/base-path";
 import { cx } from "@/lib/cx";
 import type { Contact } from "@/content/schema";
 import { ContactDialog } from "./ContactDialog";
-import { useScrollTarget } from "./useScrollTarget";
 
 const normalize = (pathname: string) => pathname.replace(/\/+$/, "") || "/";
 
-/** 현재 메뉴 판정: 홈에서는 화면에 보이는 섹션, 다른 페이지에서는 경로 기준 */
-function activeState(pathname: string, item: NavItem, section: string | null): "page" | "location" | undefined {
+/** 현재 메뉴 판정: 페이지 경로 기준 (홈 → 소개, /projects/… → 프로젝트) */
+function activeState(pathname: string, item: NavItem): "page" | undefined {
   const path = normalize(pathname);
-  if (path === "/") return item.section && item.section === section ? "location" : undefined;
-  if (item.match && (path === item.match || path.startsWith(`${item.match}/`))) return "page";
-  return undefined;
-}
-
-/** 홈 화면에서 지금 보고 있는 섹션 (화면 세로 중앙 기준) */
-function useActiveSection(enabled: boolean): string | null {
-  const [active, setActive] = useState<string | null>(null);
-  useEffect(() => {
-    if (!enabled) return;
-    const targets = Object.keys(SECTION_TO_NAV)
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (targets.length === 0) return;
-    const visible = new Set<string>();
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) visible.add(e.target.id);
-          else visible.delete(e.target.id);
-        }
-        const first = targets.find((t) => visible.has(t.id));
-        setActive(first ? SECTION_TO_NAV[first.id]! : null);
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    targets.forEach((t) => io.observe(t));
-    return () => io.disconnect();
-  }, [enabled]);
-  return enabled ? active : null;
+  return path === item.match || (item.match !== "/" && path.startsWith(`${item.match}/`)) ? "page" : undefined;
 }
 
 export function HeaderNav({ resume, contact }: { resume?: string; contact: Contact }) {
   const pathname = usePathname();
-  const isHome = normalize(pathname) === "/";
-  const observed = useActiveSection(isHome);
-  // 메뉴 클릭으로 이동하는 동안은 지나가는 섹션 대신 목표 메뉴를 현재 위치로 표시
-  const [target, lockTarget] = useScrollTarget();
-  const section = isHome ? (target ?? observed) : null;
-  const onNavigate = (item: NavItem) => {
-    if (isHome && item.section) lockTarget(item.section);
-  };
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -94,7 +56,29 @@ export function HeaderNav({ resume, contact }: { resume?: string; contact: Conta
 
   return (
     <>
-      {/* 데스크톱은 상단 메뉴 없이 홈 오른쪽 섹션 점 내비게이션(SectionSpy)으로 이동한다 (2026-11-25) */}
+      {/* 데스크톱 메뉴: 페이지 단위(소개 / 프로젝트). 홈 안의 섹션 이동은 오른쪽 점 내비게이션(SectionSpy)이 맡는다 */}
+      <nav aria-label="주요 메뉴" className="absolute left-1/2 hidden h-full -translate-x-1/2 lg:block">
+        <ul className="flex h-full items-center gap-1">
+          {NAV_ITEMS.map((item) => {
+            const current = activeState(pathname, item);
+            return (
+              <li key={item.href} className="h-full">
+                <Link
+                  href={item.href}
+                  aria-current={current}
+                  className={cx(
+                    "relative flex h-full items-center px-4 text-[0.95rem] transition-colors duration-150",
+                    current ? "font-semibold text-fg" : "text-fg-muted hover:text-fg",
+                  )}
+                >
+                  {item.label}
+                  {current && <span aria-hidden="true" className="absolute inset-x-4 bottom-0 h-0.5 bg-accent" />}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
       <div className="flex items-center gap-2">
         <div className="hidden lg:block">{resumeButton}</div>
         {/* 연락하기: 작은 버튼 → 연락처 대화상자 (모든 화면 크기) */}
@@ -124,17 +108,14 @@ export function HeaderNav({ resume, contact }: { resume?: string; contact: Conta
         <nav aria-label="주요 메뉴" className="mx-auto max-w-(--container-content) px-4 py-4 sm:px-6">
           <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => {
-              const current = activeState(pathname, item, section);
+              const current = activeState(pathname, item);
               const active = current !== undefined;
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     aria-current={current}
-                    onClick={() => {
-                      onNavigate(item);
-                      setOpen(false);
-                    }}
+                    onClick={() => setOpen(false)}
                     className={cx(
                       "flex h-12 items-center rounded-control px-3",
                       active ? "bg-accent-soft font-semibold text-fg" : "text-fg-muted hover:bg-surface hover:text-fg",

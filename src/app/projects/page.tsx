@@ -3,6 +3,7 @@ import { getAwards, getPublishedProjects } from "@/content/loaders";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ProjectGrid } from "@/components/project/ProjectCards";
+import { ProjectOriginTracker } from "@/components/project/ProjectOrigin";
 
 export const metadata: Metadata = {
   title: "프로젝트",
@@ -14,6 +15,7 @@ export default function ProjectsPage() {
   const awards = getAwards();
   return (
     <>
+      <ProjectOriginTracker from="list" />
       <PageHeader title="프로젝트">
         <p>기획부터 구현까지 참여한 게임 프로젝트입니다.</p>
       </PageHeader>

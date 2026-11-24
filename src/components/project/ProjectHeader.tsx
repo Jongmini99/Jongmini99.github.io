@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ChevronLeft, Calendar, Gamepad2, Layers, User, Users } from "lucide-react";
+import { ChevronRight, Calendar, Gamepad2, Layers, User, Users } from "lucide-react";
 import type { Project } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
+import { ProjectBackLink } from "./ProjectOrigin";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -28,10 +29,33 @@ export function ProjectHeader({ project }: { project: Project }) {
       </div>
 
       <Container className="relative flex flex-col gap-8 pt-8 pb-8 sm:pt-10">
-        <Link href="/projects/" className="inline-flex w-fit items-center gap-1 text-sm text-fg-muted hover:text-fg">
-          <ChevronLeft className="size-4" aria-hidden="true" />
-          프로젝트 목록으로
-        </Link>
+        <div className="flex flex-col gap-3">
+          {/* 현재 위치: 소개 › 프로젝트 › 이 프로젝트 */}
+          <nav aria-label="현재 위치">
+            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-fg-muted">
+              <li>
+                <Link href="/#top" className="hover:text-fg">
+                  소개
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <ChevronRight className="size-3.5" />
+              </li>
+              <li>
+                <Link href="/projects/" className="hover:text-fg">
+                  프로젝트
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <ChevronRight className="size-3.5" />
+              </li>
+              <li aria-current="page" className="font-semibold text-fg">
+                {project.title}
+              </li>
+            </ol>
+          </nav>
+          <ProjectBackLink slug={project.slug} />
+        </div>
 
         <div className="flex max-w-xl flex-col gap-4 pt-8 pb-4 sm:pt-16 sm:pb-8">
           <h1 className="text-display font-bold tracking-[-0.05em] text-fg">{project.title}</h1>

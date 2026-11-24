@@ -56,7 +56,7 @@ npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검
 | `src/content/loaders.ts` | 페이지 데이터 로더. 서버 컴포넌트 전용이며 클라이언트 컴포넌트(`'use client'`)에서의 import를 금지한다. |
 | `src/styles/tokens.css` | 디자인 토큰(색상·타이포그래피·반경·여백) 정의. **컴포넌트 내 `#hex` 색상 코드 직접 하드코딩 금지**, 반드시 토큰 유틸리티 클래스를 사용한다. |
 | `src/components/ui` | 기본 UI 프리미티브(Button, Card, Badge, Typography, Media, Icon 등). 신규 UI 요소는 기존 프리미티브를 확장·재사용한다. |
-| `src/components/layout/nav.ts` | 모바일 메뉴 정의(데스크톱 상단 메뉴는 2026-11-25 제거, 홈 섹션 점 내비게이션으로 대체). 홈 섹션 앵커 ID와 1:1로 동기화되어야 한다. |
+| `src/components/layout/nav.ts` | 상단 메뉴 정의(페이지 단위: 소개 `/` · 프로젝트 `/projects/`, 2026-11-25). 홈 안의 섹션 이동은 오른쪽 점 내비게이션(`SectionSpy`, `page.tsx`의 `spyItems`)이 맡는다. |
 | **정적 에셋 경로** | 업로드 파일은 `public/uploads/...`에 두고 `/uploads/...` 경로로 참조한다. 모든 `<img>` 태그 및 다운로드 링크는 반드시 `withBasePath()` 유틸리티로 감싼다. |
 | **외부 링크 및 보안** | 외부 링크는 `target="_blank" rel="noopener noreferrer"`와 스크린 리더용 `"(새 창)"` 텍스트를 포함한다. Markdown 원시 HTML 렌더링 및 `dangerouslySetInnerHTML` 사용을 엄격히 금지한다. |
 | **빌드 패치 격리** | Next.js 16 정적 내보내기의 프리페치 경로 버그 우회를 위해 `scripts/fix-export-prefetch.mjs`가 빌드 파이프라인에 포함되어 있다. 프레임워크 패치 이후에는 즉시 제거하여 기술 부채를 청산한다. |
@@ -71,8 +71,8 @@ npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검
 * **컴포넌트 형태**: 카드는 `rounded-card` (`20px`), 버튼은 알약형(`rounded-full`)을 기본으로 한다.
 * **텍스트 라벨 제약**: 섹션 제목 상단에 **영문 소제목(eyebrow) 라벨을 배치하지 않는다**. 홈 히어로 섹션의 영문 직함 라벨 역시 사용하지 않는다.
 * **정보 구조 (IA)**:
-  * **홈 (`/`)**: 단일 페이지 스크롤 구조. **데스크톱은 전체가 One Scroll - One Section(scroll-snap mandatory)** — 모든 섹션이 한 화면(헤더 제외) 안에 들어가야 하며, 넘치면 섹션을 나눈다. 히어로(`#top`) → 대표 프로젝트(`#featured`) → AI 게임 제작 파이프라인(`#featured-pipeline`, 대표 프로젝트의 흐름 도표 카드) → 프로젝트 AI(`#projects`) → 프로젝트 기획·개발(`#projects-game`) → 프로젝트 문서(`#projects-document`) → 경험 플레이(`#experience`, 티어 엠블럼) → 경험 현장(`#experience-field`, 활동). 이력 및 성과 섹션은 히어로 소개와 겹쳐 2026-11-25 제거(`career.json`은 보존). 연락하기는 섹션 없이 상단 바의 작은 버튼(연락처 대화상자, `/#contact`로도 열림). 수상은 별도 섹션 없이 히어로 사진 옆 상장 카드(클릭 확대)와 연결 프로젝트 카드의 🏆 배지(`awards.json` `projectSlug`)로 표시. 홈 카드 큰 제목은 `tagline`(한줄 요약), 프로젝트 이름은 그 위에 작게. 섹션 ID 변경 시 `nav.ts`도 함께 수정한다.
-  * **프로젝트 (`/projects/`, `/projects/<slug>/`)**: 목록 페이지 및 상세 페이지. 상세 페이지는 콘텐츠 섹션 구조(목차·탭·2열 half 배치)를 유지한다.
+  * **홈 (`/`)**: 단일 페이지 스크롤 구조. **데스크톱은 전체가 One Scroll - One Section(scroll-snap mandatory)** — 모든 섹션이 한 화면(헤더 제외) 안에 들어가야 하며, 넘치면 섹션을 나눈다. 히어로(`#top`) → 대표 프로젝트(`#featured`) → AI 게임 제작 파이프라인(`#featured-pipeline`, 대표 프로젝트의 흐름 도표 카드) → 프로젝트 AI(`#projects`) → AI 업무 자동화(`#ai-automation`, `profile.json` `aiAutomation`) → 프로젝트 기획·개발(`#projects-game`) → 프로젝트 문서(`#projects-document`) → 현업 실무 경험(`#career-field`, `profile.json` `fieldWork`) → 경험 플레이(`#experience`, 티어 엠블럼) → 경험 현장(`#experience-field`, 활동). 이력 및 성과 섹션은 히어로 소개와 겹쳐 2026-11-25 제거(`career.json`은 보존). 연락하기는 섹션 없이 상단 바의 작은 버튼(연락처 대화상자, `/#contact`로도 열림). 수상은 별도 섹션 없이 히어로 사진 옆 상장 카드(클릭 확대)와 연결 프로젝트 카드의 🏆 배지(`awards.json` `projectSlug`)로 표시. 홈 카드 큰 제목은 `tagline`(한줄 요약), 프로젝트 이름은 그 위에 작게. 섹션 ID 변경 시 `spyItems`도 함께 수정한다.
+  * **프로젝트 (`/projects/`, `/projects/<slug>/`)**: 목록 페이지 및 상세 페이지. 상세 페이지는 콘텐츠 섹션 구조(목차·탭·2열 half 배치)를 유지한다. 상단에 현재 위치(소개 › 프로젝트 › 이름)와 들어온 곳으로 돌아가는 링크(홈 카드에서 왔으면 홈의 해당 화면, 아니면 목록 — `ProjectOrigin.tsx`), 하단에 이전/다음 프로젝트를 둔다.
   * **리다이렉트 경로 (`/about/`, `/contact/`)**: 홈의 해당 섹션 앵커(`#top`, `#contact`)로 리다이렉트 처리하며, 검색 엔진 색인에서 제외(`noindex`, `sitemap` 제외)한다.
 * **미디어 규격**: 히어로 프로필 사진 `900×1200` (3:4 세로) · 대표 키아트/상세 헤더 `1920×1080` · 썸네일 `1200×800` · 갤러리 `1600×900`. 대표 키아트·상세 헤더는 장축 `1920px`, 그 외 이미지는 장축 `1600px` 이하로 맞추고 용량은 `500KB` 이하로 최적화하며, 영상은 직접 호스팅하지 않고 YouTube 링크로 임베드한다. 예외: 홈 대표 프로젝트의 무음 반복 클립(`heroVideo`)만 10초 내외·720p·5MB 이하 mp4로 직접 올린다.
 
@@ -81,7 +81,7 @@ npm run audit             # 뷰포트별 가로 넘침 및 접근성(axe) 점검
 배포 전 아래 기준을 모두 충족해야 한다.
 
 * **자동화 검증 통과**: `npm run check` 무결성 통과 및 `npm run audit` 실행 시 주요 페이지의 **390px / 768px / 1440px** 뷰포트에서 **가로 넘침(Horizontal Overflow) 0건**, **axe(WCAG 2.1 AA + best-practice) 위반 0건**을 달성해야 한다.
-* **키보드 내비게이션**: 본문 바로가기(Skip link), 홈 섹션 점 내비게이션(데스크톱), 상세 페이지 목차, 미디어 탭(`←`/`→` 방향키), 라이트박스(`Esc` 닫기), 모바일 드로어 메뉴(`Esc` 닫기 및 트리거 요소로 포커스 복귀)가 정상 동작해야 한다.
+* **키보드 내비게이션**: 본문 바로가기(Skip link), 상단 메뉴, 홈 섹션 점 내비게이션(데스크톱), 상세 페이지 목차, 미디어 탭(`←`/`→` 방향키), 라이트박스(`Esc` 닫기), 모바일 드로어 메뉴(`Esc` 닫기 및 트리거 요소로 포커스 복귀)가 정상 동작해야 한다.
 * **모션 제어**: `prefers-reduced-motion: reduce` 환경에서는 모든 전환 애니메이션 및 부드러운 스크롤을 비활성화한다 (모션 클래스는 반드시 `motion-safe:` 접두어 사용).
 * **시맨틱 및 ARIA**: 장식용 그래픽은 `aria-hidden="true"`, 의미를 전달하는 이미지는 구체적인 대체 텍스트(`alt`), 주요 섹션은 `aria-labelledby`로 제목과 연결한다.
 * **시각적 회귀 확인**: 디자인 또는 레이아웃 변경 시 `AUDIT_SHOTS=<폴더명> npm run audit`로 1440px 및 390px 전체 화면 스크린샷을 생성하여 레이아웃 깨짐을 육안으로 교차 검증한다.

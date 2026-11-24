@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, getPublishedProjects, getVisibleSections } from "@/content/loaders";
 import { ProjectHeader } from "@/components/project/ProjectHeader";
+import { ProjectPager } from "@/components/project/ProjectPager";
 import { ProjectPipeline } from "@/components/project/ProjectPipeline";
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
 import { ProjectTocDesktop, ProjectTocMobile } from "@/components/sections/ProjectToc";
@@ -46,6 +47,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
   const sections = getVisibleSections(project);
   const toc = buildToc(sections);
   const rows = groupSections(sections);
+  // 이전/다음 프로젝트: 프로젝트 목록과 같은 순서
+  const all = getPublishedProjects();
+  const index = all.findIndex((p) => p.slug === project.slug);
+  const prev = index > 0 ? all[index - 1] : undefined;
+  const next = index >= 0 && index < all.length - 1 ? all[index + 1] : undefined;
 
   return (
     <article data-toc-page>
@@ -71,6 +77,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
           )}
         </div>
       </Container>
+      <ProjectPager prev={prev} next={next} />
     </article>
   );
 }
