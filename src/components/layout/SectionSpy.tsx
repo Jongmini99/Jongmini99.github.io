@@ -48,7 +48,10 @@ export function SectionSpy({ items }: { items: SpyItem[] }) {
                   - 1344~1599px: 번호만 표시
                   - 그보다 좁으면 점만. 마우스·키보드 포커스 시에는 항상 이름까지 표시
                 */}
+                {/* 스크린 리더용 이름 (눈에 보이는 표시는 화면 폭에 따라 숨겨질 수 있음) */}
+                <span className="sr-only">{`${i + 1}. ${item.label}`}</span>
                 <span
+                  aria-hidden="true"
                   className={cx(
                     "pointer-events-none items-center rounded-full border px-2.5 py-1 text-xs font-semibold whitespace-nowrap shadow-lg",
                     "group-hover:inline-flex group-focus-visible:inline-flex",
