@@ -6,7 +6,7 @@ import { cx } from "@/lib/cx";
  * 오른쪽 점 내비게이션과 겹치지 않도록 화면 폭 - 20rem을 넘지 않고, 낮은 화면(울트라와이드)에서 카드가 넘치지 않도록 화면 높이의 1.6배도 넘지 않는다 (1536px 이하에서는 기본 폭과 같음).
  */
 const WIDE =
-  "2xl:max-w-[min(100rem,calc(100vw_-_20rem),160vh)] min-[140rem]:max-w-[min(116rem,calc(100vw_-_20rem),160vh)]";
+  "2xl:max-w-[min(86rem,calc(100vw_-_20rem),160vh)] min-[140rem]:max-w-[min(94rem,calc(100vw_-_20rem),160vh)]";
 
 export function Container({
   as: Tag = "div",

@@ -87,7 +87,7 @@ export function FeaturedBand({
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14 2xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] 2xl:gap-16">
           <div className="flex flex-col gap-7">
             {(project.subtitle || project.description) && (
-              <p className="text-[clamp(1.75rem,1rem+2vw,3.4rem)] leading-[1.25] font-bold tracking-[-0.04em] text-balance text-fg">
+              <p className="text-[clamp(1.75rem,1.2rem+1.8vw,2.9rem)] leading-[1.25] font-bold tracking-[-0.04em] text-balance text-fg">
                 {project.subtitle ?? project.description}
               </p>
             )}
