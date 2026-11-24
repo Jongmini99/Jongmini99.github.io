@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, Play, X } from "lucide-react";
 import type { z } from "zod";
 import type { ImageSchema, VideoSchema } from "@/content/schema";
@@ -25,6 +25,13 @@ const subscribeMotion = (cb: () => void) => {
 };
 const getMotionSnapshot = () => window.matchMedia(MOTION_QUERY).matches;
 
+/** 첫 영상 자동 재생 음량 (0~100) */
+const AUTO_VOLUME = 15;
+
+/** YouTube 임베드에 postMessage 명령 전송 (IFrame API 스크립트 없이 enablejsapi 프로토콜 사용) */
+const ytCommand = (frame: HTMLIFrameElement | null, func: string, args: unknown[] = []) =>
+  frame?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args, id: 1, channel: "widget" }), "*");
+
 const arrowBtn =
   "absolute top-1/2 z-10 hidden size-11 sm:inline-flex -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white " +
   "transition-colors duration-150 hover:bg-accent-solid";
@@ -35,7 +42,9 @@ const iconBtn =
 
 /**
  * 상세 헤더 미디어 쇼케이스 (스팀 상점 페이지 방식).
- * 큰 화면 1개 + 아래 썸네일 줄. 영상이 먼저 오고, 첫 영상은 소리 없이 자동 재생한다
+ * 큰 화면 1개 + 아래 썸네일 줄. 영상이 먼저 오고, 첫 영상은 작은 음량(AUTO_VOLUME)으로 자동 재생한다.
+ * 브라우저 정책상 소리 있는 자동 재생은 사용자 조작 이후에만 허용되므로, 음소거로 시작한 뒤
+ * 이미 페이지와 상호작용했으면 즉시, 아니면 첫 클릭·키 입력 때 음소거를 풀고 작은 음량으로 바꾼다
  * (동작 줄이기 설정이면 자동 재생하지 않음). 썸네일 줄에서 ←/→로 이동, 이미지는 눌러서 크게 보기(Esc 닫기).
  */
 export function MediaShowcase({ videos, images, title }: { videos: Video[]; images: Image[]; title: string }) {
@@ -54,10 +63,63 @@ export function MediaShowcase({ videos, images, title }: { videos: Video[]; imag
   const playing: null | "auto" | "user" =
     userPlaying === undefined ? (index === 0 && !reducedMotion ? "auto" : null) : userPlaying ? "user" : null;
   const thumbRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [zoomed, setZoomed] = useState(false);
 
   const current = items[index];
+  const currentVideoId = current?.kind === "video" ? current.id : null;
+
+  // 자동 재생: 플레이어 준비 후 (사용자 조작이 있었으면) 음소거 해제 + 작은 음량
+  useEffect(() => {
+    if (playing !== "auto") return;
+    const frame = frameRef.current;
+    if (!frame) return;
+    let ready = false;
+    let unmuted = false;
+    // 이미 페이지와 상호작용했으면(예: 홈 카드 클릭으로 진입) 준비되는 즉시 소리를 켠다
+    let gestureArmed = navigator.userActivation?.hasBeenActive ?? false;
+    const gestureEvents = ["pointerdown", "keydown", "touchstart"] as const;
+    const unmute = () => {
+      if (unmuted || !ready) return;
+      unmuted = true;
+      ytCommand(frame, "setVolume", [AUTO_VOLUME]);
+      ytCommand(frame, "unMute");
+      ytCommand(frame, "playVideo");
+      removeGesture();
+    };
+    const onGesture = () => {
+      gestureArmed = true;
+      unmute();
+    };
+    const removeGesture = () => gestureEvents.forEach((e) => window.removeEventListener(e, onGesture));
+    gestureEvents.forEach((e) => window.addEventListener(e, onGesture, { passive: true }));
+
+    const onMessage = (e: MessageEvent) => {
+      if (e.source !== frame.contentWindow || typeof e.data !== "string") return;
+      let data: { event?: string };
+      try {
+        data = JSON.parse(e.data);
+      } catch {
+        return;
+      }
+      if (ready || (data.event !== "onReady" && data.event !== "infoDelivery")) return;
+      ready = true;
+      ytCommand(frame, "setVolume", [AUTO_VOLUME]);
+      if (gestureArmed) unmute();
+    };
+    const listen = () =>
+      frame.contentWindow?.postMessage(JSON.stringify({ event: "listening", id: 1, channel: "widget" }), "*");
+    window.addEventListener("message", onMessage);
+    frame.addEventListener("load", listen);
+    listen();
+    return () => {
+      window.removeEventListener("message", onMessage);
+      frame.removeEventListener("load", listen);
+      removeGesture();
+    };
+  }, [playing, currentVideoId]);
+
   if (!current) return null;
 
   const select = (i: number, focus = false) => {
@@ -79,7 +141,8 @@ export function MediaShowcase({ videos, images, title }: { videos: Video[]; imag
           playing ? (
             <iframe
               key={`${current.id}-${playing}`}
-              src={`${youTubeEmbedUrl(current.id)}?autoplay=1&rel=0&playsinline=1${playing === "auto" ? "&mute=1" : ""}`}
+              ref={frameRef}
+              src={`${youTubeEmbedUrl(current.id)}?autoplay=1&rel=0&playsinline=1${playing === "auto" ? "&mute=1&enablejsapi=1" : ""}`}
               title={current.video.title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
