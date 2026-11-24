@@ -408,6 +408,8 @@ export const AwardsSchema = z.object({
 });
 
 export const ContactSchema = z.object({
+  /** 전화번호 (예: 010-0000-0000). 연락하기 대화상자에 표시 */
+  phone: optionalText,
   email: z.preprocess(emptyToUndefined, z.email().optional()),
   github: optionalUrl,
   /** 이력서 파일 경로 ("/uploads/resume/...pdf") */

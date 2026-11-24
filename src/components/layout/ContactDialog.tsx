@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowUpRight, Download, Mail, X } from "lucide-react";
+import { ArrowUpRight, Mail, Phone, X } from "lucide-react";
 import type { Contact } from "@/content/schema";
 import { buttonClass } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { withBasePath } from "@/lib/base-path";
 import { cx } from "@/lib/cx";
 
 /**
@@ -15,6 +14,17 @@ import { cx } from "@/lib/cx";
  */
 export function ContactDialog({ contact, className, onOpen }: { contact: Contact; className?: string; onOpen?: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const rows = [
+    contact.phone && { label: "TEL", value: contact.phone, href: `tel:${contact.phone.replace(/[^0-9+]/g, "")}`, icon: <Phone className="size-5" /> },
+    contact.email && { label: "E-mail", value: contact.email, href: `mailto:${contact.email}`, icon: <Mail className="size-5" /> },
+    contact.github && {
+      label: "GitHub",
+      value: contact.github.replace(/^https?:\/\//, ""),
+      href: contact.github,
+      icon: <Icon name="github" className="size-5" />,
+      external: true,
+    },
+  ].filter((r) => !!r) as { label: string; value: string; href: string; icon: React.ReactNode; external?: boolean }[];
 
   const open = () => {
     onOpen?.();
@@ -69,51 +79,32 @@ export function ContactDialog({ contact, className, onOpen }: { contact: Contact
             </button>
           </div>
 
-          <div className="flex flex-col gap-3">
-            {contact.email && (
-              <a href={`mailto:${contact.email}`} className={buttonClass({ variant: "primary", className: "w-full justify-center" })}>
-                <Mail className="size-5" aria-hidden="true" />
-                {contact.email}
-              </a>
-            )}
-            <div className="flex flex-wrap gap-3">
-              {contact.github && (
-                <a href={contact.github} target="_blank" rel="noopener noreferrer" className={buttonClass({ variant: "outline", size: "sm" })}>
-                  <Icon name="github" className="size-4" />
-                  GitHub
-                  <span className="sr-only">(새 창)</span>
+          {/* 연락 수단 3개: 전화 · 메일 · GitHub */}
+          <ul className="flex flex-col gap-2">
+            {rows.map((r) => (
+              <li key={r.label}>
+                <a
+                  href={r.href}
+                  {...(r.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="group flex items-center gap-4 rounded-card border border-line bg-bg/40 px-4 py-3.5 transition-colors duration-150 hover:border-accent/60"
+                >
+                  <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent-text">
+                    {r.icon}
+                  </span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="text-xs font-semibold text-fg-muted">{r.label}</span>
+                    <span className="truncate font-display font-semibold text-fg">{r.value}</span>
+                  </span>
+                  {r.external && (
+                    <>
+                      <ArrowUpRight className="ml-auto size-5 shrink-0 text-fg-muted group-hover:text-accent-text" aria-hidden="true" />
+                      <span className="sr-only">(새 창)</span>
+                    </>
+                  )}
                 </a>
-              )}
-              {contact.resume && (
-                <a href={withBasePath(contact.resume)} download className={buttonClass({ variant: "outline", size: "sm" })}>
-                  <Download className="size-4" aria-hidden="true" />
-                  포트폴리오 PDF
-                </a>
-              )}
-            </div>
-          </div>
-
-          {contact.links.length > 0 && (
-            <ul aria-label="외부 링크" className="flex flex-col gap-2 border-t border-line pt-5">
-              {contact.links.map((l) => (
-                <li key={l.url}>
-                  <a
-                    href={l.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center justify-between gap-4 rounded-control px-3 py-2.5 hover:bg-surface-raised"
-                  >
-                    <span className="min-w-0">
-                      <span className="block font-semibold text-fg">{l.label}</span>
-                      {l.description && <span className="block text-sm text-fg-muted">{l.description}</span>}
-                    </span>
-                    <ArrowUpRight className="size-5 shrink-0 text-fg-muted group-hover:text-accent-text" aria-hidden="true" />
-                    <span className="sr-only">(새 창)</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+              </li>
+            ))}
+          </ul>
         </div>
       </dialog>
     </>
