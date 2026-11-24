@@ -199,22 +199,34 @@ export function CareerTimeline({ items }: { items: Career["items"] }) {
 export function GamerEmblems({ items, labelledBy }: { items: Profile["gamerMetrics"]; labelledBy?: string }) {
   if (items.length === 0) return null;
   return (
-    <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3">
       {items.map((m) => (
-        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 rounded-card border border-line bg-surface px-4 py-6 text-center lg:py-5">
-          <span aria-hidden="true" className="flex size-20 items-center justify-center">
-            {m.emblem ? (
+        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 text-center">
+          {/* 게임 아이콘 (없으면 티어 엠블럼 → 로고 아이콘 → 머리글자) */}
+          <span aria-hidden="true" className="relative flex size-24 items-center justify-center [@media(max-height:56rem)]:lg:size-20 xl:size-28">
+            {m.image ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="size-20 object-contain" />
+              <img src={withBasePath(m.image.src)} alt="" loading="lazy" decoding="async" className="size-full rounded-2xl border border-line-strong object-cover" />
+            ) : m.emblem ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="size-full object-contain" />
             ) : (
-              <span className="flex size-16 items-center justify-center rounded-full bg-surface-raised text-fg">
-                {hasIcon(m.icon) ? <Icon name={m.icon} className="size-8" /> : <span className="text-xl font-bold">{m.game.slice(0, 1)}</span>}
+              <span className="flex size-full items-center justify-center rounded-2xl bg-surface-raised text-fg">
+                {hasIcon(m.icon) ? <Icon name={m.icon} className="size-10" /> : <span className="text-2xl font-bold">{m.game.slice(0, 1)}</span>}
               </span>
+            )}
+            {/* 티어 엠블럼은 아이콘 오른쪽 아래에 작게 */}
+            {m.image && m.emblem && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={withBasePath(m.emblem.src)} alt="" loading="lazy" decoding="async" className="absolute -right-3 -bottom-3 size-12 object-contain drop-shadow-[0_4px_10px_rgb(0_0_0/0.6)]" />
             )}
           </span>
           <span className="flex flex-col gap-1">
-            <span className="text-xl font-bold tracking-[-0.02em] text-accent-text">{m.metric}</span>
-            <span className="text-sm font-semibold break-keep text-fg">{m.game}</span>
+            <span className="text-base font-bold tracking-[-0.02em] break-keep text-fg xl:text-lg">{m.game}</span>
+            <span className="text-sm break-keep text-fg-muted">
+              {m.metricLabel && <span>{m.metricLabel}: </span>}
+              <span className="font-semibold text-accent-text">{m.metric}</span>
+            </span>
           </span>
         </li>
       ))}
@@ -222,37 +234,57 @@ export function GamerEmblems({ items, labelledBy }: { items: Profile["gamerMetri
   );
 }
 
-/** 기획을 위한 활동 카드 그리드 (sm 이상 2열) */
+/** 기획을 위한 활동 카드 그리드: 사진이 있으면 사진 + 제목 + 한 줄 설명 (lg 4열) */
 export function ActivitiesGrid({ items, headingLevel = "h4" }: { items: Profile["activities"]; headingLevel?: "h3" | "h4" }) {
   const H = headingLevel;
   if (items.length === 0) return null;
+  const withImages = items.some((a) => a.image);
   return (
-    <ul className="grid gap-4 sm:grid-cols-2">
-      {items.map((a) => (
-        <li key={a.title} className="flex min-w-0 flex-col gap-3 rounded-card border border-line bg-surface p-6">
-          <div className="flex flex-col gap-1">
-            {(a.period || a.organization) && (
-              <p className="flex flex-wrap items-center gap-x-2 text-xs font-semibold text-fg-subtle">
-                {a.period && <span className="font-display">{a.period}</span>}
-                {a.period && a.organization && <span aria-hidden="true">·</span>}
-                {a.organization && <span>{a.organization}</span>}
-              </p>
+    <ul className={cx("grid gap-4 sm:grid-cols-2", withImages && "gap-y-8 lg:grid-cols-4 lg:gap-6")}>
+      {items.map((a) =>
+        withImages ? (
+          <li key={a.title} className="flex min-w-0 flex-col gap-4">
+            <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-card border border-line bg-surface">
+              {a.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={withBasePath(a.image.src)} alt={a.image.alt ?? a.title} loading="lazy" decoding="async" className="max-h-full w-full object-contain" />
+              ) : (
+                <span aria-hidden="true" className="text-sm text-fg-subtle">
+                  이미지 준비 중
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <H className="text-lg leading-snug font-bold tracking-[-0.02em] break-keep text-fg xl:text-xl">{a.title}</H>
+              <p className="text-[0.95rem] break-keep text-fg-muted">{a.role}</p>
+            </div>
+          </li>
+        ) : (
+          <li key={a.title} className="flex min-w-0 flex-col gap-3 rounded-card border border-line bg-surface p-6">
+            <div className="flex flex-col gap-1">
+              {(a.period || a.organization) && (
+                <p className="flex flex-wrap items-center gap-x-2 text-xs font-semibold text-fg-subtle">
+                  {a.period && <span className="font-display">{a.period}</span>}
+                  {a.period && a.organization && <span aria-hidden="true">·</span>}
+                  {a.organization && <span>{a.organization}</span>}
+                </p>
+              )}
+              <H className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{a.title}</H>
+              <p className="text-sm font-semibold text-accent-text">{a.role}</p>
+            </div>
+            {a.description && <p className="text-[0.95rem] leading-[1.75] text-fg-muted">{a.description}</p>}
+            {a.tags.length > 0 && (
+              <ul aria-label="태그" className="mt-auto flex flex-wrap gap-1.5 pt-1">
+                {a.tags.map((t) => (
+                  <li key={t}>
+                    <Tag>{t}</Tag>
+                  </li>
+                ))}
+              </ul>
             )}
-            <H className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{a.title}</H>
-            <p className="text-sm font-semibold text-accent-text">{a.role}</p>
-          </div>
-          {a.description && <p className="text-[0.95rem] leading-[1.75] text-fg-muted">{a.description}</p>}
-          {a.tags.length > 0 && (
-            <ul aria-label="태그" className="mt-auto flex flex-wrap gap-1.5 pt-1">
-              {a.tags.map((t) => (
-                <li key={t}>
-                  <Tag>{t}</Tag>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))}
+          </li>
+        ),
+      )}
     </ul>
   );
 }

@@ -50,66 +50,102 @@
   ],
   "gamerMetrics": [
     {
+      "game": "배틀그라운드",
+      "metric": "1,000시간 이상",
+      "description": "배틀로얄 슈팅 · 누적 플레이",
+      "icon": "pubg",
+      "image": {
+        "src": "/uploads/images/games/pubg.jpg",
+        "alt": ""
+      }
+    },
+    {
       "game": "리그 오브 레전드",
       "metric": "마스터 550pt",
+      "metricLabel": "최고 티어",
       "description": "MOBA · 최고 달성 티어",
       "emblem": {
         "src": "/uploads/images/emblems/riot-master.png",
         "alt": "마스터 티어 엠블럼"
       },
-      "icon": "leagueoflegends"
+      "icon": "leagueoflegends",
+      "image": {
+        "src": "/uploads/images/games/lol.jpg",
+        "alt": ""
+      }
     },
     {
       "game": "전략적 팀 전투 (TFT)",
       "metric": "마스터 220pt",
+      "metricLabel": "최고 티어",
       "description": "오토배틀러 · 최고 달성 티어",
       "emblem": {
         "src": "/uploads/images/emblems/riot-master.png",
         "alt": "마스터 티어 엠블럼"
       },
-      "icon": "riotgames"
+      "icon": "riotgames",
+      "image": {
+        "src": "/uploads/images/games/tft.jpg",
+        "alt": ""
+      }
     },
     {
       "game": "이터널 리턴",
       "metric": "미스릴 7900pt",
+      "metricLabel": "최고 티어",
       "description": "배틀로얄 · 최고 달성 티어",
       "emblem": {
         "src": "/uploads/images/emblems/eternalreturn-mithril.png",
         "alt": "미스릴 티어 엠블럼"
-      }
-    },
-    {
-      "game": "오버워치",
-      "metric": "마스터",
-      "description": "히어로 슈터 · 최고 달성 티어",
-      "icon": "battlenet",
-      "emblem": {
-        "src": "/uploads/images/emblems/overwatch-master.png",
-        "alt": "마스터 티어 엠블럼"
+      },
+      "image": {
+        "src": "/uploads/images/games/eternalreturn.jpg",
+        "alt": ""
       }
     },
     {
       "game": "마블 라이벌즈",
       "metric": "마스터",
+      "metricLabel": "최고 티어",
       "description": "히어로 슈터 · 최고 달성 티어",
       "emblem": {
         "src": "/uploads/images/emblems/marvelrivals-master.png",
         "alt": "마스터 티어 엠블럼"
+      },
+      "image": {
+        "src": "/uploads/images/games/marvelrivals.jpg",
+        "alt": ""
       }
     },
     {
-      "game": "배틀그라운드",
-      "metric": "1,000시간 이상",
-      "description": "배틀로얄 슈팅 · 누적 플레이",
-      "icon": "pubg"
-    },
-    {
-      "game": "Steam",
-      "metric": "248개 게임 플레이",
-      "description": "PC 패키지 게임 · 장르별 탐색",
-      "icon": "steam"
+      "game": "오버워치",
+      "metric": "마스터",
+      "metricLabel": "최고 티어",
+      "description": "히어로 슈터 · 최고 달성 티어",
+      "icon": "battlenet",
+      "emblem": {
+        "src": "/uploads/images/emblems/overwatch-master.png",
+        "alt": "마스터 티어 엠블럼"
+      },
+      "image": {
+        "src": "/uploads/images/games/overwatch.jpg",
+        "alt": ""
+      }
     }
   ],
+  "playShowcase": {
+    "title": "최상위권 플레이 경험과 높은 게임 이해도",
+    "titleAccent": "최상위권 플레이 경험",
+    "intro": "경쟁 게임 중심으로 유명 게임들의 최상위권 티어를 달성했습니다. 각 장르별 메타 분석과 전투 시 핵심 규칙들에 대한 높은 이해도를 보유하고 있습니다.\n모바일·패키지 게임 등 안 해본 게임들을 탐색해 지속적으로 플레이 경험을 늘리고 있어 기획 작업에 필요한 인사이트(경험)를 제공할 수 있습니다.",
+    "gamesLabel": "이해도가 높은 게임",
+    "steam": {
+      "label": "STEAM 게임 플레이 Top 12 - 총 248 게임 플레이",
+      "image": {
+        "src": "/uploads/images/games/steam-top12.jpg",
+        "alt": "Steam 플레이 시간 상위 12개 게임: Rust 925.9시간, PUBG 804.5시간, RimWorld 770.6시간, 이터널 리턴 681.1시간, Project Zomboid 419.8시간, TBH: 태스크바 히어로 253.8시간, Unturned 214.6시간, Civilization VI 159.9시간, Don't Starve Together 153.5시간, Civilization V 146.2시간, Palworld 107시간, Counter-Strike 2 105.7시간"
+      }
+    }
+  },
   "activities": [
     {
       "title": "게임 제작 동아리 GameMakers",
@@ -118,7 +154,11 @@
       "tags": [
         "프로토타이핑",
         "Unity"
-      ]
+      ],
+      "image": {
+        "src": "/uploads/images/activities/gamemakers-tapnnis.jpg",
+        "alt": "동아리에서 만든 리듬 게임 프로토타입 「TAPNNIS」 플레이 화면"
+      }
     },
     {
       "title": "게임 회사 테스터",
@@ -126,25 +166,42 @@
       "tags": [
         "테스트",
         "피드백"
-      ]
+      ],
+      "image": {
+        "src": "/uploads/images/activities/tester-smash-legends.jpg",
+        "alt": "「스매시 레전드」 키 아트"
+      }
     },
     {
-      "title": "지스타 · 인디게임 쇼케이스 참여",
-      "role": "행사 현장에서 게임과 유저 반응 확인",
+      "title": "지스타/인디게임 쇼케이스 참여",
+      "role": "지스타 2023/2024와 인디게임 쇼케이스",
       "period": "2023 · 2024",
       "tags": [
         "현장 조사",
         "유저 반응"
-      ]
+      ],
+      "image": {
+        "src": "/uploads/images/activities/showcase-gstar.jpg",
+        "alt": "지스타·인디게임 쇼케이스 현장 사진 3장"
+      }
     },
     {
-      "title": "게임 취업·개발 특강 정리",
+      "title": "게임 취업밤 특강 메모",
       "role": "게임 커뮤니티 특강을 꾸준히 듣고 인사이트 정리",
       "description": "예: 2025.10.11 바이브 코딩 강의 요약",
       "tags": [
         "지속 학습",
         "AI 개발"
-      ]
+      ],
+      "image": {
+        "src": "/uploads/images/activities/lecture-memo.jpg",
+        "alt": "2025.10.11 바이브 코딩 강의 요약 메모"
+      }
     }
-  ]
+  ],
+  "activityIntro": {
+    "title": "게임을 만들고 경험하는 현장을 직접 찾아다녔습니다",
+    "titleAccent": "직접",
+    "intro": "게임 제작 동아리에서 프로토타입을 개발하고 테스터와 행사 현장에서 유저 반응을 직접 확인했습니다.\n또한 게임 개발 커뮤니티에서 활동하며 다양한 특강들을 꾸준히 듣고 정리하고 있습니다."
+  }
 }

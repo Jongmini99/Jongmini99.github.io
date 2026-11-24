@@ -16,6 +16,7 @@ import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
 import { FeaturedBand, ProjectGrid, TRACKS } from "@/components/project/ProjectCards";
 import { cx } from "@/lib/cx";
+import { withBasePath } from "@/lib/base-path";
 import { SectionSpy, type SpyItem } from "@/components/layout/SectionSpy";
 import {
   AchievementGrid,
@@ -42,6 +43,48 @@ import {
 
 /** 데스크톱에서 한 화면(헤더 제외)을 채우고 화면 단위로 스냅되는 섹션 */
 const SLIDE = "relative flex items-center py-section lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start lg:py-8";
+
+/** 제목 일부(accent)를 강조색으로 */
+function AccentTitle({ title, accent }: { title: string; accent?: string }) {
+  const i = accent ? title.indexOf(accent) : -1;
+  if (!accent || i < 0) return <>{title}</>;
+  return (
+    <>
+      {title.slice(0, i)}
+      <span className="text-accent-text">{accent}</span>
+      {title.slice(i + accent.length)}
+    </>
+  );
+}
+
+/** 머리말: 상위 섹션 이름 작게 + 강조 제목 + 소개 문단 */
+function IntroTitle({
+  parent,
+  id,
+  intro,
+  fallback,
+}: {
+  parent: string;
+  id: string;
+  intro?: { title: string; titleAccent?: string; intro?: string };
+  fallback: string;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-sm font-semibold text-fg-muted">{parent}</p>
+      <h2 id={id} className="text-3xl font-bold tracking-[-0.04em] break-keep text-fg sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
+        <AccentTitle title={intro?.title ?? fallback} accent={intro?.titleAccent} />
+      </h2>
+      {intro?.intro && (
+        <div className="flex flex-col gap-1 break-keep text-fg-muted lg:text-[1.0625rem]">
+          {intro.intro.split("\n").map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 /** 분류 제목 (01 게임 기획 & 프로토타입) */
 function TrackHeading({ index, title, description, id }: { index: number; title: string; description?: string; id: string }) {
@@ -100,6 +143,7 @@ export default function HomePage() {
   const contact = getContact();
   const heroSkills = skills.groups.flatMap((g) => g.items).filter((s) => s.highlight);
   const proofBadges = awards.items.filter((a) => a.highlight);
+  const play = profile.playShowcase;
   const topAward = awards.items.find((a) => a.category === "award" && a.highlight);
   // 프로젝트는 분류(track)별로 한 화면씩. 분류 없는 프로젝트는 마지막 화면에 붙인다.
   const projectSlides: { key: string; title: string; description?: string; items: typeof projects }[] = TRACKS.map((t) => ({
@@ -260,12 +304,29 @@ export default function HomePage() {
         {profile.gamerMetrics.length > 0 && (
           <section id="experience" aria-labelledby="experience-title" className={cx(SLIDE, "bg-bg-alt")}>
             <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-              <SectionTitle title="게임 기획을 위한 경험" id="experience-title" description="많이 플레이하고, 직접 만들고, 현장을 찾아다녔습니다." />
-              <div className="flex flex-col gap-6">
-                <h3 id="gamer-metrics-title" className="text-xl font-bold tracking-[-0.02em] text-fg">
-                  최상위권 플레이 경험
-                </h3>
-                <GamerEmblems items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
+              <IntroTitle parent="게임 기획을 위한 경험" id="experience-title" intro={play} fallback="최상위권 플레이 경험" />
+              <div className={cx("grid gap-10", play?.steam && "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12")}>
+                <div className="flex flex-col gap-6">
+                  <h3 id="gamer-metrics-title" className="self-start rounded-full border border-line-strong px-4 py-1.5 text-base font-semibold text-fg">
+                    {play?.gamesLabel ?? "최상위권 플레이 경험"}
+                  </h3>
+                  <GamerEmblems items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
+                </div>
+                {play?.steam && (
+                  <figure className="flex min-w-0 flex-col gap-6">
+                    <figcaption className="self-start rounded-full border border-line-strong px-4 py-1.5 text-base font-semibold text-fg">{play.steam.label}</figcaption>
+                    <a
+                      href={withBasePath(play.steam.image.src)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block overflow-hidden rounded-card border border-line-strong transition-colors duration-150 hover:border-accent/60"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={withBasePath(play.steam.image.src)} alt={play.steam.image.alt ?? play.steam.label} loading="lazy" decoding="async" width={1682} height={1112} className="h-auto w-full" />
+                      <span className="sr-only">(원본 이미지 새 창)</span>
+                    </a>
+                  </figure>
+                )}
               </div>
             </Container>
           </section>
@@ -277,7 +338,7 @@ export default function HomePage() {
             className={cx(SLIDE, "bg-bg-alt")}
           >
             <Container className="flex w-full flex-col gap-8 [@media(max-height:56rem)]:lg:gap-6">
-              <ContinuedTitle parent="게임 기획을 위한 경험" title="만들고 경험하는 현장" id="experience-field-title" />
+              <IntroTitle parent="게임 기획을 위한 경험" id="experience-field-title" intro={profile.activityIntro} fallback="만들고 경험하는 현장" />
               <ActivitiesGrid items={profile.activities} headingLevel="h3" />
             </Container>
           </section>

@@ -329,8 +329,23 @@ export const GamerMetricSchema = z.object({
   description: optionalText,
   /** 공식 티어 엠블럼 이미지 (선택). 없으면 icon → 게임 이름 머리글자 순으로 대체 */
   emblem: optionalImage,
+  /** 게임 대표 아이콘 이미지 (선택, 정사각형). 있으면 홈 플레이 경험 카드에 크게 표시 */
+  image: optionalImage,
+  /** 지표 앞 라벨 (선택, 예: "최고 티어") */
+  metricLabel: optionalText,
   /** 게임 로고 아이콘 키 (선택, Icon 레지스트리) */
   icon: optionalText,
+});
+
+/** 홈 '최상위권 플레이 경험' 화면 머리말과 Steam 플레이 기록 */
+export const PlayShowcaseSchema = z.object({
+  title: text,
+  /** title 안에서 강조색으로 표시할 부분 (선택) */
+  titleAccent: optionalText,
+  intro: optionalText,
+  /** 게임 카드 묶음 라벨 (예: "이해도가 높은 게임") */
+  gamesLabel: optionalText,
+  steam: z.preprocess(emptyToUndefined, z.object({ label: text, image: ImageSchema }).optional()),
 });
 
 /** 기획 활동 (동아리·테스터·행사 참관·특강 등) */
@@ -341,6 +356,18 @@ export const ActivityItemSchema = z.object({
   period: optionalText,
   description: optionalText,
   tags: list(text),
+  /** 대표 사진·캡처 (선택). 있으면 홈 카드 위에 표시 */
+  image: optionalImage,
+});
+
+/** 홈 섹션 머리말 (강조 제목 + 소개) */
+export const SectionIntroSchema = z.object({
+  title: text,
+  /** title 안에서 강조색으로 표시할 부분 (선택) */
+  titleAccent: optionalText,
+  /** 줄바꿈(
+)마다 한 문단 */
+  intro: optionalText,
 });
 
 export const ProfileSchema = z.object({
@@ -358,8 +385,12 @@ export const ProfileSchema = z.object({
   coreStrengths: list(CoreStrengthSchema),
   /** 게임 플레이 지표 (비우면 숨김) */
   gamerMetrics: list(GamerMetricSchema),
+  /** 플레이 경험 화면 머리말·Steam 기록 (선택) */
+  playShowcase: z.preprocess(emptyToUndefined, PlayShowcaseSchema.optional()),
   /** 기획을 위한 활동 (홈 '게임 기획을 위한 경험' 섹션. 플레이 지표와 함께 비우면 섹션 숨김) */
   activities: list(ActivityItemSchema),
+  /** 활동 화면 머리말 (선택) */
+  activityIntro: z.preprocess(emptyToUndefined, SectionIntroSchema.optional()),
 });
 
 export const SkillsSchema = z.object({
