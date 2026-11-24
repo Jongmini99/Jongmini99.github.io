@@ -48,9 +48,9 @@
 }
 
 /*
- * 홈 앞 3화면(히어로·대표 프로젝트·수상)을 PPT처럼 화면 단위로 고정한다.
+ * 홈 전체를 PPT처럼 한 화면 = 한 섹션으로 고정한다 (One Scroll - One Section).
  * 데스크톱 + 동작 허용 환경에서만. mandatory라 스크롤하면 반드시 다음 화면 시작점에 멈춘다.
- * 그 아래 섹션들은 하나의 큰 스냅 영역(data-snap-tail)으로 묶어, 영역 안에서는 자유롭게 스크롤된다.
+ * 각 섹션은 한 화면 안에 들어가도록 나눠 배치한다. 화면이 아주 낮아 넘치면 그 섹션 안에서만 스크롤된다.
  */
 @media (width >= 64rem) and (prefers-reduced-motion: no-preference) {
   html:has([data-snap-home]) {

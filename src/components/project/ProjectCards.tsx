@@ -197,7 +197,18 @@ function KeyTakeaways({ takeaways }: { takeaways: NonNullable<Project["keyTakeaw
  * 프로젝트 카드: 이미지 + 제목 + 3단 요약(있으면) 또는 짧은 소개.
  * 카드 전체 클릭 영역은 제목 링크의 ::after 로 확장 — 링크는 하나만 존재한다.
  */
-export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: Project; wide?: boolean; headingLevel?: HeadingLevel }) {
+export function ProjectTile({
+  project,
+  wide,
+  compact,
+  headingLevel = "h3",
+}: {
+  project: Project;
+  wide?: boolean;
+  /** 홈 한 화면 배치용: 여백·글자 크기를 줄인다 (데스크톱만) */
+  compact?: boolean;
+  headingLevel?: HeadingLevel;
+}) {
   const H = headingLevel;
   return (
     <article
@@ -206,7 +217,7 @@ export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: P
         "transition-[transform,border-color] duration-200 focus-within:border-accent hover:border-accent/60 motion-safe:hover:-translate-y-1",
       )}
     >
-      <div className={cx("relative aspect-[16/9] overflow-hidden", wide && "md:aspect-[21/9]")}>
+      <div className={cx("relative aspect-[16/9] overflow-hidden", wide && "md:aspect-[21/9]", compact && "lg:aspect-[2/1]")}>
         <MediaImage
           image={project.thumbnail}
           decorative
@@ -221,7 +232,7 @@ export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: P
           className="absolute top-4 right-4 size-9 rounded-full bg-bg/70 p-2 text-fg opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
         />
       </div>
-      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+      <div className={cx("flex flex-1 flex-col gap-4 p-5 sm:p-6", compact && "lg:gap-3 lg:p-5")}>
         <div className="flex flex-col gap-1.5">
           {project.tagline ? (
             /* 한줄 요약을 크게, 프로젝트 이름·기간은 그 위에 작게 */
@@ -234,7 +245,10 @@ export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: P
               </span>
               <Link
                 href={href(project)}
-                className="text-xl leading-snug font-bold tracking-[-0.03em] text-balance text-fg outline-none after:absolute after:inset-0 after:content-['']"
+                className={cx(
+                  "text-xl leading-snug font-bold tracking-[-0.03em] text-balance text-fg outline-none after:absolute after:inset-0 after:content-['']",
+                  compact && "lg:text-lg",
+                )}
               >
                 {project.tagline}
               </Link>
@@ -264,20 +278,36 @@ export function ProjectTile({ project, wide, headingLevel = "h3" }: { project: P
 }
 
 /** 프로젝트 수에 맞춘 카드 그리드 (1개: 넓게, 2개: 2열, 3개 이상: 3열) */
-export function ProjectGrid({ projects, headingLevel }: { projects: Project[]; headingLevel?: HeadingLevel }) {
+export function ProjectGrid({
+  projects,
+  headingLevel,
+  compact,
+}: {
+  projects: Project[];
+  headingLevel?: HeadingLevel;
+  /** 홈 한 화면 배치: 4개면 데스크톱에서 한 줄 4열 */
+  compact?: boolean;
+}) {
   const n = projects.length;
   return (
-    <ul className={cx("grid gap-5", n === 2 && "md:grid-cols-2", n >= 3 && "md:grid-cols-2 lg:grid-cols-3")}>
+    <ul
+      className={cx(
+        "grid gap-5",
+        n === 2 && "md:grid-cols-2",
+        n >= 3 && "md:grid-cols-2 lg:grid-cols-3",
+        compact && n >= 4 && "lg:grid-cols-4",
+      )}
+    >
       {projects.map((p) => (
         <li key={p.id} className="min-w-0">
-          <ProjectTile project={p} wide={n === 1} headingLevel={headingLevel} />
+          <ProjectTile project={p} wide={n === 1 && !compact} compact={compact} headingLevel={headingLevel} />
         </li>
       ))}
     </ul>
   );
 }
 
-const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
+export const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
   {
     key: "game",
     title: "게임 기획 & 프로토타입",
@@ -289,35 +319,3 @@ const TRACKS: { key: ProjectTrack; title: string; description: string }[] = [
     description: "시스템 역기획, 지표·BM 분석, 출시 가격 제안 문서",
   },
 ];
-
-/**
- * 홈 프로젝트 영역: 분류(track)별로 위아래 블록으로 나눠 보여 준다.
- * 분류가 없는 프로젝트는 마지막에 제목 없이 이어서 표시한다.
- */
-export function TrackedProjects({ projects, idPrefix = "track" }: { projects: Project[]; idPrefix?: string }) {
-  const groups = TRACKS.map((t) => ({ ...t, items: projects.filter((p) => p.track === t.key) })).filter((g) => g.items.length > 0);
-  const rest = projects.filter((p) => !p.track);
-  if (groups.length === 0) return <ProjectGrid projects={projects} />;
-  return (
-    <div className="flex flex-col gap-14">
-      {groups.map((g, i) => {
-        const headingId = `${idPrefix}-${g.key}`;
-        return (
-          <section key={g.key} aria-labelledby={headingId} className="flex flex-col gap-6">
-            <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
-              <h3 id={headingId} className="flex items-baseline gap-3 text-2xl font-bold tracking-[-0.03em] text-fg">
-                <span aria-hidden="true" className="font-display text-base font-semibold text-accent-text">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {g.title}
-              </h3>
-              <p className="text-sm text-fg-muted">{g.description}</p>
-            </div>
-            <ProjectGrid projects={g.items} headingLevel="h4" />
-          </section>
-        );
-      })}
-      {rest.length > 0 && <ProjectGrid projects={rest} />}
-    </div>
-  );
-}

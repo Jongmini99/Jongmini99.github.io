@@ -201,7 +201,7 @@ export function GamerEmblems({ items, labelledBy }: { items: Profile["gamerMetri
   return (
     <ul aria-labelledby={labelledBy} className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((m) => (
-        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 rounded-card border border-line bg-surface px-4 py-6 text-center">
+        <li key={`${m.game}-${m.metric}`} className="flex min-w-0 flex-col items-center gap-3 rounded-card border border-line bg-surface px-4 py-6 text-center lg:py-5">
           <span aria-hidden="true" className="flex size-20 items-center justify-center">
             {m.emblem ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -223,7 +223,8 @@ export function GamerEmblems({ items, labelledBy }: { items: Profile["gamerMetri
 }
 
 /** 기획을 위한 활동 카드 그리드 (sm 이상 2열) */
-export function ActivitiesGrid({ items }: { items: Profile["activities"] }) {
+export function ActivitiesGrid({ items, headingLevel = "h4" }: { items: Profile["activities"]; headingLevel?: "h3" | "h4" }) {
+  const H = headingLevel;
   if (items.length === 0) return null;
   return (
     <ul className="grid gap-4 sm:grid-cols-2">
@@ -237,7 +238,7 @@ export function ActivitiesGrid({ items }: { items: Profile["activities"] }) {
                 {a.organization && <span>{a.organization}</span>}
               </p>
             )}
-            <h4 className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{a.title}</h4>
+            <H className="text-lg leading-snug font-bold tracking-[-0.02em] text-fg">{a.title}</H>
             <p className="text-sm font-semibold text-accent-text">{a.role}</p>
           </div>
           {a.description && <p className="text-[0.95rem] leading-[1.75] text-fg-muted">{a.description}</p>}
