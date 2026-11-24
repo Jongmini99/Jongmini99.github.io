@@ -34,3 +34,28 @@ export function youTubeEmbedUrl(id: string): string {
 export function youTubeThumbnailUrl(id: string, size: "hq" | "maxres" = "hq"): string {
   return `https://i.ytimg.com/vi/${id}/${size === "maxres" ? "maxresdefault" : "hqdefault"}.jpg`;
 }
+
+/**
+ * YouTube URL의 시작 시각(t= 또는 start=)을 초 단위로 반환한다. 없거나 해석할 수 없으면 0.
+ * 지원: 90, 90s, 1m30s, 1h2m3s. 임베드 플레이어는 t=를 무시하므로 start= 로 넘겨야 한다.
+ */
+export function parseYouTubeStart(input: string): number {
+  let url: URL;
+  try {
+    url = new URL(input);
+  } catch {
+    return 0;
+  }
+  const raw = url.searchParams.get("t") ?? url.searchParams.get("start");
+  if (!raw) return 0;
+  if (/^\d+$/.test(raw)) return Number(raw);
+  const m = /^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/.exec(raw);
+  if (!m) return 0;
+  return Number(m[1] ?? 0) * 3600 + Number(m[2] ?? 0) * 60 + Number(m[3] ?? 0);
+}
+
+/** 임베드 iframe src. start(초)가 있으면 그 지점부터 재생한다. */
+export function youTubeEmbedSrc(id: string, youtubeUrl: string, params: string): string {
+  const start = parseYouTubeStart(youtubeUrl);
+  return `${youTubeEmbedUrl(id)}?${params}${start > 0 ? `&start=${start}` : ""}`;
+}

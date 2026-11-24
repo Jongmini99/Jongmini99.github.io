@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Maximize2, Play, X } from "lucide-react";
 import type { z } from "zod";
 import type { ImageSchema, VideoSchema } from "@/content/schema";
 import { withBasePath } from "@/lib/base-path";
-import { parseYouTubeId, youTubeEmbedUrl, youTubeThumbnailUrl } from "@/lib/youtube";
+import { parseYouTubeId, youTubeEmbedSrc, youTubeThumbnailUrl } from "@/lib/youtube";
 import { cx } from "@/lib/cx";
 
 type Video = z.infer<typeof VideoSchema>;
@@ -142,7 +142,11 @@ export function MediaShowcase({ videos, images, title }: { videos: Video[]; imag
             <iframe
               key={`${current.id}-${playing}`}
               ref={frameRef}
-              src={`${youTubeEmbedUrl(current.id)}?autoplay=1&rel=0&playsinline=1${playing === "auto" ? "&mute=1&enablejsapi=1" : ""}`}
+              src={youTubeEmbedSrc(
+                current.id,
+                current.video.youtubeUrl,
+                `autoplay=1&rel=0&playsinline=1${playing === "auto" ? "&mute=1&enablejsapi=1" : ""}`,
+              )}
               title={current.video.title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

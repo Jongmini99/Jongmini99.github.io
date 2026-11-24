@@ -5,7 +5,7 @@ import { Play } from "lucide-react";
 import type { z } from "zod";
 import type { VideoSchema } from "@/content/schema";
 import { MediaPlaceholder } from "@/components/ui/Media";
-import { parseYouTubeId, youTubeEmbedUrl, youTubeThumbnailUrl } from "@/lib/youtube";
+import { parseYouTubeId, youTubeEmbedSrc, youTubeThumbnailUrl } from "@/lib/youtube";
 import { PLAY_TRAILER_EVENT } from "@/components/project/TrailerButton";
 
 type Video = z.infer<typeof VideoSchema>;
@@ -48,7 +48,7 @@ export function YouTubeFrame({
   return active ? (
           <iframe
             ref={frameRef}
-            src={`${youTubeEmbedUrl(id)}?autoplay=1&rel=0`}
+            src={youTubeEmbedSrc(id, video.youtubeUrl, "autoplay=1&rel=0")}
             title={video.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
