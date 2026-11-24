@@ -134,109 +134,112 @@ export default function HomePage() {
       {/* ---------------- ③ 수상 ---------------- */}
       {topAward && <AwardShowcase award={topAward} project={topAwardProject} id="award" />}
 
-      {/* ---------------- ④ 프로젝트 ---------------- */}
-      <section id="projects" aria-labelledby="projects-title" className="py-section lg:snap-start">
-        <Container className="flex flex-col gap-14">
-          <SectionTitle
-            title="참여한 프로젝트"
-            id="projects-title"
-            description="카드마다 문제 → 해결 → 결과를 정리했습니다."
-            aside={
-              projects.length > 0 && (
-                <ButtonLink href="/projects/" variant="outline" size="sm">
-                  전체 프로젝트
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </ButtonLink>
-              )
-            }
-          />
-          {projects.length > 0 ? (
-            <TrackedProjects projects={projects} />
-          ) : (
-            <p className="text-fg-subtle">공개된 프로젝트가 없습니다.</p>
-          )}
-        </Container>
-      </section>
-
-      {/* ---------------- ⑤ 게임 기획을 위한 경험 ---------------- */}
-      {hasExperience && (
-        <section id="experience" aria-labelledby="experience-title" className="bg-bg-alt py-section">
-          <Container className="flex flex-col gap-16">
-            <SectionTitle title="게임 기획을 위한 경험" id="experience-title" description="많이 플레이하고, 직접 만들고, 현장을 찾아다녔습니다." />
-            {profile.gamerMetrics.length > 0 && (
-              <div className="flex flex-col gap-6">
-                <h3 id="gamer-metrics-title" className="text-xl font-bold tracking-[-0.02em] text-fg">
-                  최상위권 플레이 경험
-                </h3>
-                <GamerEmblems items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
-              </div>
-            )}
-            {profile.activities.length > 0 && (
-              <div className="flex flex-col gap-6">
-                <h3 className="text-xl font-bold tracking-[-0.02em] text-fg">만들고 경험하는 현장</h3>
-                <ActivitiesGrid items={profile.activities} />
-              </div>
+      {/* ④~⑦은 하나의 스냅 영역: 진입할 때만 고정되고 안에서는 자유 스크롤 */}
+      <div data-snap-tail className="lg:snap-start">
+        {/* ---------------- ④ 프로젝트 ---------------- */}
+        <section id="projects" aria-labelledby="projects-title" className="py-section">
+          <Container className="flex flex-col gap-14">
+            <SectionTitle
+              title="참여한 프로젝트"
+              id="projects-title"
+              description="카드마다 문제 → 해결 → 결과를 정리했습니다."
+              aside={
+                projects.length > 0 && (
+                  <ButtonLink href="/projects/" variant="outline" size="sm">
+                    전체 프로젝트
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </ButtonLink>
+                )
+              }
+            />
+            {projects.length > 0 ? (
+              <TrackedProjects projects={projects} />
+            ) : (
+              <p className="text-fg-subtle">공개된 프로젝트가 없습니다.</p>
             )}
           </Container>
         </section>
-      )}
 
-      {/* ---------------- ⑥ 이력 및 성과 ---------------- */}
-      <section id="career" aria-labelledby="career-title" className="py-section">
-        <Container className="flex flex-col gap-14">
-          <SectionTitle title="이력 및 성과" id="career-title" />
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
-            <div className="flex flex-col gap-5">
-              <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">경력</h3>
-              <CareerTimeline items={career.items} />
-            </div>
-            <div className="flex flex-col gap-5">
-              <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">수상 · 출시 · 전시</h3>
-              <AchievementGrid items={awards.items} />
-            </div>
-          </div>
-        </Container>
-      </section>
+        {/* ---------------- ⑤ 게임 기획을 위한 경험 ---------------- */}
+        {hasExperience && (
+          <section id="experience" aria-labelledby="experience-title" className="bg-bg-alt py-section">
+            <Container className="flex flex-col gap-16">
+              <SectionTitle title="게임 기획을 위한 경험" id="experience-title" description="많이 플레이하고, 직접 만들고, 현장을 찾아다녔습니다." />
+              {profile.gamerMetrics.length > 0 && (
+                <div className="flex flex-col gap-6">
+                  <h3 id="gamer-metrics-title" className="text-xl font-bold tracking-[-0.02em] text-fg">
+                    최상위권 플레이 경험
+                  </h3>
+                  <GamerEmblems items={profile.gamerMetrics} labelledBy="gamer-metrics-title" />
+                </div>
+              )}
+              {profile.activities.length > 0 && (
+                <div className="flex flex-col gap-6">
+                  <h3 className="text-xl font-bold tracking-[-0.02em] text-fg">만들고 경험하는 현장</h3>
+                  <ActivitiesGrid items={profile.activities} />
+                </div>
+              )}
+            </Container>
+          </section>
+        )}
 
-      {/* ---------------- ⑦ 연락하기 ---------------- */}
-      <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-bg-alt py-section">
-        <div aria-hidden="true" className="pointer-events-none absolute bottom-[-20rem] left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
-        <Container className="relative flex flex-col items-center gap-6 text-center">
-          <h2 id="contact-title" className="text-title font-semibold tracking-[-0.04em] text-fg">
-            연락하기
-          </h2>
-          <p className="max-w-md leading-[1.8] text-fg-muted">채용 및 협업 관련 문의를 환영합니다.</p>
-          <ContactActions contact={contact} resumeLabel={resumeLabel} className="justify-center pt-2" />
-          {contact.email && (
-            <p className="font-display text-sm text-fg-muted">
-              <a href={`mailto:${contact.email}`} className="underline-offset-4 hover:text-fg hover:underline">
-                {contact.email}
-              </a>
-            </p>
-          )}
-          {contact.links.length > 0 && (
-            <ul aria-label="외부 링크" className="mt-6 grid w-full max-w-3xl gap-3 text-left sm:grid-cols-2">
-              {contact.links.map((l, i) => (
-                <li key={i}>
-                  <a
-                    href={l.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center justify-between gap-4 rounded-card border border-line bg-surface px-5 py-4 transition-colors duration-150 hover:border-accent/60"
-                  >
-                    <span>
-                      <span className="block font-semibold text-fg">{l.label}</span>
-                      {l.description && <span className="text-sm text-fg-subtle">{l.description}</span>}
-                    </span>
-                    <ArrowUpRight className="size-5 text-fg-muted group-hover:text-accent-text" aria-hidden="true" />
-                    <span className="sr-only">(새 창)</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Container>
-      </section>
+        {/* ---------------- ⑥ 이력 및 성과 ---------------- */}
+        <section id="career" aria-labelledby="career-title" className="py-section">
+          <Container className="flex flex-col gap-14">
+            <SectionTitle title="이력 및 성과" id="career-title" />
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+              <div className="flex flex-col gap-5">
+                <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">경력</h3>
+                <CareerTimeline items={career.items} />
+              </div>
+              <div className="flex flex-col gap-5">
+                <h3 className="text-sm font-semibold tracking-wide text-fg-subtle">수상 · 출시 · 전시</h3>
+                <AchievementGrid items={awards.items} />
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* ---------------- ⑦ 연락하기 ---------------- */}
+        <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-bg-alt py-section">
+          <div aria-hidden="true" className="pointer-events-none absolute bottom-[-20rem] left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
+          <Container className="relative flex flex-col items-center gap-6 text-center">
+            <h2 id="contact-title" className="text-title font-semibold tracking-[-0.04em] text-fg">
+              연락하기
+            </h2>
+            <p className="max-w-md leading-[1.8] text-fg-muted">채용 및 협업 관련 문의를 환영합니다.</p>
+            <ContactActions contact={contact} resumeLabel={resumeLabel} className="justify-center pt-2" />
+            {contact.email && (
+              <p className="font-display text-sm text-fg-muted">
+                <a href={`mailto:${contact.email}`} className="underline-offset-4 hover:text-fg hover:underline">
+                  {contact.email}
+                </a>
+              </p>
+            )}
+            {contact.links.length > 0 && (
+              <ul aria-label="외부 링크" className="mt-6 grid w-full max-w-3xl gap-3 text-left sm:grid-cols-2">
+                {contact.links.map((l, i) => (
+                  <li key={i}>
+                    <a
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between gap-4 rounded-card border border-line bg-surface px-5 py-4 transition-colors duration-150 hover:border-accent/60"
+                    >
+                      <span>
+                        <span className="block font-semibold text-fg">{l.label}</span>
+                        {l.description && <span className="text-sm text-fg-subtle">{l.description}</span>}
+                      </span>
+                      <ArrowUpRight className="size-5 text-fg-muted group-hover:text-accent-text" aria-hidden="true" />
+                      <span className="sr-only">(새 창)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Container>
+        </section>
+      </div>
     </div>
   );
 }

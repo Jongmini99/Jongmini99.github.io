@@ -48,14 +48,15 @@
 }
 
 /*
- * 홈 앞 3화면(히어로·대표 프로젝트·수상)을 PPT처럼 화면 단위로 맞춘다.
- * 데스크톱 + 동작 허용 환경에서만. proximity라 그 아래 긴 섹션은 자유롭게 스크롤된다.
+ * 홈 앞 3화면(히어로·대표 프로젝트·수상)을 PPT처럼 화면 단위로 고정한다.
+ * 데스크톱 + 동작 허용 환경에서만. mandatory라 스크롤하면 반드시 다음 화면 시작점에 멈춘다.
+ * 그 아래 섹션들은 하나의 큰 스냅 영역(data-snap-tail)으로 묶어, 영역 안에서는 자유롭게 스크롤된다.
  */
 @media (width >= 64rem) and (prefers-reduced-motion: no-preference) {
   html:has([data-snap-home]) {
-    scroll-snap-type: y proximity;
+    scroll-snap-type: y mandatory;
   }
-  [data-snap-home] > section {
+  [data-snap-home] > * {
     scroll-margin-top: var(--spacing-header);
   }
 }
