@@ -91,7 +91,11 @@
     {
       "game": "마블 라이벌즈",
       "metric": "마스터",
-      "description": "히어로 슈터 · 최고 달성 티어"
+      "description": "히어로 슈터 · 최고 달성 티어",
+      "emblem": {
+        "src": "/uploads/images/emblems/marvelrivals-master.png",
+        "alt": "마스터 티어 엠블럼"
+      }
     },
     {
       "game": "배틀그라운드",
