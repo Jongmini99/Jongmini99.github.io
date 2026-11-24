@@ -26,12 +26,11 @@ function splitActor(label: string): { name: string; actor?: "human" | "ai" } {
  * 홈 대표 프로젝트 화면 (첫 화면 다음 두 번째 화면).
  * 제목은 작게, 강조할 내용(한 줄 소개·핵심 성과 불릿·작업 흐름)은 크게 보여 준다.
  * 비주얼은 YouTube 영상(videos 첫 번째, 클릭 시 재생) → 무음 반복 영상(heroVideo) → 상세 헤더 이미지 → 대표 이미지 순.
- * 작업 흐름은 상세 페이지의 첫 흐름 도표(flow) 섹션을 그대로 가져온다.
+ * 작업 흐름(AI 게임 제작 파이프라인)은 다음 화면(FeaturedPipeline)으로 나눠 보여 준다.
  */
 export function FeaturedBand({ project, id }: { project: Project; id: string }) {
   const image = project.heroImage ?? project.thumbnail;
   const headingId = `${id}-title`;
-  const flow = project.sections.find((s): s is Extract<Project["sections"][number], { type: "flow" }> => s.type === "flow" && s.visible);
   const youtube = project.videos[0];
   const video = project.heroVideo;
   return (
@@ -116,16 +115,39 @@ export function FeaturedBand({ project, id }: { project: Project; id: string }) 
           </div>
         </div>
 
-        {/* 작업 흐름: 도표가 있으면 도표 카드(클릭 시 확대), 없으면 단계 카드 — 사람(결정·검증)과 AI(설계·제작·검사)를 구분 */}
-        {flow && flow.figures.length > 0 && (
-          <div className="flex flex-col gap-4 border-t border-band-line pt-8">
-            <h3 className="text-base font-bold text-fg">{flow.title}</h3>
-            <WorkflowCards figures={flow.figures} label={flow.title} />
-          </div>
-        )}
-        {flow && flow.figures.length === 0 && flow.steps.length > 0 && (
-          <div className="flex flex-col gap-4 border-t border-band-line pt-8">
-            <h3 className="text-base font-bold text-fg">{flow.title}</h3>
+      </Container>
+    </section>
+  );
+}
+
+/**
+ * 홈 대표 프로젝트 다음 화면: 상세 페이지의 첫 흐름(flow) 섹션을 가져와 보여 준다.
+ * 도표가 있으면 큰 도표 카드(클릭 시 확대), 없으면 단계 카드 — 사람(결정·검증)과 AI(설계·제작·검사)를 구분.
+ */
+export function FeaturedPipeline({ project, id }: { project: Project; id: string }) {
+  const flow = project.sections.find((s): s is Extract<Project["sections"][number], { type: "flow" }> => s.type === "flow" && s.visible);
+  if (!flow || (flow.figures.length === 0 && flow.steps.length === 0)) return null;
+  const headingId = `${id}-title`;
+  return (
+    <section
+      id={id}
+      aria-labelledby={headingId}
+      className="relative flex items-center overflow-hidden bg-band py-section lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start lg:py-14"
+    >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -right-24 size-[30rem] rounded-full bg-accent/10 blur-3xl" />
+      </div>
+      <Container className="relative flex flex-col gap-6 lg:gap-8">
+        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <h2 id={headingId} className="text-[clamp(1.5rem,1.1rem+1.2vw,2.1rem)] font-bold tracking-[-0.04em] text-fg">
+            {flow.title}
+          </h2>
+          <p className="text-sm text-fg-muted">{project.title}</p>
+        </div>
+        {flow.figures.length > 0 ? (
+          <WorkflowCards figures={flow.figures} label={flow.title} />
+        ) : (
+          <div>
             <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(var(--n),minmax(0,1fr))]" style={{ "--n": flow.steps.length } as React.CSSProperties}>
               {flow.steps.map((step, i) => {
                 const { name, actor } = splitActor(step.label);

@@ -17,6 +17,7 @@ export const NAV_ITEMS: NavItem[] = [
 /** 홈에서 스크롤 위치 추적 대상 (대표 프로젝트 화면은 '프로젝트' 메뉴로 표시) */
 export const SECTION_TO_NAV: Record<string, string> = {
   featured: "projects",
+  "featured-pipeline": "projects",
   projects: "projects",
   "projects-game": "projects",
   "projects-document": "projects",

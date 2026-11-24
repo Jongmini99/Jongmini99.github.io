@@ -12,7 +12,7 @@ import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/Typography";
 import { MediaImage } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
-import { FeaturedBand, ProjectGrid, TRACKS } from "@/components/project/ProjectCards";
+import { FeaturedBand, FeaturedPipeline, ProjectGrid, TRACKS } from "@/components/project/ProjectCards";
 import { cx } from "@/lib/cx";
 import { Icon } from "@/components/ui/Icon";
 import { withBasePath } from "@/lib/base-path";
@@ -34,7 +34,8 @@ import { TrailerButton } from "@/components/project/TrailerButton";
  * 데스크톱에서는 모든 섹션이 한 화면에 맞춰지고 화면 단위로 스크롤된다 (One Scroll - One Section).
  * 앞 2화면: 첫인상을 결정하는 구간
  *   ① 히어로(#top): 한 줄 소개·자기소개·나의 강점·성과 배지·사진 + 상장 카드
- *   ② 대표 프로젝트(#featured): 한 줄 소개·핵심 성과·영상·AI 작업 흐름
+ *   ② 대표 프로젝트(#featured): 한 줄 소개·핵심 성과·영상
+ *   ②-2 AI 게임 제작 파이프라인(#featured-pipeline): 대표 프로젝트의 작업 흐름 도표
  * 그 아래도 한 화면 = 한 섹션: 프로젝트(#projects AI / #projects-game 기획·개발 / #projects-document 문서) →
  *   경험(#experience 플레이 / #experience-field 현장) → 이력 및 성과(#career)
  * 연락하기는 섹션 없이 상단 바의 작은 버튼(연락처 대화상자)으로 제공한다.
@@ -90,6 +91,7 @@ export default function HomePage() {
   const profile = getProfile();
   const projects = getPublishedProjects();
   const featured = getFeaturedProjects()[0];
+  const hasPipeline = !!featured?.sections.some((s) => s.type === "flow" && s.visible && (s.figures.length > 0 || s.steps.length > 0));
   const career = getCareer();
   const awards = getAwards();
   const contact = getContact();
@@ -113,6 +115,7 @@ export default function HomePage() {
   const spyItems: SpyItem[] = [
     { id: "top", label: "소개" },
     ...(featured ? [{ id: "featured", label: "대표 프로젝트" }] : []),
+    ...(featured && hasPipeline ? [{ id: "featured-pipeline", label: "AI 게임 제작 파이프라인" }] : []),
     ...(projectSlides.length > 0
       ? projectSlides.map((slide, i) => ({ id: i === 0 ? "projects" : `projects-${slide.key}`, label: slide.title || "참여한 프로젝트" }))
       : [{ id: "projects", label: "참여한 프로젝트" }]),
@@ -232,6 +235,7 @@ export default function HomePage() {
 
         {/* ---------------- ② 대표 프로젝트 ---------------- */}
         {featured && <FeaturedBand project={featured} id="featured" />}
+        {featured && <FeaturedPipeline project={featured} id="featured-pipeline" />}
 
 
         {/* ---------------- ④ 프로젝트: 분류별로 한 화면씩 ---------------- */}

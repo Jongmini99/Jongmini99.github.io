@@ -19,7 +19,7 @@ function splitCaption(caption: string | undefined, fallback: string) {
 }
 
 /**
- * 홈 대표 프로젝트 화면의 워크플로우 도표 카드 (가로 카드: 왼쪽 썸네일 + 오른쪽 제목·설명).
+ * 홈 AI 게임 제작 파이프라인 화면의 워크플로우 도표 카드 (세로 카드: 위 큰 도표 + 아래 제목·설명).
  * 도표 글씨가 작아 카드를 누르면 라이트박스로 크게 보여 준다 (←/→ 이동, Esc 닫기).
  */
 export function WorkflowCards({ figures, label }: { figures: Image[]; label: string }) {
@@ -36,7 +36,7 @@ export function WorkflowCards({ figures, label }: { figures: Image[]; label: str
 
   return (
     <>
-      <ul className="grid gap-3 md:grid-cols-2">
+      <ul className="grid gap-5 md:grid-cols-2">
         {figures.map((f, i) => {
           const { title, description } = splitCaption(f.caption, label);
           return (
@@ -44,20 +44,26 @@ export function WorkflowCards({ figures, label }: { figures: Image[]; label: str
               <button
                 type="button"
                 onClick={() => open(i)}
-                className="group flex h-full w-full items-center gap-4 rounded-inner border border-band-line bg-bg/40 p-3 text-left transition-colors duration-150 hover:border-accent/60"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-card border border-band-line bg-bg/40 text-left transition-colors duration-150 hover:border-accent/60"
               >
-                <span className="relative aspect-video w-36 shrink-0 overflow-hidden rounded-md border border-band-line sm:w-44 xl:w-48 2xl:w-56">
+                <span className="relative block aspect-video w-full overflow-hidden border-b border-band-line">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={withBasePath(f.src)} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
+                  <img
+                    src={withBasePath(f.src)}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="size-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.02]"
+                  />
                 </span>
-                <span className="flex min-w-0 flex-col gap-1">
-                  <span className="text-[0.95rem] leading-snug font-bold text-fg">
-                    <span className="mr-1.5 font-display text-accent-text">{String(i + 1).padStart(2, "0")}</span>
+                <span className="flex min-w-0 flex-col gap-1.5 p-4 sm:p-5">
+                  <span className="text-lg leading-snug font-bold text-fg">
+                    <span className="mr-2 font-display text-accent-text">{String(i + 1).padStart(2, "0")}</span>
                     {title}
                   </span>
-                  {description && <span className="text-sm leading-snug break-keep text-fg-muted">{description}</span>}
-                  <span className="mt-0.5 inline-flex items-center gap-1 text-xs font-semibold text-fg-muted group-hover:text-accent-text">
-                    <Maximize2 className="size-3.5" aria-hidden="true" />
+                  {description && <span className="text-[0.95rem] leading-snug break-keep text-fg-muted">{description}</span>}
+                  <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-fg-muted group-hover:text-accent-text">
+                    <Maximize2 className="size-4" aria-hidden="true" />
                     크게 보기
                   </span>
                 </span>
