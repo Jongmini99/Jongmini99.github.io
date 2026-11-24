@@ -1,13 +1,9 @@
 /**
  * 사이트 정보(프로필·성과·연락처) 표시 블록 — 홈 한 페이지 섹션에서 사용
  */
-import { ArrowRight } from "lucide-react";
-import type { Awards, Career, Profile, Project } from "@/content/schema";
-import { ButtonLink } from "@/components/ui/Button";
+import type { Awards, Career, Profile } from "@/content/schema";
 import { Icon, hasIcon } from "@/components/ui/Icon";
-import { MediaImage } from "@/components/ui/Media";
 import { Tag } from "@/components/ui/Badge";
-import { Container } from "@/components/layout/Container";
 import { withBasePath } from "@/lib/base-path";
 import { cx } from "@/lib/cx";
 
@@ -93,82 +89,6 @@ export function AchievementGrid({ items }: { items: AwardItem[] }) {
         );
       })}
     </ul>
-  );
-}
-
-/**
- * 홈 수상 화면: 상장 이미지 + 관련 프로젝트 키아트를 겹쳐 보여 주고, 수상명을 크게 강조한다.
- * 상장 이미지가 없으면 프로젝트 키아트만, 둘 다 없으면 플레이스홀더를 보여 준다.
- */
-export function AwardShowcase({ award, project, id }: { award: AwardItem; project?: Project; id: string }) {
-  const headingId = `${id}-title`;
-  const keyart = project?.heroImage ?? project?.thumbnail;
-  return (
-    <section
-      id={id}
-      aria-labelledby={headingId}
-      className="relative flex items-center overflow-hidden bg-bg-alt py-section lg:min-h-[calc(100svh-var(--spacing-header))] lg:snap-start lg:py-12"
-    >
-      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-[-10%] size-[40rem] -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
-      <Container className="relative grid items-center gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
-        {/* 상장 + 키아트 콜라주 */}
-        <div className="relative mx-auto w-full max-w-[20rem] pb-16 sm:max-w-[22rem] lg:max-w-[21rem]">
-          <div className="aspect-[3/4] overflow-hidden rounded-card border border-line-strong bg-surface shadow-[0_30px_80px_rgb(0_0_0/0.45)] motion-safe:lg:-rotate-2">
-            <MediaImage image={award.image ?? keyart} fallbackAlt={`${award.title} 상장`} placeholderLabel="상장 이미지 준비 중" />
-          </div>
-          {award.image && keyart && (
-            <div className="absolute right-[-12%] bottom-0 w-[72%] overflow-hidden rounded-card border border-line-strong shadow-[0_24px_60px_rgb(0_0_0/0.55)] motion-safe:lg:rotate-2">
-              <div className="aspect-video">
-                <MediaImage image={keyart} decorative />
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-7">
-          <span className="flex size-16 items-center justify-center rounded-2xl bg-accent-solid text-accent-fg shadow-[0_12px_40px_rgb(37_99_235/0.35)]">
-            <Icon name="trophy" className="size-8" />
-          </span>
-          <div className="flex flex-col gap-3">
-            <p className="flex items-center gap-2 text-lg font-semibold text-accent-text">
-              <span>{CATEGORY_LABEL[award.category]}</span>
-              {award.date && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  <span className="font-display">{award.date}</span>
-                </>
-              )}
-            </p>
-            <h2 id={headingId} className="text-title font-bold tracking-[-0.04em] text-balance text-fg">
-              {award.title}
-            </h2>
-          </div>
-          {project && (
-            <div className="flex flex-col gap-4">
-              <p className="text-xl font-semibold tracking-[-0.02em] text-fg">
-                「{project.title}」 <span className="font-normal text-fg-muted">· {project.genre}</span>
-              </p>
-              {project.keyTakeaways && (
-                <ul className="flex flex-col gap-2.5 text-lg text-fg-muted">
-                  {(["problem", "solution", "result"] as const).map((k) => (
-                    <li key={k} className="flex items-start gap-3">
-                      <span aria-hidden="true" className={cx("mt-2.5 size-1.5 shrink-0 rounded-full", k === "result" ? "bg-accent" : "bg-fg-subtle")} />
-                      <span className={cx(k === "result" && "font-semibold text-fg")}>{project.keyTakeaways![k]}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <div className="pt-2">
-                <ButtonLink href={`/projects/${project.slug}/`} variant="primary">
-                  {project.title} 자세히 보기
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </ButtonLink>
-              </div>
-            </div>
-          )}
-        </div>
-      </Container>
-    </section>
   );
 }
 

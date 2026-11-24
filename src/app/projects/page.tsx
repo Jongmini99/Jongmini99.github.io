@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPublishedProjects } from "@/content/loaders";
+import { getAwards, getPublishedProjects } from "@/content/loaders";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ProjectGrid } from "@/components/project/ProjectCards";
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   const projects = getPublishedProjects();
+  const awards = getAwards();
   return (
     <>
       <PageHeader title="프로젝트">
@@ -20,7 +21,7 @@ export default function ProjectsPage() {
         {projects.length === 0 ? (
           <p className="text-fg-subtle">공개된 프로젝트가 없습니다.</p>
         ) : (
-          <ProjectGrid projects={projects} headingLevel="h2" />
+          <ProjectGrid projects={projects} awards={awards.items} headingLevel="h2" />
         )}
       </Container>
     </>

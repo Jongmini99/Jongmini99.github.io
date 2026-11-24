@@ -20,20 +20,20 @@ import { SectionSpy, type SpyItem } from "@/components/layout/SectionSpy";
 import {
   AchievementGrid,
   ActivitiesGrid,
-  AwardShowcase,
   CareerTimeline,
   GamerEmblems,
+  CATEGORY_LABEL,
   HeroProofBadges,
 } from "@/components/profile/ProfileBlocks";
+import { AwardCertificate } from "@/components/profile/AwardCertificate";
 
 /**
  * 홈 — 한 페이지에서 전체 내용을 확인한다.
  *
  * 데스크톱에서는 모든 섹션이 한 화면에 맞춰지고 화면 단위로 스크롤된다 (One Scroll - One Section).
- * 앞 3화면: 첫인상을 결정하는 구간
- *   ① 히어로(#top): 한 줄 소개·자기소개·성과 배지·도구 아이콘·사진
+ * 앞 2화면: 첫인상을 결정하는 구간
+ *   ① 히어로(#top): 한 줄 소개·자기소개·나의 강점·성과 배지·사진 + 상장 카드
  *   ② 대표 프로젝트(#featured): 한 줄 소개·핵심 성과·영상·AI 작업 흐름
- *   ③ 수상(#award): 상장 + 프로젝트 키아트
  * 그 아래도 한 화면 = 한 섹션: 프로젝트(#projects AI / #projects-game 기획·개발 / #projects-document 문서) →
  *   경험(#experience 플레이 / #experience-field 현장) → 이력 및 성과(#career)
  * 연락하기는 섹션 없이 상단 바의 작은 버튼(연락처 대화상자)으로 제공한다.
@@ -112,7 +112,6 @@ export default function HomePage() {
   const spyItems: SpyItem[] = [
     { id: "top", label: "소개" },
     ...(featured ? [{ id: "featured", label: "대표 프로젝트" }] : []),
-    ...(topAward ? [{ id: "award", label: "수상" }] : []),
     ...(projectSlides.length > 0
       ? projectSlides.map((slide, i) => ({ id: i === 0 ? "projects" : `projects-${slide.key}`, label: slide.title || "참여한 프로젝트" }))
       : [{ id: "projects", label: "참여한 프로젝트" }]),
@@ -122,7 +121,6 @@ export default function HomePage() {
       : []),
     { id: "career", label: "이력 및 성과" },
   ];
-  const topAwardProject = topAward?.projectSlug ? projects.find((p) => p.slug === topAward.projectSlug) : undefined;
   const resumeSize = getFileSizeLabel(contact.resume);
   const resumeLabel = `포트폴리오 PDF 다운로드${resumeSize ? ` (${resumeSize})` : ""}`;
 
@@ -201,6 +199,16 @@ export default function HomePage() {
                 <div className="relative aspect-[3/4] overflow-hidden rounded-card border border-line shadow-[0_30px_80px_rgb(0_0_0/0.45)] motion-safe:animate-[float_3.5s_ease-in-out_infinite]">
                   <MediaImage image={profile.heroImage} priority fallbackAlt={`${profile.name} 프로필 사진`} />
                 </div>
+                {/* 수상 증빙: 사진 왼쪽 아래에 겹친 작은 상장 (누르면 크게 보기) */}
+                {topAward?.image && (
+                  <AwardCertificate
+                    title={topAward.title}
+                    label={CATEGORY_LABEL[topAward.category]}
+                    date={topAward.date}
+                    image={topAward.image}
+                    className="absolute -bottom-6 -left-4 z-10 sm:-left-10 lg:-left-16"
+                  />
+                )}
               </div>
             )}
           </Container>
@@ -210,8 +218,6 @@ export default function HomePage() {
         {/* ---------------- ② 대표 프로젝트 ---------------- */}
         {featured && <FeaturedBand project={featured} id="featured" />}
 
-        {/* ---------------- ③ 수상 ---------------- */}
-        {topAward && <AwardShowcase award={topAward} project={topAwardProject} id="award" />}
 
         {/* ---------------- ④ 프로젝트: 분류별로 한 화면씩 ---------------- */}
         {projectSlides.map((slide, i) => {
@@ -233,7 +239,7 @@ export default function HomePage() {
                     ) : undefined
                   }
                 />
-                <ProjectGrid projects={slide.items} headingLevel="h3" compact />
+                <ProjectGrid projects={slide.items} awards={awards.items} headingLevel="h3" compact />
               </Container>
             </section>
           );

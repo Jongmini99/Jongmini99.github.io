@@ -10,7 +10,6 @@ export type NavItem = {
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "프로젝트", href: "/#featured", section: "projects", match: "/projects" },
-  { label: "수상", href: "/#award", section: "award" },
   { label: "경험", href: "/#experience", section: "experience" },
   { label: "이력 및 성과", href: "/#career", section: "career" },
 ];
@@ -18,7 +17,6 @@ export const NAV_ITEMS: NavItem[] = [
 /** 홈에서 스크롤 위치 추적 대상 (대표 프로젝트 화면은 '프로젝트' 메뉴로 표시) */
 export const SECTION_TO_NAV: Record<string, string> = {
   featured: "projects",
-  award: "award",
   projects: "projects",
   "projects-game": "projects",
   "projects-document": "projects",

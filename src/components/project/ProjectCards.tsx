@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type React from "react";
 import { ArrowRight, ArrowUpRight, Check, CircleAlert, Sparkles, Trophy, User, Wrench } from "lucide-react";
-import type { Project, ProjectTrack } from "@/content/schema";
+import type { Awards, Project, ProjectTrack } from "@/content/schema";
+
+type AwardItem = Awards["items"][number];
 import { MediaImage } from "@/components/ui/Media";
 import { YouTubeFrame } from "@/components/sections/Videos";
 import { ButtonLink } from "@/components/ui/Button";
@@ -206,8 +208,11 @@ export function ProjectTile({
   wide,
   compact,
   headingLevel = "h3",
+  award,
 }: {
   project: Project;
+  /** 이 프로젝트로 받은 상 (awards.json의 projectSlug로 연결) — 썸네일 배지와 이름 앞 트로피로 표시 */
+  award?: AwardItem;
   wide?: boolean;
   /** 홈 한 화면 배치용: 여백·글자 크기를 줄인다 (데스크톱만) */
   compact?: boolean;
@@ -228,9 +233,17 @@ export function ProjectTile({
           placeholderLabel="대표 이미지 준비 중"
           className="transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
         />
-        <span className="absolute top-4 left-4 inline-flex max-w-[calc(100%-2rem)] items-center rounded-md border border-white/20 bg-bg/80 px-2.5 py-1 text-xs font-bold text-fg backdrop-blur-sm">
-          {project.platform}
-        </span>
+        <div className="absolute top-4 left-4 flex max-w-[calc(100%-2rem)] flex-col items-start gap-2">
+          <span className="inline-flex max-w-full items-center rounded-md border border-white/20 bg-bg/80 px-2.5 py-1 text-xs font-bold text-fg backdrop-blur-sm">
+            {project.platform}
+          </span>
+          {award && (
+            <span className="inline-flex max-w-full items-center gap-1.5 rounded-md bg-accent-solid px-2.5 py-1 text-xs font-bold text-accent-fg shadow-lg">
+              <Trophy className="size-3.5 shrink-0" aria-hidden="true" />
+              {award.title}
+            </span>
+          )}
+        </div>
         <ArrowUpRight
           aria-hidden="true"
           className="absolute top-4 right-4 size-9 rounded-full bg-bg/70 p-2 text-fg opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
@@ -242,6 +255,7 @@ export function ProjectTile({
             /* 한줄 요약을 크게, 프로젝트 이름·기간은 그 위에 작게 */
             <H className="flex flex-col gap-1.5">
               <span className="text-sm font-semibold text-fg-muted">
+                {award && <Trophy className="mr-1.5 inline size-4 -translate-y-px text-accent-text" aria-hidden="true" />}
                 {project.title}
                 {project.developmentPeriod && (
                   <span className="ml-2 font-display font-medium whitespace-nowrap">{formatPeriod(project.developmentPeriod)}</span>
@@ -286,8 +300,11 @@ export function ProjectGrid({
   projects,
   headingLevel,
   compact,
+  awards = [],
 }: {
   projects: Project[];
+  /** 수상 항목: projectSlug가 맞는 카드에 수상 표시 */
+  awards?: AwardItem[];
   headingLevel?: HeadingLevel;
   /** 홈 한 화면 배치: 4개면 데스크톱에서 한 줄 4열 */
   compact?: boolean;
@@ -304,7 +321,13 @@ export function ProjectGrid({
     >
       {projects.map((p) => (
         <li key={p.id} className="min-w-0">
-          <ProjectTile project={p} wide={n === 1 && !compact} compact={compact} headingLevel={headingLevel} />
+          <ProjectTile
+            project={p}
+            award={awards.find((a) => a.category === "award" && a.projectSlug === p.slug)}
+            wide={n === 1 && !compact}
+            compact={compact}
+            headingLevel={headingLevel}
+          />
         </li>
       ))}
     </ul>
