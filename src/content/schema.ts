@@ -295,6 +295,11 @@ export const ProjectSchema = z
         })
         .optional(),
     ),
+    /**
+     * 웹에서 바로 플레이할 수 있는 주소 (선택, 예: 메이플스토리 월드 플레이 페이지).
+     * 상세 헤더에 '플레이하기' 버튼으로 표시. 비우면 버튼을 숨긴다.
+     */
+    playUrl: optionalUrl,
     sections: list(SectionSchema),
     achievements: list(AchievementSchema),
     documents: list(DocumentSchema),

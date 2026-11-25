@@ -4,6 +4,7 @@ import type { Project } from "@/content/schema";
 import { MediaImage } from "@/components/ui/Media";
 import { ProjectBackLink } from "./ProjectOrigin";
 import { PlayBuildButton, PlayBuildNote } from "./PlayBuild";
+import { PlayLinkButton } from "./PlayLink";
 import { MediaShowcase } from "./MediaShowcase";
 import { Container } from "@/components/layout/Container";
 import { formatPeriod } from "@/lib/format";
@@ -57,6 +58,7 @@ export function ProjectHeader({ project }: { project: Project }) {
                 ))}
               </dl>
 
+              {project.playUrl && <PlayLinkButton url={project.playUrl} className="self-start" />}
               {project.playBuild && (
                 <div className="flex flex-col items-start gap-3">
                   <PlayBuildButton build={project.playBuild} idPrefix="project" variant="primary" />
@@ -90,6 +92,11 @@ export function ProjectHeader({ project }: { project: Project }) {
           <h1 className="text-display font-bold tracking-[-0.05em] text-fg">{project.title}</h1>
           <p className="text-xl font-semibold text-accent-text">{project.genre}</p>
           {project.subtitle && <p className="border-l-2 border-accent pl-4 text-lg text-fg-muted">{project.subtitle}</p>}
+          {project.playUrl && (
+            <div className="pt-2">
+              <PlayLinkButton url={project.playUrl} />
+            </div>
+          )}
           {project.playBuild && (
             <div className="flex flex-col items-start gap-3 pt-2">
               <PlayBuildButton build={project.playBuild} idPrefix="project" variant="primary" />
